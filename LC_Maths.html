@@ -1,0 +1,1669 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Axiom H1 — LC Maths Higher Level</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-drafting: #F7F5EF;
+      --bg-card: #FFFFFF;
+      --bg-well: #EFECE3;
+      --grid-line: rgba(24, 34, 47, 0.045);
+      --ink-primary: #18222F;
+      --ink-secondary: #526071;
+      --ink-muted: #718096;
+      --accent-cobalt: #1D4ED8;
+      --accent-cobalt-dark: #1E3A8A;
+      --accent-cobalt-soft: #EFF6FF;
+      --accent-emerald: #15803D;
+      --accent-emerald-soft: #ECFDF5;
+      --accent-amber: #B45309;
+      --accent-amber-soft: #FFFBEB;
+      --accent-crimson: #B91C1C;
+      --accent-crimson-soft: #FEF2F2;
+      --border-hairline: #E2DDD0;
+      --border-strong: #C9C2B0;
+      --shadow-card: 0 2px 8px rgba(24, 34, 47, 0.045), 0 1px 2px rgba(24, 34, 47, 0.03);
+      --radius-card: 12px;
+      --radius-ctrl: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-drafting);
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 28px 28px;
+      color: var(--ink-primary);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .font-serif-display {
+      font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+      color: var(--ink-primary);
+      letter-spacing: -0.015em;
+      margin-top: 0;
+    }
+
+    code, pre, .font-mono {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    sub, sup {
+      font-size: 72%;
+      line-height: 0;
+    }
+
+    /* Sticky Top Header */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background-color: rgba(247, 245, 239, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .topbar-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background-color: var(--accent-cobalt);
+      color: #FFFFFF;
+      border: 1px solid var(--accent-cobalt-dark);
+      display: grid;
+      place-items: center;
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 1.24rem;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--ink-secondary);
+      margin: 2px 0 0;
+    }
+
+    .topbar-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mastery-box {
+      min-width: 225px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-ctrl);
+      padding: 8px 12px;
+    }
+
+    .mastery-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--ink-secondary);
+      margin-bottom: 5px;
+    }
+
+    .mastery-track {
+      height: 7px;
+      width: 100%;
+      background-color: var(--bg-well);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .mastery-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--accent-cobalt);
+      transition: width 0.25s ease;
+    }
+
+    /* Navigation Tabs */
+    .nav-strip {
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .nav-strip-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+    }
+
+    .nav-btn {
+      appearance: none;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      padding: 13px 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.14s ease, border-color 0.14s ease;
+    }
+
+    .nav-btn:hover {
+      color: var(--ink-primary);
+    }
+
+    .nav-btn.active {
+      color: var(--accent-cobalt);
+      border-bottom-color: var(--accent-cobalt);
+      font-weight: 700;
+    }
+
+    /* Page Container */
+    .page-main {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 24px 20px 68px;
+    }
+
+    .view-panel {
+      display: none;
+    }
+
+    .view-panel.active {
+      display: block;
+    }
+
+    /* Cards & Wells */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 18px 16px;
+      }
+    }
+
+    .well {
+      background-color: var(--bg-well);
+      border: 1px solid var(--border-hairline);
+      border-radius: 10px;
+      padding: 16px;
+      margin: 14px 0;
+    }
+
+    .formula-box {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      font-weight: 600;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      padding: 10px 14px;
+      overflow-x: auto;
+      color: var(--ink-primary);
+    }
+
+    .trap-callout {
+      background-color: var(--accent-amber-soft);
+      border: 1px solid #FDE68A;
+      border-left: 4px solid var(--accent-amber);
+      border-radius: 8px;
+      padding: 12px 15px;
+      margin: 12px 0;
+    }
+
+    .trap-label {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--accent-amber);
+      margin-bottom: 3px;
+    }
+
+    .worked-callout {
+      background-color: var(--accent-cobalt-soft);
+      border: 1px solid #BFDBFE;
+      border-left: 4px solid var(--accent-cobalt);
+      border-radius: 8px;
+      padding: 13px 16px;
+      margin: 12px 0;
+    }
+
+    .worked-label {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--accent-cobalt);
+      margin-bottom: 4px;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .badge-cobalt {
+      background-color: var(--accent-cobalt-soft);
+      color: var(--accent-cobalt);
+      border: 1px solid #BFDBFE;
+    }
+
+    .badge-emerald {
+      background-color: var(--accent-emerald-soft);
+      color: var(--accent-emerald);
+      border: 1px solid #A7F3D0;
+    }
+
+    .badge-amber {
+      background-color: var(--accent-amber-soft);
+      color: var(--accent-amber);
+      border: 1px solid #FDE68A;
+    }
+
+    .badge-crimson {
+      background-color: var(--accent-crimson-soft);
+      color: var(--accent-crimson);
+      border: 1px solid #FECACA;
+    }
+
+    /* Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 820px) {
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Controls */
+    .btn {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 15px;
+      border-radius: var(--radius-ctrl);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.14s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-cobalt);
+      color: #FFFFFF;
+      border-color: var(--accent-cobalt-dark);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-cobalt-dark);
+    }
+
+    .btn-emerald {
+      background-color: var(--accent-emerald);
+      color: #FFFFFF;
+      border-color: #166534;
+    }
+
+    .btn-emerald:hover {
+      background-color: #166534;
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-card);
+      color: var(--ink-primary);
+      border-color: var(--border-strong);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-well);
+    }
+
+    .btn-sm {
+      padding: 6px 11px;
+      font-size: 0.8rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      padding: 8px 11px;
+      border-radius: var(--radius-ctrl);
+      border: 1px solid var(--border-strong);
+      background-color: var(--bg-card);
+      color: var(--ink-primary);
+    }
+
+    input:focus,
+    select:focus {
+      outline: 2px solid rgba(29, 78, 216, 0.2);
+      border-color: var(--accent-cobalt);
+    }
+
+    /* Checklist & Filters */
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-ctrl);
+      border: 1px solid var(--border-hairline);
+      background-color: var(--bg-card);
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+
+    .check-item:hover {
+      background-color: var(--bg-well);
+    }
+
+    .check-item input[type="checkbox"] {
+      margin-top: 3px;
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent-cobalt);
+      flex-shrink: 0;
+    }
+
+    .filter-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .filter-chip {
+      appearance: none;
+      padding: 6px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background-color: var(--bg-card);
+      color: var(--ink-secondary);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .filter-chip.active {
+      background-color: var(--accent-cobalt);
+      border-color: var(--accent-cobalt-dark);
+      color: #FFFFFF;
+    }
+
+    /* Mini Quiz & Solution Box */
+    .mc-option {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 9px 13px;
+      border-radius: var(--radius-ctrl);
+      border: 1px solid var(--border-hairline);
+      background-color: var(--bg-card);
+      color: var(--ink-primary);
+      font-size: 0.88rem;
+      cursor: pointer;
+      margin-bottom: 7px;
+    }
+
+    .mc-option:hover {
+      background-color: var(--bg-well);
+    }
+
+    .mc-option.correct {
+      background-color: var(--accent-emerald-soft);
+      border-color: var(--accent-emerald);
+      font-weight: 600;
+    }
+
+    .mc-option.wrong {
+      background-color: var(--accent-crimson-soft);
+      border-color: var(--accent-crimson);
+    }
+
+    .feedback-panel {
+      margin-top: 10px;
+      padding: 11px 14px;
+      border-radius: var(--radius-ctrl);
+      font-size: 0.87rem;
+      display: none;
+    }
+
+    .feedback-panel.show {
+      display: block;
+    }
+
+    .feedback-panel.ok {
+      background-color: var(--accent-emerald-soft);
+      border: 1px solid #A7F3D0;
+      color: #14532D;
+    }
+
+    .feedback-panel.err {
+      background-color: var(--accent-crimson-soft);
+      border: 1px solid #FECACA;
+      color: #7F1D1D;
+    }
+
+    .feedback-panel.info {
+      background-color: var(--accent-cobalt-soft);
+      border: 1px solid #BFDBFE;
+      color: #1E3A8A;
+    }
+
+    .solution-box {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: var(--radius-ctrl);
+      background-color: var(--accent-emerald-soft);
+      border: 1px solid #A7F3D0;
+      color: #14532D;
+      font-size: 0.87rem;
+      display: none;
+    }
+
+    .solution-box.open {
+      display: block;
+    }
+
+    /* Toast */
+    .toast-msg {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 95;
+      background-color: var(--ink-primary);
+      color: #FFFFFF;
+      padding: 10px 16px;
+      border-radius: var(--radius-ctrl);
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+    }
+
+    .toast-msg.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-box">
+        <div class="brand-badge">H1</div>
+        <div>
+          <h1 class="brand-title">Axiom H1 &mdash; LC Maths Higher Level</h1>
+          <p class="brand-sub">Irish Leaving Certificate Mathematics &bull; Paper 1 &amp; Paper 2 &bull; Beginner to H1 Achiever</p>
+        </div>
+      </div>
+
+      <div class="topbar-controls">
+        <div class="mastery-box">
+          <div class="mastery-top">
+            <span>H1 Mastery Progress</span>
+            <span id="mastery-pct-text">0%</span>
+          </div>
+          <div class="mastery-track">
+            <div id="mastery-fill-bar" class="mastery-fill"></div>
+          </div>
+        </div>
+        <button id="reset-progress-btn" type="button" class="btn btn-secondary btn-sm">Reset Progress</button>
+      </div>
+    </div>
+
+    <nav class="nav-strip" aria-label="Primary LMS sections">
+      <div class="nav-strip-inner">
+        <button type="button" class="nav-btn active" data-view="blueprint">1. Blueprint &amp; H1 Strategy</button>
+        <button type="button" class="nav-btn" data-view="curriculum">2. Step-by-Step Curriculum (P1 &amp; P2)</button>
+        <button type="button" class="nav-btn" data-view="labs">3. Interactive Maths Labs</button>
+        <button type="button" class="nav-btn" data-view="mocks">4. Mock Exam &amp; H1 Grade Simulator</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-main">
+
+    <!-- =====================================================================
+         1. BLUEPRINT & H1 STRATEGY VIEW
+         ===================================================================== -->
+    <section id="view-blueprint" class="view-panel active">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+          <span class="badge badge-cobalt">600 Marks Total + 25 HL Bonus Points</span>
+          <span class="badge badge-emerald">H1 = 90%+ (540 / 600 Marks)</span>
+        </div>
+        <h2>Leaving Certificate Mathematics (Higher Level) Exam Architecture</h2>
+        <p style="color:var(--ink-secondary); margin-bottom:14px;">
+          Higher Level Mathematics is assessed across two written papers totaling <strong>600 marks</strong>: <strong>Paper 1 (300 marks, 2h 30m)</strong> and <strong>Paper 2 (300 marks, 2h 30m)</strong>. Each paper contains <strong>Section A (Concepts &amp; Skills, 150m)</strong> and <strong>Section B (Contexts &amp; Applications, 150m)</strong>. In addition, under Irish CAO rules, students achieving a <strong>H6 or higher</strong> in Higher Level Mathematics receive a <strong>25-point bonus</strong> toward CAO points calculations (up to 625 maximum).
+        </p>
+
+        <div class="grid-2">
+          <div class="well" style="margin:0;">
+            <span class="badge badge-cobalt">Paper 1 &bull; 300 Marks (2h 30m)</span>
+            <h3 style="margin-top:8px; font-size:1.08rem;">Algebra, Complex Numbers, Sequences &amp; Calculus</h3>
+            <ul style="padding-left:18px; margin:6px 0 0; font-size:0.88rem; color:var(--ink-secondary);">
+              <li><strong>Section A &mdash; Concepts &amp; Skills (150m):</strong> Core manipulation, factor/remainder theorems, indices &amp; logs, Argand/polar complex numbers, series/induction, differentiation &amp; integration rules.</li>
+              <li><strong>Section B &mdash; Contexts &amp; Applications (150m):</strong> Multi-step modelling, financial maths (amortisation/present value), De Moivre applications, rates of change, optimisation, and area between curves.</li>
+            </ul>
+          </div>
+
+          <div class="well" style="margin:0;">
+            <span class="badge badge-emerald">Paper 2 &bull; 300 Marks (2h 30m)</span>
+            <h3 style="margin-top:8px; font-size:1.08rem;">Co-ordinate &amp; Synthetic Geometry, Trig, Probability &amp; Stats</h3>
+            <ul style="padding-left:18px; margin:6px 0 0; font-size:0.88rem; color:var(--ink-secondary);">
+              <li><strong>Section A &mdash; Concepts &amp; Skills (150m):</strong> Line &amp; circle geometry, geometric proofs/constructions, radian trigonometry &amp; identities, counting/probability rules, summary statistics &amp; z-scores.</li>
+              <li><strong>Section B &mdash; Contexts &amp; Applications (150m):</strong> Tangency/locus problems, 3D/non-right trigonometry, conditional/expected/binomial probability, confidence intervals &amp; hypothesis testing conclusions in context.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="margin-top:20px;">Pacing &amp; H1 Execution Guide</h3>
+        <div class="grid-3">
+          <div class="well" style="margin:0;">
+            <div style="font-weight:700; color:var(--accent-cobalt);">Time Budgeting (~0.5 min/mark)</div>
+            <p style="font-size:0.85rem; color:var(--ink-secondary); margin:6px 0 0;">
+              Each paper gives <strong>150 minutes</strong> for <strong>300 marks</strong> (~70&ndash;75 min Section A, ~70&ndash;75 min Section B, leaving 5&ndash;10 min review). If a part stalls for 3&ndash;4 minutes, mark it and move on to bank sure marks.
+            </p>
+          </div>
+          <div class="well" style="margin:0;">
+            <div style="font-weight:700; color:var(--accent-emerald);">Formulae &amp; Tables + Calculator Mode</div>
+            <p style="font-size:0.85rem; color:var(--ink-secondary); margin:6px 0 0;">
+              Know where every formula sits in the <em>Formulae and Tables</em> booklet (series, De Moivre, calculus, line/circle, trig identities, normal/stats). Check <strong>RAD vs. DEG</strong> before every trig or complex polar calculation.
+            </p>
+          </div>
+          <div class="well" style="margin:0;">
+            <div style="font-weight:700; color:var(--accent-amber);">Partial Credit &amp; Exact Working</div>
+            <p style="font-size:0.85rem; color:var(--ink-secondary); margin:6px 0 0;">
+              SEC marking schemes award <strong>High, Mid, and Low partial credit</strong> for valid intermediate steps. Always write the formula, substitute clearly, keep exact surds/fractions/<strong>&pi;</strong> until the final rounded line, and state units.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8-Item Interactive H1 Readiness Checklist -->
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+          <span class="badge badge-cobalt">Interactive Readiness Tracker</span>
+          <span id="checklist-status-label" style="font-size:0.82rem; font-weight:700; color:var(--ink-secondary);">0 / 8 Completed</span>
+        </div>
+        <h3>H1 Exam Readiness Checklist</h3>
+        <div id="h1-checklist-box"></div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         2. STEP-BY-STEP CURRICULUM (PAPER 1 & PAPER 2 — 8 COMPREHENSIVE MODULES)
+         ===================================================================== -->
+    <section id="view-curriculum" class="view-panel">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <div>
+            <span class="badge badge-cobalt">Beginner &rarr; Intermediate &rarr; H1 Achiever</span>
+            <h2 style="margin-top:6px; margin-bottom:4px;">Complete LC Higher Level Curriculum (Papers 1 &amp; 2)</h2>
+            <p style="color:var(--ink-secondary); margin:0; font-size:0.9rem;">
+              Work through all eight modules step by step. Each module builds from foundational rules to H1 exam technique with a worked example, common H1 trap, and instant check question.
+            </p>
+          </div>
+        </div>
+
+        <div class="filter-strip" id="curriculum-filter-strip">
+          <button type="button" class="filter-chip active" data-pfilter="ALL">All Modules (8)</button>
+          <button type="button" class="filter-chip" data-pfilter="P1">Paper 1 Modules (4)</button>
+          <button type="button" class="filter-chip" data-pfilter="P2">Paper 2 Modules (4)</button>
+        </div>
+      </div>
+
+      <div id="curriculum-modules-list"></div>
+    </section>
+
+    <!-- =====================================================================
+         3. INTERACTIVE MATHS LABS & SOLVERS (4 TOOLS)
+         ===================================================================== -->
+    <section id="view-labs" class="view-panel">
+
+      <!-- Lab 1: Quadratic, Cubic Factor & Discriminant / Turning Point Explorer -->
+      <div class="card">
+        <span class="badge badge-cobalt">Lab 1 &bull; Paper 1 Algebra &amp; Calculus</span>
+        <h2 style="margin-top:8px;">Quadratic Discriminant, Roots &amp; Turning Point Explorer</h2>
+        <p style="color:var(--ink-secondary); font-size:0.9rem;">
+          For a quadratic <code class="font-mono">f(x) = ax&sup2; + bx + c</code> (with <code class="font-mono">a &ne; 0</code>), the discriminant <code class="font-mono">&Delta; = b&sup2; &minus; 4ac</code> determines root nature, while <code class="font-mono">x<sub>v</sub> = &minus;b / (2a)</code> gives the turning point (vertex) and derivative <code class="font-mono">f&prime;(x) = 2ax + b</code>.
+        </p>
+
+        <div class="grid-3" style="margin-bottom:12px;">
+          <div>
+            <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Coefficient a (non-zero)</label>
+            <input id="quad-a" type="number" step="any" value="1" style="width:100%;" />
+          </div>
+          <div>
+            <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Coefficient b</label>
+            <input id="quad-b" type="number" step="any" value="-5" style="width:100%;" />
+          </div>
+          <div>
+            <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Coefficient c</label>
+            <input id="quad-c" type="number" step="any" value="6" style="width:100%;" />
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" id="quad-solve-btn">Compute Roots, Discriminant &amp; Vertex</button>
+        <div id="quad-output" class="well" style="margin-bottom:0;"></div>
+      </div>
+
+      <!-- Lab 2: Complex Numbers Polar & De Moivre Calculator -->
+      <div class="card">
+        <span class="badge badge-cobalt">Lab 2 &bull; Paper 1 Complex Numbers</span>
+        <h2 style="margin-top:8px;">Modulus-Argument (Polar Form) &amp; De Moivre&rsquo;s Theorem Solver</h2>
+        <p style="color:var(--ink-secondary); font-size:0.9rem;">
+          Converts <code class="font-mono">z = x + iy</code> into polar form <code class="font-mono">r(cos &theta; + i sin &theta;)</code> where <code class="font-mono">r = &radic;(x&sup2; + y&sup2;)</code> and principal argument <code class="font-mono">&theta; &isin; (&minus;&pi;, &pi;]</code>, then computes <code class="font-mono">z<sup>n</sup> = r<sup>n</sup>(cos n&theta; + i sin n&theta;)</code>.
+        </p>
+
+        <div class="grid-3" style="margin-bottom:12px;">
+          <div>
+            <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Real part x</label>
+            <input id="cplx-x" type="number" step="any" value="1" style="width:100%;" />
+          </div>
+          <div>
+            <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Imaginary part y</label>
+            <input id="cplx-y" type="number" step="any" value="1.7320508" style="width:100%;" />
+          </div>
+          <div>
+            <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Power n (integer)</label>
+            <input id="cplx-n" type="number" step="1" value="3" style="width:100%;" />
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" id="cplx-solve-btn">Calculate Polar Form &amp; z<sup>n</sup></button>
+        <div id="cplx-output" class="well" style="margin-bottom:0;"></div>
+      </div>
+
+      <!-- Lab 3: Co-ordinate Geometry (Line & Circle) Analyzer -->
+      <div class="card">
+        <span class="badge badge-emerald">Lab 3 &bull; Paper 2 Co-ordinate Geometry</span>
+        <h2 style="margin-top:8px;">Line Segment &amp; Circle Equation / Tangency Analyzer</h2>
+        <p style="color:var(--ink-secondary); font-size:0.9rem;">
+          Analyses two points <code class="font-mono">A(x<sub>1</sub>, y<sub>1</sub>)</code> and <code class="font-mono">B(x<sub>2</sub>, y<sub>2</sub>)</code> (slope, midpoint, distance) and checks a circle centred at <code class="font-mono">(h, k)</code> with radius <code class="font-mono">r</code>.
+        </p>
+
+        <div class="grid-3" style="margin-bottom:12px;">
+          <div>
+            <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Point A (x<sub>1</sub>, y<sub>1</sub>)</label>
+            <div style="display:flex; gap:6px;">
+              <input id="geom-x1" type="number" step="any" value="1" style="width:50%;" placeholder="x1" />
+              <input id="geom-y1" type="number" step="any" value="2" style="width:50%;" placeholder="y1" />
+            </div>
+          </div>
+          <div>
+            <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Point B (x<sub>2</sub>, y<sub>2</sub>)</label>
+            <div style="display:flex; gap:6px;">
+              <input id="geom-x2" type="number" step="any" value="5" style="width:50%;" placeholder="x2" />
+              <input id="geom-y2" type="number" step="any" value="10" style="width:50%;" placeholder="y2" />
+            </div>
+          </div>
+          <div>
+            <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Circle Centre (h, k) &amp; Radius r</label>
+            <div style="display:flex; gap:6px;">
+              <input id="circ-h" type="number" step="any" value="0" style="width:33%;" placeholder="h" />
+              <input id="circ-k" type="number" step="any" value="0" style="width:33%;" placeholder="k" />
+              <input id="circ-r" type="number" step="any" min="0.1" value="5" style="width:34%;" placeholder="r" />
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-emerald btn-sm" id="geom-solve-btn">Run Line &amp; Circle Analysis</button>
+        <div id="geom-output" class="well" style="margin-bottom:0;"></div>
+      </div>
+
+      <!-- Lab 4: Normal Distribution z-Score & Hypothesis Test Helper -->
+      <div class="card">
+        <span class="badge badge-emerald">Lab 4 &bull; Paper 2 Inferential Statistics</span>
+        <h2 style="margin-top:8px;">Normal Distribution z-Score &amp; Sample Mean Standard Error Helper</h2>
+        <p style="color:var(--ink-secondary); font-size:0.9rem;">
+          Computes <code class="font-mono">z = (x &minus; &mu;) / &sigma;</code> for an individual observation and <code class="font-mono">SE = &sigma; / &radic;n</code> plus <code class="font-mono">z<sub>x&#772;</sub> = (x&#772; &minus; &mu;) / (&sigma; / &radic;n)</code> for a sample of size <code class="font-mono">n</code>.
+        </p>
+
+        <div class="grid-2" style="margin-bottom:12px;">
+          <div class="grid-2" style="gap:10px;">
+            <div>
+              <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Value x / Sample mean x&#772;</label>
+              <input id="stat-x" type="number" step="any" value="76" style="width:100%;" />
+            </div>
+            <div>
+              <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Population mean &mu;</label>
+              <input id="stat-mu" type="number" step="any" value="70" style="width:100%;" />
+            </div>
+          </div>
+          <div class="grid-2" style="gap:10px;">
+            <div>
+              <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Std deviation &sigma; (&gt; 0)</label>
+              <input id="stat-sigma" type="number" step="any" min="0.0001" value="8" style="width:100%;" />
+            </div>
+            <div>
+              <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Sample size n (&ge; 1)</label>
+              <input id="stat-n" type="number" step="1" min="1" value="16" style="width:100%;" />
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-emerald btn-sm" id="stat-solve-btn">Compute z-Scores &amp; Standard Error</button>
+        <div id="stat-output" class="well" style="margin-bottom:0;"></div>
+      </div>
+
+    </section>
+
+    <!-- =====================================================================
+         4. MOCK EXAM & H1 GRADE SIMULATOR
+         ===================================================================== -->
+    <section id="view-mocks" class="view-panel">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px;">
+          <span class="badge badge-cobalt">Timed 150-Minute Paper Mode</span>
+          <span id="exam-timer-display" class="badge badge-emerald" style="font-family:'JetBrains Mono', monospace; font-size:0.84rem;">150:00</span>
+        </div>
+        <h2>Leaving Certificate Maths HL Practice Bank &amp; Timed Exam Mode</h2>
+        <p style="color:var(--ink-secondary); font-size:0.9rem; margin-bottom:10px;">
+          Select Paper 1 or Paper 2 for the 150-minute countdown timer, work through Section A and Section B practice items, and reveal step-by-step H1 solutions.
+        </p>
+
+        <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+          <label for="mock-paper-select" style="font-size:0.82rem; font-weight:700;">Timed Paper:</label>
+          <select id="mock-paper-select">
+            <option value="P1">Paper 1 (300m • 150m • Sec A + Sec B)</option>
+            <option value="P2">Paper 2 (300m • 150m • Sec A + Sec B)</option>
+          </select>
+          <button type="button" class="btn btn-primary btn-sm" id="exam-start-btn">Start Timer</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="exam-pause-btn">Pause</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="exam-reset-btn">Reset (150:00)</button>
+        </div>
+
+        <div class="filter-strip" id="mock-filter-strip">
+          <button type="button" class="filter-chip active" data-mfilter="ALL">All Practice Items (8)</button>
+          <button type="button" class="filter-chip" data-mfilter="P1">Paper 1 Items (4)</button>
+          <button type="button" class="filter-chip" data-mfilter="P2">Paper 2 Items (4)</button>
+        </div>
+      </div>
+
+      <div id="mock-questions-container"></div>
+
+      <!-- 600-Mark H1–H8 Grade & CAO Points Calculator -->
+      <div class="card">
+        <span class="badge badge-amber">600-Mark Total + 25 HL Bonus</span>
+        <h3 style="margin-top:8px;">H1&ndash;H8 Grade &amp; CAO Points Calculator (Paper 1 + Paper 2)</h3>
+        <p style="font-size:0.88rem; color:var(--ink-secondary);">
+          Enter your marks out of <strong>300</strong> for Paper 1 and out of <strong>300</strong> for Paper 2 to compute your combined mark out of <strong>600</strong>, percentage, LC grade (H1&ndash;H8), and Leaving Cert CAO points (including +25 bonus points for H6 or above).
+        </p>
+
+        <div class="grid-2" style="margin-bottom:12px;">
+          <div>
+            <label for="p1-marks-input" style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:4px;">Paper 1 Score (0 &ndash; 300)</label>
+            <input id="p1-marks-input" type="number" min="0" max="300" value="275" style="width:100%;" />
+          </div>
+          <div>
+            <label for="p2-marks-input" style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:4px;">Paper 2 Score (0 &ndash; 300)</label>
+            <input id="p2-marks-input" type="number" min="0" max="300" value="270" style="width:100%;" />
+          </div>
+        </div>
+
+        <div id="cao-grade-summary" class="well" style="margin-bottom:0;"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="toast-banner" class="toast-msg" role="status" aria-live="polite"></div>
+
+  <script>
+    /* =======================================================================
+       1. STATE PERSISTENCE (LOCALSTORAGE)
+       ======================================================================= */
+    const STORAGE_KEY = 'axiom_h1_lc_maths_v1';
+
+    const DEFAULT_STATE = {
+      activeView: 'blueprint',
+      curriculumFilter: 'ALL',
+      completedLessonIds: [],
+      checklistIds: [],
+      quizAnswers: {},
+      mockFilter: 'ALL',
+      mockPaper: 'P1',
+      timerRemainingSec: 9000, // 150 minutes
+      p1Score: 275,
+      p2Score: 270
+    };
+
+    let state = loadState();
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return { ...DEFAULT_STATE };
+        const parsed = JSON.parse(raw);
+        return {
+          ...DEFAULT_STATE,
+          ...parsed,
+          completedLessonIds: Array.isArray(parsed.completedLessonIds) ? parsed.completedLessonIds : [],
+          checklistIds: Array.isArray(parsed.checklistIds) ? parsed.checklistIds : [],
+          quizAnswers: parsed.quizAnswers && typeof parsed.quizAnswers === 'object' ? parsed.quizAnswers : {}
+        };
+      } catch (err) {
+        console.warn('localStorage load fallback:', err);
+        return { ...DEFAULT_STATE };
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (err) {
+        console.warn('localStorage save fallback:', err);
+      }
+      updateMasteryMeter();
+    }
+
+    function showToast(text) {
+      const el = document.getElementById('toast-banner');
+      if (!el) return;
+      el.textContent = text;
+      el.classList.add('visible');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => el.classList.remove('visible'), 2200);
+    }
+
+    function updateMasteryMeter() {
+      // 8 lessons (50%), 8 checklist items (25%), and quiz attempts (25%) = 100%
+      const lessonFrac = Math.min(1, state.completedLessonIds.length / 8);
+      const chkFrac = Math.min(1, state.checklistIds.length / 8);
+      const quizFrac = Math.min(1, Object.keys(state.quizAnswers).length / 8);
+      const pct = Math.min(100, Math.round(lessonFrac * 50 + chkFrac * 25 + quizFrac * 25));
+      const fill = document.getElementById('mastery-fill-bar');
+      const txt = document.getElementById('mastery-pct-text');
+      if (fill) fill.style.width = `${pct}%`;
+      if (txt) txt.textContent = `${pct}%`;
+    }
+
+    /* =======================================================================
+       2. BLUEPRINT CHECKLIST
+       ======================================================================= */
+    const BLUEPRINT_CHECKLIST = [
+      { id: 'b1', text: 'I know the 600-mark structure: Paper 1 (300m, 2h 30m) and Paper 2 (300m, 2h 30m), each with Section A (150m) and Section B (150m).' },
+      { id: 'b2', text: 'I understand the +25 Higher Level Maths CAO bonus points rule (awarded for H6 or higher, bringing maximum CAO points to 625).' },
+      { id: 'b3', text: 'I budget ~70–75 minutes per section and move on cleanly if a part stalls, returning during review.' },
+      { id: 'b4', text: 'I verify RAD vs. DEG mode on my calculator before solving trig equations, arc/sector problems, or polar complex numbers.' },
+      { id: 'b5', text: 'I locate identities and formulas quickly in the LC Formulae and Tables booklet rather than guessing from memory.' },
+      { id: 'b6', text: 'I write down formulas and intermediate steps so I capture High/Mid/Low partial credit even if arithmetic slips.' },
+      { id: 'b7', text: 'I keep exact surds, fractions, and &pi; until the final line and round only to the requested decimal places or significant figures.' },
+      { id: 'b8', text: 'In Paper 2 statistics and probability contexts, I interpret results clearly in the wording of the problem rather than stopping at a number.' }
+    ];
+
+    function renderChecklist() {
+      const box = document.getElementById('h1-checklist-box');
+      if (!box) return;
+      box.innerHTML = BLUEPRINT_CHECKLIST.map(item => {
+        const checked = state.checklistIds.includes(item.id);
+        return `
+          <label class="check-item">
+            <input type="checkbox" data-cid="${item.id}" ${checked ? 'checked' : ''} />
+            <span style="font-size:0.89rem;">${item.text}</span>
+          </label>
+        `;
+      }).join('');
+
+      box.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', () => {
+          const id = cb.dataset.cid;
+          if (cb.checked && !state.checklistIds.includes(id)) state.checklistIds.push(id);
+          if (!cb.checked) state.checklistIds = state.checklistIds.filter(x => x !== id);
+          saveState();
+          updateChecklistLabel();
+        });
+      });
+      updateChecklistLabel();
+    }
+
+    function updateChecklistLabel() {
+      const lbl = document.getElementById('checklist-status-label');
+      if (lbl) lbl.textContent = `${state.checklistIds.length} / ${BLUEPRINT_CHECKLIST.length} Completed`;
+    }
+
+    /* =======================================================================
+       3. STEP-BY-STEP CURRICULUM (ALL 8 PAPER 1 & PAPER 2 MODULES)
+       ======================================================================= */
+    const CURRICULUM_MODULES = [
+      {
+        id: 'p1_alg',
+        paper: 'P1',
+        paperBadge: 'Paper 1',
+        levelBadge: 'Beginner &rarr; H1 Achiever',
+        title: 'Algebra, Indices, Surds &amp; Logarithms',
+        formulaStrip: 'a<sup>m</sup>&middot;a<sup>n</sup> = a<sup>m+n</sup> &bull; log<sub>a</sub>(xy) = log<sub>a</sub>x + log<sub>a</sub>y &bull; Factor Theorem: P(k) = 0 &hArr; (x &minus; k) is a factor',
+        steps: [
+          '<strong>Beginner:</strong> Rationalise surd denominators using conjugates, apply index laws (including negative and fractional powers such as x<sup>1/2</sup> = &radic;x and x<sup>&minus;n</sup> = 1/x<sup>n</sup>), and factorise quadratics/differences of squares.',
+          '<strong>Intermediate:</strong> Use the Factor and Remainder Theorems to factorise cubics and solve polynomial equations or inequalities, and convert between exponential and logarithmic forms.',
+          '<strong>H1 Achiever:</strong> Combine log laws cleanly before taking antilogs, check domain restrictions (arguments of logs must be strictly positive), and model exponential growth/decay (N(t) = N<sub>0</sub>e<sup>kt</sup> or a<sup>t</sup>) accurately.'
+        ],
+        workedExample: 'Factorise P(x) = x&sup3; &minus; 4x&sup2; + x + 6 and solve P(x) = 0. Test x = &minus;1: P(&minus;1) = &minus;1 &minus; 4 &minus; 1 + 6 = 0, so (x + 1) is a factor. Dividing gives x&sup2; &minus; 5x + 6 = (x &minus; 2)(x &minus; 3). Roots: x = &minus;1, 2, 3.',
+        h1Trap: 'Never split log(A + B) into log A + log B, and always verify candidate roots in logarithmic/radical equations against domain conditions.',
+        checkQ: 'If log<sub>2</sub>(x &minus; 1) + log<sub>2</sub>(x + 1) = 3 (with x &gt; 1), what is x?',
+        checkOpts: ['x = 2', 'x = 3', 'x = &radic;10', 'x = 4'],
+        checkAns: 1,
+        checkExp: 'log<sub>2</sub>((x &minus; 1)(x + 1)) = 3 &rArr; x&sup2; &minus; 1 = 2&sup3; = 8 &rArr; x&sup2; = 9. Since x &gt; 1, x = 3.'
+      },
+      {
+        id: 'p1_cplx',
+        paper: 'P1',
+        paperBadge: 'Paper 1',
+        levelBadge: 'Intermediate &rarr; H1 Achiever',
+        title: 'Complex Numbers &amp; De Moivre&rsquo;s Theorem',
+        formulaStrip: 'z = a + bi &bull; |z| = r = &radic;(a&sup2; + b&sup2;) &bull; [r(cos &theta; + i sin &theta;)]<sup>n</sup> = r<sup>n</sup>(cos n&theta; + i sin n&theta;)',
+        steps: [
+          '<strong>Beginner:</strong> Plot z = a + bi on the Argand diagram, find the conjugate z&#773; = a &minus; bi, and add/subtract/multiply using i&sup2; = &minus;1.',
+          '<strong>Intermediate:</strong> Compute modulus r = |z| and principal argument &theta; &isin; (&minus;&pi;, &pi;] by checking the quadrant of (a, b), then write z in polar form r(cos &theta; + i sin &theta;).',
+          '<strong>H1 Achiever:</strong> Apply De Moivre&rsquo;s theorem to find powers z<sup>n</sup>, expand cos(n&theta;)/sin(n&theta;) identities, and find all n<sup>th</sup> roots spaced equally by 2&pi;/n around a circle of radius r<sup>1/n</sup>.'
+        ],
+        workedExample: 'Express z = 1 + i in polar form and find z<sup>4</sup>. Here r = &radic;(1&sup2; + 1&sup2;) = &radic;2 and &theta; = &pi;/4. By De Moivre, z<sup>4</sup> = (&radic;2)<sup>4</sup>(cos &pi; + i sin &pi;) = 4(&minus;1 + 0i) = &minus;4.',
+        h1Trap: 'Always determine the quadrant of (a, b) before finding &theta;; arctan(b/a) alone can give the wrong angle by &pi; in Quadrants II or III.',
+        checkQ: 'What is the modulus |3 &minus; 4i| of the complex number 3 &minus; 4i?',
+        checkOpts: ['1', '5', '7', '25'],
+        checkAns: 1,
+        checkExp: '|3 &minus; 4i| = &radic;(3&sup2; + (&minus;4)&sup2;) = &radic;(9 + 16) = &radic;25 = 5.'
+      },
+      {
+        id: 'p1_seq',
+        paper: 'P1',
+        paperBadge: 'Paper 1',
+        levelBadge: 'Beginner &rarr; H1 Achiever',
+        title: 'Sequences, Series, Induction &amp; Financial Maths',
+        formulaStrip: 'T<sub>n</sub> = a + (n&minus;1)d &bull; T<sub>n</sub> = ar<sup>n&minus;1</sup> &bull; S<sub>&infin;</sub> = a/(1&minus;r) (|r|&lt;1) &bull; PV = A[1 &minus; (1+i)<sup>&minus;t</sup>]/i',
+        steps: [
+          '<strong>Beginner:</strong> Identify arithmetic sequences (constant difference d) and geometric sequences (constant ratio r), and find T<sub>n</sub> or S<sub>n</sub>.',
+          '<strong>Intermediate:</strong> Apply sum to infinity S<sub>&infin;</sub> = a/(1 &minus; r) when |r| &lt; 1, and set up compound interest / repayment / present value models with matching time periods and interest rates.',
+          '<strong>H1 Achiever:</strong> Structure Proof by Mathematical Induction in three explicit steps: (1) Base case n = 1, (2) Assume true for n = k, (3) Prove true for n = k + 1 using the inductive hypothesis clearly.'
+        ],
+        workedExample: 'Find the sum to infinity of 12 + 6 + 3 + 1.5 + &hellip; Here a = 12 and r = 6/12 = 0.5 (|r| &lt; 1). Thus S<sub>&infin;</sub> = 12 / (1 &minus; 0.5) = 24.',
+        h1Trap: 'In Proof by Induction, never assume the n = k + 1 statement is already true—algebraically transform the n = k + 1 expression to reach the required form, and always include a concluding sentence.',
+        checkQ: 'In a geometric series with first term a = 9 and common ratio r = 1/3, what is S<sub>&infin;</sub>?',
+        checkOpts: ['12', '13.5', '27', '3'],
+        checkAns: 1,
+        checkExp: 'Since |1/3| &lt; 1, S<sub>&infin;</sub> = 9 / (1 &minus; 1/3) = 9 / (2/3) = 27/2 = 13.5.'
+      },
+      {
+        id: 'p1_calc',
+        paper: 'P1',
+        paperBadge: 'Paper 1',
+        levelBadge: 'Beginner &rarr; H1 Achiever',
+        title: 'Functions &amp; Calculus (Differentiation &amp; Integration)',
+        formulaStrip: '(uv)&prime; = u(dv/dx) + v(du/dx) &bull; (u/v)&prime; = (v(du/dx) &minus; u(dv/dx))/v&sup2; &bull; Area = &int;<sub>a</sub><sup>b</sup> [f(x) &minus; g(x)] dx',
+        steps: [
+          '<strong>Beginner:</strong> Determine domain and range, evaluate composite functions f(g(x)), find inverse functions f<sup>&minus;1</sup>(x), and differentiate power/trig/exponential/log functions.',
+          '<strong>Intermediate:</strong> Apply the chain rule (including ln and e<sup>kx</sup> and trig), product rule, and quotient rule; find stationary points via f&prime;(x) = 0 and classify them using the second derivative f&Prime;(x).',
+          '<strong>H1 Achiever:</strong> Solve rates-of-change and optimisation problems (expressing the target quantity in one variable first), verify max/min with f&Prime;(x) or sign test, and compute exact areas between curves (splitting at intersections where curves cross).'
+        ],
+        workedExample: 'Find the stationary point of y = x&sup2; &minus; 6x + 11 and classify it. dy/dx = 2x &minus; 6 = 0 &rArr; x = 3, y = 2. Since d&sup2;y/dx&sup2; = 2 &gt; 0, (3, 2) is a local minimum.',
+        h1Trap: 'When finding area between two curves or between a curve and the x-axis over an interval where the sign changes, split the integral at the crossing points—otherwise positive and negative regions partially cancel.',
+        checkQ: 'Differentiate f(x) = (3x + 2)<sup>4</sup> with respect to x.',
+        checkOpts: ['4(3x + 2)<sup>3</sup>', '12(3x + 2)<sup>3</sup>', '12(3x + 2)<sup>4</sup>', '3(3x + 2)<sup>3</sup>'],
+        checkAns: 1,
+        checkExp: 'By the chain rule: f&prime;(x) = 4(3x + 2)<sup>3</sup> &middot; (d/dx)(3x + 2) = 4(3x + 2)<sup>3</sup> &middot; 3 = 12(3x + 2)<sup>3</sup>.'
+      },
+      {
+        id: 'p2_coord',
+        paper: 'P2',
+        paperBadge: 'Paper 2',
+        levelBadge: 'Beginner &rarr; H1 Achiever',
+        title: 'Co-ordinate Geometry: The Line &amp; The Circle',
+        formulaStrip: 'm = (y<sub>2</sub>&minus;y<sub>1</sub>)/(x<sub>2</sub>&minus;x<sub>1</sub>) &bull; m<sub>1</sub>m<sub>2</sub> = &minus;1 (&perp;) &bull; (x &minus; h)&sup2; + (y &minus; k)&sup2; = r&sup2; &bull; d<sub>perp</sub> = |ax<sub>0</sub> + by<sub>0</sub> + c| / &radic;(a&sup2; + b&sup2;)',
+        steps: [
+          '<strong>Beginner:</strong> Compute slope, distance, and midpoint between two points, and write the equation of a line using y &minus; y<sub>1</sub> = m(x &minus; x<sub>1</sub>).',
+          '<strong>Intermediate:</strong> Use parallel (m<sub>1</sub> = m<sub>2</sub>) and perpendicular (m<sub>1</sub>m<sub>2</sub> = &minus;1) conditions, find circle centre (&minus;g, &minus;f) and radius r = &radic;(g&sup2; + f&sup2; &minus; c) from x&sup2; + y&sup2; + 2gx + 2fy + c = 0.',
+          '<strong>H1 Achiever:</strong> Use perpendicular distance from circle centre (h, k) to a line: a line is tangent to the circle if and only if d<sub>perp</sub> = r (and secant if d<sub>perp</sub> &lt; r).'
+        ],
+        workedExample: 'Find the midpoint and slope of the segment joining A(1, 2) and B(5, 10). Midpoint = ((1+5)/2, (2+10)/2) = (3, 6). Slope m = (10 &minus; 2)/(5 &minus; 1) = 8/4 = 2.',
+        h1Trap: 'In the general circle equation x&sup2; + y&sup2; + 2gx + 2fy + c = 0, divide by 2 and flip signs to get centre (&minus;g, &minus;f)—forgetting the minus sign is one of the most frequent Paper 2 errors.',
+        checkQ: 'A line has slope m = 3/4. What is the slope of any line perpendicular to it?',
+        checkOpts: ['3/4', '&minus;3/4', '&minus;4/3', '4/3'],
+        checkAns: 2,
+        checkExp: 'For perpendicular non-vertical lines, m<sub>1</sub> &middot; m<sub>2</sub> = &minus;1 &rArr; m<sub>2</sub> = &minus;1 / (3/4) = &minus;4/3.'
+      },
+      {
+        id: 'p2_trig',
+        paper: 'P2',
+        paperBadge: 'Paper 2',
+        levelBadge: 'Beginner &rarr; H1 Achiever',
+        title: 'Synthetic Geometry, Proofs &amp; Trigonometry',
+        formulaStrip: 's = r&theta; &bull; Area<sub>sector</sub> = &frac12;r&sup2;&theta; (rad) &bull; a/sin A = b/sin B = c/sin C &bull; a&sup2; = b&sup2; + c&sup2; &minus; 2bc cos A &bull; Area<sub>&Delta;</sub> = &frac12;ab sin C',
+        steps: [
+          '<strong>Beginner:</strong> Convert between degrees and radians (&pi; rad = 180&deg;), use right-triangle ratios, and apply &frac12;ab sin C for triangle area.',
+          '<strong>Intermediate:</strong> Apply the Sine Rule and Cosine Rule in non-right triangles (including 3D problems broken into right/planar triangles) and use compound/double-angle identities.',
+          '<strong>H1 Achiever:</strong> Watch for the ambiguous case (SSA) of the Sine Rule when a &lt; b sin A or two valid acute/obtuse angles exist, and write crisp geometric proofs with explicit Given / To Prove / Construction / Proof structure.'
+        ],
+        workedExample: 'Find the arc length and sector area for radius r = 6 cm and angle &theta; = &pi;/3 rad. Arc s = 6 &times; (&pi;/3) = 2&pi; cm. Sector area = &frac12; &times; 6&sup2; &times; (&pi;/3) = 6&pi; cm&sup2;.',
+        h1Trap: 'The formulas s = r&theta; and Area = &frac12;r&sup2;&theta; require &theta; in RADIANS—using degrees directly gives a major error.',
+        checkQ: 'Convert 135&deg; into radians.',
+        checkOpts: ['&pi;/4', '&pi;/3', '3&pi;/4', '2&pi;/3'],
+        checkAns: 2,
+        checkExp: '135&deg; &times; (&pi; / 180&deg;) = (135 / 180)&pi; = 3&pi;/4 radians.'
+      },
+      {
+        id: 'p2_prob',
+        paper: 'P2',
+        paperBadge: 'Paper 2',
+        levelBadge: 'Beginner &rarr; H1 Achiever',
+        title: 'Probability &amp; Counting Principles',
+        formulaStrip: 'P(A &cup; B) = P(A) + P(B) &minus; P(A &cap; B) &bull; P(A | B) = P(A &cap; B) / P(B) &bull; E(X) = &Sigma;[x &middot; P(X = x)]',
+        steps: [
+          '<strong>Beginner:</strong> Use the Fundamental Principle of Counting (multiply choices across independent stages), complement rule P(A&prime;) = 1 &minus; P(A), and basic probability bounds [0, 1].',
+          '<strong>Intermediate:</strong> Distinguish permutations (<sup>n</sup>P<sub>r</sub>, order matters) from combinations (<sup>n</sup>C<sub>r</sub>, selection/order does not matter), and apply addition/multiplication rules.',
+          '<strong>H1 Achiever:</strong> Use conditional probability P(A | B) = P(A &cap; B)/P(B) carefully, test independence via P(A &cap; B) = P(A)P(B), and compute expected value E(X) or repeated Bernoulli trial probabilities.'
+        ],
+        workedExample: 'From 6 distinct books, how many ways can a committee/selection of 2 books be chosen if order does not matter? <sup>6</sup>C<sub>2</sub> = (6 &times; 5) / (2 &times; 1) = 15.',
+        h1Trap: 'Do not multiply probabilities assuming independence unless independence is given or proven via P(A &cap; B) = P(A)P(B); when sampling without replacement, probabilities update each draw.',
+        checkQ: 'If P(A) = 0.4, P(B) = 0.5, and P(A &cap; B) = 0.2, what is P(A &cup; B)?',
+        checkOpts: ['0.9', '0.7', '0.2', '0.1'],
+        checkAns: 1,
+        checkExp: 'P(A &cup; B) = P(A) + P(B) &minus; P(A &cap; B) = 0.4 + 0.5 &minus; 0.2 = 0.7.'
+      },
+      {
+        id: 'p2_stats',
+        paper: 'P2',
+        paperBadge: 'Paper 2',
+        levelBadge: 'Intermediate &rarr; H1 Achiever',
+        title: 'Descriptive &amp; Inferential Statistics',
+        formulaStrip: 'z = (x &minus; &mu;) / &sigma; &bull; SE(x&#772;) = &sigma; / &radic;n &bull; 95% CI &approx; x&#772; &plusmn; 1.96(&sigma; / &radic;n)',
+        steps: [
+          '<strong>Beginner:</strong> Compare mean vs. median (skew/outliers), compute interquartile range IQR = Q<sub>3</sub> &minus; Q<sub>1</sub>, and interpret spread/standard deviation &sigma;.',
+          '<strong>Intermediate:</strong> Standardise normal variables using z = (x &minus; &mu;) / &sigma;, apply empirical/normal symmetry (~68% within &plusmn;1&sigma;, ~95% within &plusmn;1.96&sigma;), and use standard error &sigma;/&radic;n for sample means.',
+          '<strong>H1 Achiever:</strong> State clear Null (H<sub>0</sub>) and Alternative (H<sub>1</sub>) hypotheses, construct/interpret 95% confidence intervals, and judge whether to reject or fail to reject H<sub>0</sub> in context (never claiming H<sub>0</sub> is "proven true").'
+        ],
+        workedExample: 'A normal distribution has &mu; = 50 and &sigma; = 4. Find the z-score for x = 58. z = (58 &minus; 50) / 4 = 8 / 4 = +2.0 (2 standard deviations above the mean).',
+        h1Trap: 'Never state that a hypothesis test "proves H<sub>0</sub> is true"—sample evidence only allows rejecting H<sub>0</sub> or failing to reject H<sub>0</sub> at the chosen significance level.',
+        checkQ: 'If a sample of size n = 25 is drawn from a population with standard deviation &sigma; = 10, what is the standard error of the sample mean?',
+        checkOpts: ['10', '2', '0.4', '25'],
+        checkAns: 1,
+        checkExp: 'Standard error SE = &sigma; / &radic;n = 10 / &radic;25 = 10 / 5 = 2.'
+      }
+    ];
+
+    function renderCurriculum() {
+      const list = document.getElementById('curriculum-modules-list');
+      if (!list) return;
+
+      const items = CURRICULUM_MODULES.filter(m =>
+        state.curriculumFilter === 'ALL' ? true : m.paper === state.curriculumFilter
+      );
+
+      list.innerHTML = items.map(m => {
+        const done = state.completedLessonIds.includes(m.id);
+        const picked = state.quizAnswers[m.id];
+
+        const optsHtml = m.checkOpts.map((opt, idx) => {
+          let cls = 'mc-option';
+          if (typeof picked === 'number') {
+            if (idx === m.checkAns) cls += ' correct';
+            else if (idx === picked) cls += ' wrong';
+          }
+          return `<button type="button" class="${cls}" data-mid="${m.id}" data-oidx="${idx}">${opt}</button>`;
+        }).join('');
+
+        let fbHtml = '';
+        if (typeof picked === 'number') {
+          const right = picked === m.checkAns;
+          fbHtml = `<div class="feedback-panel show ${right ? 'ok' : 'err'}"><strong>${right ? 'Correct!' : 'Check Working:'}</strong> ${m.checkExp}</div>`;
+        }
+
+        return `
+          <article class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <span class="badge ${m.paper === 'P1' ? 'badge-cobalt' : 'badge-emerald'}">${m.paperBadge}</span>
+                <span class="badge badge-amber">${m.levelBadge}</span>
+              </div>
+              <button type="button" class="btn ${done ? 'btn-emerald' : 'btn-secondary'} btn-sm toggle-done-btn" data-mid="${m.id}">
+                ${done ? 'Completed &check;' : 'Mark Lesson Complete'}
+              </button>
+            </div>
+
+            <h3 style="font-size:1.2rem; margin-bottom:8px;">${m.title}</h3>
+            <div class="formula-box" style="margin-bottom:12px;">${m.formulaStrip}</div>
+
+            <ul style="padding-left:18px; margin:0 0 12px; font-size:0.92rem;">
+              ${m.steps.map(st => `<li style="margin-bottom:6px;">${st}</li>`).join('')}
+            </ul>
+
+            <div class="worked-callout">
+              <span class="worked-label">Worked Leaving Cert Example</span>
+              <p style="margin:0; font-size:0.89rem;">${m.workedExample}</p>
+            </div>
+
+            <div class="trap-callout">
+              <span class="trap-label">Common H1 Trap</span>
+              <p style="margin:0; font-size:0.89rem;">${m.h1Trap}</p>
+            </div>
+
+            <div class="well" style="margin-bottom:0;">
+              <span class="badge badge-cobalt">Check Your Understanding</span>
+              <p style="font-weight:700; margin:8px 0 8px; font-size:0.93rem;">${m.checkQ}</p>
+              <div>${optsHtml}</div>
+              ${fbHtml}
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      list.querySelectorAll('.toggle-done-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const mid = btn.dataset.mid;
+          if (state.completedLessonIds.includes(mid)) {
+            state.completedLessonIds = state.completedLessonIds.filter(x => x !== mid);
+            showToast('Lesson marked incomplete');
+          } else {
+            state.completedLessonIds.push(mid);
+            showToast('Lesson marked complete');
+          }
+          saveState();
+          renderCurriculum();
+        });
+      });
+
+      list.querySelectorAll('.mc-option').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const mid = btn.dataset.mid;
+          const oidx = Number(btn.dataset.oidx);
+          state.quizAnswers[mid] = oidx;
+          saveState();
+          renderCurriculum();
+        });
+      });
+    }
+
+    /* =======================================================================
+       4. FOUR INTERACTIVE MATHS LABS & SOLVERS
+       ======================================================================= */
+    function fmtNum(val) {
+      if (!Number.isFinite(val)) return 'undefined';
+      const rounded = Math.round(val * 10000) / 10000;
+      return String(rounded);
+    }
+
+    function solveQuadraticLab() {
+      const a = Number(document.getElementById('quad-a').value);
+      const b = Number(document.getElementById('quad-b').value);
+      const c = Number(document.getElementById('quad-c').value);
+      const out = document.getElementById('quad-output');
+
+      if (!Number.isFinite(a) || a === 0 || !Number.isFinite(b) || !Number.isFinite(c)) {
+        out.innerHTML = '<span style="color:var(--accent-crimson); font-weight:700;">Please enter valid numbers with a &ne; 0.</span>';
+        return;
+      }
+
+      const disc = b * b - 4 * a * c;
+      const xv = -b / (2 * a);
+      const yv = a * xv * xv + b * xv + c;
+      const turnType = a > 0 ? 'Local Minimum (concave up)' : 'Local Maximum (concave down)';
+
+      let rootsText = '';
+      let natureText = '';
+      if (disc > 0) {
+        const s = Math.sqrt(disc);
+        const r1 = (-b - s) / (2 * a);
+        const r2 = (-b + s) / (2 * a);
+        natureText = '&Delta; &gt; 0 &rarr; Two distinct real roots';
+        rootsText = `x<sub>1</sub> = ${fmtNum(r1)}, &nbsp; x<sub>2</sub> = ${fmtNum(r2)}`;
+      } else if (Math.abs(disc) < 1e-12) {
+        const r0 = -b / (2 * a);
+        natureText = '&Delta; = 0 &rarr; One repeated real root';
+        rootsText = `x = ${fmtNum(r0)} (repeated)`;
+      } else {
+        const realPart = -b / (2 * a);
+        const imagPart = Math.sqrt(-disc) / Math.abs(2 * a);
+        natureText = '&Delta; &lt; 0 &rarr; Two complex conjugate roots';
+        rootsText = `x = ${fmtNum(realPart)} &plusmn; ${fmtNum(imagPart)}i`;
+      }
+
+      out.innerHTML = `
+        <div style="font-size:0.89rem; line-height:1.7;">
+          <div><strong>Discriminant &Delta; = b&sup2; &minus; 4ac:</strong> <span class="font-mono">${fmtNum(b)}&sup2; &minus; 4(${fmtNum(a)})(${fmtNum(c)}) = ${fmtNum(disc)}</span> (${natureText})</div>
+          <div><strong>Roots:</strong> <span class="font-mono" style="color:var(--accent-cobalt); font-weight:700;">${rootsText}</span></div>
+          <div><strong>Turning Point (Vertex):</strong> <span class="font-mono">(${fmtNum(xv)}, ${fmtNum(yv)})</span> &mdash; ${turnType}</div>
+          <div><strong>Derivative:</strong> <span class="font-mono">f&prime;(x) = ${fmtNum(2 * a)}x ${b >= 0 ? '+ ' + fmtNum(b) : '&minus; ' + fmtNum(Math.abs(b))}</span></div>
+        </div>
+      `;
+    }
+
+    function solveComplexLab() {
+      const x = Number(document.getElementById('cplx-x').value);
+      const y = Number(document.getElementById('cplx-y').value);
+      const n = Math.trunc(Number(document.getElementById('cplx-n').value));
+      const out = document.getElementById('cplx-output');
+
+      if (!Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(n)) {
+        out.innerHTML = '<span style="color:var(--accent-crimson); font-weight:700;">Enter valid real, imaginary, and integer n values.</span>';
+        return;
+      }
+
+      const r = Math.hypot(x, y);
+      const theta = Math.atan2(y, x); // Principal argument in (-pi, pi]
+      const rn = Math.pow(r, n);
+      const nTheta = n * theta;
+      const realZn = rn * Math.cos(nTheta);
+      const imagZn = rn * Math.sin(nTheta);
+
+      out.innerHTML = `
+        <div style="font-size:0.89rem; line-height:1.7;">
+          <div><strong>Modulus r = |z|:</strong> <span class="font-mono">${fmtNum(r)}</span></div>
+          <div><strong>Principal Argument &theta; (rad):</strong> <span class="font-mono">${fmtNum(theta)} rad</span> (${fmtNum(theta * 180 / Math.PI)}&deg;)</div>
+          <div><strong>Polar Form:</strong> <span class="font-mono">${fmtNum(r)}[cos(${fmtNum(theta)}) + i sin(${fmtNum(theta)})]</span></div>
+          <div><strong>De Moivre z<sup>${n}</sup> (polar):</strong> <span class="font-mono">${fmtNum(rn)}[cos(${fmtNum(nTheta)}) + i sin(${fmtNum(nTheta)})]</span></div>
+          <div><strong>Cartesian Form z<sup>${n}</sup>:</strong> <span class="font-mono" style="color:var(--accent-cobalt); font-weight:700;">${fmtNum(realZn)} ${imagZn >= 0 ? '+ ' + fmtNum(imagZn) : '&minus; ' + fmtNum(Math.abs(imagZn))}i</span></div>
+        </div>
+      `;
+    }
+
+    function solveGeomLab() {
+      const x1 = Number(document.getElementById('geom-x1').value);
+      const y1 = Number(document.getElementById('geom-y1').value);
+      const x2 = Number(document.getElementById('geom-x2').value);
+      const y2 = Number(document.getElementById('geom-y2').value);
+      const h = Number(document.getElementById('circ-h').value);
+      const k = Number(document.getElementById('circ-k').value);
+      const r = Number(document.getElementById('circ-r').value);
+      const out = document.getElementById('geom-output');
+
+      if ([x1, y1, x2, y2, h, k, r].some(v => !Number.isFinite(v)) || r <= 0) {
+        out.innerHTML = '<span style="color:var(--accent-crimson); font-weight:700;">Enter valid coordinates and radius r &gt; 0.</span>';
+        return;
+      }
+
+      const dx = x2 - x1;
+      const dy = y2 - y1;
+      const dist = Math.hypot(dx, dy);
+      const midX = (x1 + x2) / 2;
+      const midY = (y1 + y2) / 2;
+      const slopeStr = Math.abs(dx) < 1e-12 ? 'Undefined (vertical line)' : fmtNum(dy / dx);
+      const perpStr = Math.abs(dx) < 1e-12
+        ? '0 (horizontal)'
+        : (Math.abs(dy) < 1e-12 ? 'Undefined (vertical)' : fmtNum(-dx / dy));
+
+      const distCentreToA = Math.hypot(x1 - h, y1 - k);
+      const diffR = Math.abs(distCentreToA - r);
+      let posRel = 'outside the circle';
+      if (diffR < 1e-6) posRel = 'ON the circle (distance = r)';
+      else if (distCentreToA < r) posRel = 'INSIDE the circle (distance &lt; r)';
+
+      out.innerHTML = `
+        <div style="font-size:0.89rem; line-height:1.7;">
+          <div><strong>Length |AB|:</strong> <span class="font-mono">${fmtNum(dist)}</span> &bull; <strong>Midpoint:</strong> <span class="font-mono">(${fmtNum(midX)}, ${fmtNum(midY)})</span></div>
+          <div><strong>Slope m<sub>AB</sub>:</strong> <span class="font-mono">${slopeStr}</span> &bull; <strong>Perpendicular slope:</strong> <span class="font-mono">${perpStr}</span></div>
+          <div><strong>Circle Equation:</strong> <span class="font-mono">(x ${h >= 0 ? '&minus; ' + fmtNum(h) : '+ ' + fmtNum(Math.abs(h))})&sup2; + (y ${k >= 0 ? '&minus; ' + fmtNum(k) : '+ ' + fmtNum(Math.abs(k))})&sup2; = ${fmtNum(r * r)}</span></div>
+          <div><strong>Point A relative to circle:</strong> Distance from centre to A is <span class="font-mono">${fmtNum(distCentreToA)}</span> vs radius <span class="font-mono">${fmtNum(r)}</span> &rarr; <strong>${posRel}</strong>.</div>
+        </div>
+      `;
+    }
+
+    function solveStatsLab() {
+      const x = Number(document.getElementById('stat-x').value);
+      const mu = Number(document.getElementById('stat-mu').value);
+      const sigma = Number(document.getElementById('stat-sigma').value);
+      const n = Math.max(1, Math.trunc(Number(document.getElementById('stat-n').value) || 1));
+      const out = document.getElementById('stat-output');
+
+      if (!Number.isFinite(x) || !Number.isFinite(mu) || !Number.isFinite(sigma) || sigma <= 0) {
+        out.innerHTML = '<span style="color:var(--accent-crimson); font-weight:700;">Enter valid values with &sigma; &gt; 0 and n &ge; 1.</span>';
+        return;
+      }
+
+      const zSingle = (x - mu) / sigma;
+      const se = sigma / Math.sqrt(n);
+      const zMean = (x - mu) / se;
+      const ciLow = x - 1.96 * se;
+      const ciHigh = x + 1.96 * se;
+
+      out.innerHTML = `
+        <div style="font-size:0.89rem; line-height:1.7;">
+          <div><strong>Single-value z = (x &minus; &mu;) / &sigma;:</strong> <span class="font-mono" style="color:var(--accent-emerald); font-weight:700;">${fmtNum(zSingle)}</span></div>
+          <div><strong>Standard Error SE = &sigma; / &radic;n:</strong> <span class="font-mono">${fmtNum(se)}</span></div>
+          <div><strong>Sample-mean z<sub>x&#772;</sub> = (x&#772; &minus; &mu;) / SE:</strong> <span class="font-mono">${fmtNum(zMean)}</span></div>
+          <div><strong>Approx. 95% CI around x&#772; (x&#772; &plusmn; 1.96&middot;SE):</strong> <span class="font-mono">[${fmtNum(ciLow)}, ${fmtNum(ciHigh)}]</span></div>
+        </div>
+      `;
+    }
+
+    /* =======================================================================
+       5. MOCK EXAM PRACTICE ITEMS, 150-MIN TIMER & CAO / H1–H8 CALCULATOR
+       ======================================================================= */
+    const MOCK_PRACTICE_ITEMS = [
+      { id: 'mp1', paper: 'P1', section: 'Section A', marks: 25, title: 'Indices &amp; Quadratic Roots', prompt: 'Solve 4<sup>x</sup> &minus; 6(2<sup>x</sup>) + 8 = 0 for x.', sol: 'Let u = 2<sup>x</sup> &gt; 0. Then u&sup2; &minus; 6u + 8 = 0 &rArr; (u &minus; 2)(u &minus; 4) = 0 &rArr; u = 2 or u = 4. Thus 2<sup>x</sup> = 2<sup>1</sup> (x = 1) or 2<sup>x</sup> = 2<sup>2</sup> (x = 2).' },
+      { id: 'mp2', paper: 'P1', section: 'Section A', marks: 25, title: 'Complex Conjugates &amp; Polar Modulus', prompt: 'Given z = 2 + 2i, find |z| and z&sup2; in Cartesian form.', sol: '|z| = &radic;(2&sup2; + 2&sup2;) = &radic;8 = 2&radic;2. z&sup2; = (2 + 2i)&sup2; = 4 + 8i + 4i&sup2; = 4 + 8i &minus; 4 = 8i.' },
+      { id: 'mp3', paper: 'P1', section: 'Section B', marks: 50, title: 'Optimisation via Calculus', prompt: 'A rectangular enclosure along a straight wall uses 40 m of fencing on the other three sides (width x along wall, depth y on each end). Express area A in terms of x and find the maximum area.', sol: 'x + 2y = 40 &rArr; y = 20 &minus; 0.5x. Area A(x) = x(20 &minus; 0.5x) = 20x &minus; 0.5x&sup2;. dA/dx = 20 &minus; x = 0 &rArr; x = 20 m, y = 10 m. d&sup2;A/dx&sup2; = &minus;1 &lt; 0 (max). Max area = 200 m&sup2;.' },
+      { id: 'mp4', paper: 'P1', section: 'Section B', marks: 50, title: 'Definite Integration &amp; Area', prompt: 'Find the area bounded by y = x&sup2;, the x-axis, x = 1, and x = 3.', sol: 'Area = &int;<sub>1</sub><sup>3</sup> x&sup2; dx = [x&sup3;/3]<sub>1</sub><sup>3</sup> = (27/3) &minus; (1/3) = 26/3 square units.' },
+      { id: 'mp5', paper: 'P2', section: 'Section A', marks: 25, title: 'Circle Tangency &amp; Centre', prompt: 'State the centre and radius of x&sup2; + y&sup2; &minus; 6x + 4y &minus; 12 = 0.', sol: 'Completing the square: (x &minus; 3)&sup2; &minus; 9 + (y + 2)&sup2; &minus; 4 &minus; 12 = 0 &rArr; (x &minus; 3)&sup2; + (y + 2)&sup2; = 25. Centre = (3, &minus;2), radius r = 5.' },
+      { id: 'mp6', paper: 'P2', section: 'Section A', marks: 25, title: 'Cosine Rule Triangle Side', prompt: 'In &Delta;ABC, b = 7 cm, c = 8 cm, and A = 60&deg;. Find side a.', sol: 'a&sup2; = 7&sup2; + 8&sup2; &minus; 2(7)(8)cos 60&deg; = 49 + 64 &minus; 112(0.5) = 113 &minus; 56 = 57. Hence a = &radic;57 &approx; 7.55 cm.' },
+      { id: 'mp7', paper: 'P2', section: 'Section B', marks: 50, title: 'Conditional &amp; Combined Probability', prompt: 'If P(A) = 0.6, P(B) = 0.5, and P(A &cup; B) = 0.8, find P(A &cap; B) and P(A | B).', sol: 'P(A &cap; B) = P(A) + P(B) &minus; P(A &cup; B) = 0.6 + 0.5 &minus; 0.8 = 0.3. Then P(A | B) = P(A &cap; B) / P(B) = 0.3 / 0.5 = 0.6.' },
+      { id: 'mp8', paper: 'P2', section: 'Section B', marks: 50, title: '95% Confidence Interval &amp; Conclusion', prompt: 'A sample of n = 36 students has mean score x&#772; = 74 with &sigma; = 12. Compute the 95% confidence interval for &mu;.', sol: 'SE = 12 / &radic;36 = 12 / 6 = 2. Margin of error = 1.96 &times; 2 = 3.92. 95% CI = [74 &minus; 3.92, 74 + 3.92] = [70.08, 77.92].' }
+    ];
+
+    function renderMockItems() {
+      const box = document.getElementById('mock-questions-container');
+      if (!box) return;
+
+      const filtered = MOCK_PRACTICE_ITEMS.filter(item =>
+        state.mockFilter === 'ALL' ? true : item.paper === state.mockFilter
+      );
+
+      box.innerHTML = filtered.map(item => `
+        <article class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <span class="badge ${item.paper === 'P1' ? 'badge-cobalt' : 'badge-emerald'}">${item.paper === 'P1' ? 'Paper 1' : 'Paper 2'}</span>
+              <span class="badge badge-amber">${item.section} &bull; ${item.marks} Marks</span>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm sol-toggle-btn" data-target="sol-${item.id}">Reveal H1 Solution</button>
+          </div>
+          <h3 style="font-size:1.1rem; margin-bottom:6px;">${item.title}</h3>
+          <p style="margin:0; font-size:0.92rem;">${item.prompt}</p>
+          <div id="sol-${item.id}" class="solution-box">
+            <strong>Worked H1 Solution:</strong> ${item.sol}
+          </div>
+        </article>
+      `).join('');
+
+      box.querySelectorAll('.sol-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const panel = document.getElementById(btn.dataset.target);
+          if (!panel) return;
+          const open = panel.classList.toggle('open');
+          btn.textContent = open ? 'Hide H1 Solution' : 'Reveal H1 Solution';
+        });
+      });
+    }
+
+    // Timer logic
+    let examTimerId = null;
+
+    function formatClock(totalSec) {
+      const s = Math.max(0, Number(totalSec) || 0);
+      const mins = Math.floor(s / 60);
+      const rem = s % 60;
+      return `${String(mins).padStart(3, '0')}:${String(rem).padStart(2, '0')}`;
+    }
+
+    function renderTimer() {
+      const disp = document.getElementById('exam-timer-display');
+      if (disp) disp.textContent = formatClock(state.timerRemainingSec);
+    }
+
+    function initTimer() {
+      const paperSel = document.getElementById('mock-paper-select');
+      paperSel.value = state.mockPaper || 'P1';
+      paperSel.addEventListener('change', () => {
+        state.mockPaper = paperSel.value;
+        saveState();
+        showToast(`Timed mode set to ${state.mockPaper === 'P1' ? 'Paper 1' : 'Paper 2'}`);
+      });
+
+      document.getElementById('exam-start-btn').addEventListener('click', () => {
+        if (examTimerId) return;
+        showToast(`150-min timer started (${state.mockPaper})`);
+        examTimerId = setInterval(() => {
+          if (state.timerRemainingSec > 0) {
+            state.timerRemainingSec -= 1;
+            renderTimer();
+            if (state.timerRemainingSec % 15 === 0) saveState();
+          } else {
+            clearInterval(examTimerId);
+            examTimerId = null;
+            saveState();
+            showToast('150-minute exam time reached');
+          }
+        }, 1000);
+      });
+
+      document.getElementById('exam-pause-btn').addEventListener('click', () => {
+        if (examTimerId) {
+          clearInterval(examTimerId);
+          examTimerId = null;
+          saveState();
+          showToast('Timer paused');
+        }
+      });
+
+      document.getElementById('exam-reset-btn').addEventListener('click', () => {
+        if (examTimerId) {
+          clearInterval(examTimerId);
+          examTimerId = null;
+        }
+        state.timerRemainingSec = 9000;
+        renderTimer();
+        saveState();
+        showToast('Timer reset to 150:00');
+      });
+    }
+
+    // CAO + H1–H8 Calculator
+    function updateCaoGradeSummary() {
+      const p1 = Math.max(0, Math.min(300, Number(document.getElementById('p1-marks-input').value) || 0));
+      const p2 = Math.max(0, Math.min(300, Number(document.getElementById('p2-marks-input').value) || 0));
+      state.p1Score = p1;
+      state.p2Score = p2;
+      saveState();
+
+      const total = p1 + p2;
+      const pct = (total / 600) * 100;
+
+      let grade = 'H8';
+      let basePts = 0;
+      if (pct >= 90) { grade = 'H1'; basePts = 100; }
+      else if (pct >= 80) { grade = 'H2'; basePts = 88; }
+      else if (pct >= 70) { grade = 'H3'; basePts = 77; }
+      else if (pct >= 60) { grade = 'H4'; basePts = 66; }
+      else if (pct >= 50) { grade = 'H5'; basePts = 56; }
+      else if (pct >= 40) { grade = 'H6'; basePts = 46; }
+      else if (pct >= 30) { grade = 'H7'; basePts = 37; }
+
+      const bonus = basePts >= 46 ? 25 : 0; // +25 HL bonus for H6 and above
+      const caoTotal = basePts + bonus;
+
+      document.getElementById('cao-grade-summary').innerHTML = `
+        <div style="font-size:0.9rem; line-height:1.75;">
+          <div><strong>Combined Score:</strong> <span class="font-mono" style="font-weight:700;">${total} / 600 (${pct.toFixed(1)}%)</span></div>
+          <div><strong>LC Higher Level Grade:</strong> <span class="badge ${grade === 'H1' ? 'badge-emerald' : 'badge-cobalt'}">${grade}</span></div>
+          <div><strong>CAO Points:</strong> <span class="font-mono" style="color:var(--accent-cobalt); font-weight:700;">${caoTotal} pts</span> <span style="color:var(--ink-secondary);">(${basePts} base + ${bonus} HL bonus)</span></div>
+        </div>
+      `;
+    }
+
+    /* =======================================================================
+       6. VIEW SWITCHING & INITIALIZATION
+       ======================================================================= */
+    function openView(viewName) {
+      state.activeView = viewName;
+      saveState();
+
+      document.querySelectorAll('.nav-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.view === viewName);
+      });
+      document.querySelectorAll('.view-panel').forEach(p => {
+        p.classList.toggle('active', p.id === `view-${viewName}`);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', () => openView(btn.dataset.view));
+      });
+
+      // Curriculum filter chips
+      document.querySelectorAll('#curriculum-filter-strip .filter-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          state.curriculumFilter = chip.dataset.pfilter;
+          document.querySelectorAll('#curriculum-filter-strip .filter-chip').forEach(c => {
+            c.classList.toggle('active', c.dataset.pfilter === state.curriculumFilter);
+          });
+          saveState();
+          renderCurriculum();
+        });
+      });
+
+      // Mock filter chips
+      document.querySelectorAll('#mock-filter-strip .filter-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          state.mockFilter = chip.dataset.mfilter;
+          document.querySelectorAll('#mock-filter-strip .filter-chip').forEach(c => {
+            c.classList.toggle('active', c.dataset.mfilter === state.mockFilter);
+          });
+          saveState();
+          renderMockItems();
+        });
+      });
+
+      // Two-step inline Reset Progress button
+      let resetArmed = false;
+      const resetBtn = document.getElementById('reset-progress-btn');
+      resetBtn.addEventListener('click', () => {
+        if (!resetArmed) {
+          resetArmed = true;
+          resetBtn.textContent = 'Click Again to Reset';
+          setTimeout(() => {
+            resetArmed = false;
+            resetBtn.textContent = 'Reset Progress';
+          }, 3000);
+        } else {
+          if (examTimerId) {
+            clearInterval(examTimerId);
+            examTimerId = null;
+          }
+          localStorage.removeItem(STORAGE_KEY);
+          state = {
+            ...DEFAULT_STATE,
+            completedLessonIds: [],
+            checklistIds: [],
+            quizAnswers: {}
+          };
+          resetArmed = false;
+          resetBtn.textContent = 'Reset Progress';
+          document.getElementById('p1-marks-input').value = String(state.p1Score);
+          document.getElementById('p2-marks-input').value = String(state.p2Score);
+          document.getElementById('mock-paper-select').value = state.mockPaper;
+          renderChecklist();
+          renderCurriculum();
+          renderMockItems();
+          renderTimer();
+          updateCaoGradeSummary();
+          openView('blueprint');
+          updateMasteryMeter();
+          showToast('Progress reset');
+        }
+      });
+
+      // Lab buttons
+      document.getElementById('quad-solve-btn').addEventListener('click', solveQuadraticLab);
+      document.getElementById('cplx-solve-btn').addEventListener('click', solveComplexLab);
+      document.getElementById('geom-solve-btn').addEventListener('click', solveGeomLab);
+      document.getElementById('stat-solve-btn').addEventListener('click', solveStatsLab);
+
+      // CAO score inputs
+      document.getElementById('p1-marks-input').addEventListener('input', updateCaoGradeSummary);
+      document.getElementById('p2-marks-input').addEventListener('input', updateCaoGradeSummary);
+
+      // Initial renders
+      renderChecklist();
+      renderCurriculum();
+      solveQuadraticLab();
+      solveComplexLab();
+      solveGeomLab();
+      solveStatsLab();
+      renderMockItems();
+      renderTimer();
+      initTimer();
+
+      document.getElementById('p1-marks-input').value = String(state.p1Score ?? 275);
+      document.getElementById('p2-marks-input').value = String(state.p2Score ?? 270);
+      updateCaoGradeSummary();
+
+      openView(state.activeView || 'blueprint');
+      updateMasteryMeter();
+    });
+  </script>
+</body>
+</html>

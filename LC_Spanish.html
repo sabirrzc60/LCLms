@@ -1,0 +1,2002 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cuaderno H1 — Leaving Cert Spanish Higher Level LMS</title>
+  <!-- Tailwind CSS for responsive layout utilities -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Fraunces (Editorial Serif), Plus Jakarta Sans (Humanist Sans), JetBrains Mono (Phonetics) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-paper: #FAF8F5;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #F3EFEA;
+      --ink-primary: #1E242B;
+      --ink-secondary: #5A6577;
+      --accent-terracotta: #C84B31;
+      --accent-terracotta-soft: #FDF2EF;
+      --accent-olive: #2D6A4F;
+      --accent-olive-soft: #EEF6F2;
+      --accent-ochre: #B7791F;
+      --accent-ochre-soft: #FEF9EC;
+      --border-crisp: #E4DFD7;
+      --shadow-paper: 0 2px 10px rgba(30, 36, 43, 0.04), 0 1px 2px rgba(30, 36, 43, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-paper);
+      color: var(--ink-primary);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, .font-editorial {
+      font-family: 'Fraunces', Georgia, serif;
+      letter-spacing: -0.015em;
+    }
+
+    .font-phonetic {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Tactile Paper & Notebook Accents */
+    .paper-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-crisp);
+      border-radius: 12px;
+      box-shadow: var(--shadow-paper);
+    }
+
+    .binder-rule {
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 31px,
+        #EFECE6 32px
+      );
+    }
+
+    /* Interactive Spanish Token Pill */
+    .es-token {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-crisp);
+      border-radius: 8px;
+      padding: 3px 9px;
+      margin: 2px 0;
+      vertical-align: middle;
+      transition: all 0.15s ease;
+    }
+
+    .es-token:hover {
+      border-color: var(--accent-terracotta);
+      background-color: var(--accent-terracotta-soft);
+    }
+
+    .es-word {
+      font-weight: 700;
+      color: var(--ink-primary);
+    }
+
+    .es-phonetic {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--accent-terracotta);
+      background: #FFFFFF;
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid #EADCD8;
+    }
+
+    .audio-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 9999px;
+      background-color: var(--accent-terracotta);
+      color: #FFFFFF;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      transition: transform 0.12s ease, background-color 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .audio-btn:hover {
+      background-color: #A93B24;
+      transform: scale(1.08);
+    }
+
+    .audio-btn:active {
+      transform: scale(0.95);
+    }
+
+    .audio-btn.speaking {
+      background-color: var(--accent-olive);
+      animation: pulseRing 1.2s infinite;
+    }
+
+    @keyframes pulseRing {
+      0% { box-shadow: 0 0 0 0 rgba(45, 106, 79, 0.5); }
+      70% { box-shadow: 0 0 0 7px rgba(45, 106, 79, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(45, 106, 79, 0); }
+    }
+
+    /* Sidebar Navigation Item */
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      text-align: left;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--ink-secondary);
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+
+    .nav-item:hover {
+      background-color: var(--bg-subtle);
+      color: var(--ink-primary);
+    }
+
+    .nav-item.active {
+      background-color: var(--accent-terracotta-soft);
+      color: var(--accent-terracotta);
+      border-color: #F2D3CB;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-paper);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D5CEC4;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B8AFA3;
+    }
+
+    /* Toast Notification */
+    #toast-box {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      transform: translateY(120%);
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #toast-box.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col lg:flex-row">
+
+  <!-- Mobile Top Header -->
+  <header class="lg:hidden sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur border-b border-[#E4DFD7] px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-2.5">
+      <div class="w-9 h-9 rounded-lg bg-[#C84B31] text-white flex items-center justify-center font-editorial font-bold text-lg shadow-sm">
+        Ñ
+      </div>
+      <div>
+        <div class="font-editorial font-bold text-base leading-tight text-[#1E242B]">Cuaderno H1</div>
+        <div class="text-[11px] text-[#5A6577] font-medium">Leaving Cert Spanish • Higher Level</div>
+      </div>
+    </div>
+    <button id="mobile-menu-btn" class="p-2.5 rounded-lg border border-[#E4DFD7] bg-white text-[#1E242B] font-semibold text-sm flex items-center gap-1.5">
+      <span>☰</span> <span>Binder</span>
+    </button>
+  </header>
+
+  <!-- Left Study Binder Sidebar -->
+  <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-72 bg-[#FAF8F5] border-r border-[#E4DFD7] transform -translate-x-full lg:translate-x-0 lg:static lg:flex lg:flex-col justify-between transition-transform duration-200 ease-in-out overflow-y-auto">
+    <div class="p-5">
+      <!-- Brand Header -->
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-[#C84B31] text-white flex items-center justify-center font-editorial font-bold text-xl shadow-sm">
+            Ñ
+          </div>
+          <div>
+            <h1 class="font-editorial font-bold text-lg leading-tight text-[#1E242B]">Cuaderno H1</h1>
+            <p class="text-xs text-[#5A6577] font-medium">LC Spanish • Higher Level</p>
+          </div>
+        </div>
+        <button id="close-sidebar-btn" class="lg:hidden p-2 rounded-lg text-[#5A6577] hover:bg-[#F3EFEA]">✕</button>
+      </div>
+
+      <!-- Readiness Meter Card -->
+      <div class="paper-card p-3.5 mb-6 bg-white">
+        <div class="flex items-center justify-between text-xs font-semibold mb-1.5">
+          <span class="text-[#5A6577] uppercase tracking-wider">H1 Readiness</span>
+          <span id="sidebar-progress-pct" class="text-[#2D6A4F] font-bold">0%</span>
+        </div>
+        <div class="w-full h-2 bg-[#F3EFEA] rounded-full overflow-hidden mb-2">
+          <div id="sidebar-progress-bar" class="h-full bg-[#2D6A4F] transition-all duration-300" style="width: 0%"></div>
+        </div>
+        <div class="flex items-center justify-between text-[11px] text-[#5A6577]">
+          <span id="sidebar-stages-count">0 / 6 Stages Done</span>
+          <span id="sidebar-mocks-count">0 / 5 Mocks</span>
+        </div>
+      </div>
+
+      <!-- Main Navigation -->
+      <div class="space-y-1">
+        <div class="px-3 pb-1 text-[11px] font-bold uppercase tracking-wider text-[#5A6577]">Study Binder</div>
+        <button class="nav-item active" data-tab="roadmap">
+          <span class="text-base">🧭</span>
+          <span>Exam Blueprint & Roadmap</span>
+        </button>
+        <button class="nav-item" data-tab="curriculum">
+          <span class="text-base">📚</span>
+          <span>Zero-to-Hero Curriculum</span>
+        </button>
+        <button class="nav-item" data-tab="aural">
+          <span class="text-base">🎧</span>
+          <span>Aural Listening Lab (80m)</span>
+        </button>
+        <button class="nav-item" data-tab="vocab">
+          <span class="text-base">🗂️</span>
+          <span>Pronunciation & Vocab Vault</span>
+        </button>
+        <button class="nav-item" data-tab="mocks">
+          <span class="text-base">📝</span>
+          <span>5 Full Mock Exams (400m)</span>
+        </button>
+      </div>
+
+      <!-- Quick Stage Shortcuts -->
+      <div class="mt-6 pt-5 border-t border-[#E4DFD7]">
+        <div class="px-3 pb-2 text-[11px] font-bold uppercase tracking-wider text-[#5A6577]">Curriculum Stages</div>
+        <div id="sidebar-stage-links" class="space-y-1 text-xs">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Audio Settings & Reset -->
+    <div class="p-4 border-t border-[#E4DFD7] bg-[#F3EFEA]/60 text-xs space-y-2.5">
+      <div class="flex items-center justify-between">
+        <span class="font-semibold text-[#1E242B]">🔊 Spanish Voice Speed</span>
+        <select id="global-voice-rate" class="bg-white border border-[#E4DFD7] rounded-md px-2 py-1 text-xs font-semibold text-[#1E242B]">
+          <option value="0.75">0.75x (Learner)</option>
+          <option value="0.92" selected>0.92x (Clear Exam)</option>
+          <option value="1.05">1.05x (Native)</option>
+        </select>
+      </div>
+      <div class="flex items-center justify-between pt-1">
+        <span class="text-[#5A6577]">Saved locally in browser</span>
+        <button id="reset-progress-btn" class="text-[#C84B31] hover:underline font-semibold">Reset</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div id="sidebar-backdrop" class="fixed inset-0 bg-black/30 z-40 hidden lg:hidden"></div>
+
+  <!-- Main Content Canvas -->
+  <main class="flex-1 min-w-0 p-4 sm:p-6 lg:p-10 max-w-5xl mx-auto w-full">
+
+    <!-- ==================== VIEW 1: EXAM BLUEPRINT & ROADMAP ==================== -->
+    <section id="view-roadmap" class="view-section space-y-8">
+      <!-- Hero Banner -->
+      <div class="paper-card p-6 sm:p-8 bg-white relative overflow-hidden">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FDF2EF] border border-[#F2D3CB] text-[#C84B31] text-xs font-bold uppercase tracking-wider mb-4">
+          <span>Irish Leaving Certificate • Higher Level</span>
+        </div>
+        <h2 class="font-editorial text-2xl sm:text-4xl font-bold text-[#1E242B] mb-3 leading-tight">
+          From Absolute Beginner to Leaving Cert Spanish H1
+        </h2>
+        <p class="text-[#5A6577] text-base sm:text-lg max-w-3xl mb-6">
+          Every concept is taught step-by-step in plain English. Every single Spanish word includes an instant <strong class="text-[#1E242B]">English phonetic guide</strong> <span class="font-phonetic text-xs bg-[#F3EFEA] px-1.5 py-0.5 rounded text-[#C84B31]">[like this]</span> and native <strong class="text-[#1E242B]">🔊 audio pronunciation</strong> so you never guess how a word sounds in the Oral or Aural exam.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <button onclick="switchTab('curriculum')" class="px-5 py-2.5 rounded-xl bg-[#C84B31] hover:bg-[#A93B24] text-white font-semibold text-sm shadow-sm transition">
+            Start Stage 1: Zero to Foundations →
+          </button>
+          <button onclick="switchTab('mocks')" class="px-5 py-2.5 rounded-xl bg-white hover:bg-[#F3EFEA] text-[#1E242B] border border-[#E4DFD7] font-semibold text-sm transition">
+            Explore 5 Full Mock Papers
+          </button>
+        </div>
+      </div>
+
+      <!-- Official 400-Mark Exam Architecture -->
+      <div>
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-4 gap-2">
+          <div>
+            <h3 class="font-editorial text-xl sm:text-2xl font-bold text-[#1E242B]">Official 400-Mark Exam Blueprint</h3>
+            <p class="text-sm text-[#5A6577]">How the State Examinations Commission (SEC) awards every mark at Higher Level.</p>
+          </div>
+          <span class="text-xs font-bold px-3 py-1.5 rounded-lg bg-[#EEF6F2] text-[#2D6A4F] border border-[#CBE4D7]">
+            Total: 400 Marks (H1 = 360–400m / 90%+)
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Component 1: Oral -->
+          <div class="paper-card p-5 border-t-4 border-t-[#C84B31]">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#C84B31]">Component 1 • Easter</span>
+              <span class="font-editorial font-bold text-lg text-[#1E242B]">100 Marks (25%)</span>
+            </div>
+            <h4 class="font-editorial font-bold text-lg mb-2">Oral Examination (15 Mins)</h4>
+            <ul class="text-sm text-[#5A6577] space-y-1.5">
+              <li>• <strong class="text-[#1E242B]">General Conversation (~10 mins):</strong> Family, school, pastimes, technology, past holidays, future plans & current affairs.</li>
+              <li>• <strong class="text-[#1E242B]">Roleplay (~5 mins):</strong> 1 of 5 prescribed scenarios + examiner's follow-up <strong class="text-[#1E242B]">Open Question</strong>.</li>
+            </ul>
+          </div>
+
+          <!-- Component 2: Aural -->
+          <div class="paper-card p-5 border-t-4 border-t-[#2D6A4F]">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#2D6A4F]">Component 2 • June (40 Mins)</span>
+              <span class="font-editorial font-bold text-lg text-[#1E242B]">80 Marks (20%)</span>
+            </div>
+            <h4 class="font-editorial font-bold text-lg mb-2">Aural / Listening Test</h4>
+            <ul class="text-sm text-[#5A6577] space-y-1.5">
+              <li>• <strong class="text-[#1E242B]">7 Audio Sections:</strong> Dialogues, announcements, weather report, and 3 journalistic news items.</li>
+              <li>• <strong class="text-[#1E242B]">Answers in English:</strong> Each piece is played 3 times (whole, segments, whole). Precision wins full marks.</li>
+            </ul>
+          </div>
+
+          <!-- Component 3: Written -->
+          <div class="paper-card p-5 border-t-4 border-t-[#B7791F]">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#B7791F]">Component 3 • June (2h 30m)</span>
+              <span class="font-editorial font-bold text-lg text-[#1E242B]">220 Marks (55%)</span>
+            </div>
+            <h4 class="font-editorial font-bold text-lg mb-2">Written Paper (Sections A, B & C)</h4>
+            <ul class="text-sm text-[#5A6577] space-y-1.5">
+              <li>• <strong class="text-[#1E242B]">Section A (70m):</strong> Prescriptive & journalistic reading comprehensions.</li>
+              <li>• <strong class="text-[#1E242B]">Section B (100m):</strong> Long reading text (60m) + <strong class="text-[#1E242B]">Opinion Piece</strong> in Spanish (40m).</li>
+              <li>• <strong class="text-[#1E242B]">Section C (50m):</strong> Dialogue/Letter (30m) + Diary Entry/Note (20m).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- June Written Paper Timing Strategy -->
+      <div class="paper-card p-6 bg-[#FAF8F5]">
+        <h3 class="font-editorial text-lg font-bold text-[#1E242B] mb-3">⏱️ Gold-Standard June Written Paper Timing (150 Minutes Total)</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+          <div class="bg-white p-3.5 rounded-xl border border-[#E4DFD7]">
+            <div class="font-bold text-[#C84B31]">0:00 – 0:40 (40m)</div>
+            <div class="font-semibold text-[#1E242B]">Section A (70 Marks)</div>
+            <div class="text-xs text-[#5A6577] mt-1">Read questions first. Answer English Qs concisely; find exact Spanish synonyms.</div>
+          </div>
+          <div class="bg-white p-3.5 rounded-xl border border-[#E4DFD7]">
+            <div class="font-bold text-[#2D6A4F]">0:40 – 1:15 (35m)</div>
+            <div class="font-semibold text-[#1E242B]">Section B Reading (60m)</div>
+            <div class="text-xs text-[#5A6577] mt-1">Long journalistic article + Spanish manipulation questions.</div>
+          </div>
+          <div class="bg-white p-3.5 rounded-xl border border-[#E4DFD7]">
+            <div class="font-bold text-[#B7791F]">1:15 – 1:50 (35m)</div>
+            <div class="font-semibold text-[#1E242B]">Section B Opinion (40m)</div>
+            <div class="text-xs text-[#5A6577] mt-1">5-paragraph essay (~140–160 words) with 2+ Subjunctive triggers.</div>
+          </div>
+          <div class="bg-white p-3.5 rounded-xl border border-[#E4DFD7]">
+            <div class="font-bold text-[#1E242B]">1:50 – 2:30 (40m)</div>
+            <div class="font-semibold text-[#1E242B]">Section C (50 Marks)</div>
+            <div class="text-xs text-[#5A6577] mt-1">25m on Dialogue/Letter (30m) + 15m on Diary/Note (20m) + proofread!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6-Stage Zero-to-Hero Roadmap Tracker -->
+      <div>
+        <h3 class="font-editorial text-xl sm:text-2xl font-bold text-[#1E242B] mb-2">Your 6-Stage Zero-to-Hero Study Path</h3>
+        <p class="text-sm text-[#5A6577] mb-4">Click any stage to open the full English lesson with interactive pronunciation and exam templates.</p>
+        <div id="roadmap-stages-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 2: ZERO-TO-HERO CURRICULUM ==================== -->
+    <section id="view-curriculum" class="view-section hidden space-y-6">
+      <!-- Stage Selector Tabs -->
+      <div class="paper-card p-4 bg-white">
+        <div class="text-xs font-bold uppercase tracking-wider text-[#5A6577] mb-2.5">Select Curriculum Stage</div>
+        <div id="curriculum-stage-pills" class="flex flex-wrap gap-2">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Active Stage Content Container -->
+      <div id="curriculum-stage-content" class="space-y-6">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 3: AURAL LISTENING LAB ==================== -->
+    <section id="view-aural" class="view-section hidden space-y-6">
+      <div class="paper-card p-6 bg-white">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E4DFD7] pb-5 mb-5">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-[#2D6A4F]">Paper 1 • Section 1 (80 Marks / 20%)</span>
+            <h2 class="font-editorial text-2xl sm:text-3xl font-bold text-[#1E242B] mt-1">Interactive Aural Listening Lab</h2>
+            <p class="text-sm text-[#5A6577] mt-1">
+              Train your ear for the June Leaving Cert CD. Press play to hear native Spanish audio, practice answering in English, and reveal the Spanish transcript with phonetic guides.
+            </p>
+          </div>
+          <div class="bg-[#FAF8F5] border border-[#E4DFD7] rounded-xl p-3 text-xs space-y-1 shrink-0">
+            <div class="font-bold text-[#1E242B]">🎯 Golden Aural Rules</div>
+            <div class="text-[#5A6577]">1. Always answer in <strong>English</strong>.</div>
+            <div class="text-[#5A6577]">2. Watch out for <em>pero</em> (but) & numbers.</div>
+            <div class="text-[#5A6577]">3. Write two clear points if worth 4–6m.</div>
+          </div>
+        </div>
+
+        <!-- Aural Track Selector -->
+        <div id="aural-tracks-container" class="space-y-6">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 4: PRONUNCIATION & VOCAB VAULT ==================== -->
+    <section id="view-vocab" class="view-section hidden space-y-6">
+      <div class="paper-card p-6 bg-white">
+        <span class="text-xs font-bold uppercase tracking-wider text-[#C84B31]">H1 Lexicon • Every Word With Phonetics & Audio</span>
+        <h2 class="font-editorial text-2xl sm:text-3xl font-bold text-[#1E242B] mt-1">Pronunciation & High-Scoring Vocabulary Vault</h2>
+        <p class="text-sm text-[#5A6577] mt-1 mb-5">
+          Filter by Leaving Cert exam topic or search in English/Spanish. Tap <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#C84B31] text-white text-[10px]">🔊</span> on any card to hear the exact Spanish pronunciation.
+        </p>
+
+        <!-- Search and Category Filter -->
+        <div class="flex flex-col sm:flex-row gap-3 mb-5">
+          <input id="vocab-search" type="text" placeholder="Search English meaning, Spanish word, or phonetic..." class="flex-1 px-4 py-2.5 rounded-xl border border-[#E4DFD7] bg-[#FAF8F5] text-sm focus:outline-none focus:border-[#C84B31]" />
+          <select id="vocab-category" class="px-4 py-2.5 rounded-xl border border-[#E4DFD7] bg-white text-sm font-semibold text-[#1E242B]">
+            <option value="ALL">All Exam Categories</option>
+            <option value="Opinion & Linkers">Opinion Piece Linkers & Idioms</option>
+            <option value="Subjunctive Triggers">H1 Subjunctive Triggers</option>
+            <option value="Oral & Roleplay">Oral Exam & Roleplay Survival</option>
+            <option value="Environment & Society">Environment, Tech & Social Issues</option>
+            <option value="Time & Tenses">Time Markers (Preterite/Future)</option>
+          </select>
+        </div>
+
+        <div id="vocab-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 5: 5 FULL ORIGINAL MOCK EXAMS ==================== -->
+    <section id="view-mocks" class="view-section hidden space-y-6">
+      <!-- Mock Exam Header & Paper Switcher -->
+      <div class="paper-card p-6 bg-white">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-[#B7791F]">Complete SEC-Format Practice Suite</span>
+            <h2 class="font-editorial text-2xl sm:text-3xl font-bold text-[#1E242B] mt-1">5 Original Leaving Cert Mock Exams</h2>
+            <p class="text-sm text-[#5A6577] mt-1">
+              Each mock covers all 400 marks: <strong>Aural (80m)</strong>, <strong>Section A Reading (70m)</strong>, <strong>Section B Reading + Opinion (100m)</strong>, <strong>Section C Written (50m)</strong>, and <strong>Oral Simulation (100m)</strong>.
+            </p>
+          </div>
+          <!-- Live Exam Stopwatch -->
+          <div class="bg-[#FAF8F5] border border-[#E4DFD7] rounded-xl p-3.5 flex items-center gap-3 shrink-0">
+            <div>
+              <div class="text-[11px] font-bold uppercase text-[#5A6577]">Exam Timer</div>
+              <div id="mock-timer-display" class="font-phonetic text-xl font-bold text-[#1E242B]">02:30:00</div>
+            </div>
+            <div class="flex flex-col gap-1">
+              <button id="mock-timer-toggle" class="px-3 py-1 rounded-lg bg-[#2D6A4F] text-white text-xs font-semibold">Start</button>
+              <button id="mock-timer-reset" class="px-3 py-1 rounded-lg bg-white border border-[#E4DFD7] text-[#5A6577] text-xs font-semibold">Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 Mock Tabs -->
+        <div id="mock-selector-tabs" class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Active Mock Paper Container -->
+      <div id="active-mock-container" class="space-y-6">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast Message Box (Replaces alert()) -->
+  <div id="toast-box" class="bg-[#1E242B] text-white px-4 py-3 rounded-xl shadow-lg text-sm font-medium flex items-center gap-2.5 max-w-sm">
+    <span id="toast-icon">ℹ️</span>
+    <span id="toast-text">Notification</span>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       1. SPANISH SPEECH SYNTHESIS & PHONETIC HELPER ENGINE
+       ========================================================================== */
+    let activeAudioBtn = null;
+
+    function speakSpanish(text, btnElement = null, customRate = null) {
+      if (!('speechSynthesis' in window)) {
+        showToast('Your browser does not support text-to-speech audio.', '⚠️');
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+      if (activeAudioBtn) {
+        activeAudioBtn.classList.remove('speaking');
+      }
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'es-ES';
+
+      // Prefer a natural Spanish voice if available
+      const voices = window.speechSynthesis.getVoices();
+      const esVoice = voices.find(v => v.lang.includes('es-ES')) || voices.find(v => v.lang.startsWith('es'));
+      if (esVoice) {
+        utterance.voice = esVoice;
+      }
+
+      const globalRate = parseFloat(document.getElementById('global-voice-rate')?.value || '0.92');
+      utterance.rate = customRate || globalRate;
+      utterance.pitch = 1.0;
+
+      if (btnElement) {
+        activeAudioBtn = btnElement;
+        btnElement.classList.add('speaking');
+      }
+
+      utterance.onend = () => {
+        if (btnElement) btnElement.classList.remove('speaking');
+        activeAudioBtn = null;
+      };
+      utterance.onerror = () => {
+        if (btnElement) btnElement.classList.remove('speaking');
+        activeAudioBtn = null;
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // Ensure voices are loaded on Chrome/Safari
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+    }
+
+    // Helper to render a Spanish word/phrase with phonetic guide + audio button
+    function esPill(spanish, phonetic) {
+      const safeEs = spanish.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+      return `<span class="es-token">
+        <span class="es-word">${spanish}</span>
+        <span class="es-phonetic">[${phonetic}]</span>
+        <button type="button" class="audio-btn" title="Listen to pronunciation" onclick="speakSpanish('${safeEs}', this)">🔊</button>
+      </span>`;
+    }
+
+    function showToast(msg, icon = '✓') {
+      const box = document.getElementById('toast-box');
+      document.getElementById('toast-icon').textContent = icon;
+      document.getElementById('toast-text').textContent = msg;
+      box.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => box.classList.remove('show'), 3200);
+    }
+
+    /* ==========================================================================
+       2. CURRICULUM DATA (ZERO TO HERO - 6 STAGES TAUGHT IN ENGLISH)
+       ========================================================================== */
+    const CURRICULUM_STAGES = [
+      {
+        id: 1,
+        badge: 'Stage 1 • Zero to Foundations',
+        title: 'Pronunciation Rules, Alphabet & Survival Spanish',
+        subtitle: 'Master how Spanish sounds so you ace the Oral & Aural exams from day one.',
+        examWeight: 'Foundation for Oral (25%) & Aural (20%)',
+        blocks: [
+          {
+            heading: '1. The Golden Rule of Spanish Vowels (100% Consistent!)',
+            explanation: 'Unlike English—where the letter "a" sounds different in "cat", "car", and "cake"—Spanish vowels NEVER change their sound. Every single vowel is short, crisp, and pure.',
+            cards: [
+              { es: 'A — Casa', ph: 'AH — KAH-sah', en: 'Always like "ah" in father. Never like "cat". (House)' },
+              { es: 'E — Verde', ph: 'EH — BEHR-deh', en: 'Always like "eh" in bed. Never silent at the end of a word! (Green)' },
+              { es: 'I — Libro', ph: 'EE — LEE-broh', en: 'Always like "ee" in see. (Book)' },
+              { es: 'O — Poco', ph: 'OH — POH-koh', en: 'Always a short "oh" as in no, without a "w" glide. (A little)' },
+              { es: 'U — Uno', ph: 'OO — OO-noh', en: 'Always like "oo" in boot. Silent in "que" [keh] and "qui" [kee]. (One)' }
+            ]
+          },
+          {
+            heading: '2. Tricky Consonants That Catch Leaving Cert Students Out',
+            explanation: 'Examiners listen closely to these letters during the Oral exam. Learn these 6 rules once and you will sound remarkably authentic:',
+            cards: [
+              { es: 'H is ALWAYS Silent: Hola / Hacer', ph: 'OH-lah / ah-THEHR', en: 'Never pronounce the H! "Hola" sounds identical to "ola".' },
+              { es: 'Ñ (Eñe): España / Mañana', ph: 'ehs-PAH-nyah / mah-NYAH-nah', en: 'Sounds like "ny" in canyon. Crucial for "años" [AH-nyohs] (years).' },
+              { es: 'LL: Me llamo / Calle', ph: 'meh YAH-moh / KAH-yeh', en: 'Double L sounds like an English "Y" in "yes".' },
+              { es: 'J & Ge/Gi: Jugar / Gente', ph: 'hoo-GAHR / HEN-teh', en: 'Sounds like a strong English "H" (or Irish "ch" in loch).' },
+              { es: 'Ce/Ci & Z: Gracias / Zapato', ph: 'GRAH-thyahs / thah-PAH-toh', en: 'In mainland Spain (Castilian), C before E/I and Z are pronounced like "th" in "think".' },
+              { es: 'RR vs R: Perro vs Pero', ph: 'PEHR-roh vs PEH-roh', en: 'Double RR is rolled strongly (dog); single R is a quick tap (but).' }
+            ]
+          },
+          {
+            heading: '3. Stress & Accent Marks (La Tilde)',
+            explanation: 'In Spanish, if a word ends in a vowel, N, or S, stress the SECOND-LAST syllable (e.g., "ha-BLAN"). If it ends in any other consonant, stress the LAST syllable (e.g., "ha-BLAR"). Any exception gets a written accent mark (´) showing you exactly where to punch the syllable!',
+            cards: [
+              { es: 'Difícil / Fácil', ph: 'dee-FEE-theel / FAH-theel', en: 'The accent tells you to stress the middle/first syllable. (Difficult / Easy)' },
+              { es: 'Hablé vs Hable', ph: 'ah-BLEH vs AH-bleh', en: 'Accent marks change grammar! "Hablé" = I spoke (past); "Hable" = Subjunctive.' },
+              { es: 'Inglés / Francés / Irlandés', ph: 'een-GLEHS / frahn-THEHS / eer-lahn-DEHS', en: 'Nationalities ending in -és always stress the final syllable.' }
+            ]
+          }
+        ],
+        quiz: {
+          question: 'Quick Check: How is the Spanish phrase "Me llamo Juan y vivo en España" pronounced?',
+          options: [
+            'Meh lah-moh Joo-ahn ee vee-voh en Ehs-pah-nah',
+            'Meh YAH-moh HWAHN ee BEE-boh en ehs-PAH-nyah',
+            'Mee yah-moh HOO-an ee vee-boh en ehs-PAN-uh'
+          ],
+          correctIndex: 1,
+          explanation: 'Spot on! "LL" sounds like Y [YAH-moh], "J" sounds like H [HWAHN], and "Ñ" sounds like NY [ehs-PAH-nyah].'
+        }
+      },
+      {
+        id: 2,
+        badge: 'Stage 2 • The Tenses Engine',
+        title: 'H1 Grammar: The 6 Essential Tenses & Subjunctive Triggers',
+        subtitle: 'Everything you need to score 90%+ in Grammar, Opinion Pieces, Dialogues & Orals.',
+        examWeight: 'Directly tested across Written (55%) & Oral (25%)',
+        blocks: [
+          {
+            heading: '1. The 5 Core Indicative Tenses (Using "Hablar" — to speak)',
+            explanation: 'To earn an H1 in the Oral and Written paper, examiners look for accurate shifts between Past, Present, Future, and Conditional. Memorize this timeline:',
+            cards: [
+              { es: 'Present: Hablo español cada día', ph: 'AH-bloh ehs-pah-NYOHL KAH-dah DEE-ah', en: 'I speak Spanish every day. (-ar endings: -o, -as, -a, -amos, -áis, -an)' },
+              { es: 'Preterite (Completed Past): Ayer hablé con mi profesor', ph: 'ah-YEHR ah-BLEH kohn mee proh-feh-SOHR', en: 'Yesterday I spoke with my teacher. Used for one-off completed past actions.' },
+              { es: 'Imperfect (Used to / Description): Cuando era niño, hablaba mucho', ph: 'KWAHN-doh EH-rah NEE-nyoh, ah-BLAH-bah MOO-choh', en: 'When I was a child, I used to speak a lot. Used for habits, age, weather & descriptions in the past.' },
+              { es: 'Near Future: Voy a estudiar medicina', ph: 'boy ah ehs-too-DYAHR meh-dee-THEE-nah', en: 'I am going to study medicine. (Ir + a + infinitive — easiest & safest future tense!)' },
+              { es: 'Simple Future: El año que viene iré a Madrid', ph: 'el AH-nyoh keh BYEH-neh ee-REH ah mah-DREED', en: 'Next year I will go to Madrid. Add -é, -ás, -á, -emos, -éis, -án onto the full infinitive!' },
+              { es: 'Conditional: Me gustaría viajar por Sudamérica', ph: 'meh goos-tah-REE-ah byah-HAHR pohr soo-dah-MEH-ree-kah', en: 'I would like to travel around South America. Add -ía, -ías, -ía, -íamos, -íais, -ían onto the infinitive.' }
+            ]
+          },
+          {
+            heading: '2. The H1 Secret Weapon: The Present Subjunctive (El Subjuntivo)',
+            explanation: 'Using just TWO accurate subjunctive triggers in your Opinion Piece or Oral elevates your grade into the H1 band. How to form it: Take the Present "Yo" form (e.g., tengo → teng-), drop the -o, and swap vowel endings (-AR verbs take -e, -ER/-IR verbs take -a).',
+            cards: [
+              { es: 'Es importante que protejamos el medio ambiente', ph: 'ehs eem-pohr-TAHN-teh keh proh-teh-HAH-mohs el MEH-dyoh ahm-BYEHN-teh', en: 'It is important that we protect the environment. (Trigger: Es importante que...)' },
+              { es: 'Ojalá apruebe todos mis exámenes', ph: 'oh-hah-LAH ah-PRWEH-beh TOH-dohs mees ek-SAH-meh-nehs', en: 'Hopefully I pass all my exams! ("Ojalá" ALWAYS triggers the subjunctive.)' },
+              { es: 'Cuando termine el instituto, iré a la universidad', ph: 'KWAHN-doh tehr-MEE-neh el eens-tee-TOO-toh, ee-REH ah lah oo-nee-behr-see-DAHD', en: 'When I finish secondary school, I will go to university. ("Cuando" + future idea = subjunctive!)' },
+              { es: 'No creo que sea justo', ph: 'noh KREH-oh keh SEH-ah HOOS-toh', en: 'I don’t think it is fair. (Negative opinion "No creo que" triggers subjunctive; "Creo que" uses normal indicative!)' }
+            ]
+          },
+          {
+            heading: '3. "Gustar-Type" Verbs (Tested Every Year in Section C Dialogue!)',
+            explanation: 'Verbs like Gustar (to like), Encantar (to love), Interesar (to interest), and Preocupar (to worry) work backwards in Spanish: the thing doing the pleasing is the subject! Use "gusta" for singular/infinitive, and "gustan" for plural nouns.',
+            cards: [
+              { es: 'Me gusta jugar al fútbol / Me gustan los deportes', ph: 'meh GOOS-tah hoo-GAHR ahl FOOT-bohl / meh GOOS-tahn lohs deh-POHR-tehs', en: 'I like playing football / I like sports. (Pronouns: me, te, le, nos, os, les)' },
+              { es: 'Nos preocupa mucho el cambio climático', ph: 'nohs preh-oh-KOO-pah MOO-choh el KAHM-byoh klee-MAH-tee-koh', en: 'Climate change worries us a lot. (Great H1 Opinion Piece sentence!)' }
+            ]
+          }
+        ],
+        quiz: {
+          question: 'Which sentence correctly uses the Subjunctive after a future "Cuando" clause?',
+          options: [
+            'Cuando tengo dieciocho años, viajaré a España.',
+            'Cuando tenga dieciocho años, viajaré a España.',
+            'Cuando tenía dieciocho años, viajaré a España.'
+          ],
+          correctIndex: 1,
+          explanation: 'Correct! "Tener" → Yo form "tengo" → swap vowel to "tenga". When "cuando" refers to a future event that hasn’t happened yet, Spanish requires the subjunctive.'
+        }
+      },
+      {
+        id: 3,
+        badge: 'Stage 3 • Oral Exam Mastery (25%)',
+        title: 'Leaving Cert Spanish Oral: General Conversation & 5 Roleplays',
+        subtitle: '100 marks (25% of your entire grade) completed at Easter before June.',
+        examWeight: '100 Marks (25% of Total Grade)',
+        blocks: [
+          {
+            heading: '1. General Conversation: High-Frequency Examiner Questions',
+            explanation: 'The first 10 minutes feel like a friendly chat, but the examiner is actively testing your ability to use Past, Present, Future, and Opinions. Never give one-word answers—always add "porque" (because) + an opinion!',
+            cards: [
+              { es: 'Háblame de ti y de tu familia', ph: 'AH-blah-meh deh tee ee deh too fah-MEE-lyah', en: 'Tell me about yourself and your family. (Give ages, personalities, and how you get on: "Nos llevamos bien" [nohs yeh-BAH-mohs byehn]).' },
+              { es: '¿Qué hiciste el fin de semana pasado?', ph: 'keh ee-THEES-teh el feen deh seh-MAH-nah pah-SAH-doh', en: 'What did you do last weekend? (Examiner is testing your PRETERITE past tense!)' },
+              { es: '¿Qué planes tienes para el futuro?', ph: 'keh PLAH-nehs TYEH-nehs PAH-rah el foo-TOO-roh', en: 'What plans do you have for the future? (Use "Voy a estudiar..." + "Me gustaría ser...")' },
+              { es: '¿Cómo es tu instituto y qué asignaturas estudias?', ph: 'KOH-moh ehs too eens-tee-TOO-toh ee keh ah-seeg-nah-TOO-rahs ehs-TOO-dyahs', en: 'What is your school like and what subjects do you study? (Mention "el Bachillerato" [bah-chee-yeh-RAH-toh] = Leaving Cert).' }
+            ]
+          },
+          {
+            heading: '2. Natural Filler Phrases to Sound Like a Native Speaker',
+            explanation: 'If you need 2 seconds to think of a verb, do NOT say "um..." in English. Use authentic Spanish fillers—examiners love them!',
+            cards: [
+              { es: 'Pues, a ver... déjame pensar', ph: 'pwehs, ah behr... DEH-hah-meh pehn-SAHR', en: 'Well, let’s see... let me think.' },
+              { es: 'La verdad es que...', ph: 'lah behr-DAHD ehs keh', en: 'The truth is that...' },
+              { es: 'Por un lado... por otro lado...', ph: 'pohr oon LAH-doh... pohr OH-troh LAH-doh', en: 'On one hand... on the other hand...' },
+              { es: 'Lo que más me gusta es que...', ph: 'loh keh mahs meh GOOS-tah ehs keh', en: 'What I like most is that...' }
+            ]
+          },
+          {
+            heading: '3. The 5 Official Roleplay Scenarios & The Open Question',
+            explanation: 'At the end of the Oral, you pick a card face-down containing 1 of the 5 SEC Roleplays. After acting out the 5 prompts, the examiner asks ONE unprepared "Open Question" linked to the theme.',
+            cards: [
+              { es: 'Roleplay 1: Alojamiento (Accommodation Problem)', ph: 'ah-loh-hah-MYEHN-toh', en: 'Complaining about a hotel/apartment issue (no hot water, noise) & requesting a solution.' },
+              { es: 'Roleplay 2: Trabajo de Verano (Summer Job Interview)', ph: 'trah-BAH-hoh deh beh-RAH-noh', en: 'Applying for a job in Spain, explaining your experience, languages & availability.' },
+              { es: 'Roleplay 3: Salud / Médico (Doctor or Pharmacy)', ph: 'sah-LOOD / MEH-dee-koh', en: 'Explaining symptoms (stomach ache, sunburn, sprained ankle) & asking for medicine.' },
+              { es: 'Roleplay 4: Objeto Perdido / Robo (Lost Property / Police)', ph: 'ohb-HEH-toh pehr-DEE-doh / ROH-boh', en: 'Reporting a lost backpack or stolen phone at a police station/train office.' },
+              { es: 'Roleplay 5: Invitación / Tiempo Libre (Making Plans)', ph: 'een-bee-tah-THYOHN / TYEHM-poh LEE-breh', en: 'Negotiating cinema/concert plans with a Spanish friend, agreeing on time & meeting place.' }
+            ]
+          }
+        ],
+        quiz: {
+          question: 'When the examiner asks "¿Qué hiciste ayer?" (What did you do yesterday?), which tense MUST you use?',
+          options: [
+            'The Future Tense (Iré al cine...)',
+            'The Preterite Past Tense (Fui al cine con mis amigos...)',
+            'The Present Tense (Voy al cine...)'
+          ],
+          correctIndex: 1,
+          explanation: 'Exactly! "Hiciste" is the Preterite of "hacer". Answering with "Fui" (I went), "Jugué" (I played), or "Estudié" (I studied) proves you can handle past tenses.'
+        }
+      },
+      {
+        id: 4,
+        badge: 'Stage 4 • Aural Strategy (20%)',
+        title: 'Mastering the 80-Mark Listening Comprehension Paper',
+        subtitle: 'Decode fast Spanish news broadcasts, weather reports & dialogues with confidence.',
+        examWeight: '80 Marks (20% of Total Grade)',
+        blocks: [
+          {
+            heading: '1. Structure of the 40-Minute Aural Exam',
+            explanation: 'You hear every recording THREE times: (1) Full playthrough, (2) Broken into short segments with pauses to write, (3) Full playthrough to double-check. Always write your answers in clear, specific English.',
+            cards: [
+              { es: 'El Tiempo (Weather Forecast Vocabulary)', ph: 'el TYEHM-poh', en: 'Watch for: "chubascos" [choo-BAHS-kohs] (showers), "niebla" [NYEH-blah] (fog), "vientos fuertes" [BYEHN-tohs FWEHR-tehs] (strong winds), "despejado" [dehs-peh-HAH-doh] (clear skies).' },
+              { es: 'Noticias (News & Current Affairs)', ph: 'noh-TEE-thyahs', en: 'Watch for: "huelga" [WEHL-gah] (strike), "sequía" [seh-KEE-ah] (drought), "incendios forestales" [een-THEHN-dyohs foh-rehs-TAH-lehs] (forest fires), "paro" [PAH-roh] (unemployment).' },
+              { es: 'Números y Fechas (Numbers & Dates Trap)', ph: 'NOO-meh-rohs ee FEH-chahs', en: 'Examiners love testing "sesenta" [seh-SEHN-tah] (60) vs "setenta" [seh-TEHN-tah] (70), and "quinientos" [kee-NYEHN-tohs] (500).' }
+            ]
+          },
+          {
+            heading: '2. High-Frequency Aural "Trap" Words',
+            explanation: 'These words frequently flip the meaning of a sentence in Sections 5, 6, and 7 (the News Items):',
+            cards: [
+              { es: 'Sin embargo / No obstante', ph: 'seen ehm-BAHR-goh / noh ohb-STAHN-teh', en: 'However / Nevertheless (The real answer usually comes right after this!)' },
+              { es: 'A pesar de que...', ph: 'ah peh-SAHR deh keh', en: 'Despite the fact that...' },
+              { es: 'Casi / Alrededor de / Más de', ph: 'KAH-see / ahl-reh-deh-DOHR deh / mahs deh', en: 'Almost / Around / More than (Crucial for statistics questions!)' }
+            ]
+          }
+        ],
+        quiz: {
+          question: 'In an Aural weather report, you hear: "Habrá chubascos en el norte, pero el sur estará despejado." What is the weather in the south?',
+          options: [
+            'Heavy showers and storms',
+            'Clear / cloudless skies',
+            'Dense morning fog'
+          ],
+          correctIndex: 1,
+          explanation: 'Well done! "Chubascos" means showers (in the north), while "despejado" means clear skies (in the south).'
+        }
+      },
+      {
+        id: 5,
+        badge: 'Stage 5 • Reading & Opinion Piece (42.5%)',
+        title: 'Sections A & B: Reading Comprehension & The H1 Opinion Piece',
+        subtitle: 'Worth 170 marks combined—the single biggest block of marks on the Written Paper.',
+        examWeight: '170 Marks (42.5% of Total Grade)',
+        blocks: [
+          {
+            heading: '1. Section A (70m) & Section B Reading (60m): Exam Technique',
+            explanation: 'Never read the Spanish passage cold first! Read the English questions first, underline keywords, and locate the exact paragraph. For "Find the Spanish word/phrase that means..." questions, match the exact grammatical form (if the English prompt is a plural noun, give a plural noun—do not copy a whole sentence!).',
+            cards: [
+              { es: 'Busca en el texto una palabra que signifique...', ph: 'BOOS-kah en el TEKS-toh OO-nah pah-LAH-brah keh seeg-nee-FEE-keh', en: 'Find a word in the text that means... (Give ONLY the exact word/phrase requested!)' },
+              { es: 'Falsos Amigos (False Friends Warning!)', ph: 'FAHL-sohs ah-MEE-gohs', en: '"Actualmente" = currently (NOT actually); "Éxito" = success (NOT exit); "Embarazada" = pregnant (NOT embarrassed!).' }
+            ]
+          },
+          {
+            heading: '2. The 5-Paragraph H1 Opinion Piece Blueprint (Section B — 40 Marks)',
+            explanation: 'You have a choice of two essay titles linked to the Section B reading theme (e.g., social media, youth stress, environment, tourism). Aim for 140–160 words using this exact 5-paragraph structure:',
+            cards: [
+              { es: 'Para 1 (Hook + Thesis): Hoy en día, el tema de... es muy polémico.', ph: 'oy en DEE-ah, el TEH-mah deh... ehs mwee poh-LEH-mee-koh', en: 'Nowadays, the topic of... is very controversial. State your clear stance.' },
+              { es: 'Para 2 (Argument 1): En primer lugar, cabe destacar que...', ph: 'en pree-MEHR loo-GAHR, KAH-beh dehs-tah-KAHR keh', en: 'In the first place, it is worth highlighting that... Give your strongest point + example.' },
+              { es: 'Para 3 (Argument 2 + Subjunctive): Además, es fundamental que los jóvenes...', ph: 'ah-deh-MAHS, ehs foon-dah-mehn-TAHL keh lohs HOH-beh-nehs', en: 'Furthermore, it is essential that young people... (+ Subjunctive verb!).' },
+              { es: 'Para 4 (Counter-argument): Aunque algunos opinan que..., yo diría que...', ph: 'AHWN-keh ahl-GOO-nohs oh-PEE-nahn keh..., yoh dee-REE-ah keh', en: 'Although some think that..., I would say that... (Shows nuanced H1 thinking).' },
+              { es: 'Para 5 (Conclusion): En definitiva, debemos actuar antes de que sea tarde.', ph: 'en deh-fee-nee-TEE-bah, deh-BEH-mohs ahk-TWAHR AHN-tehs deh keh SEH-ah TAHR-deh', en: 'Ultimately, we must act before it is too late. (Includes "antes de que + subjunctive"!)' }
+            ]
+          }
+        ],
+        quiz: {
+          question: 'What does the Spanish word "actualmente" mean in a Reading Comprehension passage?',
+          options: [
+            'Actually / In fact',
+            'Currently / Nowadays',
+            'Actively'
+          ],
+          correctIndex: 1,
+          explanation: 'Classic Leaving Cert false friend! "Actualmente" means "currently / nowadays". ("En realidad" means "actually".)'
+        }
+      },
+      {
+        id: 6,
+        badge: 'Stage 6 • Section C Written Production (12.5%)',
+        title: 'Mastering the Dialogue, Formal Letter, Diary Entry & Note',
+        subtitle: '50 marks where disciplined structure and tense control guarantee 45+ marks.',
+        examWeight: '50 Marks (12.5% of Total Grade)',
+        blocks: [
+          {
+            heading: '1. Question 1 (30 Marks): Dialogue Translation vs. Letter/Email',
+            explanation: 'You choose EITHER (a) translating 5 English dialogue turns into natural Spanish, OR (b) writing a Formal/Informal Letter or Email. Most top students love the Dialogue because there is zero guesswork about what to say—just translate every detail accurately!',
+            cards: [
+              { es: 'Dialogue Rule 1: Use "Tú" for friends/family, "Usted" for officials', ph: 'too / oos-TEHD', en: 'Check who is speaking! A waiter, doctor, or hotel receptionist requires "Usted" (3rd person singular).' },
+              { es: 'Dialogue Rule 2: "For + time" = Hace + time + que + Present', ph: 'AH-theh... keh', en: 'e.g., "I have lived here for two years" = "Hace dos años que vivo aquí" (NOT "por dos años"!).' },
+              { es: 'Letter/Email Opening & Closing: Estimado/a señor/a → Atentamente', ph: 'ehs-tee-MAH-doh seh-NYOHR / ah-tehn-tah-MEHN-teh', en: 'Dear Sir/Madam → Yours faithfully (Formal). For a friend: "Querido/a..." → "Un fuerte abrazo".' }
+            ]
+          },
+          {
+            heading: '2. Question 2 (20 Marks): Diary Entry (El Diario) vs. Note (La Nota)',
+            explanation: 'Short, punchy communication (~60–80 words). Always tick off all 3–4 bullet points in the prompt!',
+            cards: [
+              { es: 'Diary Opener: Querido diario, ¡qué día tan increíble!', ph: 'keh-REE-doh DYAH-ryoh, keh DEE-ah tahn een-kreh-EE-bleh', en: 'Dear diary, what an incredible day! (Or "¡qué desastre de día!" = what a disaster of a day!)' },
+              { es: 'Diary Sign-off: Bueno, me voy a dormir porque estoy agotado/a.', ph: 'BWEH-noh, meh boy ah dohr-MEER POHR-keh ehs-TOY ah-goh-TAH-doh', en: 'Anyway, I’m going to sleep because I’m exhausted. (Remember -o for male, -a for female!)' },
+              { es: 'Note Opener & Sign-off: Hola [Nombre], te escribo para decirte que... ¡Un beso!', ph: 'OH-lah, teh ehs-KREE-boh PAH-rah deh-THEER-teh keh... oon BEH-soh', en: 'Hi [Name], I’m writing to tell you that... Kisses/Best!' }
+            ]
+          }
+        ],
+        quiz: {
+          question: 'How do you correctly translate "I have been studying Spanish for three years" in a Section C Dialogue?',
+          options: [
+            'He estado estudiando español por tres años.',
+            'Hace tres años que estudio español.',
+            'Tengo tres años estudiando español.'
+          ],
+          correctIndex: 1,
+          explanation: 'Brilliant! "Hace + [time] + que + [Present Tense]" is an SEC examiner favourite tested almost every second year in the Dialogue.'
+        }
+      }
+    ];
+
+    /* ==========================================================================
+       3. AURAL LISTENING LAB DATA (INTERACTIVE AUDIO TRACKS)
+       ========================================================================== */
+    const AURAL_TRACKS = [
+      {
+        id: 'aural-1',
+        sectionLabel: 'Section 1 • Dialogue (12 Marks)',
+        title: 'Planning an Interrail Trip Across Spain',
+        context: 'Listen to Sofía and Mateo discussing their summer plans after their exams.',
+        spanishAudio: 'Hola Mateo. ¡Por fin hemos terminado los exámenes! Este verano quiero viajar en tren por el norte de España con mis primos. Vamos a salir de Bilbao el quince de julio y pasaremos diez días en Asturias y Galicia. Sin embargo, todavía no hemos reservado los albergues porque son bastante caros en temporada alta.',
+        phoneticTranscript: 'OH-lah mah-TEH-oh. pohr feen EH-mohs tehr-mee-NAH-doh lohs ek-SAH-meh-nehs! EHS-teh beh-RAH-noh KYEH-roh byah-HAHR en trehn pohr el NOHR-teh deh ehs-PAH-nyah kohn mees PREE-mohs. BAH-mohs ah sah-LEER deh beel-BAH-oh el KEEN-theh deh HOO-lyoh ee pah-sah-REH-mohs dyehth DEE-ahs en ahs-TOO-ryahs ee gah-LEE-thyah. seen ehm-BAHR-goh, toh-dah-BEE-ah noh EH-mohs reh-sehr-BAH-doh lohs ahl-BEHR-gehs POHR-keh sohn bahs-TAHN-teh KAH-rohs en tehm-poh-RAH-dah AHL-tah.',
+        questions: [
+          { q: '(a) Who is Sofía planning to travel with this summer? (3m)', a: 'Her cousins (mis primos).' },
+          { q: '(b) On what exact date are they leaving Bilbao, and how long will they spend in Asturias and Galicia? (6m)', a: '15th of July (el quince de julio); 10 days (diez días).' },
+          { q: '(c) Why have they NOT booked the hostels yet? (3m)', a: 'Because they are quite expensive in high season (son bastante caros en temporada alta).' }
+        ]
+      },
+      {
+        id: 'aural-2',
+        sectionLabel: 'Section 4 • Weather Report (10 Marks)',
+        title: 'El Tiempo en España (National Forecast)',
+        context: 'Listen to the Spanish meteorological forecast for tomorrow.',
+        spanishAudio: 'Buenos días. Mañana tendremos un tiempo muy variado en toda la península. En Galicia y el País Vasco se esperan lluvias fuertes y vientos del oeste. En el centro, incluida Madrid, habrá niebla por la mañana pero estará despejado por la tarde, con temperaturas máximas de veintidós grados. En Andalucía hará mucho calor, llegando a los treinta y cuatro grados.',
+        phoneticTranscript: 'BWEH-nohs DEE-ahs. mah-NYAH-nah tehn-DREH-mohs oon TYEHM-poh mwee bah-RYAH-doh en TOH-dah lah peh-NEEN-soo-lah. en gah-LEE-thyah ee el pah-EES BAHS-koh seh ehs-PEH-rahn YOO-byahs FWEHR-tehs ee BYEHN-tohs del oh-EHS-teh. en el THEHN-troh, een-kloo-EE-dah mah-DREED, ah-BRAH NYEH-blah pohr lah mah-NYAH-nah PEH-roh ehs-tah-RAH dehs-peh-HAH-doh pohr lah TAHR-deh, kohn tehm-peh-rah-TOO-rahs MAHK-see-mahs deh beyn-tee-DOHS GRAH-dohs. en ahn-dah-loo-THEE-ah ah-RAH MOO-choh kah-LOHR, yeh-GAHN-doh ah lohs TREYN-tah ee KWAH-troh GRAH-dohs.',
+        questions: [
+          { q: '(a) Give TWO weather conditions expected in Galicia and the Basque Country. (4m)', a: '1. Heavy rain (lluvias fuertes)  2. Westerly winds / winds from the west (vientos del oeste).' },
+          { q: '(b) How will the weather change in Madrid between morning and afternoon? (4m)', a: 'There will be fog in the morning, but it will be clear/sunny in the afternoon.' },
+          { q: '(c) What maximum temperature will Andalucía reach? (2m)', a: '34 degrees (treinta y cuatro grados).' }
+        ]
+      },
+      {
+        id: 'aural-3',
+        sectionLabel: 'Section 6 • News Item (14 Marks)',
+        title: 'New Rules on Mobile Phones in Secondary Schools',
+        context: 'Listen to this news report from Madrid about smartphone regulations in schools.',
+        spanishAudio: 'El Ministerio de Educación ha anunciado hoy que los teléfonos móviles estarán prohibidos en todos los institutos públicos a partir de septiembre. Según un estudio reciente, casi el setenta por ciento de los profesores afirma que los móviles distraen a los alumnos en clase y aumentan el ciberacoso. Sin embargo, los estudiantes podrán usar tabletas digitales únicamente para fines educativos.',
+        phoneticTranscript: 'el mee-nees-TEH-ryoh deh eh-doo-kah-THYOHN ah ah-noon-THYAH-doh oy keh lohs teh-LEH-foh-nohs MOH-bee-lehs ehs-tah-RAHN proh-ee-BEE-dohs en TOH-dohs lohs eens-tee-TOO-tohs POO-blee-kohs ah pahr-TEER deh sehp-TYEHM-breh. seh-GOON oon ehs-TOO-dyoh reh-THYEHN-teh, KAH-see el seh-TEHN-tah pohr THYEHN-toh deh lohs proh-feh-SOH-rehs ah-FEER-mah keh lohs MOH-bee-lehs dees-TRAH-ehn ah lohs ah-LOOM-nohs en KLAH-seh ee ahw-MEHN-tahn el thee-behr-ah-KOH-soh. seen ehm-BAHR-goh, lohs ehs-too-DYAHN-tehs poh-DRAHN oo-SAHR tah-BLEH-tahs dee-hee-TAH-lehs OO-nee-kah-mehn-teh PAH-rah FEE-nehs eh-doo-kah-TEE-bohs.',
+        questions: [
+          { q: '(a) When does the mobile phone ban in public secondary schools begin? (3m)', a: 'From September (a partir de septiembre).' },
+          { q: '(b) According to the study, what percentage of teachers say phones cause issues, and give TWO problems they mention? (8m)', a: 'Almost 70% (casi el setenta por ciento). Problems: 1. They distract pupils in class. 2. They increase cyberbullying (ciberacoso).' },
+          { q: '(c) Under what condition may students still use digital tablets? (3m)', a: 'Only for educational purposes (únicamente para fines educativos).' }
+        ]
+      }
+    ];
+
+    /* ==========================================================================
+       4. PRONUNCIATION & VOCABULARY VAULT DATA
+       ========================================================================== */
+    const VOCAB_VAULT = [
+      { category: 'Opinion & Linkers', es: 'Hoy en día', ph: 'oy en DEE-ah', en: 'Nowadays', tip: 'Classic H1 opener for Paragraph 1 of your Opinion Piece.' },
+      { category: 'Opinion & Linkers', es: 'Cabe destacar que', ph: 'KAH-beh dehs-tah-KAHR keh', en: 'It is worth highlighting that', tip: 'Replaces basic "Pienso que" with university-level Spanish.' },
+      { category: 'Opinion & Linkers', es: 'Por un lado... por otro lado', ph: 'pohr oon LAH-doh... pohr OH-troh LAH-doh', en: 'On one hand... on the other hand', tip: 'Shows balanced argumentation in both Oral & Written essays.' },
+      { category: 'Opinion & Linkers', es: 'A pesar de todo', ph: 'ah peh-SAHR deh TOH-doh', en: 'In spite of everything / Nevertheless', tip: 'Great transition into your counter-argument paragraph.' },
+      { category: 'Opinion & Linkers', es: 'En definitiva', ph: 'en deh-fee-nee-TEE-bah', en: 'Ultimately / In conclusion', tip: 'Stronger and more idiomatic than "En conclusión".' },
+      { category: 'Opinion & Linkers', es: 'Aportar su granito de arena', ph: 'ah-pohr-TAHR soo grah-NEE-toh deh ah-REH-nah', en: 'To do one’s bit (lit. contribute one’s grain of sand)', tip: 'Idiomatic gold! Use it in essays on climate change or charity.' },
+      { category: 'Subjunctive Triggers', es: 'Es imprescindible que', ph: 'ehs eem-prehs-theen-DEE-bleh keh', en: 'It is essential that (+ Subjunctive)', tip: 'Follow with a subjunctive verb, e.g. "...actuemos ya".' },
+      { category: 'Subjunctive Triggers', es: 'Ojalá tuviera más tiempo', ph: 'oh-hah-LAH too-BYEH-rah mahs TYEHM-poh', en: 'I wish I had more time (Imperfect Subjunctive)', tip: 'Instant H1 flex in the Oral exam when talking about hobbies or study.' },
+      { category: 'Subjunctive Triggers', es: 'Antes de que sea demasiado tarde', ph: 'AHN-tehs deh keh SEH-ah deh-mah-SYAH-doh TAHR-deh', en: 'Before it is too late', tip: '"Antes de que" ALWAYS triggers the subjunctive.' },
+      { category: 'Subjunctive Triggers', es: 'Para que los jóvenes puedan', ph: 'PAH-rah keh lohs HOH-beh-nehs PWEH-dahn', en: 'So that young people can (+ Subjunctive)', tip: 'Purpose clauses with "para que" always take the subjunctive.' },
+      { category: 'Oral & Roleplay', es: 'Nos llevamos como el perro y el gato', ph: 'nohs yeh-BAH-mohs KOH-moh el PEHR-roh ee el GAH-toh', en: 'We fight like cat and dog', tip: 'Fun idiom when describing brothers/sisters in the Oral!' },
+      { category: 'Oral & Roleplay', es: 'Suelo estudiar dos horas cada noche', ph: 'SWEH-loh ehs-too-DYAHR dohs OH-rahs KAH-dah NOH-cheh', en: 'I usually study two hours every night', tip: '"Soler + infinitive" means "to usually do something"—examiners love it.' },
+      { category: 'Oral & Roleplay', es: 'Quisiera poner una reclamación', ph: 'kee-SYEH-rah poh-NEHR OO-nah reh-klah-mah-THYOHN', en: 'I would like to make a complaint', tip: 'Essential polite phrase for Roleplay 1 (Accommodation).' },
+      { category: 'Oral & Roleplay', es: 'Me cuesta mucho concentrarme', ph: 'meh KWEHS-tah MOO-choh kohn-thehn-TRAHR-meh', en: 'I find it very hard to concentrate', tip: 'Great for discussing Leaving Cert exam stress in the Oral.' },
+      { category: 'Environment & Society', es: 'El calentamiento global', ph: 'el kah-lehn-tah-MYEHN-toh gloh-BAHL', en: 'Global warming', tip: 'Core vocabulary for Section B essays and Aural news items.' },
+      { category: 'Environment & Society', es: 'Las redes sociales', ph: 'lahs REH-dehs soh-THYAH-lehs', en: 'Social networks / Social media', tip: 'Remember it is feminine plural: "las redes sociales".' },
+      { category: 'Environment & Society', es: 'La salud mental de los adolescentes', ph: 'lah sah-LOOD mehn-TAHL deh lohs ah-doh-lehs-THEHN-tehs', en: 'Adolescents’ mental health', tip: 'Very common Section B & Oral topic.' },
+      { category: 'Environment & Society', es: 'El turismo sostenible', ph: 'el too-REES-moh sohs-teh-NEE-bleh', en: 'Sustainable tourism', tip: 'Relevant to Spain’s economy and over-tourism debates.' },
+      { category: 'Time & Tenses', es: 'El año pasado / Ayer', ph: 'el AH-nyoh pah-SAH-doh / ah-YEHR', en: 'Last year / Yesterday', tip: 'Signals the PRETERITE (completed past) tense.' },
+      { category: 'Time & Tenses', es: 'Cuando era pequeño/a', ph: 'KWAHN-doh EH-rah peh-KEH-nyoh', en: 'When I was little', tip: 'Signals the IMPERFECT (habitual past) tense.' },
+      { category: 'Time & Tenses', es: 'El año que viene', ph: 'el AH-nyoh keh BYEH-neh', en: 'Next year', tip: 'Signals the FUTURE tense (Voy a... or -é ending).' },
+      { category: 'Time & Tenses', es: 'Acabo de terminar', ph: 'ah-KAH-boh deh tehr-mee-NAHR', en: 'I have just finished', tip: '"Acabar de + infinitive" = to have just done something.' }
+    ];
+
+    /* ==========================================================================
+       5. 5 FULL ORIGINAL LEAVING CERT MOCK EXAMS (400 MARKS EACH)
+       ========================================================================== */
+    const MOCK_EXAMS = [
+      {
+        id: 1,
+        title: 'Mock Paper 1: Youth, Digital Life & Sustainable Travel',
+        themeBadge: 'Full 400-Mark SEC Simulation',
+        aural: {
+          marks: 80,
+          title: 'Listening Comprehension — Part 1: Train Station Announcement & News (80m)',
+          audioText: 'Atención pasajeros. El tren de alta velocidad AVE con destino a Sevilla, previsto para las diez y cuarto, saldrá con un retraso de veinticinco minutos debido a obras en la vía. Pedimos disculpas por las molestias. En otras noticias, el ayuntamiento de Barcelona ha inaugurado hoy diez kilómetros nuevos de carril bici para reducir la contaminación.',
+          phonetic: 'ah-tehn-THYOHN pah-sah-HEH-rohs. el trehn deh AHL-tah beh-loh-thee-DAHD AH-beh kohn dehs-TEE-noh ah seh-BEE-yah, preh-BEES-toh PAH-rah lahs dyehth ee KWAHR-toh, sahl-DRAH kohn oon reh-TRAH-soh deh beyn-tee-THEEN-koh mee-NOO-tohs deh-BEE-doh ah OH-brahs en lah BEE-ah. peh-DEE-mohs dees-KOOL-pahs pohr lahs moh-LEHS-tyahs. en OH-trahs noh-TEE-thyahs, el ah-yoon-tah-MYEHN-toh deh bahr-theh-LOH-nah ah ee-nahw-goo-RAH-doh oy dyehth kee-LOH-meh-trohs NWEH-bohs deh kahr-REEL BEE-thee PAH-rah reh-doo-THEER lah kohn-tah-mee-nah-THYOHN.',
+          questions: [
+            '1. What is the destination and scheduled departure time of the AVE train? (20m)',
+            '2. How long is the delay, and what is the exact reason given? (30m)',
+            '3. What has Barcelona City Council opened today, and why? (30m)'
+          ],
+          markingScheme: '1. Seville (Sevilla) at 10:15 (las diez y cuarto). (20m)\n2. 25 minutes delay (veinticinco minutos) due to track works / works on the line (obras en la vía). (30m)\n3. 10 new kilometres of cycle lane (carril bici) in order to reduce pollution (reducir la contaminación). (30m)'
+        },
+        sectionA: {
+          marks: 70,
+          title: 'Section A — Reading Comprehension: El Turismo de Masas en España (70m)',
+          passage: 'Cada verano, millones de turistas extranjeros visitan las costas e islas de España. Aunque el turismo genera millones de puestos de trabajo y representa más del doce por ciento del producto interior bruto, muchos vecinos de ciudades como Málaga y Palma de Mallorca protestan contra el aumento del precio de los alquileres. Los residentes afirman que los pisos turísticos están expulsando a las familias locales de sus propios barrios.',
+          questions: [
+            '1. Mention TWO economic benefits of tourism in Spain mentioned in the text. (30m)',
+            '2. Why are residents in Málaga and Palma de Mallorca protesting? (20m)',
+            '3. Find the Spanish phrase in the text that means: "foreign tourists" (10m) and "tourist apartments" (10m).'
+          ],
+          markingScheme: '1. It creates millions of jobs (genera millones de puestos de trabajo) AND represents over 12% of GDP (más del 12% del PIB). (30m)\n2. Against the rise in rental prices (el aumento del precio de los alquileres) / tourist flats pushing local families out of their own neighbourhoods. (20m)\n3. "turistas extranjeros" (10m); "pisos turísticos" (10m).'
+        },
+        sectionB: {
+          marks: 100,
+          readingTitle: 'Section B (Part 1) — Reading Comprehension: La Desconexión Digital (60m)',
+          passage: 'Según un informe publicado en Madrid, los jóvenes españoles pasan una media de cuatro horas diarias mirando pantallas fuera del horario escolar. Los psicólogos advierten que el uso excesivo de las redes sociales provoca ansiedad y problemas de sueño. Por ello, varios institutos han creado talleres donde los adolescentes aprenden a gestionar su tiempo libre sin depender del teléfono móvil.',
+          readingQuestions: [
+            '1. How much daily screen time outside school hours do young Spaniards average? (20m)',
+            '2. Name TWO psychological/health effects linked to excessive social media use. (20m)',
+            '3. What initiative have several secondary schools introduced to help teenagers? (20m)'
+          ],
+          readingScheme: '1. An average of 4 hours per day (cuatro horas diarias). (20m)\n2. Anxiety (ansiedad) and sleep problems (problemas de sueño). (20m)\n3. Workshops (talleres) where teenagers learn to manage their free time without depending on their mobile phone. (20m)',
+          opinionPrompt: 'Section B (Part 2) — Opinion Piece (40 Marks • ~140–160 words): "¿Crees que los adolescentes de hoy son demasiado dependientes de las redes sociales?" (Do you think today’s teenagers are too dependent on social media?)',
+          modelOpinionEs: 'Hoy en día, el impacto de las redes sociales en la juventud es un tema muy polémico. En primer lugar, cabe destacar que aplicaciones como TikTok e Instagram conectan a los jóvenes con amigos de todo el mundo. Sin embargo, creo que muchos adolescentes son demasiado dependientes de sus móviles. Paso muchas horas estudiando para el Bachillerato y veo que las notificaciones constantes nos distraen y aumentan el estrés. Además, es imprescindible que los jóvenes protejan su salud mental y pasen más tiempo haciendo deporte al aire libre. Aunque algunos opinan que la tecnología mejora nuestra vida, yo diría que debemos encontrar un equilibrio saludable. En definitiva, es fundamental que desconectemos de las pantallas antes de que sea demasiado tarde.',
+          modelOpinionPh: 'oy en DEE-ah, el eem-PAHK-toh deh lahs REH-dehs soh-THYAH-lehs en lah hoo-behn-TOOD ehs oon TEH-mah mwee poh-LEH-mee-koh. en pree-MEHR loo-GAHR, KAH-beh dehs-tah-KAHR keh ah-plee-kah-THYOH-nehs KOH-moh teek-tohk eh eens-tah-GRAHM koh-NEHK-tahn ah lohs HOH-beh-nehs kohn ah-MEE-gohs deh TOH-doh el MOON-doh. seen ehm-BAHR-goh, KREH-oh keh MOO-chohs ah-doh-lehs-THEHN-tehs sohn deh-mah-SYAH-doh deh-pehn-DYEHN-tehs deh soos MOH-bee-lehs. PAH-soh MOO-chahs OH-rahs ehs-too-DYAHN-doh PAH-rah el bah-chee-yeh-RAH-toh ee BEH-oh keh lahs noh-tee-fee-kah-THYOH-nehs kohn-STAHN-tehs nohs dees-TRAH-ehn ee ahw-MEHN-tahn el ehs-TREHS. ah-deh-MAHS, ehs eem-prehs-theen-DEE-bleh keh lohs HOH-beh-nehs proh-TEH-hahn soo sah-LOOD mehn-TAHL ee PAH-sehn mahs TYEHM-poh ah-THYEHN-doh deh-POHR-teh ahl AHY-reh LEE-breh. AHWN-keh ahl-GOO-nohs oh-PEE-nahn keh lah tehk-noh-loh-HEE-ah meh-HOH-rah NWEHS-trah BEE-dah, yoh dee-REE-ah keh deh-BEH-mohs ehn-kohn-TRAHR oon eh-kee-LEE-bryoh sah-loo-DAH-bleh. en deh-fee-nee-TEE-bah, ehs foon-dah-mehn-TAHL keh dehs-koh-nehk-TEH-mohs deh lahs pahn-TAH-yahs AHN-tehs deh keh SEH-ah deh-mah-SYAH-doh TAHR-deh.'
+        },
+        sectionC: {
+          marks: 50,
+          q1Title: 'Section C — Q1: Dialogue Translation (30 Marks)',
+          q1Prompt: 'Translate into Spanish:\n• Clara: Hi Carlos! How long have you been waiting here?\n• Carlos: Only ten minutes. Sorry I didn’t call you yesterday, I was studying for my Spanish exam.\n• Clara: No problem! Would you like to go to the new café near the park?\n• Carlos: Great idea, I am very hungry and thirsty.',
+          q1ModelEs: '• Clara: ¡Hola Carlos! ¿Cuánto tiempo hace que esperas aquí?\n• Carlos: Solo diez minutos. Perdona que no te llamara ayer, estaba estudiando para mi examen de español.\n• Clara: ¡No hay problema! ¿Te gustaría ir a la nueva cafetería cerca del parque?\n• Carlos: Qué buena idea, tengo mucha hambre y mucha sed.',
+          q1ModelPh: 'OH-lah KAHR-lohs! KWAHN-toh TYEHM-poh AH-theh keh ehs-PEH-rahs ah-KEE? / SOH-loh dyehth mee-NOO-tohs. pehr-DOH-nah keh noh teh yah-MAH-rah ah-YEHR, ehs-TAH-bah ehs-too-DYAHN-doh PAH-rah mee ek-SAH-mehn deh ehs-pah-NYOHL. / noh ahy proh-BLEH-mah! teh goos-tah-REE-ah eer ah lah NWEH-bah kah-feh-teh-REE-ah THEHR-kah del PAHR-keh? / keh BWEH-nah ee-DEH-ah, TEHN-goh MOO-chah AHM-breh ee MOO-chah sehd.',
+          q2Title: 'Section C — Q2: Diary Entry (20 Marks)',
+          q2Prompt: 'You have just finished your Leaving Cert Oral Exam. Write a diary entry in Spanish mentioning: (1) how nervous you felt beforehand, (2) what topics the examiner asked you about, and (3) how you celebrated afterwards.',
+          q2ModelEs: 'Querido diario:\n¡Por fin he terminado mi examen oral de español! Antes de entrar en el aula estaba muy nervioso, pero la examinadora fue muy amable. Hablamos de mi familia, de mi instituto y de mis planes de estudiar ciencias el año que viene. También me tocó el juego de rol sobre el hotel y salió genial. Después, fui a cenar pizza con mis amigos para celebrarlo. ¡Estoy agotado pero muy feliz!',
+          q2ModelPh: 'keh-REE-doh DYAH-ryoh: pohr feen eh tehr-mee-NAH-doh mee ek-SAH-mehn oh-RAHL deh ehs-pah-NYOHL! AHN-tehs deh ehn-TRAHR en el AHW-lah ehs-TAH-bah mwee nehr-BYOH-soh, PEH-roh lah ek-sah-mee-nah-DOH-rah fweh mwee ah-MAH-bleh. ah-BLAH-mohs deh mee fah-MEE-lyah, deh mee eens-tee-TOO-toh ee deh mees PLAH-nehs deh ehs-too-DYAHR THYEHN-thyahs el AH-nyoh keh BYEH-neh. tahm-BYEHN meh toh-KOH el HWEH-goh deh rohl SOH-breh el oh-TEHL ee sah-LYOH heh-NYAHL. dehs-PWEHS, fwee ah theh-NAHR PEET-sah kohn mees ah-MEE-gohs PAH-rah theh-leh-BRAHR-loh. ehs-TOY ah-goh-TAH-doh PEH-roh mwee feh-LEETH!'
+        },
+        oral: {
+          marks: 100,
+          title: 'Part 5 — Oral Exam Simulation (100 Marks)',
+          prompts: [
+            'General Conversation Q1: ¿Qué hiciste durante las vacaciones de verano pasadas? (What did you do during last summer’s holidays?)',
+            'Roleplay 1 (Accommodation): You are staying in a youth hostel in Madrid. Tell the receptionist that the air conditioning doesn’t work and ask to change rooms.',
+            'Open Question: ¿Prefieres viajar solo o con amigos, y por qué? (Do you prefer travelling alone or with friends, and why?)'
+          ],
+          sampleAnswerEs: 'El verano pasado fui a Alicante con mi familia durante dos semanas. Nos alojamos cerca de la playa, nadamos todos los días y probamos la paella valenciana. ¡Fue unas vacaciones inolvidables!',
+          sampleAnswerPh: 'el beh-RAH-noh pah-SAH-doh fwee ah ah-lee-KAHN-teh kohn mee fah-MEE-lyah doo-RAHN-teh dohs seh-MAH-nahs. nohs ah-loh-HAH-mohs THEHR-kah deh lah PLAH-yah, nah-DAH-mohs TOH-dohs lohs DEE-ahs ee proh-BAH-mohs lah pah-EH-yah bah-lehn-THYAH-nah. fweh OO-nahs bah-kah-THYOH-nehs een-ohl-bee-DAH-blehs!'
+        }
+      },
+      {
+        id: 2,
+        title: 'Mock Paper 2: Climate Action, Sport & Part-Time Work',
+        themeBadge: 'Full 400-Mark SEC Simulation',
+        aural: {
+          marks: 80,
+          title: 'Listening Comprehension — Part 1: Environmental Radio Report (80m)',
+          audioText: 'Una organización ecologista de Valencia ha recogido más de tres toneladas de plástico en las playas este fin de semana. Participaron cuatrocientos voluntarios, en su mayoría estudiantes universitarios. El portavoz declaró que, sin embargo, los ayuntamientos deben instalar más papeleras de reciclaje antes del verano.',
+          phonetic: 'OO-nah ohr-gah-nee-thah-THYOHN eh-koh-loh-HEES-tah deh bah-LEHN-thyah ah reh-koh-HEE-doh mahs deh trehs toh-neh-LAH-dahs deh PLAHS-tee-koh en lahs PLAH-yahs EHS-teh feen deh seh-MAH-nah. pahr-tee-thee-PAH-rohn kwah-troh-THYEHN-tohs boh-loon-TAH-ryohs, en soo mah-yoh-REE-ah ehs-too-DYAHN-tehs oo-nee-behr-see-TAH-ryohs. el pohr-tah-BOHTH deh-klah-ROH keh, seen ehm-BAHR-goh, lohs ah-yoon-tah-MYEHN-tohs DEH-behn eens-tah-LAHR mahs pah-peh-LEH-rahs deh reh-thee-KLAH-heh AHN-tehs del beh-RAH-noh.',
+          questions: [
+            '1. How much plastic was collected on Valencia’s beaches this weekend? (25m)',
+            '2. How many volunteers took part, and who were the majority of them? (30m)',
+            '3. What does the spokesperson say local councils must do before summer? (25m)'
+          ],
+          markingScheme: '1. Over 3 tonnes of plastic (más de tres toneladas de plástico). (25m)\n2. 400 volunteers (cuatrocientos voluntarios); mostly university students (estudiantes universitarios). (30m)\n3. Install more recycling bins before summer (instalar más papeleras de reciclaje antes del verano). (25m)'
+        },
+        sectionA: {
+          marks: 70,
+          title: 'Section A — Reading Comprehension: El Deporte Femenino en España (70m)',
+          passage: 'El éxito histórico de la selección española femenina de fútbol ha inspirado a miles de niñas en toda España. En los últimos dos años, el número de licencias federativas femeninas ha crecido un treinta por ciento. No obstante, las jugadoras siguen reclamando igualdad salarial y mejores instalaciones deportivas en los clubes pequeños.',
+          questions: [
+            '1. How has the success of the Spanish women’s football team affected girls across Spain? (25m)',
+            '2. By what percentage have female federated licences grown in the last two years? (20m)',
+            '3. Name TWO things female players are still demanding. (25m)'
+          ],
+          markingScheme: '1. It has inspired thousands of girls across Spain (ha inspirado a miles de niñas). (25m)\n2. 30% (un treinta por ciento). (20m)\n3. Equal pay (igualdad salarial) and better sports facilities in small clubs (mejores instalaciones deportivas). (25m)'
+        },
+        sectionB: {
+          marks: 100,
+          readingTitle: 'Section B (Part 1) — Reading Comprehension: Trabajar Mientras Estudias (60m)',
+          passage: 'Cada vez más estudiantes irlandeses y españoles buscan un trabajo a tiempo parcial durante el curso académico para ahorrar dinero. Trabajar los fines de semana en una cafetería o tienda enseña responsabilidad y puntualidad. Sin embargo, los orientadores escolares avisan de que trabajar más de quince horas semanales puede perjudicar las notas de los exámenes finales.',
+          readingQuestions: [
+            '1. Why are more students looking for part-time work during the academic year? (20m)',
+            '2. Give TWO personal qualities that weekend jobs teach students. (20m)',
+            '3. What warning do school guidance counsellors give? (20m)'
+          ],
+          readingScheme: '1. To save money (para ahorrar dinero). (20m)\n2. Responsibility (responsabilidad) and punctuality (puntualidad). (20m)\n3. Working more than 15 hours a week can harm final exam grades (perjudicar las notas). (20m)',
+          opinionPrompt: 'Section B (Part 2) — Opinion Piece (40 Marks • ~140–160 words): "¿Es buena idea que los estudiantes tengan un trabajo a tiempo parcial?" (Is it a good idea for students to have a part-time job?)',
+          modelOpinionEs: 'Hoy en día, muchos jóvenes deciden buscar un trabajo a tiempo parcial mientras estudian. Por un lado, creo que trabajar los sábados es una experiencia muy positiva porque nos da independencia económica y nos enseña el valor del dinero. Por ejemplo, yo trabajo en un supermercado local y he aprendido a trabajar en equipo. Por otro lado, es fundamental que los estudios sean siempre nuestra prioridad. Durante el año del Bachillerato tenemos mucha presión y demasiadas horas de trabajo pueden causar cansancio. Aunque algunos padres piensan que trabajar distrae a los alumnos, yo diría que todo depende de una buena organización. En definitiva, un trabajo de pocas horas es recomendable siempre que no afecte a nuestros estudios.',
+          modelOpinionPh: 'oy en DEE-ah, MOO-chohs HOH-beh-nehs deh-THEE-dehn boos-KAHR oon trah-BAH-hoh ah TYEHM-poh pahr-THYAHL MYEHN-trahs ehs-TOO-dyahn. pohr oon LAH-doh, KREH-oh keh trah-bah-HAHR lohs SAH-bah-dohs ehs OO-nah ek-speh-RYEHN-thyah mwee poh-see-TEE-bah POHR-keh nohs dah een-deh-pehn-DEHN-thyah eh-koh-NOH-mee-kah ee nohs ehn-SEH-nyah el bah-LOHR del dee-NEH-roh. pohr eh-HEHM-ploh, yoh trah-BAH-hoh en oon soo-pehr-mehr-KAH-doh loh-KAHL ee eh ah-prehn-DEE-doh ah trah-bah-HAHR en eh-KEE-poh. pohr OH-troh LAH-doh, ehs foon-dah-mehn-TAHL keh lohs ehs-TOO-dyohs SEH-ahn SYEHM-preh NWEHS-trah pryoh-ree-DAHD. doo-RAHN-teh el AH-nyoh del bah-chee-yeh-RAH-toh teh-NEH-mohs MOO-chah preh-SYOHN ee deh-mah-SYAH-dahs OH-rahs deh trah-BAH-hoh PWEH-dehn kahw-SAHR kahn-SAHN-thyoh. AHWN-keh ahl-GOO-nohs PAH-drehs PYEHN-sahn keh trah-bah-HAHR dees-TRAH-eh ah lohs ah-LOOM-nohs, yoh dee-REE-ah keh TOH-doh deh-PEHN-deh deh OO-nah BWEH-nah ohr-gah-nee-thah-THYOHN. en deh-fee-nee-TEE-bah, oon trah-BAH-hoh deh POH-kahs OH-rahs ehs reh-koh-mehn-DAH-bleh SYEHM-preh keh noh ah-FEHK-teh ah NWEHS-trohs ehs-TOO-dyohs.'
+        },
+        sectionC: {
+          marks: 50,
+          q1Title: 'Section C — Q1: Formal Job Application Email (30 Marks)',
+          q1Prompt: 'Write an email in Spanish applying for a summer job as a waiter/waitress in a restaurant in Málaga. Mention your age, your personality, your languages (English, Irish, Spanish), and when you can start.',
+          q1ModelEs: 'Estimado señor:\nLe escribo para solicitar el puesto de camarero en su restaurante este verano. Tengo dieciocho años y soy una persona muy trabajadora, puntual y simpática. Hablo inglés e irlandés con fluidez y tengo un nivel alto de español. Puedo empezar a trabajar a partir del veinte de junio. Adjunto mi currículum.\nAtentamente,\nLiam Murphy',
+          q1ModelPh: 'ehs-tee-MAH-doh seh-NYOHR: leh ehs-KREE-boh PAH-rah soh-lee-thee-TAHR el PWEHS-toh deh kah-mah-REH-roh en soo rehs-tahw-RAHN-teh EHS-teh beh-RAH-noh. TEHN-goh dyehth-ee-OH-choh AH-nyohs ee soy OO-nah pehr-SOH-nah mwee trah-bah-hah-DOH-rah, poon-TWAHL ee seem-PAH-tee-kah. AH-bloh een-GLEHS eh eer-lahn-DEHS kohn floo-ee-DEHTH ee TEHN-goh oon nee-BEHL AHL-toh deh ehs-pah-NYOHL. PWEH-doh ehm-peh-THAHR ah trah-bah-HAHR ah pahr-TEER del BEYN-teh deh HOO-nyoh. ahd-HOON-toh mee koor-REE-koo-loom. ah-tehn-tah-MEHN-teh, Liam Murphy',
+          q2Title: 'Section C — Q2: Note to a Host Family (20 Marks)',
+          q2Prompt: 'Leave a note for your Spanish exchange family explaining that you have gone to the library with Javier, you will be back at 7:30 pm, and asking what you can help with for dinner.',
+          q2ModelEs: 'Hola Carmen:\nTe escribo esta nota para decirte que he ido a la biblioteca con Javier para estudiar. Volveremos a casa a las siete y media de la tarde. ¿En qué puedo ayudar para preparar la cena esta noche?\n¡Muchas gracias y hasta luego!',
+          q2ModelPh: 'OH-lah KAHR-mehn: teh ehs-KREE-boh EHS-tah NOH-tah PAH-rah deh-THEER-teh keh eh EE-doh ah lah bee-blyoh-TEH-kah kohn hah-BYEHR PAH-rah ehs-too-DYAHR. bohl-beh-REH-mohs ah KAH-sah ah lahs SYEH-teh ee MEH-dyah deh lah TAHR-deh. en keh PWEH-doh ah-yoo-DAHR PAH-rah preh-pah-RAHR lah THEH-nah EHS-tah NOH-cheh? MOO-chahs GRAH-thyahs ee AHS-tah LWEH-goh!'
+        },
+        oral: {
+          marks: 100,
+          title: 'Part 5 — Oral Exam Simulation (100 Marks)',
+          prompts: [
+            'General Conversation: ¿Qué haces en tu tiempo libre para mantenerte en forma? (What do you do in your free time to keep fit?)',
+            'Roleplay 2 (Summer Job): Explain to the Spanish camp director why you would be a great sports monitor for children.',
+            'Open Question: ¿Crees que el deporte es importante para los jóvenes? (Do you think sport is important for young people?)'
+          ],
+          sampleAnswerEs: 'En mi tiempo libre juego al fútbol gaélico tres veces a la semana y voy al gimnasio. Creo que el deporte es imprescindible porque reduce el estrés de los exámenes.',
+          sampleAnswerPh: 'en mee TYEHM-poh LEE-breh HWEH-goh ahl FOOT-bohl gah-EH-lee-koh trehs BEH-thehs ah lah seh-MAH-nah ee boy ahl heem-NAH-syoh. KREH-oh keh el deh-POHR-teh ehs eem-prehs-theen-DEE-bleh POHR-keh reh-DOO-theh el ehs-TREHS deh lohs ek-SAH-meh-nehs.'
+        }
+      },
+      {
+        id: 3,
+        title: 'Mock Paper 3: Health, Diet & Spanish Culture',
+        themeBadge: 'Full 400-Mark SEC Simulation',
+        aural: {
+          marks: 80,
+          title: 'Listening Comprehension — Part 1: Health & Mediterranean Diet Podcast (80m)',
+          audioText: 'Un nuevo estudio de la Universidad de Granada demuestra que seguir la dieta mediterránea reduce el riesgo de enfermedades del corazón en un veinticinco por ciento. Los médicos recomiendan consumir aceite de oliva, pescado fresco y frutas de temporada, y evitar la comida rápida y las bebidas azucaradas.',
+          phonetic: 'oon NWEH-boh ehs-TOO-dyoh deh lah oo-nee-behr-see-DAHD deh grah-NAH-dah deh-MWEHS-trah keh seh-GEER lah DYEH-tah meh-dee-tehr-RAH-neh-ah reh-DOO-theh el RYEHS-goh deh ehn-fehr-meh-DAH-dehs del koh-rah-THOHN en oon beyn-tee-THEEN-koh pohr THYEHN-toh. lohs MEH-dee-kohs reh-koh-MYEHN-dahn kohn-soo-MEER ah-THEHY-teh deh oh-LEE-bah, pehs-KAH-doh FREHS-koh ee FROO-tahs deh tehm-poh-RAH-dah, ee eh-bee-TAHR lah koh-MEE-dah RAH-pee-dah ee lahs beh-BEE-dahs ah-thoo-kah-RAH-dahs.',
+          questions: [
+            '1. Which university conducted this study, and by what percentage does the Mediterranean diet reduce heart disease risk? (30m)',
+            '2. Name THREE foods doctors recommend eating. (30m)',
+            '3. Name TWO things doctors advise avoiding. (20m)'
+          ],
+          markingScheme: '1. University of Granada (Universidad de Granada); reduces risk by 25% (veinticinco por ciento). (30m)\n2. Olive oil (aceite de oliva), fresh fish (pescado fresco), seasonal fruit (frutas de temporada). (30m)\n3. Fast food (comida rápida) and sugary drinks (bebidas azucaradas). (20m)'
+        },
+        sectionA: {
+          marks: 70,
+          title: 'Section A — Reading Comprehension: La Siesta y los Horarios Españoles (70m)',
+          passage: 'A diferencia de Irlanda, donde se cena alrededor de las seis de la tarde, en España la cena suele servirse entre las nueve y las diez de la noche. Aunque muchos extranjeros piensan que todos los españoles duermen la siesta cada día, la realidad es que menos del veinte por ciento de los trabajadores tiene tiempo para descansar después de comer debido a las largas jornadas laborales.',
+          questions: [
+            '1. Contrast the typical dinner times in Ireland and Spain mentioned in the text. (25m)',
+            '2. What percentage of Spanish workers actually have time for a daily siesta, and why? (30m)',
+            '3. Find the Spanish phrase meaning: "unlike Ireland" (15m).'
+          ],
+          markingScheme: '1. Ireland: around 6 pm (alrededor de las seis); Spain: between 9 pm and 10 pm (entre las nueve y las diez). (25m)\n2. Less than 20% (menos del veinte por ciento), due to long working days (las largas jornadas laborales). (30m)\n3. "A diferencia de Irlanda" (15m).'
+        },
+        sectionB: {
+          marks: 100,
+          readingTitle: 'Section B (Part 1) — Reading Comprehension: El Voluntariado Juvenil (60m)',
+          passage: 'Cada vez más jóvenes participan en proyectos de voluntariado durante las vacaciones escolares. Ayudar en comedores sociales o enseñar informática a personas mayores no solo beneficia a la comunidad, sino que también aumenta la empatía y la autoestima de los propios voluntarios.',
+          readingQuestions: [
+            '1. Give TWO examples of volunteer activities mentioned in the passage. (30m)',
+            '2. Mention TWO personal benefits that volunteering brings to the young volunteers themselves. (30m)'
+          ],
+          readingScheme: '1. Helping in soup kitchens (comedores sociales) and teaching IT/computing to elderly people (enseñar informática a personas mayores). (30m)\n2. Increases empathy (empatía) and self-esteem (autoestima). (30m)',
+          opinionPrompt: 'Section B (Part 2) — Opinion Piece (40 Marks • ~140–160 words): "¿Debería ser obligatorio el voluntariado en los institutos?" (Should volunteering be compulsory in secondary schools?)',
+          modelOpinionEs: 'En mi opinión, el voluntariado es una actividad sumamente enriquecedora para los jóvenes, pero no creo que deba ser obligatorio. En primer lugar, la esencia del voluntariado es ayudar a los demás de manera libre y altruista. Si los institutos obligan a los alumnos a participar, muchos lo harán sin entusiasmo. Sin embargo, es imprescindible que los colegios fomenten estos proyectos. Por ejemplo, en mi instituto organizamos campañas para ayudar a las personas sin hogar en invierno y fue una experiencia inolvidable. Además, el voluntariado nos ayuda a valorar lo que tenemos y a mejorar nuestra comunidad. En conclusión, aunque no debe imponerse por ley, animo a todos los jóvenes a que participen como voluntarios alguna vez en su vida.',
+          modelOpinionPh: 'en mee oh-pee-NYOHN, el boh-loon-tah-RYAH-doh ehs OO-nah ahk-tee-bee-DAHD soo-mah-MEHN-teh ehn-ree-keh-theh-DOH-rah PAH-rah lohs HOH-beh-nehs, PEH-roh noh KREH-oh keh DEH-bah sehr oh-blee-gah-TOH-ryoh. en pree-MEHR loo-GAHR, lah eh-SEHN-thyah del boh-loon-tah-RYAH-doh ehs ah-yoo-DAHR ah lohs deh-MAHS deh mah-NEH-rah LEE-breh ee ahl-troo-EES-tah. see lohs eens-tee-TOO-tohs oh-BLEE-gahn ah lohs ah-LOOM-nohs ah pahr-tee-thee-PAHR, MOO-chohs loh ah-RAHN seen ehn-too-SYAHS-moh. seen ehm-BAHR-goh, ehs eem-prehs-theen-DEE-bleh keh lohs koh-LEH-hyohs foh-MEHN-tehn EHS-tohs proh-YEHK-tohs. pohr eh-HEHM-ploh, en mee eens-tee-TOO-toh ohr-gah-nee-THAH-mohs kahm-PAH-nyahs PAH-rah ah-yoo-DAHR ah lahs pehr-SOH-nahs seen oh-GAHR en een-BYEHR-noh ee fweh OO-nah ek-speh-RYEHN-thyah een-ohl-bee-DAH-bleh. ah-deh-MAHS, el boh-loon-tah-RYAH-doh nohs ah-YOO-dah ah bah-loh-RAHR loh keh teh-NEH-mohs ee ah meh-hoh-RAHR NWEHS-trah koh-moo-nee-DAHD. en kohn-kloo-SYOHN, AHWN-keh noh DEH-beh eem-poh-NEHR-seh pohr ley, ah-NEE-moh ah TOH-dohs lohs HOH-beh-nehs ah keh pahr-tee-THEE-pehn KOH-moh boh-loon-TAH-ryohs ahl-GOO-nah behth en soo BEE-dah.'
+        },
+        sectionC: {
+          marks: 50,
+          q1Title: 'Section C — Q1: Dialogue Translation (30 Marks)',
+          q1Prompt: 'Translate into Spanish:\n• Doctor: Good morning. What is the matter with you?\n• Patient: Good morning doctor. My stomach hurts a lot and I have had a fever since last night.\n• Doctor: What did you eat yesterday?\n• Patient: I ate seafood in a restaurant near the port.',
+          q1ModelEs: '• Médico: Buenos días. ¿Qué le pasa?\n• Paciente: Buenos días, doctor. Me duele mucho el estómago y tengo fiebre desde anoche.\n• Médico: ¿Qué comió usted ayer?\n• Paciente: Comí mariscos en un restaurante cerca del puerto.',
+          q1ModelPh: 'BWEH-nohs DEE-ahs. keh leh PAH-sah? / BWEH-nohs DEE-ahs, dohk-TOHR. meh DWEH-leh MOO-choh el ehs-TOH-mah-goh ee TEHN-goh FYEH-breh DEHS-deh ah-NOH-cheh. / keh koh-MYOH oos-TEHD ah-YEHR? / koh-MEE mah-REES-kohs en oon rehs-tahw-RAHN-teh THEHR-kah del PWEHR-toh.',
+          q2Title: 'Section C — Q2: Diary Entry (20 Marks)',
+          q2Prompt: 'Write a diary entry about a disastrous day when you overslept, missed the school bus, and forgot your homework.',
+          q2ModelEs: 'Querido diario:\n¡Qué desastre de día he tenido hoy! Me quedé dormido porque no sonó el despertador y perdí el autobús escolar. Tuve que ir corriendo al instituto bajo la lluvia y llegué veinte minutos tarde. Para colmo, me olvidé los deberes de historia en casa y el profesor se enfadó mucho. ¡Ojalá mañana sea un día mucho mejor!',
+          q2ModelPh: 'keh-REE-doh DYAH-ryoh: keh dehs-AHS-treh deh DEE-ah eh teh-NEE-doh oy! meh keh-DEH dohr-MEE-doh POHR-keh noh soh-NOH el dehs-pehr-tah-DOHR ee pehr-DEE el ahw-toh-BOOS ehs-koh-LAHR. TOO-beh keh eer kohr-RYEHN-doh ahl eens-tee-TOO-toh BAH-hoh lah YOO-byah ee yeh-GEH BEYN-teh mee-NOO-tohs TAHR-deh. PAH-rah KOHL-moh, meh ohl-bee-DEH lohs deh-BEH-rehs deh ees-TOH-ryah en KAH-sah ee el proh-feh-SOHR seh ehn-fah-DOH MOO-choh. oh-hah-LAH mah-NYAH-nah SEH-ah oon DEE-ah MOO-choh meh-HOHR!'
+        },
+        oral: {
+          marks: 100,
+          title: 'Part 5 — Oral Exam Simulation (100 Marks)',
+          prompts: [
+            'General Conversation: ¿Llevas una dieta sana? ¿Cuál es tu plato favorito? (Do you have a healthy diet? What is your favourite dish?)',
+            'Roleplay 3 (Doctor/Pharmacy): Tell the pharmacist you got sunburnt on the beach and need cream and painkillers.',
+            'Open Question: ¿Qué haces para cuidar tu salud física y mental? (What do you do to look after your physical and mental health?)'
+          ],
+          sampleAnswerEs: 'Intento llevar una dieta equilibrada con mucha fruta y verdura, aunque de vez en cuando me encanta comer chocolate. Mi plato favorito es la tortilla española.',
+          sampleAnswerPh: 'een-TEHN-toh yeh-BAHR OO-nah DYEH-tah eh-kee-lee-BRAH-dah kohn MOO-chah FROO-tah ee behr-DOO-rah, AHWN-keh deh behth en KWAHN-doh meh ehn-KAHN-tah koh-MEHR choh-koh-LAH-teh. mee PLAH-toh fah-boh-REE-toh ehs lah tohr-TEE-yah ehs-pah-NYOH-lah.'
+        }
+      },
+      {
+        id: 4,
+        title: 'Mock Paper 4: Artificial Intelligence, Education & Future Plans',
+        themeBadge: 'Full 400-Mark SEC Simulation',
+        aural: {
+          marks: 80,
+          title: 'Listening Comprehension — Part 1: Tech & AI in Universities (80m)',
+          audioText: 'La Universidad de Salamanca ofrecerá el próximo septiembre un nuevo grado en Inteligencia Artificial y Ética. Habrá ochenta plazas disponibles y las clases se impartirán tanto en español como en inglés. El rector explicó que el objetivo es preparar a los jóvenes para los empleos del futuro sin perder los valores humanos.',
+          phonetic: 'lah oo-nee-behr-see-DAHD deh sah-lah-MAHN-kah oh-freh-theh-RAH el PROHK-see-moh sehp-TYEHM-breh oon NWEH-boh GRAH-doh en een-teh-lee-HEHN-thyah ahr-tee-fee-THYAHL ee EH-tee-kah. ah-BRAH oh-CHEHN-tah PLAH-thahs dees-poh-NEE-blehs ee lahs KLAH-sehs seh eem-pahr-tee-RAHN TAHN-toh en ehs-pah-NYOHL KOH-moh en een-GLEHS. el rehk-TOHR ehks-plee-KOH keh el ohb-heh-TEE-boh ehs preh-pah-RAHR ah lohs HOH-beh-nehs PAH-rah lohs ehm-PLEH-ohs del foo-TOO-roh seen pehr-DEHR lohs bah-LOH-rehs oo-MAH-nohs.',
+          questions: [
+            '1. What new degree will the University of Salamanca offer next September? (25m)',
+            '2. How many places are available, and in which languages will classes be taught? (30m)',
+            '3. What is the main goal of the degree according to the rector? (25m)'
+          ],
+          markingScheme: '1. Artificial Intelligence and Ethics (Inteligencia Artificial y Ética). (25m)\n2. 80 places (ochenta plazas); taught in both Spanish and English (en español como en inglés). (30m)\n3. To prepare young people for future jobs without losing human values (preparar a los jóvenes para los empleos del futuro sin perder los valores humanos). (25m)'
+        },
+        sectionA: {
+          marks: 70,
+          title: 'Section A — Reading Comprehension: El Aprendizaje de Idiomas en Europa (70m)',
+          passage: 'Hablar más de un idioma abre puertas tanto profesionales como personales. Según datos de la Comisión Europea, los jóvenes que participan en el programa Erasmus tienen el doble de posibilidades de encontrar empleo en el extranjero. Además, aprender una lengua extranjera mejora la memoria y fomenta la tolerancia cultural.',
+          questions: [
+            '1. What advantage do young people who take part in Erasmus have according to the European Commission? (30m)',
+            '2. Give TWO cognitive or social benefits of learning a foreign language mentioned in the text. (25m)',
+            '3. Find the Spanish phrase meaning: "opens doors" (15m).'
+          ],
+          markingScheme: '1. Twice the chance / double the likelihood of finding employment abroad (el doble de posibilidades de encontrar empleo en el extranjero). (30m)\n2. Improves memory (mejora la memoria) and promotes cultural tolerance (fomenta la tolerancia cultural). (25m)\n3. "abre puertas" (15m).'
+        },
+        sectionB: {
+          marks: 100,
+          readingTitle: 'Section B (Part 1) — Reading Comprehension: La Inteligencia Artificial en las Aulas (60m)',
+          passage: 'La llegada de la inteligencia artificial ha transformado la educación secundaria. Algunos profesores utilizan estas herramientas para crear ejercicios personalizados, pero existe preocupación por el plagio en los trabajos escritos. Por esta razón, muchos colegios están volviendo a los exámenes orales y escritos a mano en clase.',
+          readingQuestions: [
+            '1. How are some teachers using AI tools positively? (20m)',
+            '2. What concern exists regarding written assignments? (20m)',
+            '3. How are many schools responding to this problem? (20m)'
+          ],
+          readingScheme: '1. To create personalised exercises (crear ejercicios personalizados). (20m)\n2. Plagiarism in written work (el plagio en los trabajos escritos). (20m)\n3. Returning to oral exams and handwritten tests in class (volviendo a los exámenes orales y escritos a mano). (20m)',
+          opinionPrompt: 'Section B (Part 2) — Opinion Piece (40 Marks • ~140–160 words): "¿Es la inteligencia artificial una amenaza o una ayuda para los estudiantes?" (Is AI a threat or a help to students?)',
+          modelOpinionEs: 'Hoy en día, la inteligencia artificial está cambiando nuestra forma de estudiar. En primer lugar, cabe destacar que estas herramientas pueden ser muy útiles para explicar conceptos difíciles o practicar idiomas. Sin embargo, creo que existe el peligro de que los alumnos dependan demasiado de la tecnología y dejen de pensar por sí mismos. Si copiamos un ensayo sin esfuerzo, no aprendemos nada y no estaremos preparados para los exámenes reales. Además, es fundamental que los profesores enseñen a usar la inteligencia artificial de manera ética y responsable. En definitiva, la tecnología debe ser un apoyo para el aprendizaje, nunca un sustituto del esfuerzo humano.',
+          modelOpinionPh: 'oy en DEE-ah, lah een-teh-lee-HEHN-thyah ahr-tee-fee-THYAHL ehs-TAH kahm-BYAHN-doh NWEHS-trah FOHR-mah deh ehs-too-DYAHR. en pree-MEHR loo-GAHR, KAH-beh dehs-tah-KAHR keh EHS-tahs ehr-rah-MYEHN-tahs PWEH-dehn sehr mwee OO-tee-lehs PAH-rah ehks-plee-KAHR kohn-THEHP-tohs dee-FEE-thee-lehs oh prahk-tee-KAHR ee-DYOH-mahs. seen ehm-BAHR-goh, KREH-oh keh ehk-SEES-teh el peh-LEE-groh deh keh lohs ah-LOOM-nohs deh-PEHN-dahn deh-mah-SYAH-doh deh lah tehk-noh-loh-HEE-ah ee DEH-hehn deh pehn-SAHR pohr see MEES-mohs. see koh-PYAH-mohs oon ehn-SAH-yoh seen ehs-FWEHR-thoh, noh ah-prehn-DEH-mohs NAH-dah ee noh ehs-tah-REH-mohs preh-pah-RAH-dohs PAH-rah lohs ek-SAH-meh-nehs reh-AH-lehs. ah-deh-MAHS, ehs foon-dah-mehn-TAHL keh lohs proh-feh-SOH-rehs ehn-SEH-nyehn ah oo-SAHR lah een-teh-lee-HEHN-thyah ahr-tee-fee-THYAHL deh mah-NEH-rah EH-tee-kah ee rehs-pohn-SAH-bleh. en deh-fee-nee-TEE-bah, lah tehk-noh-loh-HEE-ah DEH-beh sehr oon ah-POY-oh PAH-rah el ah-prehn-dee-THAH-heh, NOON-kah oon soos-tee-TOO-toh del ehs-FWEHR-thoh oo-MAH-noh.'
+        },
+        sectionC: {
+          marks: 50,
+          q1Title: 'Section C — Q1: Informal Email to a Spanish Friend (30 Marks)',
+          q1Prompt: 'Write an email to your penpal in Seville telling them about your Leaving Cert subjects, which subject you find hardest, and inviting them to visit Ireland in July.',
+          q1ModelEs: 'Querida Lucía:\n¿Qué tal estás? Perdona que no te haya escrito antes, pero estoy muy ocupado con el Bachillerato. Estudio siete asignaturas, incluidas matemáticas, biología y español. La asignatura más difícil para mí es la química porque hay mucho vocabulario. ¿Te gustaría venir a Irlanda en julio? Podemos visitar Dublín y la costa oeste.\nUn fuerte abrazo,\nAoife',
+          q1ModelPh: 'keh-REE-dah loo-THEE-ah: keh tahl ehs-TAHS? pehr-DOH-nah keh noh teh AH-yah ehs-KREE-toh AHN-tehs, PEH-roh ehs-TOY mwee oh-koo-PAH-doh kohn el bah-chee-yeh-RAH-toh. ehs-TOO-dyoh SYEH-teh ah-seeg-nah-TOO-rahs, een-kloo-EE-dahs mah-teh-MAH-tee-kahs, byoh-loh-HEE-ah ee ehs-pah-NYOHL. lah ah-seeg-nah-TOO-rah mahs dee-FEE-theel PAH-rah mee ehs lah KEE-mee-kah POHR-keh ahy MOO-choh boh-kah-boo-LAH-ryoh. teh goos-tah-REE-ah beh-NEER ah eer-LAHN-dah en HOO-lyoh? poh-DEH-mohs bee-see-TAHR doo-BLEEN ee lah KOHS-tah oh-EHS-teh. oon FWEHR-teh ah-BRAH-thoh, Aoife',
+          q2Title: 'Section C — Q2: Note Explaining a Lost Item (20 Marks)',
+          q2Prompt: 'Write a short note to your Spanish teacher explaining that you left your Spanish textbook on the bus, asking if you can borrow a spare copy, and promising to bring your homework tomorrow.',
+          q2ModelEs: 'Hola profesora:\nLe dejo esta nota para decirle que ayer me olvidé mi libro de español en el autobús. ¿Podría prestarme una copia hoy en clase, por favor? Mañana traeré todos mis deberes hechos.\nMuchas gracias.',
+          q2ModelPh: 'OH-lah proh-feh-SOH-rah: leh DEH-hoh EHS-tah NOH-tah PAH-rah deh-THEER-leh keh ah-YEHR meh ohl-bee-DEH mee LEE-broh deh ehs-pah-NYOHL en el ahw-toh-BOOS. poh-DREE-ah prehs-TAHR-meh OO-nah KOH-pyah oy en KLAH-seh, pohr fah-BOHR? mah-NYAH-nah trah-eh-REH TOH-dohs mees deh-BEH-rehs EH-chohs. MOO-chahs GRAH-thyahs.'
+        },
+        oral: {
+          marks: 100,
+          title: 'Part 5 — Oral Exam Simulation (100 Marks)',
+          prompts: [
+            'General Conversation: ¿Qué quieres estudiar en la universidad y por qué? (What do you want to study at university and why?)',
+            'Roleplay 4 (Lost Property): Report at a police station in Córdoba that your wallet with 60 euros and your ID card was stolen on the metro.',
+            'Open Question: ¿Crees que es importante aprender idiomas hoy en día? (Do you think it is important to learn languages nowadays?)'
+          ],
+          sampleAnswerEs: 'Cuando termine el instituto, me gustaría estudiar derecho o empresariales en Dublín. Además, quiero hacer un año Erasmus en Madrid para mejorar mi español.',
+          sampleAnswerPh: 'KWAHN-doh tehr-MEE-neh el eens-tee-TOO-toh, meh goos-tah-REE-ah ehs-too-DYAHR deh-REH-choh oh ehm-preh-sah-RYAH-lehs en doo-BLEEN. ah-deh-MAHS, KYEH-roh ah-THEHR oon AH-nyoh eh-RAHS-moos en mah-DREED PAH-rah meh-hoh-RAHR mee ehs-pah-NYOHL.'
+        }
+      },
+      {
+        id: 5,
+        title: 'Mock Paper 5: Housing, City vs. Countryside & Festivals',
+        themeBadge: 'Full 400-Mark SEC Simulation',
+        aural: {
+          marks: 80,
+          title: 'Listening Comprehension — Part 1: Rural Revival & Festivals in Spain (80m)',
+          audioText: 'Un pequeño pueblo de Aragón ofrece casas gratuitas y conexión a internet de alta velocidad a familias con niños que decidan mudarse allí. El objetivo es evitar que cierre la escuela local, que actualmente solo tiene nueve alumnos. Las familias interesadas pueden enviar su solicitud antes del treinta de noviembre.',
+          phonetic: 'oon peh-KEH-nyoh PWEH-bloh deh ah-rah-GOHN oh-FREH-theh KAH-sahs grah-TWEE-tahs ee koh-nehk-SYOHN ah een-tehr-NEHT deh AHL-tah beh-loh-thee-DAHD ah fah-MEE-lyahs kohn NEE-nyohs keh deh-THEE-dahn moo-DAHR-seh ah-YEE. el ohb-heh-TEE-boh ehs eh-bee-TAHR keh THYEHR-reh lah ehs-KWEH-lah loh-KAHL, keh ahk-twahl-MEHN-teh SOH-loh TYEH-neh NWEH-beh ah-LOOM-nohs. lahs fah-MEE-lyahs een-teh-reh-SAH-dahs PWEH-dehn ehn-BYAHR soo soh-lee-thee-TOOD AHN-tehs del TREYN-tah deh noh-BYEHM-breh.',
+          questions: [
+            '1. Name TWO things the small village in Aragón is offering to families with children. (30m)',
+            '2. Why is the village making this offer, and how many pupils currently attend the local school? (30m)',
+            '3. What is the deadline for interested families to apply? (20m)'
+          ],
+          markingScheme: '1. Free houses (casas gratuitas) and high-speed internet connection (conexión a internet de alta velocidad). (30m)\n2. To prevent the local school from closing (evitar que cierre la escuela local); it currently only has 9 pupils (nueve alumnos). (30m)\n3. Before the 30th of November (antes del treinta de noviembre). (20m)'
+        },
+        sectionA: {
+          marks: 70,
+          title: 'Section A — Reading Comprehension: La España Vaciada (70m)',
+          passage: 'En las últimas décadas, millones de personas han abandonado las zonas rurales de España para buscar oportunidades laborales en grandes ciudades como Madrid y Barcelona. Como consecuencia, muchos pueblos sufren la falta de transporte público y de servicios médicos. Sin embargo, el teletrabajo está permitiendo que algunos jóvenes regresen al campo para disfrutar de una vida más tranquila y económica.',
+          questions: [
+            '1. Why have millions of people left rural Spain in recent decades? (20m)',
+            '2. Mention TWO problems many rural villages suffer from as a result. (30m)',
+            '3. What modern development is allowing some young people to return to the countryside, and why? (20m)'
+          ],
+          markingScheme: '1. To look for job opportunities in big cities like Madrid and Barcelona (buscar oportunidades laborales). (20m)\n2. Lack of public transport (falta de transporte público) and lack of medical services (servicios médicos). (30m)\n3. Remote working / teleworking (el teletrabajo), to enjoy a quieter and cheaper life (una vida más tranquila y económica). (20m)'
+        },
+        sectionB: {
+          marks: 100,
+          readingTitle: 'Section B (Part 1) — Reading Comprehension: El Problema de la Vivienda Juvenil (60m)',
+          passage: 'Tanto en Irlanda como en España, emanciparse de casa de los padres se ha convertido en un reto casi imposible para los menores de treinta años. Los salarios bajos y el precio elevado de los pisos obligan a muchos jóvenes a compartir apartamento o a seguir viviendo con sus familias hasta bien entrada la treintena.',
+          readingQuestions: [
+            '1. What challenge faces under-thirties in both Ireland and Spain? (20m)',
+            '2. Give TWO reasons why young people struggle to move out. (20m)',
+            '3. What TWO living arrangements are young people forced into as a result? (20m)'
+          ],
+          readingScheme: '1. Moving out of their parents’ home / becoming independent (emanciparse de casa de los padres). (20m)\n2. Low wages (salarios bajos) and high apartment prices (precio elevado de los pisos). (20m)\n3. Sharing a flat (compartir apartamento) or continuing to live with their families (seguir viviendo con sus familias). (20m)',
+          opinionPrompt: 'Section B (Part 2) — Opinion Piece (40 Marks • ~140–160 words): "¿Prefieres vivir en una gran ciudad o en el campo?" (Do you prefer living in a big city or in the countryside?)',
+          modelOpinionEs: 'Hoy en día, existe un gran debate sobre si es mejor vivir en la ciudad o en el campo. Personalmente, prefiero vivir en un pueblo tranquilo cerca de la naturaleza, aunque reconozco las ventajas de la ciudad. En primer lugar, la vida en el campo es mucho más sana porque no hay contaminación ni tráfico constante. Además, la gente suele conocerse y ayudarse más. Por otro lado, es verdad que las grandes ciudades ofrecen más universidades, mejores oportunidades de trabajo y una vida cultural más variada, como conciertos y museos. Sin embargo, los alquileres en las capitales son carísimos y la vida es muy estresante. En definitiva, cuando sea mayor me gustaría trabajar a distancia desde un pueblo bonito.',
+          modelOpinionPh: 'oy en DEE-ah, ehk-SEES-teh oon grahn deh-BAH-teh SOH-breh see ehs meh-HOHR bee-BEER en lah thyoo-DAHD oh en el KAHM-poh. pehr-soh-nahl-MEHN-teh, preh-FYEH-roh bee-BEER en oon PWEH-bloh trahn-KEE-loh THEHR-kah deh lah nah-too-rah-LEH-thah, AHWN-keh reh-koh-NOHTH-koh lahs behn-TAH-hahs deh lah thyoo-DAHD. en pree-MEHR loo-GAHR, lah BEE-dah en el KAHM-poh ehs MOO-choh mahs SAH-nah POHR-keh noh ahy kohn-tah-mee-nah-THYOHN nee TRAH-fee-koh kohn-STAHN-teh. ah-deh-MAHS, lah HEHN-teh SWEH-leh koh-noh-THEHR-seh ee ah-yoo-DAHR-seh mahs. pohr OH-troh LAH-doh, ehs behr-DAHD keh lahs GRAHN-dehs thyoo-DAH-dehs oh-FREH-thehn mahs oo-nee-behr-see-DAH-dehs, meh-HOH-rehs oh-pohr-too-nee-DAH-dehs deh trah-BAH-hoh ee OO-nah BEE-dah kool-too-RAHL mahs bah-RYAH-dah, KOH-moh kohn-THYEHR-tohs ee moo-SEH-ohs. seen ehm-BAHR-goh, lohs ahl-kee-LEH-rehs en lahs kah-pee-TAH-lehs sohn kah-REE-see-mohs ee lah BEE-dah ehs mwee ehs-treh-SAHN-teh. en deh-fee-nee-TEE-bah, KWAHN-doh SEH-ah mah-YOHR meh goos-tah-REE-ah trah-bah-HAHR ah dees-TAHN-thyah DEHS-deh oon PWEH-bloh boh-NEE-toh.'
+        },
+        sectionC: {
+          marks: 50,
+          q1Title: 'Section C — Q1: Dialogue Translation (30 Marks)',
+          q1Prompt: 'Translate into Spanish:\n• Marta: What are we going to do tonight? Do you fancy going to the cinema?\n• Pablo: I’d love to, but I have to finish my geography project before tomorrow.\n• Marta: Don’t worry! We can go out on Saturday instead.\n• Pablo: Perfect! Let’s meet at seven o’clock in the main square.',
+          q1ModelEs: '• Marta: ¿Qué vamos a hacer esta noche? ¿Te apetece ir al cine?\n• Pablo: Me encantaría, pero tengo que terminar mi proyecto de geografía antes de mañana.\n• Marta: ¡No te preocupes! Podemos salir el sábado en su lugar.\n• Pablo: ¡Perfecto! Quedamos a las siete en punto en la plaza mayor.',
+          q1ModelPh: 'keh BAH-mohs ah ah-THEHR EHS-tah NOH-cheh? teh ah-peh-TEH-theh eer ahl THEE-neh? / meh ehn-kahn-tah-REE-ah, PEH-roh TEHN-goh keh tehr-mee-NAHR mee proh-YEHK-toh deh heh-oh-grah-FEE-ah AHN-tehs deh mah-NYAH-nah. / noh teh preh-oh-KOO-pehs! poh-DEH-mohs sah-LEER el SAH-bah-doh en soo loo-GAHR. / pehr-FEHK-toh! keh-DAH-mohs ah lahs SYEH-teh en POON-toh en lah PLAH-thah mah-YOHR.',
+          q2Title: 'Section C — Q2: Diary Entry (20 Marks)',
+          q2Prompt: 'Write a diary entry about attending a traditional Spanish festival (e.g., La Tomatina or Las Fallas) during your exchange trip.',
+          q2ModelEs: 'Querido diario:\n¡Hoy ha sido el mejor día de mi intercambio en Valencia! Fuimos a ver las Fallas en el centro de la ciudad. Había música, fuegos artificiales y monumentos gigantes increíbles por todas las calles. Comimos churros con chocolate y saqué muchísimas fotos con mi familia española. ¡Nunca olvidaré esta experiencia!',
+          q2ModelPh: 'keh-REE-doh DYAH-ryoh: oy ah SEE-doh el meh-HOHR DEE-ah deh mee een-tehr-KAHM-byoh en bah-LEHN-thyah! FWEE-mohs ah behr lahs FAH-yahs en el THEHN-troh deh lah thyoo-DAHD. ah-BEE-ah MOO-see-kah, FWEH-gohs ahr-tee-fee-THYAH-lehs ee moh-noo-MEHN-tohs hee-GAHN-tehs een-kreh-EE-blehs pohr TOH-dahs lahs KAH-yehs. koh-MEE-mohs CHOOR-rohs kohn choh-koh-LAH-teh ee sah-KEH moo-CHEE-see-mahs FOH-tohs kohn mee fah-MEE-lyah ehs-pah-NYOH-lah. NOON-kah ohl-bee-dah-REH EHS-tah ek-speh-RYEHN-thyah!'
+        },
+        oral: {
+          marks: 100,
+          title: 'Part 5 — Oral Exam Simulation (100 Marks)',
+          prompts: [
+            'General Conversation: ¿Cómo es tu barrio o tu pueblo? ¿Qué cambiarías si pudieras? (What is your neighbourhood/town like? What would you change if you could?)',
+            'Roleplay 5 (Making Plans): Invite your Spanish friend to a music concert on Friday night and agree on what time to meet.',
+            'Open Question: ¿Conoces alguna fiesta tradicional de España? (Do you know any traditional festival in Spain?)'
+          ],
+          sampleAnswerEs: 'Vivo en un pueblo muy acogedor cerca de Dublín. Hay buenas tiendas y un parque bonito, pero si pudiera, añadiría más carriles bici y un cine.',
+          sampleAnswerPh: 'BEE-boh en oon PWEH-bloh mwee ah-koh-heh-DOHR THEHR-kah deh doo-BLEEN. ahy BWEH-nahs TYEHN-dahs ee oon PAHR-keh boh-NEE-toh, PEH-roh see poo-DYEH-rah, ah-nyah-dee-REE-ah mahs kahr-REE-lehs BEE-thee ee oon THEE-neh.'
+        }
+      }
+    ];
+
+    /* ==========================================================================
+       6. APPLICATION STATE & LOCALSTORAGE PERSISTENCE
+       ========================================================================== */
+    const STORAGE_KEY = 'lc_spanish_h1_lms_v1';
+    let appState = {
+      activeTab: 'roadmap',
+      activeStageId: 1,
+      activeMockId: 1,
+      completedStages: [],
+      quizAnswers: {},
+      mockScores: {} // { 1: { aural: 0, secA: 0, secB: 0, secC: 0, oral: 0 } }
+    };
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          appState = { ...appState, ...parsed };
+        }
+      } catch (e) {
+        console.warn('Could not load saved state:', e);
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      } catch (e) {
+        console.warn('Could not save state:', e);
+      }
+      updateProgressUI();
+    }
+
+    function updateProgressUI() {
+      const stagesDone = appState.completedStages.length;
+      const mocksStarted = Object.keys(appState.mockScores).length;
+      const totalPoints = 6 + 5;
+      const earnedPoints = stagesDone + mocksStarted;
+      const pct = Math.round((earnedPoints / totalPoints) * 100);
+
+      document.getElementById('sidebar-progress-pct').textContent = `${pct}%`;
+      document.getElementById('sidebar-progress-bar').style.width = `${pct}%`;
+      document.getElementById('sidebar-stages-count').textContent = `${stagesDone} / 6 Stages Done`;
+      document.getElementById('sidebar-mocks-count').textContent = `${mocksStarted} / 5 Mocks`;
+
+      renderSidebarStageLinks();
+    }
+
+    /* ==========================================================================
+       7. NAVIGATION & RENDERING FUNCTIONS
+       ========================================================================== */
+    function switchTab(tabName) {
+      appState.activeTab = tabName;
+      saveState();
+
+      // Update sidebar active styles
+      document.querySelectorAll('.nav-item').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tabName);
+      });
+
+      // Toggle views
+      document.querySelectorAll('.view-section').forEach(sec => {
+        sec.classList.add('hidden');
+      });
+      const activeView = document.getElementById(`view-${tabName}`);
+      if (activeView) activeView.classList.remove('hidden');
+
+      // Close mobile sidebar if open
+      closeMobileSidebar();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openStage(stageId) {
+      appState.activeStageId = stageId;
+      switchTab('curriculum');
+      renderCurriculum();
+    }
+
+    function toggleStageComplete(stageId) {
+      const idx = appState.completedStages.indexOf(stageId);
+      if (idx === -1) {
+        appState.completedStages.push(stageId);
+        showToast(`Stage ${stageId} marked as mastered!`, '🎉');
+      } else {
+        appState.completedStages.splice(idx, 1);
+        showToast(`Stage ${stageId} unmarked.`, '↩️');
+      }
+      saveState();
+      renderRoadmap();
+      renderCurriculum();
+    }
+
+    function renderSidebarStageLinks() {
+      const container = document.getElementById('sidebar-stage-links');
+      container.innerHTML = CURRICULUM_STAGES.map(st => {
+        const isDone = appState.completedStages.includes(st.id);
+        return `<button onclick="openStage(${st.id})" class="w-full flex items-center justify-between px-3 py-1.5 rounded-lg hover:bg-[#F3EFEA] text-left text-[#5A6577] hover:text-[#1E242B] transition">
+          <span class="truncate pr-2">${st.id}. ${st.title.split(':')[0]}</span>
+          <span class="text-xs font-bold ${isDone ? 'text-[#2D6A4F]' : 'text-[#D5CEC4]'}">${isDone ? '✓' : '○'}</span>
+        </button>`;
+      }).join('');
+    }
+
+    function renderRoadmap() {
+      const grid = document.getElementById('roadmap-stages-grid');
+      grid.innerHTML = CURRICULUM_STAGES.map(st => {
+        const isDone = appState.completedStages.includes(st.id);
+        return `
+          <div class="paper-card p-5 flex flex-col justify-between hover:border-[#C84B31] transition cursor-pointer" onclick="openStage(${st.id})">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-[#C84B31]">${st.badge}</span>
+                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full ${isDone ? 'bg-[#EEF6F2] text-[#2D6A4F]' : 'bg-[#F3EFEA] text-[#5A6577]'}">
+                  ${isDone ? '✓ Completed' : 'In Progress'}
+                </span>
+              </div>
+              <h4 class="font-editorial font-bold text-lg text-[#1E242B] mb-1.5">${st.title}</h4>
+              <p class="text-sm text-[#5A6577] mb-3">${st.subtitle}</p>
+            </div>
+            <div class="pt-3 border-t border-[#E4DFD7] flex items-center justify-between text-xs">
+              <span class="font-semibold text-[#2D6A4F]">${st.examWeight}</span>
+              <span class="font-bold text-[#C84B31]">Open Lesson →</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderCurriculum() {
+      const pillsContainer = document.getElementById('curriculum-stage-pills');
+      pillsContainer.innerHTML = CURRICULUM_STAGES.map(st => {
+        const active = st.id === appState.activeStageId;
+        const done = appState.completedStages.includes(st.id);
+        return `<button onclick="openStage(${st.id})" class="px-3.5 py-2 rounded-xl text-xs font-bold border transition ${
+          active
+            ? 'bg-[#C84B31] text-white border-[#C84B31]'
+            : 'bg-[#FAF8F5] text-[#1E242B] border-[#E4DFD7] hover:border-[#C84B31]'
+        }">
+          Stage ${st.id} ${done ? '✓' : ''}
+        </button>`;
+      }).join('');
+
+      const stage = CURRICULUM_STAGES.find(s => s.id === appState.activeStageId) || CURRICULUM_STAGES[0];
+      const isDone = appState.completedStages.includes(stage.id);
+      const savedQuizChoice = appState.quizAnswers[stage.id];
+
+      const contentEl = document.getElementById('curriculum-stage-content');
+      contentEl.innerHTML = `
+        <div class="paper-card p-6 sm:p-8 bg-white">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E4DFD7] pb-5 mb-6">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-[#C84B31]">${stage.badge} • ${stage.examWeight}</span>
+              <h2 class="font-editorial text-2xl sm:text-3xl font-bold text-[#1E242B] mt-1">${stage.title}</h2>
+              <p class="text-sm text-[#5A6577] mt-1">${stage.subtitle}</p>
+            </div>
+            <button onclick="toggleStageComplete(${stage.id})" class="px-4 py-2.5 rounded-xl text-xs font-bold border transition shrink-0 ${
+              isDone
+                ? 'bg-[#EEF6F2] text-[#2D6A4F] border-[#CBE4D7]'
+                : 'bg-[#1E242B] text-white border-[#1E242B] hover:bg-[#323B46]'
+            }">
+              ${isDone ? '✓ Stage Mastered' : 'Mark Stage Complete'}
+            </button>
+          </div>
+
+          <div class="space-y-8">
+            ${stage.blocks.map(block => `
+              <div class="space-y-3">
+                <h3 class="font-editorial text-xl font-bold text-[#1E242B]">${block.heading}</h3>
+                <p class="text-sm sm:text-base text-[#5A6577] leading-relaxed">${block.explanation}</p>
+                <div class="grid grid-cols-1 gap-3 pt-1">
+                  ${block.cards.map(card => `
+                    <div class="p-4 rounded-xl bg-[#FAF8F5] border border-[#E4DFD7] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                      <div class="space-y-1">
+                        <div>${esPill(card.es, card.ph)}</div>
+                        <p class="text-sm text-[#1E242B] pt-1">${card.en}</p>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- Stage Checkpoint Mini-Quiz -->
+          <div class="mt-8 p-5 rounded-xl bg-[#FEF9EC] border border-[#F3E2B3]">
+            <div class="text-xs font-bold uppercase tracking-wider text-[#B7791F] mb-1">Stage ${stage.id} Checkpoint</div>
+            <h4 class="font-editorial font-bold text-lg text-[#1E242B] mb-3">${stage.quiz.question}</h4>
+            <div class="space-y-2">
+              ${stage.quiz.options.map((opt, idx) => {
+                let btnStyle = 'bg-white border-[#E4DFD7] text-[#1E242B] hover:border-[#B7791F]';
+                if (savedQuizChoice !== undefined) {
+                  if (idx === stage.quiz.correctIndex) {
+                    btnStyle = 'bg-[#EEF6F2] border-[#2D6A4F] text-[#2D6A4F] font-bold';
+                  } else if (idx === savedQuizChoice) {
+                    btnStyle = 'bg-[#FDF2EF] border-[#C84B31] text-[#C84B31]';
+                  }
+                }
+                return `<button onclick="answerStageQuiz(${stage.id}, ${idx})" class="w-full text-left px-4 py-3 rounded-xl border text-sm transition ${btnStyle}">
+                  ${String.fromCharCode(65 + idx)}. ${opt}
+                </button>`;
+              }).join('')}
+            </div>
+            ${savedQuizChoice !== undefined ? `
+              <div class="mt-3 p-3 rounded-lg bg-white/80 text-xs sm:text-sm text-[#1E242B] border border-[#E4DFD7]">
+                <strong>Examiner Feedback:</strong> ${stage.quiz.explanation}
+              </div>
+            ` : ''}
+          </div>
+
+          <!-- Next Stage Navigation -->
+          <div class="mt-6 pt-5 border-t border-[#E4DFD7] flex justify-between items-center">
+            ${stage.id > 1 ? `<button onclick="openStage(${stage.id - 1})" class="text-sm font-bold text-[#5A6577] hover:text-[#1E242B]">← Previous Stage</button>` : '<span></span>'}
+            ${stage.id < 6 ? `<button onclick="openStage(${stage.id + 1})" class="px-5 py-2.5 rounded-xl bg-[#C84B31] text-white text-sm font-bold hover:bg-[#A93B24]">Next: Stage ${stage.id + 1} →</button>` : `<button onclick="switchTab('mocks')" class="px-5 py-2.5 rounded-xl bg-[#2D6A4F] text-white text-sm font-bold">Ready! Try Mock Exam 1 →</button>`}
+          </div>
+        </div>
+      `;
+    }
+
+    function answerStageQuiz(stageId, optionIdx) {
+      appState.quizAnswers[stageId] = optionIdx;
+      saveState();
+      renderCurriculum();
+    }
+
+    /* ==========================================================================
+       8. AURAL LAB RENDERER
+       ========================================================================== */
+    function renderAuralLab() {
+      const container = document.getElementById('aural-tracks-container');
+      container.innerHTML = AURAL_TRACKS.map((track, index) => {
+        const safeText = track.spanishAudio.replace(/'/g, "\\'");
+        return `
+          <div class="p-5 rounded-xl bg-[#FAF8F5] border border-[#E4DFD7] space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-[#2D6A4F]">${track.sectionLabel}</span>
+                <h3 class="font-editorial text-xl font-bold text-[#1E242B]">Track ${index + 1}: ${track.title}</h3>
+                <p class="text-xs text-[#5A6577]">${track.context}</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <button onclick="speakSpanish('${safeText}', this, 0.72)" class="px-3.5 py-2 rounded-xl bg-white border border-[#E4DFD7] hover:border-[#2D6A4F] text-xs font-bold text-[#1E242B] flex items-center gap-1.5">
+                  <span>🐢</span> <span>Play 0.75x (Slow)</span>
+                </button>
+                <button onclick="speakSpanish('${safeText}', this, 0.95)" class="px-3.5 py-2 rounded-xl bg-[#2D6A4F] hover:bg-[#23543E] text-xs font-bold text-white flex items-center gap-1.5 shadow-sm">
+                  <span>🔊</span> <span>Play Exam Speed</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Questions & Student Notes -->
+            <div class="space-y-3 bg-white p-4 rounded-xl border border-[#E4DFD7]">
+              <div class="text-xs font-bold uppercase tracking-wider text-[#5A6577]">Exam Questions (Answer in English)</div>
+              ${track.questions.map((item, qIdx) => `
+                <div class="space-y-1.5">
+                  <label class="block text-sm font-semibold text-[#1E242B]">${item.q}</label>
+                  <input type="text" placeholder="Type your English answer here..." class="w-full px-3 py-2 rounded-lg border border-[#E4DFD7] bg-[#FAF8F5] text-sm focus:outline-none focus:border-[#2D6A4F]" />
+                </div>
+              `).join('')}
+
+              <div class="pt-2 flex flex-wrap gap-2">
+                <button onclick="toggleReveal('aural-ans-${track.id}')" class="px-3.5 py-1.5 rounded-lg bg-[#EEF6F2] text-[#2D6A4F] text-xs font-bold border border-[#CBE4D7]">
+                  Reveal Marking Scheme
+                </button>
+                <button onclick="toggleReveal('aural-trans-${track.id}')" class="px-3.5 py-1.5 rounded-lg bg-[#FDF2EF] text-[#C84B31] text-xs font-bold border border-[#F2D3CB]">
+                  Show Spanish Transcript + Phonetics
+                </button>
+              </div>
+
+              <div id="aural-ans-${track.id}" class="hidden p-3.5 rounded-lg bg-[#EEF6F2] border border-[#CBE4D7] text-xs sm:text-sm space-y-1">
+                <div class="font-bold text-[#2D6A4F] mb-1">SEC Marking Scheme Answers:</div>
+                ${track.questions.map((item, i) => `<div><strong>(${String.fromCharCode(97 + i)})</strong> ${item.a}</div>`).join('')}
+              </div>
+
+              <div id="aural-trans-${track.id}" class="hidden p-3.5 rounded-lg bg-[#FDF2EF] border border-[#F2D3CB] text-xs sm:text-sm space-y-2">
+                <div>
+                  <div class="font-bold text-[#1E242B]">Spanish Transcript:</div>
+                  <p class="text-[#1E242B] mt-0.5">${track.spanishAudio}</p>
+                </div>
+                <div>
+                  <div class="font-bold text-[#C84B31]">English Phonetic Guide:</div>
+                  <p class="font-phonetic text-xs text-[#C84B31] mt-0.5">[${track.phoneticTranscript}]</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* ==========================================================================
+       9. VOCABULARY VAULT RENDERER
+       ========================================================================== */
+    function renderVocabVault() {
+      const query = (document.getElementById('vocab-search')?.value || '').toLowerCase().trim();
+      const cat = document.getElementById('vocab-category')?.value || 'ALL';
+
+      const filtered = VOCAB_VAULT.filter(item => {
+        const matchesCat = cat === 'ALL' || item.category === cat;
+        const matchesQuery =
+          !query ||
+          item.es.toLowerCase().includes(query) ||
+          item.en.toLowerCase().includes(query) ||
+          item.ph.toLowerCase().includes(query);
+        return matchesCat && matchesQuery;
+      });
+
+      const grid = document.getElementById('vocab-grid');
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full p-8 text-center text-sm text-[#5A6577]">No matching vocabulary items found. Try another search term.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => `
+        <div class="p-4 rounded-xl bg-[#FAF8F5] border border-[#E4DFD7] flex flex-col justify-between gap-2">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-[#2D6A4F]">${item.category}</span>
+            </div>
+            <div class="mb-1.5">${esPill(item.es, item.ph)}</div>
+            <div class="font-bold text-sm text-[#1E242B]">${item.en}</div>
+          </div>
+          <div class="text-xs text-[#5A6577] pt-2 border-t border-[#E4DFD7]">
+            💡 ${item.tip}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ==========================================================================
+       10. 5 FULL ORIGINAL MOCK EXAMS RENDERER & GRADE CALCULATOR
+       ========================================================================== */
+    function selectMock(mockId) {
+      appState.activeMockId = mockId;
+      saveState();
+      renderMockExams();
+    }
+
+    function getHGrade(totalOutOf400) {
+      const pct = (totalOutOf400 / 400) * 100;
+      if (pct >= 90) return { grade: 'H1', label: 'Outstanding (90–100%)', color: 'text-[#2D6A4F] bg-[#EEF6F2]' };
+      if (pct >= 80) return { grade: 'H2', label: 'Very Good (80–89%)', color: 'text-[#2D6A4F] bg-[#EEF6F2]' };
+      if (pct >= 70) return { grade: 'H3', label: 'Good (70–79%)', color: 'text-[#B7791F] bg-[#FEF9EC]' };
+      if (pct >= 60) return { grade: 'H4', label: 'Credit (60–69%)', color: 'text-[#B7791F] bg-[#FEF9EC]' };
+      if (pct >= 50) return { grade: 'H5', label: 'Pass (50–59%)', color: 'text-[#5A6577] bg-[#F3EFEA]' };
+      if (pct >= 40) return { grade: 'H6', label: 'Elementary (40–49%)', color: 'text-[#C84B31] bg-[#FDF2EF]' };
+      return { grade: 'H7/H8', label: 'Below 40% — Review Stages 1–6', color: 'text-[#C84B31] bg-[#FDF2EF]' };
+    }
+
+    function updateMockScore(mockId, partKey, maxVal, rawVal) {
+      let val = parseInt(rawVal, 10);
+      if (isNaN(val) || val < 0) val = 0;
+      if (val > maxVal) val = maxVal;
+
+      if (!appState.mockScores[mockId]) {
+        appState.mockScores[mockId] = { aural: 0, secA: 0, secB: 0, secC: 0, oral: 0 };
+      }
+      appState.mockScores[mockId][partKey] = val;
+      saveState();
+      renderMockGradeSummary(mockId);
+    }
+
+    function renderMockGradeSummary(mockId) {
+      const s = appState.mockScores[mockId] || { aural: 0, secA: 0, secB: 0, secC: 0, oral: 0 };
+      const total = (s.aural || 0) + (s.secA || 0) + (s.secB || 0) + (s.secC || 0) + (s.oral || 0);
+      const pct = ((total / 400) * 100).toFixed(1);
+      const info = getHGrade(total);
+
+      const summaryEl = document.getElementById('mock-grade-summary');
+      if (summaryEl) {
+        summaryEl.innerHTML = `
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-[#5A6577]">Self-Graded Total Score</div>
+              <div class="font-editorial text-2xl sm:text-3xl font-bold text-[#1E242B]">${total} / 400 Marks <span class="text-base font-sans font-semibold text-[#5A6577]">(${pct}%)</span></div>
+            </div>
+            <div class="px-4 py-2 rounded-xl font-bold text-sm ${info.color}">
+              Estimated Grade: ${info.grade} • ${info.label}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function renderMockExams() {
+      const tabsEl = document.getElementById('mock-selector-tabs');
+      tabsEl.innerHTML = MOCK_EXAMS.map(m => {
+        const active = m.id === appState.activeMockId;
+        const hasScore = !!appState.mockScores[m.id];
+        return `<button onclick="selectMock(${m.id})" class="px-3 py-2.5 rounded-xl text-xs font-bold border transition text-center ${
+          active
+            ? 'bg-[#1E242B] text-white border-[#1E242B]'
+            : 'bg-[#FAF8F5] text-[#1E242B] border-[#E4DFD7] hover:border-[#1E242B]'
+        }">
+          Mock Exam ${m.id} ${hasScore ? '★' : ''}
+        </button>`;
+      }).join('');
+
+      const mock = MOCK_EXAMS.find(m => m.id === appState.activeMockId) || MOCK_EXAMS[0];
+      const scores = appState.mockScores[mock.id] || { aural: 0, secA: 0, secB: 0, secC: 0, oral: 0 };
+      const safeAural = mock.aural.audioText.replace(/'/g, "\\'");
+
+      const container = document.getElementById('active-mock-container');
+      container.innerHTML = `
+        <!-- Mock Title Banner -->
+        <div class="paper-card p-6 bg-white border-l-4 border-l-[#C84B31]">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#C84B31]">${mock.themeBadge}</span>
+          <h3 class="font-editorial text-2xl font-bold text-[#1E242B] mt-1">${mock.title}</h3>
+          <p class="text-sm text-[#5A6577] mt-1">Complete each section below, reveal the official-style SEC marking scheme & H1 model answers, and log your marks out of 400 at the bottom.</p>
+        </div>
+
+        <!-- PART 1: AURAL (80 MARKS) -->
+        <div class="paper-card p-6 bg-white space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E4DFD7] pb-3">
+            <div>
+              <span class="text-xs font-bold uppercase text-[#2D6A4F]">Part 1 • 80 Marks (20%)</span>
+              <h4 class="font-editorial text-xl font-bold text-[#1E242B]">${mock.aural.title}</h4>
+            </div>
+            <button onclick="speakSpanish('${safeAural}', this, 0.90)" class="px-4 py-2 rounded-xl bg-[#2D6A4F] text-white text-xs font-bold hover:bg-[#23543E] shrink-0">
+              🔊 Play Mock Aural Audio
+            </button>
+          </div>
+          <div class="space-y-2 text-sm text-[#1E242B]">
+            ${mock.aural.questions.map(q => `<div class="font-medium">${q}</div>`).join('')}
+          </div>
+          <textarea rows="3" placeholder="Write your English answers here..." class="w-full p-3 rounded-xl border border-[#E4DFD7] bg-[#FAF8F5] text-sm"></textarea>
+          <div class="flex flex-wrap gap-2">
+            <button onclick="toggleReveal('m${mock.id}-aural-ms')" class="px-3.5 py-1.5 rounded-lg bg-[#EEF6F2] text-[#2D6A4F] text-xs font-bold border border-[#CBE4D7]">Reveal Aural Marking Scheme & Transcript</button>
+          </div>
+          <div id="m${mock.id}-aural-ms" class="hidden p-4 rounded-xl bg-[#EEF6F2] border border-[#CBE4D7] text-xs sm:text-sm space-y-2">
+            <div class="font-bold text-[#2D6A4F]">Marking Scheme (80m):</div>
+            <pre class="whitespace-pre-wrap font-sans text-[#1E242B]">${mock.aural.markingScheme}</pre>
+            <div class="pt-2 border-t border-[#CBE4D7]">
+              <strong>Transcript:</strong> ${mock.aural.audioText}
+              <div class="font-phonetic text-xs text-[#C84B31] mt-1">[${mock.aural.phonetic}]</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PART 2: SECTION A READING (70 MARKS) -->
+        <div class="paper-card p-6 bg-white space-y-4">
+          <div class="border-b border-[#E4DFD7] pb-3 flex items-center justify-between gap-2">
+            <div>
+              <span class="text-xs font-bold uppercase text-[#C84B31]">Part 2 • Section A • 70 Marks</span>
+              <h4 class="font-editorial text-xl font-bold text-[#1E242B]">${mock.sectionA.title}</h4>
+            </div>
+            <button onclick="speakSpanish('${mock.sectionA.passage.replace(/'/g, "\\'")}', this)" class="px-3 py-1.5 rounded-lg bg-[#FAF8F5] border border-[#E4DFD7] text-xs font-bold">🔊 Read Text</button>
+          </div>
+          <div class="p-4 rounded-xl bg-[#FAF8F5] border border-[#E4DFD7] text-sm sm:text-base leading-relaxed text-[#1E242B]">
+            ${mock.sectionA.passage}
+          </div>
+          <div class="space-y-2 text-sm text-[#1E242B]">
+            ${mock.sectionA.questions.map(q => `<div class="font-medium">${q}</div>`).join('')}
+          </div>
+          <textarea rows="3" placeholder="Write your Section A answers here..." class="w-full p-3 rounded-xl border border-[#E4DFD7] bg-[#FAF8F5] text-sm"></textarea>
+          <button onclick="toggleReveal('m${mock.id}-seca-ms')" class="px-3.5 py-1.5 rounded-lg bg-[#FDF2EF] text-[#C84B31] text-xs font-bold border border-[#F2D3CB]">Reveal Section A Marking Scheme</button>
+          <div id="m${mock.id}-seca-ms" class="hidden p-4 rounded-xl bg-[#FDF2EF] border border-[#F2D3CB] text-xs sm:text-sm">
+            <div class="font-bold text-[#C84B31] mb-1">Section A Marking Scheme (70m):</div>
+            <pre class="whitespace-pre-wrap font-sans text-[#1E242B]">${mock.sectionA.markingScheme}</pre>
+          </div>
+        </div>
+
+        <!-- PART 3: SECTION B READING (60M) + OPINION PIECE (40M) = 100 MARKS -->
+        <div class="paper-card p-6 bg-white space-y-4">
+          <div class="border-b border-[#E4DFD7] pb-3 flex items-center justify-between gap-2">
+            <div>
+              <span class="text-xs font-bold uppercase text-[#B7791F]">Part 3 • Section B • 100 Marks (60m Reading + 40m Opinion)</span>
+              <h4 class="font-editorial text-xl font-bold text-[#1E242B]">${mock.sectionB.readingTitle}</h4>
+            </div>
+            <button onclick="speakSpanish('${mock.sectionB.passage.replace(/'/g, "\\'")}', this)" class="px-3 py-1.5 rounded-lg bg-[#FAF8F5] border border-[#E4DFD7] text-xs font-bold">🔊 Read Text</button>
+          </div>
+          <div class="p-4 rounded-xl bg-[#FAF8F5] border border-[#E4DFD7] text-sm sm:text-base leading-relaxed text-[#1E242B]">
+            ${mock.sectionB.passage}
+          </div>
+          <div class="space-y-2 text-sm text-[#1E242B]">
+            ${mock.sectionB.readingQuestions.map(q => `<div class="font-medium">${q}</div>`).join('')}
+          </div>
+          <textarea rows="3" placeholder="Write your Section B Reading answers..." class="w-full p-3 rounded-xl border border-[#E4DFD7] bg-[#FAF8F5] text-sm"></textarea>
+
+          <div class="pt-3 border-t border-[#E4DFD7] space-y-2">
+            <div class="font-bold text-sm text-[#1E242B]">${mock.sectionB.opinionPrompt}</div>
+            <textarea rows="5" placeholder="Write your 5-paragraph H1 Opinion Piece in Spanish (~140–160 words)..." class="w-full p-3 rounded-xl border border-[#E4DFD7] bg-[#FAF8F5] text-sm"></textarea>
+          </div>
+
+          <button onclick="toggleReveal('m${mock.id}-secb-ms')" class="px-3.5 py-1.5 rounded-lg bg-[#FEF9EC] text-[#B7791F] text-xs font-bold border border-[#F3E2B3]">Reveal Reading Scheme & Model H1 Opinion Essay</button>
+          <div id="m${mock.id}-secb-ms" class="hidden p-4 rounded-xl bg-[#FEF9EC] border border-[#F3E2B3] text-xs sm:text-sm space-y-3">
+            <div>
+              <div class="font-bold text-[#B7791F] mb-1">Reading Marking Scheme (60m):</div>
+              <pre class="whitespace-pre-wrap font-sans text-[#1E242B]">${mock.sectionB.readingScheme}</pre>
+            </div>
+            <div class="pt-2 border-t border-[#F3E2B3] space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-[#1E242B]">Model H1 Opinion Piece (40/40m):</span>
+                <button onclick="speakSpanish('${mock.sectionB.modelOpinionEs.replace(/'/g, "\\'")}', this)" class="px-2.5 py-1 rounded-lg bg-[#C84B31] text-white text-xs font-bold">🔊 Listen to Essay</button>
+              </div>
+              <p class="text-[#1E242B] leading-relaxed">${mock.sectionB.modelOpinionEs}</p>
+              <p class="font-phonetic text-xs text-[#C84B31]">[${mock.sectionB.modelOpinionPh}]</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PART 4: SECTION C WRITTEN PRODUCTION (50 MARKS) -->
+        <div class="paper-card p-6 bg-white space-y-4">
+          <div class="border-b border-[#E4DFD7] pb-3">
+            <span class="text-xs font-bold uppercase text-[#1E242B]">Part 4 • Section C • 50 Marks (30m + 20m)</span>
+            <h4 class="font-editorial text-xl font-bold text-[#1E242B]">Written Production: Dialogue/Email & Diary/Note</h4>
+          </div>
+
+          <div class="space-y-2">
+            <div class="font-bold text-sm text-[#1E242B]">${mock.sectionC.q1Title}</div>
+            <pre class="whitespace-pre-wrap font-sans text-sm bg-[#FAF8F5] p-3.5 rounded-xl border border-[#E4DFD7] text-[#1E242B]">${mock.sectionC.q1Prompt}</pre>
+            <textarea rows="4" placeholder="Write your Spanish response for Question 1 (30m)..." class="w-full p-3 rounded-xl border border-[#E4DFD7] bg-[#FAF8F5] text-sm"></textarea>
+          </div>
+
+          <div class="space-y-2 pt-2">
+            <div class="font-bold text-sm text-[#1E242B]">${mock.sectionC.q2Title}</div>
+            <p class="text-sm bg-[#FAF8F5] p-3.5 rounded-xl border border-[#E4DFD7] text-[#1E242B]">${mock.sectionC.q2Prompt}</p>
+            <textarea rows="4" placeholder="Write your Spanish response for Question 2 (20m)..." class="w-full p-3 rounded-xl border border-[#E4DFD7] bg-[#FAF8F5] text-sm"></textarea>
+          </div>
+
+          <button onclick="toggleReveal('m${mock.id}-secc-ms')" class="px-3.5 py-1.5 rounded-lg bg-[#F3EFEA] text-[#1E242B] text-xs font-bold border border-[#E4DFD7]">Reveal Section C H1 Model Answers & Phonetics</button>
+          <div id="m${mock.id}-secc-ms" class="hidden p-4 rounded-xl bg-[#FAF8F5] border border-[#E4DFD7] text-xs sm:text-sm space-y-3">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-bold text-[#1E242B]">Question 1 H1 Model (30m):</span>
+                <button onclick="speakSpanish('${mock.sectionC.q1ModelEs.replace(/'/g, "\\'").replace(/\n/g, ' ')}', this)" class="px-2.5 py-1 rounded-lg bg-[#C84B31] text-white text-xs font-bold">🔊 Listen</button>
+              </div>
+              <pre class="whitespace-pre-wrap font-sans text-[#1E242B]">${mock.sectionC.q1ModelEs}</pre>
+              <div class="font-phonetic text-xs text-[#C84B31] mt-1">[${mock.sectionC.q1ModelPh}]</div>
+            </div>
+            <div class="pt-2 border-t border-[#E4DFD7]">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-bold text-[#1E242B]">Question 2 H1 Model (20m):</span>
+                <button onclick="speakSpanish('${mock.sectionC.q2ModelEs.replace(/'/g, "\\'").replace(/\n/g, ' ')}', this)" class="px-2.5 py-1 rounded-lg bg-[#C84B31] text-white text-xs font-bold">🔊 Listen</button>
+              </div>
+              <pre class="whitespace-pre-wrap font-sans text-[#1E242B]">${mock.sectionC.q2ModelEs}</pre>
+              <div class="font-phonetic text-xs text-[#C84B31] mt-1">[${mock.sectionC.q2ModelPh}]</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PART 5: ORAL SIMULATION (100 MARKS) -->
+        <div class="paper-card p-6 bg-white space-y-4">
+          <div class="border-b border-[#E4DFD7] pb-3">
+            <span class="text-xs font-bold uppercase text-[#C84B31]">Part 5 • Oral Exam Simulation • 100 Marks (25%)</span>
+            <h4 class="font-editorial text-xl font-bold text-[#1E242B]">${mock.oral.title}</h4>
+          </div>
+          <ul class="space-y-2 text-sm text-[#1E242B]">
+            ${mock.oral.prompts.map(p => `<li class="p-3 rounded-xl bg-[#FAF8F5] border border-[#E4DFD7]">🎙️ ${p}</li>`).join('')}
+          </ul>
+          <button onclick="toggleReveal('m${mock.id}-oral-ms')" class="px-3.5 py-1.5 rounded-lg bg-[#FDF2EF] text-[#C84B31] text-xs font-bold border border-[#F2D3CB]">Reveal Sample H1 Oral Response + Audio</button>
+          <div id="m${mock.id}-oral-ms" class="hidden p-4 rounded-xl bg-[#FDF2EF] border border-[#F2D3CB] text-xs sm:text-sm space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-[#1E242B]">Sample H1 Oral Answer:</span>
+              <button onclick="speakSpanish('${mock.oral.sampleAnswerEs.replace(/'/g, "\\'")}', this)" class="px-2.5 py-1 rounded-lg bg-[#C84B31] text-white text-xs font-bold">🔊 Listen</button>
+            </div>
+            <p class="text-[#1E242B]">${mock.oral.sampleAnswerEs}</p>
+            <p class="font-phonetic text-xs text-[#C84B31]">[${mock.oral.sampleAnswerPh}]</p>
+          </div>
+        </div>
+
+        <!-- SELF-GRADING SCOREBOARD OUT OF 400 MARKS -->
+        <div class="paper-card p-6 bg-[#FAF8F5] border-2 border-[#2D6A4F]/30 space-y-4">
+          <h4 class="font-editorial text-xl font-bold text-[#1E242B]">📊 Mock Exam ${mock.id} — Self-Grading Score Calculator (400 Marks)</h4>
+          <p class="text-xs text-[#5A6577]">Compare your work against the marking schemes above and enter your marks for each component to calculate your Leaving Cert H1–H8 grade:</p>
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+            <div class="bg-white p-3 rounded-xl border border-[#E4DFD7]">
+              <label class="block text-[11px] font-bold text-[#5A6577]">Aural (Max 80)</label>
+              <input type="number" min="0" max="80" value="${scores.aural}" oninput="updateMockScore(${mock.id}, 'aural', 80, this.value)" class="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-[#E4DFD7] font-bold text-sm" />
+            </div>
+            <div class="bg-white p-3 rounded-xl border border-[#E4DFD7]">
+              <label class="block text-[11px] font-bold text-[#5A6577]">Sec A (Max 70)</label>
+              <input type="number" min="0" max="70" value="${scores.secA}" oninput="updateMockScore(${mock.id}, 'secA', 70, this.value)" class="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-[#E4DFD7] font-bold text-sm" />
+            </div>
+            <div class="bg-white p-3 rounded-xl border border-[#E4DFD7]">
+              <label class="block text-[11px] font-bold text-[#5A6577]">Sec B (Max 100)</label>
+              <input type="number" min="0" max="100" value="${scores.secB}" oninput="updateMockScore(${mock.id}, 'secB', 100, this.value)" class="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-[#E4DFD7] font-bold text-sm" />
+            </div>
+            <div class="bg-white p-3 rounded-xl border border-[#E4DFD7]">
+              <label class="block text-[11px] font-bold text-[#5A6577]">Sec C (Max 50)</label>
+              <input type="number" min="0" max="50" value="${scores.secC}" oninput="updateMockScore(${mock.id}, 'secC', 50, this.value)" class="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-[#E4DFD7] font-bold text-sm" />
+            </div>
+            <div class="bg-white p-3 rounded-xl border border-[#E4DFD7]">
+              <label class="block text-[11px] font-bold text-[#5A6577]">Oral (Max 100)</label>
+              <input type="number" min="0" max="100" value="${scores.oral}" oninput="updateMockScore(${mock.id}, 'oral', 100, this.value)" class="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-[#E4DFD7] font-bold text-sm" />
+            </div>
+          </div>
+          <div id="mock-grade-summary" class="p-4 rounded-xl bg-white border border-[#E4DFD7]"></div>
+        </div>
+      `;
+
+      renderMockGradeSummary(mock.id);
+    }
+
+    function toggleReveal(elementId) {
+      const el = document.getElementById(elementId);
+      if (el) el.classList.toggle('hidden');
+    }
+
+    /* ==========================================================================
+       11. EXAM STOPWATCH & MOBILE SIDEBAR CONTROLS
+       ========================================================================== */
+    let timerSeconds = 150 * 60; // 2 hours 30 mins (Written Paper)
+    let timerInterval = null;
+
+    function formatTimer(secs) {
+      const h = String(Math.floor(secs / 3600)).padStart(2, '0');
+      const m = String(Math.floor((secs % 3600) / 60)).padStart(2, '0');
+      const s = String(secs % 60).padStart(2, '0');
+      return `${h}:${m}:${s}`;
+    }
+
+    function toggleMockTimer() {
+      const btn = document.getElementById('mock-timer-toggle');
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        btn.textContent = 'Resume';
+        btn.classList.replace('bg-[#C84B31]', 'bg-[#2D6A4F]');
+      } else {
+        btn.textContent = 'Pause';
+        btn.classList.replace('bg-[#2D6A4F]', 'bg-[#C84B31]');
+        timerInterval = setInterval(() => {
+          if (timerSeconds > 0) {
+            timerSeconds--;
+            document.getElementById('mock-timer-display').textContent = formatTimer(timerSeconds);
+          } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            showToast('Time is up! Pens down — check your marking schemes.', '⏰');
+          }
+        }, 1000);
+      }
+    }
+
+    function resetMockTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+      timerSeconds = 150 * 60;
+      document.getElementById('mock-timer-display').textContent = formatTimer(timerSeconds);
+      const btn = document.getElementById('mock-timer-toggle');
+      btn.textContent = 'Start';
+      btn.classList.remove('bg-[#C84B31]');
+      btn.classList.add('bg-[#2D6A4F]');
+    }
+
+    function openMobileSidebar() {
+      document.getElementById('sidebar').classList.remove('-translate-x-full');
+      document.getElementById('sidebar-backdrop').classList.remove('hidden');
+    }
+
+    function closeMobileSidebar() {
+      document.getElementById('sidebar').classList.add('-translate-x-full');
+      document.getElementById('sidebar-backdrop').classList.add('hidden');
+    }
+
+    /* ==========================================================================
+       12. INITIALIZATION ON WINDOW LOAD
+       ========================================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      loadState();
+
+      // Bind sidebar nav clicks
+      document.querySelectorAll('.nav-item').forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+      });
+
+      // Mobile drawer controls
+      document.getElementById('mobile-menu-btn').addEventListener('click', openMobileSidebar);
+      document.getElementById('close-sidebar-btn').addEventListener('click', closeMobileSidebar);
+      document.getElementById('sidebar-backdrop').addEventListener('click', closeMobileSidebar);
+
+      // Vocab search & filter listeners
+      document.getElementById('vocab-search').addEventListener('input', renderVocabVault);
+      document.getElementById('vocab-category').addEventListener('change', renderVocabVault);
+
+      // Timer buttons
+      document.getElementById('mock-timer-toggle').addEventListener('click', toggleMockTimer);
+      document.getElementById('mock-timer-reset').addEventListener('click', resetMockTimer);
+
+      // Reset progress button (uses inline confirmation state without confirm())
+      let resetConfirmPending = false;
+      const resetBtn = document.getElementById('reset-progress-btn');
+      resetBtn.addEventListener('click', () => {
+        if (!resetConfirmPending) {
+          resetConfirmPending = true;
+          resetBtn.textContent = 'Click again to confirm';
+          setTimeout(() => {
+            resetConfirmPending = false;
+            resetBtn.textContent = 'Reset';
+          }, 3500);
+        } else {
+          localStorage.removeItem(STORAGE_KEY);
+          appState = {
+            activeTab: 'roadmap',
+            activeStageId: 1,
+            activeMockId: 1,
+            completedStages: [],
+            quizAnswers: {},
+            mockScores: {}
+          };
+          resetConfirmPending = false;
+          resetBtn.textContent = 'Reset';
+          updateProgressUI();
+          renderRoadmap();
+          renderCurriculum();
+          renderMockExams();
+          switchTab('roadmap');
+          showToast('All study progress has been reset.', '🗑️');
+        }
+      });
+
+      // Initial render of all views
+      updateProgressUI();
+      renderRoadmap();
+      renderCurriculum();
+      renderAuralLab();
+      renderVocabVault();
+      renderMockExams();
+      switchTab(appState.activeTab || 'roadmap');
+    });
+  </script>
+</body>
+</html>

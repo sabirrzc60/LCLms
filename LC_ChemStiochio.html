@@ -1,0 +1,2323 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bench &amp; Ledger H1 — Chemistry Stoichiometry Equations LMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-notebook: #F8F6F0;
+      --bg-grid: rgba(29, 92, 72, 0.055);
+      --bg-card: #FFFDF9;
+      --bg-well: #F2EFE6;
+      --ink-primary: #1B2420;
+      --ink-secondary: #4D5A54;
+      --ink-muted: #6C7872;
+      --accent-verdigris: #1D5C48;
+      --accent-verdigris-soft: #E7F2EE;
+      --accent-copper: #B4532A;
+      --accent-copper-soft: #FAECE6;
+      --accent-cobalt: #2C4C7E;
+      --accent-cobalt-soft: #EBF0F8;
+      --border-rule: #DDD7C8;
+      --border-strong: #C5BFA9;
+      --shadow-card: 0 2px 8px rgba(27, 36, 32, 0.045), 0 1px 2px rgba(27, 36, 32, 0.05);
+      --radius-card: 12px;
+      --radius-pill: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-notebook);
+      background-image:
+        linear-gradient(to right, var(--bg-grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--bg-grid) 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: var(--ink-primary);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .font-display {
+      font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+      letter-spacing: -0.015em;
+      margin-top: 0;
+      color: var(--ink-primary);
+    }
+
+    code, pre, .font-mono {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    sub, sup {
+      line-height: 0;
+      font-size: 74%;
+    }
+
+    /* Top Header */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background-color: rgba(248, 246, 240, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-rule);
+    }
+
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background-color: var(--accent-verdigris);
+      color: #FFFDF9;
+      display: grid;
+      place-items: center;
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      border: 1px solid #144334;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--ink-secondary);
+      margin: 2px 0 0;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .progress-box {
+      min-width: 210px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-rule);
+      border-radius: 10px;
+      padding: 8px 12px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--ink-secondary);
+      margin-bottom: 5px;
+    }
+
+    .progress-track {
+      height: 7px;
+      width: 100%;
+      background-color: var(--bg-well);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--accent-verdigris);
+      transition: width 0.25s ease;
+    }
+
+    /* Workspace Tabs */
+    .workspace-nav {
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-rule);
+    }
+
+    .workspace-nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+    }
+
+    .ws-tab {
+      appearance: none;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      padding: 13px 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .ws-tab:hover {
+      color: var(--ink-primary);
+    }
+
+    .ws-tab.active {
+      color: var(--accent-verdigris);
+      border-bottom-color: var(--accent-verdigris);
+      font-weight: 700;
+    }
+
+    /* Main Container */
+    .page-shell {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 20px 64px;
+    }
+
+    .view-panel {
+      display: none;
+    }
+
+    .view-panel.active {
+      display: block;
+    }
+
+    /* Curriculum Split Layout */
+    .curriculum-grid {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .curriculum-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .level-index {
+      position: sticky;
+      top: 126px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-rule);
+      border-radius: var(--radius-card);
+      padding: 14px;
+      box-shadow: var(--shadow-card);
+    }
+
+    @media (max-width: 900px) {
+      .level-index {
+        position: static;
+      }
+    }
+
+    .level-index-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+      margin-bottom: 10px;
+      padding: 0 6px;
+    }
+
+    .level-pill-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      text-align: left;
+      padding: 9px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--ink-secondary);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: all 0.14s ease;
+    }
+
+    .level-pill-btn:hover {
+      background-color: var(--bg-well);
+      color: var(--ink-primary);
+    }
+
+    .level-pill-btn.active {
+      background-color: var(--accent-verdigris-soft);
+      color: var(--accent-verdigris);
+      border-color: #BDD8CE;
+      font-weight: 700;
+    }
+
+    .done-dot {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-verdigris);
+    }
+
+    /* Cards & Callouts */
+    .ledger-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-rule);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .ledger-card {
+        padding: 18px 16px;
+      }
+    }
+
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      background-color: var(--accent-cobalt-soft);
+      color: var(--accent-cobalt);
+      border: 1px solid #C8D6EC;
+    }
+
+    .step-badge.copper {
+      background-color: var(--accent-copper-soft);
+      color: var(--accent-copper);
+      border-color: #E7C6B6;
+    }
+
+    .step-badge.verdigris {
+      background-color: var(--accent-verdigris-soft);
+      color: var(--accent-verdigris);
+      border-color: #BDD8CE;
+    }
+
+    .pitfall-box {
+      background-color: var(--accent-copper-soft);
+      border-left: 4px solid var(--accent-copper);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 14px 0;
+      font-size: 0.9rem;
+    }
+
+    .pitfall-label {
+      font-weight: 700;
+      color: var(--accent-copper);
+      display: block;
+      margin-bottom: 3px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .worked-box {
+      background-color: var(--bg-well);
+      border: 1px solid var(--border-rule);
+      border-radius: 10px;
+      padding: 16px;
+      margin: 14px 0;
+    }
+
+    .eq-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.96rem;
+      font-weight: 600;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-rule);
+      border-radius: 8px;
+      padding: 10px 14px;
+      overflow-x: auto;
+      white-space: nowrap;
+      color: var(--ink-primary);
+    }
+
+    /* Tables */
+    .ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 12px 0;
+    }
+
+    .ref-table th,
+    .ref-table td {
+      border: 1px solid var(--border-rule);
+      padding: 9px 12px;
+      text-align: left;
+    }
+
+    .ref-table th {
+      background-color: var(--bg-well);
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--ink-secondary);
+    }
+
+    .ref-table td.mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+    }
+
+    /* Buttons & Inputs */
+    .btn {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 9px 16px;
+      border-radius: var(--radius-pill);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.14s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-verdigris);
+      color: #FFFDF9;
+      border-color: #154536;
+    }
+
+    .btn-primary:hover {
+      background-color: #164838;
+    }
+
+    .btn-copper {
+      background-color: var(--accent-copper);
+      color: #FFFDF9;
+      border-color: #8E3F1E;
+    }
+
+    .btn-copper:hover {
+      background-color: #984420;
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-card);
+      color: var(--ink-primary);
+      border-color: var(--border-strong);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-well);
+    }
+
+    .btn-sm {
+      padding: 6px 11px;
+      font-size: 0.8rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      padding: 8px 11px;
+      border-radius: 8px;
+      border: 1px solid var(--border-strong);
+      background-color: var(--bg-card);
+      color: var(--ink-primary);
+    }
+
+    input.mono-input {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    input:focus,
+    select:focus {
+      outline: 2px solid rgba(29, 92, 72, 0.25);
+      border-color: var(--accent-verdigris);
+    }
+
+    .feedback-msg {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      display: none;
+    }
+
+    .feedback-msg.show {
+      display: block;
+    }
+
+    .feedback-msg.ok {
+      background-color: var(--accent-verdigris-soft);
+      border: 1px solid #B5D4C8;
+      color: #154536;
+    }
+
+    .feedback-msg.err {
+      background-color: var(--accent-copper-soft);
+      border: 1px solid #E5C1B2;
+      color: #873B1B;
+    }
+
+    .feedback-msg.info {
+      background-color: var(--accent-cobalt-soft);
+      border: 1px solid #C5D4EC;
+      color: #213B63;
+    }
+
+    /* Grid Helpers */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 780px) {
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Interactive Balancer Slots */
+    .balancer-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      padding: 14px;
+      background-color: var(--bg-well);
+      border: 1px solid var(--border-rule);
+      border-radius: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .coeff-select {
+      width: 58px;
+      font-family: 'JetBrains Mono', monospace !important;
+      font-weight: 700 !important;
+      text-align: center;
+      padding: 6px 4px !important;
+      background-color: #FFFDF9 !important;
+    }
+
+    .tally-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .tally-chip {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-rule);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tally-chip.balanced {
+      border-color: #8FC0AE;
+      background-color: var(--accent-verdigris-soft);
+    }
+
+    .tally-chip.unbalanced {
+      border-color: #E2B7A5;
+      background-color: var(--accent-copper-soft);
+    }
+
+    /* Guided Coach Stage Bars */
+    .coach-stepper {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    @media (max-width: 650px) {
+      .coach-stepper {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .coach-step-pill {
+      padding: 10px;
+      border-radius: 9px;
+      border: 1px solid var(--border-rule);
+      background-color: var(--bg-well);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-align: center;
+      color: var(--ink-secondary);
+    }
+
+    .coach-step-pill.active {
+      background-color: var(--accent-cobalt-soft);
+      border-color: #8CAAD8;
+      color: var(--accent-cobalt);
+    }
+
+    .coach-step-pill.done {
+      background-color: var(--accent-verdigris-soft);
+      border-color: #8EC0AE;
+      color: var(--accent-verdigris);
+    }
+
+    /* Quiz Options */
+    .quiz-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+      text-align: left;
+      padding: 11px 14px;
+      border-radius: 9px;
+      border: 1px solid var(--border-rule);
+      background-color: var(--bg-card);
+      color: var(--ink-primary);
+      font-size: 0.9rem;
+      cursor: pointer;
+      margin-bottom: 8px;
+      transition: all 0.14s ease;
+    }
+
+    .quiz-option:hover {
+      background-color: var(--bg-well);
+      border-color: var(--border-strong);
+    }
+
+    .quiz-option.selected {
+      border-color: var(--accent-cobalt);
+      background-color: var(--accent-cobalt-soft);
+      font-weight: 600;
+    }
+
+    .quiz-option.correct {
+      border-color: var(--accent-verdigris);
+      background-color: var(--accent-verdigris-soft);
+      font-weight: 600;
+    }
+
+    .quiz-option.wrong {
+      border-color: var(--accent-copper);
+      background-color: var(--accent-copper-soft);
+    }
+
+    /* Toast */
+    .toast-note {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 90;
+      background-color: var(--ink-primary);
+      color: #FFFDF9;
+      padding: 11px 16px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+      opacity: 0;
+      transform: translateY(14px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+    }
+
+    .toast-note.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header with Progress & Reset -->
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="brand-mark">
+        <div class="brand-badge">n&middot;M</div>
+        <div>
+          <h1 class="brand-title">Bench &amp; Ledger H1</h1>
+          <p class="brand-sub">Chemistry Stoichiometry Equations &mdash; Zero to Hero Lab Notebook</p>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <div class="progress-box">
+          <div class="progress-top">
+            <span>Course &amp; Lab Progress</span>
+            <span id="header-progress-pct">0%</span>
+          </div>
+          <div class="progress-track">
+            <div id="header-progress-bar" class="progress-fill"></div>
+          </div>
+        </div>
+        <button id="reset-progress-btn" type="button" class="btn btn-secondary btn-sm" title="Reset saved progress">
+          Reset Progress
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Primary Workspace Navigation -->
+  <nav class="workspace-nav" aria-label="Primary sections">
+    <div class="workspace-nav-inner">
+      <button class="ws-tab active" data-tab="curriculum">Zero-to-Hero Curriculum (0&ndash;5)</button>
+      <button class="ws-tab" data-tab="studio">Guided Equation Builder &amp; Practice Studio</button>
+      <button class="ws-tab" data-tab="math">Mole &amp; Stoichiometry Math Workbench</button>
+      <button class="ws-tab" data-tab="mastery">12-Question Mastery Challenge</button>
+    </div>
+  </nav>
+
+  <main class="page-shell">
+
+    <!-- =====================================================================
+         TAB 1: ZERO-TO-HERO CURRICULUM (LEVELS 0 TO 5)
+         ===================================================================== -->
+    <section id="view-curriculum" class="view-panel active">
+      <div class="curriculum-grid">
+
+        <!-- Sticky Level Index -->
+        <aside class="level-index" aria-label="Curriculum levels">
+          <div class="level-index-title">Stoichiometry Ladder</div>
+          <button class="level-pill-btn active" data-level="0">
+            <span>0. Language &amp; Symbols</span>
+            <span class="done-dot" id="dot-level-0"></span>
+          </button>
+          <button class="level-pill-btn" data-level="1">
+            <span>1. Chemical Formulas First</span>
+            <span class="done-dot" id="dot-level-1"></span>
+          </button>
+          <button class="level-pill-btn" data-level="2">
+            <span>2. Words &rarr; Skeleton Eq.</span>
+            <span class="done-dot" id="dot-level-2"></span>
+          </button>
+          <button class="level-pill-btn" data-level="3">
+            <span>3. Balancing Step-by-Step</span>
+            <span class="done-dot" id="dot-level-3"></span>
+          </button>
+          <button class="level-pill-btn" data-level="4">
+            <span>4. Net Ionic Equations</span>
+            <span class="done-dot" id="dot-level-4"></span>
+          </button>
+          <button class="level-pill-btn" data-level="5">
+            <span>5. Moles &amp; Stoichiometry</span>
+            <span class="done-dot" id="dot-level-5"></span>
+          </button>
+
+          <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border-rule);">
+            <button type="button" class="btn btn-copper btn-sm" style="width: 100%;" onclick="openWorkspaceTab('studio')">
+              Open Guided Coach &rarr;
+            </button>
+          </div>
+        </aside>
+
+        <!-- Active Level Content Column -->
+        <div id="curriculum-content-area">
+
+          <!-- LEVEL 0 -->
+          <article class="ledger-card level-module" data-level="0">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+              <span class="step-badge verdigris">Level 0 &bull; Foundations</span>
+              <button type="button" class="btn btn-secondary btn-sm mark-level-btn" data-level="0">Mark Level 0 Complete</button>
+            </div>
+            <h2>ZERO: Reading the Language of Chemistry</h2>
+            <p style="color:var(--ink-secondary);">Before writing or balancing any reaction, you must read chemical shorthand accurately. Every symbol tells you what particles are present and what physical state they occupy.</p>
+
+            <h3>1. Elements, Compounds, Mixtures &amp; Building Blocks</h3>
+            <p>
+              An <strong>element</strong> contains only one type of atom (such as iron, <code>Fe</code>, or oxygen, <code>O<sub>2</sub></code>). A <strong>compound</strong> contains two or more different elements chemically bonded in a fixed ratio (such as water, <code>H<sub>2</sub>O</code>, or sodium chloride, <code>NaCl</code>). A <strong>mixture</strong> combines substances physically without fixed chemical bonds (such as air or salt water).
+            </p>
+            <div class="grid-3">
+              <div class="worked-box" style="margin:0;">
+                <div style="font-weight:700; color:var(--accent-verdigris);">Atom &amp; Molecule</div>
+                <p style="font-size:0.86rem; margin:6px 0 0;">An <strong>atom</strong> is a single neutral particle (<code>Ne</code>). A <strong>molecule</strong> is two or more non-metal atoms covalently bonded (<code>H<sub>2</sub>O</code>, <code>CO<sub>2</sub></code>).</p>
+              </div>
+              <div class="worked-box" style="margin:0;">
+                <div style="font-weight:700; color:var(--accent-cobalt);">Ion</div>
+                <p style="font-size:0.86rem; margin:6px 0 0;">An atom or group of atoms with a net electrical charge: <strong>cations</strong> are positive (<code>Na<sup>+</sup></code>, <code>Ca<sup>2+</sup></code>) and <strong>anions</strong> are negative (<code>Cl<sup>&minus;</sup></code>, <code>SO<sub>4</sub><sup>2&minus;</sup></code>).</p>
+              </div>
+              <div class="worked-box" style="margin:0;">
+                <div style="font-weight:700; color:var(--accent-copper);">Formula Unit</div>
+                <p style="font-size:0.86rem; margin:6px 0 0;">Ionic solids form giant crystal lattices rather than discrete molecules. <code>NaCl</code> or <code>Ca(NO<sub>3</sub>)<sub>2</sub></code> shows the simplest whole-number ion ratio (<strong>formula unit</strong>).</p>
+              </div>
+            </div>
+
+            <h3 style="margin-top:20px;">2. Diatomic Elements ("HONClBrIF" / "7-Up" Trick)</h3>
+            <p>
+              Seven common non-metal elements exist naturally as <strong>diatomic molecules</strong> (two atoms bonded together) when uncombined in their standard elemental state:
+              <span class="font-mono" style="font-weight:700; color:var(--accent-verdigris);">H<sub>2</sub>, N<sub>2</sub>, O<sub>2</sub>, F<sub>2</sub>, Cl<sub>2</sub>, Br<sub>2</sub>, I<sub>2</sub></span>.
+              Pronounce <strong>&ldquo;HON-kel-brif&rdquo;</strong> (<code>H, O, N, Cl, Br, I, F</code>), or spot the 7-shaped cluster starting at element 7 (Nitrogen) across to F, Cl, Br, I on the periodic table (plus Hydrogen at #1).
+            </p>
+            <div class="pitfall-box">
+              <span class="pitfall-label">Common Beginner Trap</span>
+              When a word equation says <em>&ldquo;hydrogen reacts with chlorine to form hydrogen chloride gas&rdquo;</em>, write <code>H<sub>2</sub>(g) + Cl<sub>2</sub>(g) &rarr; 2HCl(g)</code> &mdash; NOT <code>H + Cl</code>!
+            </div>
+
+            <h3>3. Common Polyatomic Ions to Know Cold</h3>
+            <p>Polyatomic ions act as single charged packets in many reactions. Keep them intact when balancing unless they break apart.</p>
+            <table class="ref-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Formula</th>
+                  <th>Charge</th>
+                  <th>Name</th>
+                  <th>Formula</th>
+                  <th>Charge</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Ammonium</td>
+                  <td class="mono">NH<sub>4</sub><sup>+</sup></td>
+                  <td class="mono">+1</td>
+                  <td>Hydroxide</td>
+                  <td class="mono">OH<sup>&minus;</sup></td>
+                  <td class="mono">&minus;1</td>
+                </tr>
+                <tr>
+                  <td>Nitrate</td>
+                  <td class="mono">NO<sub>3</sub><sup>&minus;</sup></td>
+                  <td class="mono">&minus;1</td>
+                  <td>Hydrogencarbonate</td>
+                  <td class="mono">HCO<sub>3</sub><sup>&minus;</sup></td>
+                  <td class="mono">&minus;1</td>
+                </tr>
+                <tr>
+                  <td>Sulfate</td>
+                  <td class="mono">SO<sub>4</sub><sup>2&minus;</sup></td>
+                  <td class="mono">&minus;2</td>
+                  <td>Carbonate</td>
+                  <td class="mono">CO<sub>3</sub><sup>2&minus;</sup></td>
+                  <td class="mono">&minus;2</td>
+                </tr>
+                <tr>
+                  <td>Phosphate</td>
+                  <td class="mono">PO<sub>4</sub><sup>3&minus;</sup></td>
+                  <td class="mono">&minus;3</td>
+                  <td>Chlorate / Acetate</td>
+                  <td class="mono">ClO<sub>3</sub><sup>&minus;</sup> / CH<sub>3</sub>COO<sup>&minus;</sup></td>
+                  <td class="mono">&minus;1</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>4. State Symbols: (s), (l), (g), (aq)</h3>
+            <ul style="padding-left:20px; color:var(--ink-secondary); font-size:0.92rem;">
+              <li><strong>(s) Solid:</strong> Metals (except Hg), ionic crystals, precipitates (insoluble solids formed in solution).</li>
+              <li><strong>(l) Liquid:</strong> Pure molten substances or pure liquids such as liquid water <code>H<sub>2</sub>O(l)</code>, ethanol <code>C<sub>2</sub>H<sub>5</sub>OH(l)</code>, or bromine <code>Br<sub>2</sub>(l)</code>.</li>
+              <li><strong>(g) Gas:</strong> Gases such as <code>O<sub>2</sub>(g)</code>, <code>CO<sub>2</sub>(g)</code>, <code>H<sub>2</sub>(g)</code>, <code>NH<sub>3</sub>(g)</code>, <code>HCl(g)</code>.</li>
+              <li><strong>(aq) Aqueous:</strong> Dissolved in water! Acids like <code>HCl(aq)</code>, <code>H<sub>2</sub>SO<sub>4</sub>(aq)</code>, alkalis like <code>NaOH(aq)</code>, and soluble salts like <code>NaCl(aq)</code> are aqueous solutions unless stated as solid or molten.</li>
+            </ul>
+
+            <!-- Level 0 Interactive Mini-Check -->
+            <div class="worked-box" style="margin-top:18px;">
+              <span class="step-badge">Mini-Check 0</span>
+              <p style="font-weight:700; margin:10px 0 8px;">Which representation best shows liquid water reacting with sodium metal to produce aqueous sodium hydroxide and hydrogen gas?</p>
+              <div id="l0-quiz-options">
+                <button type="button" class="quiz-option" data-idx="0">A. 2Na(s) + 2H<sub>2</sub>O(l) &rarr; 2NaOH(aq) + H<sub>2</sub>(g)</button>
+                <button type="button" class="quiz-option" data-idx="1">B. 2Na(s) + 2H<sub>2</sub>O(aq) &rarr; 2NaOH(s) + H(g)</button>
+                <button type="button" class="quiz-option" data-idx="2">C. Na<sub>2</sub>(s) + H<sub>2</sub>O(l) &rarr; NaOH(l) + H<sub>2</sub>(aq)</button>
+              </div>
+              <div id="l0-quiz-feedback" class="feedback-msg"></div>
+            </div>
+          </article>
+
+          <!-- LEVEL 1 -->
+          <article class="ledger-card level-module" data-level="1" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+              <span class="step-badge verdigris">Level 1 &bull; Formula Construction</span>
+              <button type="button" class="btn btn-secondary btn-sm mark-level-btn" data-level="1">Mark Level 1 Complete</button>
+            </div>
+            <h2>LEVEL 1: Writing Correct Chemical Formulas First</h2>
+            <p style="color:var(--ink-secondary);">
+              <strong>The #1 Rule Before Balancing:</strong> Every chemical formula must be chemically valid <em>before</em> you add big front coefficients. Subscripts fix the internal recipe of a compound; changing a subscript changes the substance itself!
+            </p>
+
+            <div class="pitfall-box">
+              <span class="pitfall-label">Golden Rule of Balancing</span>
+              Water is <code>H<sub>2</sub>O</code> because oxygen has charge <code>&minus;2</code> and each hydrogen has charge <code>+1</code>. Never turn <code>H<sub>2</sub>O</code> into <code>H<sub>2</sub>O<sub>2</sub></code> (hydrogen peroxide, a completely different chemical!) just to make oxygen atoms match. Always use <strong>coefficients in front</strong> of formulas.
+            </div>
+
+            <h3>1. Ionic Compounds: Charge Balance &amp; Swap-and-Drop</h3>
+            <p>
+              In a neutral ionic compound, total positive charge equals total negative charge. Using <strong>swap-and-drop</strong>, take the magnitude of each ion&rsquo;s charge and drop it as the opposite subscript, then <strong>simplify to the smallest whole-number ratio</strong>.
+            </p>
+            <div class="worked-box">
+              <div style="font-weight:700; color:var(--accent-cobalt); margin-bottom:6px;">Worked Examples</div>
+              <ul style="padding-left:18px; margin:0; font-size:0.9rem;">
+                <li><strong>Magnesium chloride:</strong> <code>Mg<sup>2+</sup></code> + <code>Cl<sup>&minus;</sup></code> &rarr; swap magnitudes (2 and 1) &rarr; <code>MgCl<sub>2</sub></code>.</li>
+                <li><strong>Calcium nitrate (polyatomic ion):</strong> <code>Ca<sup>2+</sup></code> + <code>NO<sub>3</sub><sup>&minus;</sup></code> &rarr; need two nitrates for one <code>Ca<sup>2+</sup></code> &rarr; put parentheses around the polyatomic ion: <code>Ca(NO<sub>3</sub>)<sub>2</sub></code>. (Without parentheses, <code>CaNO<sub>32</sub></code> would be wrong!)</li>
+                <li><strong>Iron(III) oxide (Roman numeral = charge +3):</strong> <code>Fe<sup>3+</sup></code> + <code>O<sup>2&minus;</sup></code> &rarr; <code>Fe<sub>2</sub>O<sub>3</sub></code>.</li>
+                <li><strong>Tin(IV) oxide:</strong> <code>Sn<sup>4+</sup></code> + <code>O<sup>2&minus;</sup></code> &rarr; <code>Sn<sub>2</sub>O<sub>4</sub></code> &rarr; simplify ratio 2:4 to 1:2 &rarr; <code>SnO<sub>2</sub></code>.</li>
+              </ul>
+            </div>
+
+            <h3>2. Molecular / Covalent Prefixes &amp; Common Acids</h3>
+            <p>
+              For two non-metals (covalent molecules), Greek prefixes often tell you the subscripts directly:
+              <strong>mono-</strong> (1), <strong>di-</strong> (2), <strong>tri-</strong> (3), <strong>tetra-</strong> (4), <strong>penta-</strong> (5), <strong>hexa-</strong> (6).
+              Example: <em>dinitrogen pentoxide</em> = <code>N<sub>2</sub>O<sub>5</sub></code>; <em>sulfur hexafluoride</em> = <code>SF<sub>6</sub></code>.
+            </p>
+            <p style="font-size:0.9rem; color:var(--ink-secondary);">
+              Common acids you will meet constantly: hydrochloric acid <code>HCl(aq)</code>, sulfuric acid <code>H<sub>2</sub>SO<sub>4</sub>(aq)</code>, nitric acid <code>HNO<sub>3</sub>(aq)</code>, phosphoric acid <code>H<sub>3</sub>PO<sub>4</sub>(aq)</code>, and ethanoic/acetic acid <code>CH<sub>3</sub>COOH(aq)</code>.
+            </p>
+
+            <!-- Guided Formula Translator -->
+            <div class="worked-box" style="margin-top:16px;">
+              <span class="step-badge">Guided Formula Translator</span>
+              <p style="font-weight:700; margin:10px 0 8px;">Build the correct chemical formula before placing it into a reaction:</p>
+              <div class="grid-2">
+                <div>
+                  <label style="font-size:0.84rem; font-weight:600; display:block; margin-bottom:4px;">1. Aluminum sulfate (Al<sup>3+</sup> &amp; SO<sub>4</sub><sup>2&minus;</sup>)</label>
+                  <div style="display:flex; gap:8px;">
+                    <input id="f1-input" type="text" class="mono-input" placeholder="e.g. Al2(SO4)3" style="flex:1;" />
+                    <button type="button" class="btn btn-primary btn-sm" onclick="checkFormula('f1-input', ['al2(so4)3'], 'f1-fb', 'Correct! Two Al3+ (+6) balance three SO4(2-) (-6) -> Al2(SO4)3.')">Check</button>
+                  </div>
+                  <div id="f1-fb" class="feedback-msg"></div>
+                </div>
+
+                <div>
+                  <label style="font-size:0.84rem; font-weight:600; display:block; margin-bottom:4px;">2. Copper(II) hydroxide (Cu<sup>2+</sup> &amp; OH<sup>&minus;</sup>)</label>
+                  <div style="display:flex; gap:8px;">
+                    <input id="f2-input" type="text" class="mono-input" placeholder="e.g. Cu(OH)2" style="flex:1;" />
+                    <button type="button" class="btn btn-primary btn-sm" onclick="checkFormula('f2-input', ['cu(oh)2'], 'f2-fb', 'Correct! Cu2+ pairs with two OH- ions -> Cu(OH)2.')">Check</button>
+                  </div>
+                  <div id="f2-fb" class="feedback-msg"></div>
+                </div>
+
+                <div>
+                  <label style="font-size:0.84rem; font-weight:600; display:block; margin-bottom:4px;">3. Diphosphorus pentoxide (covalent)</label>
+                  <div style="display:flex; gap:8px;">
+                    <input id="f3-input" type="text" class="mono-input" placeholder="e.g. P2O5" style="flex:1;" />
+                    <button type="button" class="btn btn-primary btn-sm" onclick="checkFormula('f3-input', ['p2o5'], 'f3-fb', 'Correct! Di- = 2 phosphorus (P2) and pent(a)- = 5 oxygens (O5) -> P2O5.')">Check</button>
+                  </div>
+                  <div id="f3-fb" class="feedback-msg"></div>
+                </div>
+
+                <div>
+                  <label style="font-size:0.84rem; font-weight:600; display:block; margin-bottom:4px;">4. Ammonium carbonate (NH<sub>4</sub><sup>+</sup> &amp; CO<sub>3</sub><sup>2&minus;</sup>)</label>
+                  <div style="display:flex; gap:8px;">
+                    <input id="f4-input" type="text" class="mono-input" placeholder="e.g. (NH4)2CO3" style="flex:1;" />
+                    <button type="button" class="btn btn-primary btn-sm" onclick="checkFormula('f4-input', ['(nh4)2co3'], 'f4-fb', 'Correct! Two NH4+ (+2) balance one CO3(2-) (-2) -> (NH4)2CO3.')">Check</button>
+                  </div>
+                  <div id="f4-fb" class="feedback-msg"></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- LEVEL 2 -->
+          <article class="ledger-card level-module" data-level="2" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+              <span class="step-badge verdigris">Level 2 &bull; Translation &amp; Patterns</span>
+              <button type="button" class="btn btn-secondary btn-sm mark-level-btn" data-level="2">Mark Level 2 Complete</button>
+            </div>
+            <h2>LEVEL 2: Word Equations &rarr; Skeleton (Unbalanced) Equations</h2>
+            <p style="color:var(--ink-secondary);">
+              A <strong>skeleton equation</strong> translates reaction words into chemical formulas with state symbols and an arrow (<code>&rarr;</code>), showing <em>what</em> reacts and <em>what</em> forms before atom counts are equalized.
+            </p>
+
+            <h3>1. Reading Reaction Cue Words</h3>
+            <ul style="padding-left:20px; color:var(--ink-secondary); font-size:0.9rem;">
+              <li><strong>Reactants (Left of &rarr;):</strong> <em>&ldquo;A reacts with B&rdquo;</em>, <em>&ldquo;when X is added to Y&rdquo;</em>, <em>&ldquo;heating Z&rdquo;</em>, <em>&ldquo;burning in air/oxygen&rdquo;</em>.</li>
+              <li><strong>Products (Right of &rarr;):</strong> <em>&ldquo;to produce / yield / form / give&rdquo;</em>, <em>&ldquo;leaving behind&rdquo;</em>, <em>&ldquo;evolving gas&rdquo;</em>.</li>
+              <li><strong>Conditions &amp; States:</strong> <em>&ldquo;aqueous / dissolved in water&rdquo;</em> &rarr; <code>(aq)</code>; <em>&ldquo;precipitate forms&rdquo;</em> &rarr; <code>(s)</code>; <em>&ldquo;gas bubbles off&rdquo;</em> &rarr; <code>(g)</code>.</li>
+            </ul>
+
+            <h3>2. Five Core Reaction Patterns to Recognize</h3>
+            <table class="ref-table">
+              <thead>
+                <tr>
+                  <th>Pattern</th>
+                  <th>General Scheme</th>
+                  <th>Classic Chemistry Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Synthesis (Combination)</strong></td>
+                  <td class="mono">A + B &rarr; AB</td>
+                  <td class="mono">Mg(s) + O<sub>2</sub>(g) &rarr; MgO(s)</td>
+                </tr>
+                <tr>
+                  <td><strong>Decomposition</strong></td>
+                  <td class="mono">AB &rarr; A + B</td>
+                  <td class="mono">CaCO<sub>3</sub>(s) &rarr; CaO(s) + CO<sub>2</sub>(g) <em>(on heating)</em></td>
+                </tr>
+                <tr>
+                  <td><strong>Single Replacement</strong></td>
+                  <td class="mono">A + BC &rarr; AC + B</td>
+                  <td class="mono">Zn(s) + 2HCl(aq) &rarr; ZnCl<sub>2</sub>(aq) + H<sub>2</sub>(g)</td>
+                </tr>
+                <tr>
+                  <td><strong>Double Replacement</strong><br /><span style="font-size:0.78rem; color:var(--ink-muted);">(Precipitation / Neutralization)</span></td>
+                  <td class="mono">AB + CD &rarr; AD + CB</td>
+                  <td class="mono">HCl(aq) + NaOH(aq) &rarr; NaCl(aq) + H<sub>2</sub>O(l)<br />AgNO<sub>3</sub>(aq) + NaCl(aq) &rarr; AgCl(s) + NaNO<sub>3</sub>(aq)</td>
+                </tr>
+                <tr>
+                  <td><strong>Combustion of Hydrocarbons</strong></td>
+                  <td class="mono">C<sub>x</sub>H<sub>y</sub> + O<sub>2</sub> &rarr; CO<sub>2</sub> + H<sub>2</sub>O<br /><span style="font-size:0.78rem; color:var(--ink-muted);">(CO or C if O<sub>2</sub> is limited)</span></td>
+                  <td class="mono">CH<sub>4</sub>(g) + 2O<sub>2</sub>(g) &rarr; CO<sub>2</sub>(g) + 2H<sub>2</sub>O(g)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Sentence-to-Skeleton Interactive Builder -->
+            <div class="worked-box" style="margin-top:16px;">
+              <span class="step-badge">Sentence-to-Skeleton Builder</span>
+              <p style="font-weight:700; margin:10px 0 6px;">
+                Prompt: <em>&ldquo;Solid calcium carbonate is heated to form solid calcium oxide and carbon dioxide gas.&rdquo;</em>
+              </p>
+              <p style="font-size:0.85rem; color:var(--ink-secondary); margin:0 0 10px;">
+                Select the matching skeleton equation (unbalanced coefficients):
+              </p>
+              <div id="l2-skeleton-choices">
+                <button type="button" class="quiz-option" data-idx="0">A. CaCO<sub>3</sub>(s) &rarr; CaO(s) + CO<sub>2</sub>(g)</button>
+                <button type="button" class="quiz-option" data-idx="1">B. Ca(CO<sub>3</sub>)<sub>2</sub>(s) &rarr; Ca(s) + CO(g) + O<sub>2</sub>(g)</button>
+                <button type="button" class="quiz-option" data-idx="2">C. CaCO<sub>3</sub>(aq) &rarr; CaOH(s) + CO<sub>2</sub>(aq)</button>
+              </div>
+              <div id="l2-skeleton-fb" class="feedback-msg"></div>
+            </div>
+          </article>
+
+          <!-- LEVEL 3 -->
+          <article class="ledger-card level-module" data-level="3" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+              <span class="step-badge verdigris">Level 3 &bull; Atom Accounting</span>
+              <button type="button" class="btn btn-secondary btn-sm mark-level-btn" data-level="3">Mark Level 3 Complete</button>
+            </div>
+            <h2>LEVEL 3: Balancing Equations Step-by-Step</h2>
+            <p style="color:var(--ink-secondary);">
+              Matter is neither created nor destroyed in a chemical reaction (<strong>Law of Conservation of Mass</strong>). Every atom on the reactant side must appear on the product side.
+            </p>
+
+            <h3>Systematic 4-Step Balancing Method</h3>
+            <ol style="padding-left:20px; color:var(--ink-primary); font-size:0.92rem;">
+              <li><strong>Verify formulas first:</strong> Confirm every subscript is right; never change subscripts while balancing.</li>
+              <li><strong>Tally atoms (and intact polyatomic ions):</strong> Count atoms on left and right. If a polyatomic ion like <code>SO<sub>4</sub><sup>2&minus;</sup></code> or <code>NO<sub>3</sub><sup>&minus;</sup></code> stays together on both sides, count it as one unit!</li>
+              <li><strong>Balance the most complex or least common element first:</strong> Tackle metals and distinct non-metals before hydrogen (<code>H</code>) and oxygen (<code>O</code>), especially elemental <code>O<sub>2</sub></code>.</li>
+              <li><strong>Audit &amp; reduce to lowest whole-number ratio:</strong> Recount every single atom on both sides. If all coefficients share a common factor (e.g., <code>2, 4, 2</code>), divide through to <code>1, 2, 1</code>.</li>
+            </ol>
+
+            <div class="worked-box">
+              <div style="font-weight:700; color:var(--accent-cobalt); margin-bottom:6px;">Worked Walkthrough: Propane Combustion</div>
+              <div class="eq-display" style="margin-bottom:8px;">Skeleton: C<sub>3</sub>H<sub>8</sub>(g) + O<sub>2</sub>(g) &rarr; CO<sub>2</sub>(g) + H<sub>2</sub>O(g)</div>
+              <p style="font-size:0.88rem; margin:4px 0;"><strong>Step 3a (Carbon):</strong> 3 C on left &rarr; put <code>3</code> before <code>CO<sub>2</sub></code>.</p>
+              <p style="font-size:0.88rem; margin:4px 0;"><strong>Step 3b (Hydrogen):</strong> 8 H on left &rarr; put <code>4</code> before <code>H<sub>2</sub>O</code> (since 4 &times; 2 = 8).</p>
+              <p style="font-size:0.88rem; margin:4px 0;"><strong>Step 3c (Oxygen last):</strong> Right now has (3 &times; 2) + (4 &times; 1) = 10 O atoms. Divide 10 by 2 &rarr; put <code>5</code> before <code>O<sub>2</sub></code>.</p>
+              <div class="eq-display" style="margin-top:8px; border-color:#8FC0AE; background-color:var(--accent-verdigris-soft);">
+                Balanced: C<sub>3</sub>H<sub>8</sub>(g) + 5O<sub>2</sub>(g) &rarr; 3CO<sub>2</sub>(g) + 4H<sub>2</sub>O(g) &nbsp;[Check: 3 C, 8 H, 10 O each side]
+              </div>
+            </div>
+
+            <!-- Interactive Step-by-Step Equation Balancer -->
+            <div class="worked-box" style="margin-top:16px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+                <span class="step-badge">Interactive Equation Balancer</span>
+                <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                  <button type="button" class="btn btn-secondary btn-sm eq-preset-btn" data-eq="0">1. Beginner (Al + O<sub>2</sub>)</button>
+                  <button type="button" class="btn btn-secondary btn-sm eq-preset-btn" data-eq="1">2. Intermediate (Fe<sub>2</sub>O<sub>3</sub> + C)</button>
+                  <button type="button" class="btn btn-secondary btn-sm eq-preset-btn" data-eq="2">3. Combustion (C<sub>2</sub>H<sub>6</sub> + O<sub>2</sub>)</button>
+                </div>
+              </div>
+
+              <div id="balancer-prompt-text" style="font-size:0.88rem; color:var(--ink-secondary); margin-bottom:10px;"></div>
+              <div id="balancer-slots-container" class="balancer-row"></div>
+              <div id="balancer-tally-container" class="tally-grid"></div>
+
+              <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;">
+                <button type="button" class="btn btn-primary btn-sm" id="check-balancer-btn">Check Balance</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="hint-balancer-btn">Show Hint</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="reveal-balancer-btn">Reveal Solution</button>
+              </div>
+              <div id="balancer-feedback" class="feedback-msg"></div>
+            </div>
+          </article>
+
+          <!-- LEVEL 4 -->
+          <article class="ledger-card level-module" data-level="4" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+              <span class="step-badge verdigris">Level 4 &bull; Ionic &amp; Net Ionic</span>
+              <button type="button" class="btn btn-secondary btn-sm mark-level-btn" data-level="4">Mark Level 4 Complete</button>
+            </div>
+            <h2>LEVEL 4: Net Ionic Equations &amp; Spectator Ions</h2>
+            <p style="color:var(--ink-secondary);">
+              In aqueous reactions, soluble strong electrolytes exist as separated ions. Writing a <strong>net ionic equation</strong> strips away <strong>spectator ions</strong> (ions that appear unchanged on both sides) to highlight the actual chemical change.
+            </p>
+
+            <h3>1. Solubility Intuition &amp; Strong Electrolytes</h3>
+            <ul style="padding-left:20px; color:var(--ink-secondary); font-size:0.9rem;">
+              <li><strong>Generally soluble in water:</strong> All Group 1 (<code>Li<sup>+</sup>, Na<sup>+</sup>, K<sup>+</sup></code>) and ammonium (<code>NH<sub>4</sub><sup>+</sup></code>) salts; all nitrates (<code>NO<sub>3</sub><sup>&minus;</sup></code>); most sulfates (except <code>BaSO<sub>4</sub></code>, <code>PbSO<sub>4</sub></code>, <code>CaSO<sub>4</sub></code> slightly soluble); most chlorides/bromides/iodides (except <code>Ag<sup>+</sup></code>, <code>Pb<sup>2+</sup></code>, <code>Hg<sub>2</sub><sup>2+</sup></code>).</li>
+              <li><strong>Common precipitates (s):</strong> <code>AgCl(s)</code>, <code>BaSO<sub>4</sub>(s)</code>, <code>PbI<sub>2</sub>(s)</code>, <code>CaCO<sub>3</sub>(s)</code>, <code>Fe(OH)<sub>3</sub>(s)</code>.</li>
+              <li><strong>Split into ions when (aq):</strong> Strong acids (<code>HCl, HBr, HI, HNO<sub>3</sub>, H<sub>2</sub>SO<sub>4</sub></code>), strong soluble bases (<code>NaOH, KOH, Ba(OH)<sub>2</sub></code>), and soluble salts. <strong>Do NOT split</strong> solids <code>(s)</code>, pure liquids <code>(l)</code> like <code>H<sub>2</sub>O(l)</code>, gases <code>(g)</code>, or weak acids/bases.</li>
+            </ul>
+
+            <div class="worked-box">
+              <div style="font-weight:700; color:var(--accent-cobalt); margin-bottom:6px;">Worked Example: Silver Nitrate + Sodium Chloride</div>
+              <div class="eq-display" style="margin-bottom:6px;">Molecular: AgNO<sub>3</sub>(aq) + NaCl(aq) &rarr; AgCl(s) + NaNO<sub>3</sub>(aq)</div>
+              <div class="eq-display" style="margin-bottom:6px;">Complete Ionic: Ag<sup>+</sup>(aq) + NO<sub>3</sub><sup>&minus;</sup>(aq) + Na<sup>+</sup>(aq) + Cl<sup>&minus;</sup>(aq) &rarr; AgCl(s) + Na<sup>+</sup>(aq) + NO<sub>3</sub><sup>&minus;</sup>(aq)</div>
+              <p style="font-size:0.86rem; margin:4px 0; color:var(--ink-secondary);">Spectators (unchanged on both sides): <code>Na<sup>+</sup>(aq)</code> and <code>NO<sub>3</sub><sup>&minus;</sup>(aq)</code>.</p>
+              <div class="eq-display" style="border-color:#8FC0AE; background-color:var(--accent-verdigris-soft);">
+                Net Ionic: Ag<sup>+</sup>(aq) + Cl<sup>&minus;</sup>(aq) &rarr; AgCl(s)
+              </div>
+            </div>
+
+            <!-- Interactive Net Ionic Builder -->
+            <div class="worked-box" style="margin-top:16px;">
+              <span class="step-badge">Net Ionic Equation Builder</span>
+              <p style="font-weight:700; margin:10px 0 6px;">
+                Reaction: <code>HCl(aq) + NaOH(aq) &rarr; NaCl(aq) + H<sub>2</sub>O(l)</code> (Strong acid + strong base neutralization)
+              </p>
+              <p style="font-size:0.86rem; color:var(--ink-secondary); margin:0 0 10px;">
+                Which ions are spectators, and what is the net ionic equation?
+              </p>
+              <div id="l4-ionic-choices">
+                <button type="button" class="quiz-option" data-idx="0">A. Spectators: Na<sup>+</sup>(aq) &amp; Cl<sup>&minus;</sup>(aq) &bull; Net Ionic: H<sup>+</sup>(aq) + OH<sup>&minus;</sup>(aq) &rarr; H<sub>2</sub>O(l)</button>
+                <button type="button" class="quiz-option" data-idx="1">B. Spectators: H<sup>+</sup>(aq) &amp; OH<sup>&minus;</sup>(aq) &bull; Net Ionic: Na<sup>+</sup>(aq) + Cl<sup>&minus;</sup>(aq) &rarr; NaCl(s)</button>
+                <button type="button" class="quiz-option" data-idx="2">C. No spectators; H<sub>2</sub>O(l) splits into H<sup>+</sup>(aq) + O<sup>2&minus;</sup>(aq)</button>
+              </div>
+              <div id="l4-ionic-fb" class="feedback-msg"></div>
+            </div>
+          </article>
+
+          <!-- LEVEL 5 -->
+          <article class="ledger-card level-module" data-level="5" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+              <span class="step-badge copper">Level 5 &bull; Hero Stoichiometry</span>
+              <button type="button" class="btn btn-secondary btn-sm mark-level-btn" data-level="5">Mark Level 5 Complete</button>
+            </div>
+            <h2>LEVEL 5 (HERO): Moles, Mole Ratios &amp; Stoichiometric Calculations</h2>
+            <p style="color:var(--ink-secondary);">
+              Balanced coefficients give <strong>mole ratios</strong>, NOT gram ratios! You can only convert from Substance A to Substance B through <strong>moles (<code>n</code>)</strong>.
+            </p>
+
+            <h3>1. Core Mole Equations (Note Standard Conditions)</h3>
+            <div class="grid-3">
+              <div class="worked-box" style="margin:0;">
+                <div style="font-weight:700; color:var(--accent-verdigris);">Mass &amp; Molar Mass</div>
+                <div class="eq-display" style="margin-top:6px; font-size:0.84rem;">n = m / M</div>
+                <p style="font-size:0.82rem; color:var(--ink-secondary); margin:6px 0 0;"><code>n</code> = moles (mol), <code>m</code> = mass (g), <code>M</code> = molar mass (g&middot;mol<sup>&minus;1</sup>).</p>
+              </div>
+              <div class="worked-box" style="margin:0;">
+                <div style="font-weight:700; color:var(--accent-cobalt);">Gas Volume (Assumed)</div>
+                <div class="eq-display" style="margin-top:6px; font-size:0.84rem;">n = V / V<sub>m</sub></div>
+                <p style="font-size:0.82rem; color:var(--ink-secondary); margin:6px 0 0;">Assumes ideal gas: <code>22.4 L&middot;mol<sup>&minus;1</sup></code> at STP (0 &deg;C, 1 atm) or <code>24.0 dm<sup>3</sup>&middot;mol<sup>&minus;1</sup></code> at RTP (25 &deg;C, 1 bar).</p>
+              </div>
+              <div class="worked-box" style="margin:0;">
+                <div style="font-weight:700; color:var(--accent-copper);">Solution Molarity</div>
+                <div class="eq-display" style="margin-top:6px; font-size:0.84rem;">n = c &times; V</div>
+                <p style="font-size:0.82rem; color:var(--ink-secondary); margin:6px 0 0;"><code>c</code> = molarity (mol&middot;L<sup>&minus;1</sup> or M), <code>V</code> = solution volume in <strong>litres (L)</strong> (mL &divide; 1000).</p>
+              </div>
+            </div>
+
+            <h3 style="margin-top:20px;">2. The 4-Step Stoichiometry Roadmap</h3>
+            <div class="eq-display" style="margin-bottom:12px;">
+              Given Unit &rarr; Moles of Given &rarr; &times; (Target Coeff / Given Coeff) &rarr; Moles of Target &rarr; Desired Unit
+            </div>
+
+            <div class="worked-box">
+              <div style="font-weight:700; color:var(--accent-cobalt); margin-bottom:6px;">Worked Example: Mass of CO<sub>2</sub> from Burning 8.80 g of Propane (C<sub>3</sub>H<sub>8</sub>)</div>
+              <div class="eq-display" style="margin-bottom:8px;">C<sub>3</sub>H<sub>8</sub>(g) + 5O<sub>2</sub>(g) &rarr; 3CO<sub>2</sub>(g) + 4H<sub>2</sub>O(g)</div>
+              <p style="font-size:0.88rem; margin:4px 0;">1. <strong>Moles of C<sub>3</sub>H<sub>8</sub>:</strong> M(C<sub>3</sub>H<sub>8</sub>) = 3(12.01) + 8(1.008) = 44.09 g&middot;mol<sup>&minus;1</sup>. So <code>n(C<sub>3</sub>H<sub>8</sub>) = 8.80 / 44.09 = 0.200 mol</code>.</p>
+              <p style="font-size:0.88rem; margin:4px 0;">2. <strong>Mole ratio (CO<sub>2</sub> / C<sub>3</sub>H<sub>8</sub>):</strong> 3 mol CO<sub>2</sub> per 1 mol C<sub>3</sub>H<sub>8</sub> &rarr; <code>n(CO<sub>2</sub>) = 0.200 &times; (3 / 1) = 0.600 mol</code>.</p>
+              <p style="font-size:0.88rem; margin:4px 0;">3. <strong>Mass of CO<sub>2</sub>:</strong> M(CO<sub>2</sub>) = 12.01 + 2(16.00) = 44.01 g&middot;mol<sup>&minus;1</sup>. So <code>m(CO<sub>2</sub>) = 0.600 &times; 44.01 = 26.4 g</code>.</p>
+            </div>
+
+            <h3>3. Limiting Reagent &amp; Percent Yield</h3>
+            <p style="font-size:0.9rem; color:var(--ink-secondary);">
+              When given amounts of <strong>two reactants</strong>, the <strong>limiting reagent</strong> runs out first and caps the maximum (<strong>theoretical</strong>) yield of product; the other is <strong>in excess</strong>. To find the limiting reagent cleanly, divide each reactant&rsquo;s moles by its balanced coefficient &mdash; the smallest quotient is limiting!
+            </p>
+            <div class="eq-display" style="margin-bottom:10px;">
+              Percent Yield (%) = (Actual Yield / Theoretical Yield) &times; 100%
+            </div>
+            <p style="font-size:0.88rem; color:var(--ink-secondary);">
+              <em>Walkthrough:</em> Suppose theoretical yield of CaO is <code>28.0 g</code>, and your lab experiment isolates <code>23.8 g</code>. Percent yield = <code>(23.8 / 28.0) &times; 100% = 85.0%</code>. (Yield &lt; 100% often comes from incomplete reaction, side reactions, or transfer losses.)
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 2: GUIDED EQUATION BUILDER & PRACTICE STUDIO
+         ===================================================================== -->
+    <section id="view-studio" class="view-panel">
+      <div class="ledger-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
+          <span class="step-badge copper">Guided 4-Stage Coach</span>
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <label for="coach-scenario-select" style="font-size:0.82rem; font-weight:700; color:var(--ink-secondary);">Select Scenario:</label>
+            <select id="coach-scenario-select"></select>
+          </div>
+        </div>
+        <h2>How to Write an Equation &mdash; Step-by-Step Guided Studio</h2>
+        <p style="color:var(--ink-secondary); margin-bottom:14px;">
+          Practice turning a real chemistry prompt into a complete, balanced equation with state symbols. Move through Stage A &rarr; B &rarr; C &rarr; D with built-in hints whenever you get stuck.
+        </p>
+
+        <div class="coach-stepper" id="coach-stepper-bar">
+          <div class="coach-step-pill active" data-cstep="0">A. Identify Species</div>
+          <div class="coach-step-pill" data-cstep="1">B. Formulas &amp; States</div>
+          <div class="coach-step-pill" data-cstep="2">C. Balance Atoms</div>
+          <div class="coach-step-pill" data-cstep="3">D. Final Audit</div>
+        </div>
+
+        <div class="worked-box" style="margin-bottom:16px;">
+          <div style="font-size:0.76rem; font-weight:700; text-transform:uppercase; color:var(--accent-copper); letter-spacing:0.04em;">Reaction Prompt</div>
+          <div id="coach-prompt-display" style="font-size:1.02rem; font-weight:700; margin-top:4px;"></div>
+          <div id="coach-pattern-display" style="font-size:0.84rem; color:var(--ink-secondary); margin-top:4px;"></div>
+        </div>
+
+        <!-- Stage A -->
+        <div id="coach-stage-0" class="coach-stage-panel">
+          <h3>Stage A: Separate Reactants (Left of &rarr;) and Products (Right of &rarr;)</h3>
+          <p style="font-size:0.9rem; color:var(--ink-secondary);">List the starting substances and the resulting substances in plain names.</p>
+          <div class="grid-2">
+            <div>
+              <label style="font-size:0.84rem; font-weight:700; display:block; margin-bottom:4px;">Reactants (starting materials)</label>
+              <input id="coach-reactants-in" type="text" placeholder="e.g. zinc + hydrochloric acid" style="width:100%;" />
+            </div>
+            <div>
+              <label style="font-size:0.84rem; font-weight:700; display:block; margin-bottom:4px;">Products (formed substances)</label>
+              <input id="coach-products-in" type="text" placeholder="e.g. zinc chloride + hydrogen" style="width:100%;" />
+            </div>
+          </div>
+          <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-primary btn-sm" id="coach-check-a">Verify Stage A</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="showCoachHint('a')">Hint</button>
+          </div>
+          <div id="coach-fb-a" class="feedback-msg"></div>
+        </div>
+
+        <!-- Stage B -->
+        <div id="coach-stage-1" class="coach-stage-panel" style="display:none;">
+          <h3>Stage B: Write Valid Formulas &amp; State Symbols</h3>
+          <p style="font-size:0.9rem; color:var(--ink-secondary);">Write the skeleton equation using exact formulas and state symbols such as <code>(s)</code>, <code>(l)</code>, <code>(g)</code>, or <code>(aq)</code>. (Coefficients optional or 1 in this step.)</p>
+          <input id="coach-skeleton-in" type="text" class="mono-input" style="width:100%; text-align:left;" placeholder="Type skeleton equation, e.g. Zn(s) + HCl(aq) -> ZnCl2(aq) + H2(g)" />
+          <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-primary btn-sm" id="coach-check-b">Verify Stage B</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="showCoachHint('b')">Hint</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="setCoachStep(0)">&larr; Back to A</button>
+          </div>
+          <div id="coach-fb-b" class="feedback-msg"></div>
+        </div>
+
+        <!-- Stage C -->
+        <div id="coach-stage-2" class="coach-stage-panel" style="display:none;">
+          <h3>Stage C: Balance Coefficients (Atoms In = Atoms Out)</h3>
+          <p style="font-size:0.9rem; color:var(--ink-secondary);">Enter the smallest whole-number coefficients for each species in the skeleton equation.</p>
+          <div id="coach-coeff-inputs" style="display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:10px;"></div>
+          <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-primary btn-sm" id="coach-check-c">Verify Balanced Equation</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="showCoachHint('c')">Hint</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="setCoachStep(1)">&larr; Back to B</button>
+          </div>
+          <div id="coach-fb-c" class="feedback-msg"></div>
+        </div>
+
+        <!-- Stage D -->
+        <div id="coach-stage-3" class="coach-stage-panel" style="display:none;">
+          <h3>Stage D: Master Equation &amp; Atom Audit</h3>
+          <div id="coach-final-summary" class="worked-box"></div>
+          <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-copper btn-sm" id="coach-next-scenario-btn">Next Guided Scenario &rarr;</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="setCoachStep(2)">&larr; Back to C</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Formula & Balancing Drill Strip -->
+      <div class="ledger-card">
+        <h3>Quick-Fire Formula &amp; Balancing Checkpoints</h3>
+        <p style="font-size:0.88rem; color:var(--ink-secondary);">Test your speed on classic equation traps without leaving the studio.</p>
+        <div class="grid-2">
+          <div class="worked-box" style="margin:0;">
+            <div style="font-weight:700; font-size:0.9rem;">Drill 1: Balance Aluminum + Hydrochloric Acid</div>
+            <div class="eq-display" style="margin:8px 0; font-size:0.85rem;">__Al(s) + __HCl(aq) &rarr; __AlCl<sub>3</sub>(aq) + __H<sub>2</sub>(g)</div>
+            <p style="font-size:0.82rem; color:var(--ink-secondary); margin:0 0 8px;">Enter 4 coefficients separated by commas (e.g., <code>2, 6, 2, 3</code>):</p>
+            <div style="display:flex; gap:8px;">
+              <input id="drill-bal-1" type="text" class="mono-input" placeholder="c1, c2, c3, c4" style="flex:1;" />
+              <button type="button" class="btn btn-primary btn-sm" onclick="checkCoeffList('drill-bal-1', [2,6,2,3], 'drill-fb-1', 'Balanced! 2Al + 6HCl -> 2AlCl3 + 3H2 (2 Al, 6 H, 6 Cl each side).')">Check</button>
+            </div>
+            <div id="drill-fb-1" class="feedback-msg"></div>
+          </div>
+
+          <div class="worked-box" style="margin:0;">
+            <div style="font-weight:700; font-size:0.9rem;">Drill 2: Balance Ethanol Complete Combustion</div>
+            <div class="eq-display" style="margin:8px 0; font-size:0.85rem;">__C<sub>2</sub>H<sub>5</sub>OH(l) + __O<sub>2</sub>(g) &rarr; __CO<sub>2</sub>(g) + __H<sub>2</sub>O(g)</div>
+            <p style="font-size:0.82rem; color:var(--ink-secondary); margin:0 0 8px;">Enter 4 coefficients separated by commas (watch the O in C<sub>2</sub>H<sub>5</sub>OH!):</p>
+            <div style="display:flex; gap:8px;">
+              <input id="drill-bal-2" type="text" class="mono-input" placeholder="c1, c2, c3, c4" style="flex:1;" />
+              <button type="button" class="btn btn-primary btn-sm" onclick="checkCoeffList('drill-bal-2', [1,3,2,3], 'drill-fb-2', 'Balanced! 1 C2H5OH + 3 O2 -> 2 CO2 + 3 H2O (2 C, 6 H, 7 O total on both sides).')">Check</button>
+            </div>
+            <div id="drill-fb-2" class="feedback-msg"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 3: MOLE & STOICHIOMETRY MATH WORKBENCH
+         ===================================================================== -->
+    <section id="view-math" class="view-panel">
+      <div class="ledger-card">
+        <span class="step-badge verdigris">Interactive Calculator</span>
+        <h2 style="margin-top:8px;">Stoichiometry, Limiting Reagent &amp; Percent Yield Workbench</h2>
+        <p style="color:var(--ink-secondary);">
+          Use this workbench to inspect how balanced mole ratios translate given quantities into moles of product, identify the limiting reagent, and compute percent yield.
+        </p>
+
+        <h3>1. Two-Reactant Limiting Reagent &amp; Yield Simulator</h3>
+        <p style="font-size:0.88rem; color:var(--ink-secondary);">
+          Model reaction: <code>N<sub>2</sub>(g) + 3H<sub>2</sub>(g) &rarr; 2NH<sub>3</sub>(g)</code> &nbsp;|&nbsp; Molar masses: <code>M(N<sub>2</sub>) = 28.02 g&middot;mol<sup>&minus;1</sup></code>, <code>M(H<sub>2</sub>) = 2.02 g&middot;mol<sup>&minus;1</sup></code>, <code>M(NH<sub>3</sub>) = 17.03 g&middot;mol<sup>&minus;1</sup></code>.
+        </p>
+
+        <div class="grid-3">
+          <div>
+            <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:4px;">Mass of N<sub>2</sub> taken (g)</label>
+            <input id="lr-n2-mass" type="number" step="0.1" value="28.0" style="width:100%;" />
+          </div>
+          <div>
+            <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:4px;">Mass of H<sub>2</sub> taken (g)</label>
+            <input id="lr-h2-mass" type="number" step="0.1" value="4.0" style="width:100%;" />
+          </div>
+          <div>
+            <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:4px;">Actual NH<sub>3</sub> obtained (g)</label>
+            <input id="lr-actual-nh3" type="number" step="0.1" value="17.0" style="width:100%;" />
+          </div>
+        </div>
+
+        <div id="lr-calc-output" class="worked-box" style="margin-top:14px;"></div>
+      </div>
+
+      <div class="ledger-card">
+        <h3>2. Solution Molarity &amp; Mass Converter (<code>n = c &times; V</code> &amp; <code>m = n &times; M</code>)</h3>
+        <div class="grid-3">
+          <div>
+            <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:4px;">Molarity c (mol&middot;L<sup>&minus;1</sup>)</label>
+            <input id="sol-c" type="number" step="0.01" value="0.25" style="width:100%;" />
+          </div>
+          <div>
+            <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:4px;">Volume (mL) &mdash; auto &divide; 1000 for L</label>
+            <input id="sol-ml" type="number" step="1" value="250" style="width:100%;" />
+          </div>
+          <div>
+            <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:4px;">Solute Molar Mass M (g&middot;mol<sup>&minus;1</sup>)</label>
+            <input id="sol-mm" type="number" step="0.01" value="40.00" style="width:100%; font-size:0.86rem;" />
+            <span style="font-size:0.75rem; color:var(--ink-muted);">Example: NaOH = 40.00, HCl = 36.46, NaCl = 58.44</span>
+          </div>
+        </div>
+        <div id="sol-calc-output" class="worked-box" style="margin-top:14px;"></div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 4: 12-QUESTION MASTERY CHALLENGE
+         ===================================================================== -->
+    <section id="view-mastery" class="view-panel">
+      <div class="ledger-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
+          <span class="step-badge copper">Cumulative Assessment</span>
+          <span id="mastery-score-badge" class="step-badge verdigris">Score: 0 / 12</span>
+        </div>
+        <h2>Zero-to-Hero Stoichiometry Mastery Challenge (12 Questions)</h2>
+        <p style="color:var(--ink-secondary);">
+          Covers reading formulas, writing ionic/covalent formulas, translating word equations, balancing equations, net ionic equations, mole ratios, limiting reactants, and percent yield.
+        </p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+          <button type="button" class="btn btn-primary btn-sm" id="grade-mastery-btn">Check All Answers</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="clear-mastery-btn">Clear Quiz Selections</button>
+        </div>
+      </div>
+
+      <div id="mastery-questions-container"></div>
+    </section>
+
+  </main>
+
+  <div id="toast-note" class="toast-note" role="status" aria-live="polite"></div>
+
+  <script>
+    /* =======================================================================
+       1. PERSISTENT STATE & TOAST
+       ======================================================================= */
+    const STORAGE_KEY = 'bench_ledger_stoich_v1';
+
+    const defaultState = {
+      activeTab: 'curriculum',
+      activeLevel: 0,
+      completedLevels: [],
+      coachScenarioIdx: 0,
+      coachStep: 0,
+      masterySelections: {}, // qId -> optionIndex
+      masterySubmitted: false
+    };
+
+    let state = loadState();
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return { ...defaultState };
+        const parsed = JSON.parse(raw);
+        return {
+          ...defaultState,
+          ...parsed,
+          completedLevels: Array.isArray(parsed.completedLevels) ? parsed.completedLevels : [],
+          masterySelections: parsed.masterySelections && typeof parsed.masterySelections === 'object' ? parsed.masterySelections : {}
+        };
+      } catch (err) {
+        console.warn('Could not read saved state:', err);
+        return { ...defaultState };
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (err) {
+        console.warn('Could not save state:', err);
+      }
+      updateOverallProgressUI();
+    }
+
+    function showToast(message) {
+      const el = document.getElementById('toast-note');
+      if (!el) return;
+      el.textContent = message;
+      el.classList.add('visible');
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => {
+        el.classList.remove('visible');
+      }, 2400);
+    }
+
+    function showFeedback(elId, type, text) {
+      const el = document.getElementById(elId);
+      if (!el) return;
+      el.className = `feedback-msg show ${type}`;
+      el.innerHTML = text;
+    }
+
+    function normalizeFormula(str) {
+      return (str || '')
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, '')
+        .replace(/→|->|=/g, '->')
+        .replace(/[\u2080-\u2089]/g, ch => String(ch.charCodeAt(0) - 8320));
+    }
+
+    /* =======================================================================
+       2. WORKSPACE TABS & CURRICULUM LEVEL NAVIGATION
+       ======================================================================= */
+    function openWorkspaceTab(tabName) {
+      state.activeTab = tabName;
+      saveState();
+
+      document.querySelectorAll('.ws-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.tab === tabName);
+      });
+
+      document.querySelectorAll('.view-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === `view-${tabName}`);
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function setActiveLevel(levelNum) {
+      state.activeLevel = Number(levelNum);
+      saveState();
+
+      document.querySelectorAll('.level-pill-btn').forEach(btn => {
+        btn.classList.toggle('active', Number(btn.dataset.level) === state.activeLevel);
+      });
+
+      document.querySelectorAll('.level-module').forEach(mod => {
+        mod.style.display = Number(mod.dataset.level) === state.activeLevel ? 'block' : 'none';
+      });
+    }
+
+    function toggleLevelComplete(levelNum) {
+      const n = Number(levelNum);
+      const idx = state.completedLevels.indexOf(n);
+      if (idx === -1) {
+        state.completedLevels.push(n);
+        showToast(`Level ${n} marked complete`);
+      } else {
+        state.completedLevels.splice(idx, 1);
+        showToast(`Level ${n} unmarked`);
+      }
+      saveState();
+      syncLevelButtons();
+    }
+
+    function syncLevelButtons() {
+      for (let i = 0; i <= 5; i++) {
+        const isDone = state.completedLevels.includes(i);
+        const dot = document.getElementById(`dot-level-${i}`);
+        if (dot) dot.textContent = isDone ? '✓' : '';
+      }
+      document.querySelectorAll('.mark-level-btn').forEach(btn => {
+        const lvl = Number(btn.dataset.level);
+        const done = state.completedLevels.includes(lvl);
+        btn.textContent = done ? `Completed (Level ${lvl}) ✓` : `Mark Level ${lvl} Complete`;
+        btn.className = `btn btn-sm mark-level-btn ${done ? 'btn-primary' : 'btn-secondary'}`;
+      });
+    }
+
+    function updateOverallProgressUI() {
+      // 6 curriculum levels + 3 guided studio scenarios + 12 mastery questions = 21 checkpoints
+      const levelScore = state.completedLevels.length;
+      const coachScore = Math.min(3, (state.coachScenarioIdx || 0) + (state.coachStep === 3 ? 1 : 0));
+      const quizAnswered = Object.keys(state.masterySelections || {}).length;
+      const quizFraction = (quizAnswered / 12) * 3;
+
+      const totalPct = Math.min(100, Math.round(((levelScore + coachScore + quizFraction) / 12) * 100));
+      const bar = document.getElementById('header-progress-bar');
+      const pctLabel = document.getElementById('header-progress-pct');
+      if (bar) bar.style.width = `${totalPct}%`;
+      if (pctLabel) pctLabel.textContent = `${totalPct}%`;
+    }
+
+    /* =======================================================================
+       3. LEVEL 0, 1, 2, 4 INLINE CHECKS
+       ======================================================================= */
+    function initLevelChecks() {
+      // Level 0 quiz
+      const l0Opts = document.querySelectorAll('#l0-quiz-options .quiz-option');
+      l0Opts.forEach(btn => {
+        btn.addEventListener('click', () => {
+          l0Opts.forEach(b => b.classList.remove('selected', 'correct', 'wrong'));
+          const idx = Number(btn.dataset.idx);
+          if (idx === 0) {
+            btn.classList.add('correct');
+            showFeedback('l0-quiz-feedback', 'ok', 'Correct! Sodium is a solid metal Na(s), water is a pure liquid H2O(l), sodium hydroxide in water is aqueous NaOH(aq), and hydrogen is diatomic gas H2(g).');
+          } else {
+            btn.classList.add('wrong');
+            showFeedback('l0-quiz-feedback', 'err', 'Not quite. Remember: hydrogen gas is diatomic H2(g), pure liquid water is H2O(l), and dissolved NaOH is (aq). Try A.');
+          }
+        });
+      });
+
+      // Level 2 skeleton quiz
+      const l2Opts = document.querySelectorAll('#l2-skeleton-choices .quiz-option');
+      l2Opts.forEach(btn => {
+        btn.addEventListener('click', () => {
+          l2Opts.forEach(b => b.classList.remove('selected', 'correct', 'wrong'));
+          const idx = Number(btn.dataset.idx);
+          if (idx === 0) {
+            btn.classList.add('correct');
+            showFeedback('l2-skeleton-fb', 'ok', 'Spot on! Calcium carbonate is CaCO3(s), which decomposes on heating into solid calcium oxide CaO(s) and carbon dioxide gas CO2(g).');
+          } else {
+            btn.classList.add('wrong');
+            showFeedback('l2-skeleton-fb', 'err', 'Check the formula of calcium carbonate (Ca2+ and CO3(2-) -> CaCO3(s)) and its thermal decomposition products: CaO(s) + CO2(g).');
+          }
+        });
+      });
+
+      // Level 4 net ionic quiz
+      const l4Opts = document.querySelectorAll('#l4-ionic-choices .quiz-option');
+      l4Opts.forEach(btn => {
+        btn.addEventListener('click', () => {
+          l4Opts.forEach(b => b.classList.remove('selected', 'correct', 'wrong'));
+          const idx = Number(btn.dataset.idx);
+          if (idx === 0) {
+            btn.classList.add('correct');
+            showFeedback('l4-ionic-fb', 'ok', 'Exact! HCl(aq), NaOH(aq), and NaCl(aq) dissociate into ions, while H2O(l) is a pure liquid and stays together. Na+(aq) and Cl-(aq) remain unchanged as spectator ions.');
+          } else {
+            btn.classList.add('wrong');
+            showFeedback('l4-ionic-fb', 'err', 'Careful! NaCl is soluble in water (aq), and pure liquid water H2O(l) is not split into ions. Choice A is the true net ionic neutralization equation.');
+          }
+        });
+      });
+    }
+
+    function checkFormula(inputId, acceptedList, fbId, successMsg) {
+      const val = normalizeFormula(document.getElementById(inputId).value);
+      if (!val) {
+        showFeedback(fbId, 'err', 'Please type a chemical formula first.');
+        return;
+      }
+      if (acceptedList.includes(val)) {
+        showFeedback(fbId, 'ok', successMsg);
+      } else {
+        showFeedback(fbId, 'err', `Check charges, parentheses around polyatomic ions, and subscripts. Expected: <code>${acceptedList[0]}</code>.`);
+      }
+    }
+
+    function checkCoeffList(inputId, expectedArr, fbId, successMsg) {
+      const raw = (document.getElementById(inputId).value || '').trim();
+      const parts = raw.split(/[\s,]+/).filter(Boolean).map(Number);
+      if (parts.length !== expectedArr.length || parts.some(n => !Number.isInteger(n) || n < 1)) {
+        showFeedback(fbId, 'err', `Enter ${expectedArr.length} positive whole numbers separated by commas (e.g., ${expectedArr.join(', ')}).`);
+        return;
+      }
+      const matches = expectedArr.every((val, i) => parts[i] === val);
+      if (matches) {
+        showFeedback(fbId, 'ok', successMsg);
+      } else {
+        showFeedback(fbId, 'err', 'Not balanced yet. Tally atoms on both sides without changing subscripts, and make sure coefficients are in simplest whole-number ratio.');
+      }
+    }
+
+    /* =======================================================================
+       4. LEVEL 3 INTERACTIVE EQUATION BALANCER WITH LIVE ATOM TALLY
+       ======================================================================= */
+    const BALANCER_PROBLEMS = [
+      {
+        prompt: 'Balance the synthesis of aluminum oxide from aluminum metal and oxygen gas.',
+        terms: [
+          { formula: 'Al(s)', side: 'L', atoms: { Al: 1 } },
+          { formula: 'O₂(g)', side: 'L', atoms: { O: 2 } },
+          { arrow: true },
+          { formula: 'Al₂O₃(s)', side: 'R', atoms: { Al: 2, O: 3 } }
+        ],
+        solution: [4, 3, 2],
+        hint: 'Al is 1 on left and 2 on right, while O is 2 on left and 3 on right (least common multiple of 2 and 3 is 6 O atoms).'
+      },
+      {
+        prompt: 'Balance the reduction of iron(III) oxide with carbon to form molten iron and carbon dioxide.',
+        terms: [
+          { formula: 'Fe₂O₃(s)', side: 'L', atoms: { Fe: 2, O: 3 } },
+          { formula: 'C(s)', side: 'L', atoms: { C: 1 } },
+          { arrow: true },
+          { formula: 'Fe(l)', side: 'R', atoms: { Fe: 1 } },
+          { formula: 'CO₂(g)', side: 'R', atoms: { C: 1, O: 2 } }
+        ],
+        solution: [2, 3, 4, 3],
+        hint: 'Start with Fe (2 in Fe₂O₃ -> 4 Fe on right if using 2 Fe₂O₃) and reconcile O between Fe₂O₃ and CO₂ (LCM of 3 and 2 is 6 O atoms).'
+      },
+      {
+        prompt: 'Balance the complete combustion of ethane gas (C₂H₆) in excess oxygen.',
+        terms: [
+          { formula: 'C₂H₆(g)', side: 'L', atoms: { C: 2, H: 6 } },
+          { formula: 'O₂(g)', side: 'L', atoms: { O: 2 } },
+          { arrow: true },
+          { formula: 'CO₂(g)', side: 'R', atoms: { C: 1, O: 2 } },
+          { formula: 'H₂O(g)', side: 'R', atoms: { H: 2, O: 1 } }
+        ],
+        solution: [2, 7, 4, 6],
+        hint: 'Balance C first (2 per C₂H₆), then H (6 per C₂H₆ -> 3 H₂O if 1 C₂H₆, which gives 7 O atoms; double everything to avoid fractions!).'
+      }
+    ];
+
+    let activeBalancerIdx = 0;
+
+    function renderBalancerProblem(idx) {
+      activeBalancerIdx = idx;
+      const prob = BALANCER_PROBLEMS[idx];
+      document.getElementById('balancer-prompt-text').innerHTML = prob.prompt;
+      document.getElementById('balancer-feedback').className = 'feedback-msg';
+
+      const slotsEl = document.getElementById('balancer-slots-container');
+      slotsEl.innerHTML = '';
+
+      let coeffCounter = 0;
+      prob.terms.forEach((term, tIdx) => {
+        if (term.arrow) {
+          const arrowSpan = document.createElement('span');
+          arrowSpan.style.padding = '0 6px';
+          arrowSpan.style.color = 'var(--accent-copper)';
+          arrowSpan.textContent = '→';
+          slotsEl.appendChild(arrowSpan);
+          return;
+        }
+
+        // Add '+' between same-side species
+        const prev = prob.terms[tIdx - 1];
+        if (prev && !prev.arrow && prev.side === term.side) {
+          const plusSpan = document.createElement('span');
+          plusSpan.textContent = '+';
+          plusSpan.style.color = 'var(--ink-secondary)';
+          slotsEl.appendChild(plusSpan);
+        }
+
+        const sel = document.createElement('select');
+        sel.className = 'coeff-select';
+        sel.dataset.cIndex = String(coeffCounter);
+        for (let c = 1; c <= 10; c++) {
+          const opt = document.createElement('option');
+          opt.value = String(c);
+          opt.textContent = String(c);
+          if (c === 1) opt.selected = true;
+          sel.appendChild(opt);
+        }
+        sel.addEventListener('change', updateBalancerTally);
+        slotsEl.appendChild(sel);
+
+        const fSpan = document.createElement('span');
+        fSpan.textContent = term.formula;
+        slotsEl.appendChild(fSpan);
+
+        coeffCounter++;
+      });
+
+      updateBalancerTally();
+    }
+
+    function getCurrentBalancerCoeffs() {
+      return Array.from(document.querySelectorAll('#balancer-slots-container .coeff-select'))
+        .map(sel => Number(sel.value));
+    }
+
+    function updateBalancerTally() {
+      const prob = BALANCER_PROBLEMS[activeBalancerIdx];
+      const coeffs = getCurrentBalancerCoeffs();
+      const leftCounts = {};
+      const rightCounts = {};
+      const elements = new Set();
+
+      let cIdx = 0;
+      prob.terms.forEach(term => {
+        if (term.arrow) return;
+        const mult = coeffs[cIdx] || 1;
+        cIdx++;
+        Object.entries(term.atoms).forEach(([el, count]) => {
+          elements.add(el);
+          if (term.side === 'L') {
+            leftCounts[el] = (leftCounts[el] || 0) + count * mult;
+          } else {
+            rightCounts[el] = (rightCounts[el] || 0) + count * mult;
+          }
+        });
+      });
+
+      const tallyEl = document.getElementById('balancer-tally-container');
+      tallyEl.innerHTML = Array.from(elements).map(el => {
+        const l = leftCounts[el] || 0;
+        const r = rightCounts[el] || 0;
+        const ok = l === r && l > 0;
+        return `<div class="tally-chip ${ok ? 'balanced' : 'unbalanced'}">
+          <span><strong>${el}</strong></span>
+          <span class="font-mono">L: ${l} | R: ${r} ${ok ? '✓' : ''}</span>
+        </div>`;
+      }).join('');
+    }
+
+    function gcd(a, b) {
+      return b === 0 ? a : gcd(b, a % b);
+    }
+
+    function arrayGcd(arr) {
+      return arr.reduce((acc, v) => gcd(acc, v), 0);
+    }
+
+    function initBalancerEvents() {
+      document.querySelectorAll('.eq-preset-btn').forEach(btn => {
+        btn.addEventListener('click', () => renderBalancerProblem(Number(btn.dataset.eq)));
+      });
+
+      document.getElementById('check-balancer-btn').addEventListener('click', () => {
+        const prob = BALANCER_PROBLEMS[activeBalancerIdx];
+        const coeffs = getCurrentBalancerCoeffs();
+        const leftCounts = {};
+        const rightCounts = {};
+        let cIdx = 0;
+        prob.terms.forEach(term => {
+          if (term.arrow) return;
+          const mult = coeffs[cIdx++] || 1;
+          Object.entries(term.atoms).forEach(([el, count]) => {
+            if (term.side === 'L') leftCounts[el] = (leftCounts[el] || 0) + count * mult;
+            else rightCounts[el] = (rightCounts[el] || 0) + count * mult;
+          });
+        });
+
+        const allEl = new Set([...Object.keys(leftCounts), ...Object.keys(rightCounts)]);
+        const atomMatch = Array.from(allEl).every(el => (leftCounts[el] || 0) === (rightCounts[el] || 0));
+
+        if (!atomMatch) {
+          showFeedback('balancer-feedback', 'err', 'Atoms are not balanced yet. Adjust the coefficients so L = R for every element.');
+          return;
+        }
+
+        const g = arrayGcd(coeffs);
+        if (g > 1) {
+          const reduced = coeffs.map(x => x / g);
+          showFeedback('balancer-feedback', 'info', `Atoms match on both sides, but coefficients can be simplified! Divide by ${g} to get simplest whole numbers: <code>${reduced.join(' , ')}</code>.`);
+          return;
+        }
+
+        showFeedback('balancer-feedback', 'ok', `Balanced cleanly in lowest whole numbers (${coeffs.join(' , ')})! Every atom is conserved.`);
+      });
+
+      document.getElementById('hint-balancer-btn').addEventListener('click', () => {
+        showFeedback('balancer-feedback', 'info', `<strong>Hint:</strong> ${BALANCER_PROBLEMS[activeBalancerIdx].hint}`);
+      });
+
+      document.getElementById('reveal-balancer-btn').addEventListener('click', () => {
+        const prob = BALANCER_PROBLEMS[activeBalancerIdx];
+        const sels = document.querySelectorAll('#balancer-slots-container .coeff-select');
+        prob.solution.forEach((val, i) => {
+          if (sels[i]) sels[i].value = String(val);
+        });
+        updateBalancerTally();
+        showFeedback('balancer-feedback', 'info', `<strong>Solution applied:</strong> Coefficients <code>${prob.solution.join(' , ')}</code>.`);
+      });
+    }
+
+    /* =======================================================================
+       5. GUIDED 4-STAGE EQUATION BUILDER COACH
+       ======================================================================= */
+    const COACH_SCENARIOS = [
+      {
+        title: 'Scenario 1: Zinc + Hydrochloric Acid (Single Replacement)',
+        prompt: 'Granular zinc metal reacts with aqueous hydrochloric acid to produce aqueous zinc chloride and hydrogen gas.',
+        pattern: 'Pattern: Metal + Acid → Salt + Hydrogen gas',
+        reactantsHint: 'zinc, hydrochloric acid',
+        productsHint: 'zinc chloride, hydrogen',
+        skeletonHint: 'Zn(s) + HCl(aq) → ZnCl₂(aq) + H₂(g)',
+        acceptedSkeletons: ['zn(s)+hcl(aq)->zncl2(aq)+h2(g)', 'zn(s)+2hcl(aq)->zncl2(aq)+h2(g)'],
+        species: ['Zn(s)', 'HCl(aq)', 'ZnCl₂(aq)', 'H₂(g)'],
+        balancedCoeffs: [1, 2, 1, 1],
+        coeffHint: 'One ZnCl₂ needs 2 Cl atoms, so put 2 in front of HCl(aq). That also gives 2 H atoms for H₂(g).',
+        finalMaster: 'Zn(s) + 2HCl(aq) → ZnCl₂(aq) + H₂(g)'
+      },
+      {
+        title: 'Scenario 2: Calcium Carbonate + Nitric Acid (Acid + Carbonate)',
+        prompt: 'Solid calcium carbonate reacts with aqueous nitric acid to form aqueous calcium nitrate, carbon dioxide gas, and liquid water.',
+        pattern: 'Pattern: Carbonate + Acid → Salt + Carbon dioxide + Water',
+        reactantsHint: 'calcium carbonate, nitric acid',
+        productsHint: 'calcium nitrate, carbon dioxide, water',
+        skeletonHint: 'CaCO₃(s) + HNO₃(aq) → Ca(NO₃)₂(aq) + CO₂(g) + H₂O(l)',
+        acceptedSkeletons: [
+          'caco3(s)+hno3(aq)->ca(no3)2(aq)+co2(g)+h2o(l)',
+          'caco3(s)+2hno3(aq)->ca(no3)2(aq)+co2(g)+h2o(l)'
+        ],
+        species: ['CaCO₃(s)', 'HNO₃(aq)', 'Ca(NO₃)₂(aq)', 'CO₂(g)', 'H₂O(l)'],
+        balancedCoeffs: [1, 2, 1, 1, 1],
+        coeffHint: 'Ca(NO₃)₂ has two NO₃⁻ groups, so place 2 before HNO₃(aq). Check C (1), H (2), and O (3 + 6 = 9 on left; 6 + 2 + 1 = 9 on right).',
+        finalMaster: 'CaCO₃(s) + 2HNO₃(aq) → Ca(NO₃)₂(aq) + CO₂(g) + H₂O(l)'
+      },
+      {
+        title: 'Scenario 3: Complete Combustion of Ethene (C₂H₄)',
+        prompt: 'Ethene gas (C₂H₄) burns completely in oxygen gas to produce carbon dioxide gas and water vapor.',
+        pattern: 'Pattern: Hydrocarbon + O₂ → CO₂ + H₂O',
+        reactantsHint: 'ethene (C₂H₄), oxygen',
+        productsHint: 'carbon dioxide, water',
+        skeletonHint: 'C₂H₄(g) + O₂(g) → CO₂(g) + H₂O(g)',
+        acceptedSkeletons: [
+          'c2h4(g)+o2(g)->co2(g)+h2o(g)',
+          'c2h4(g)+3o2(g)->2co2(g)+2h2o(g)'
+        ],
+        species: ['C₂H₄(g)', 'O₂(g)', 'CO₂(g)', 'H₂O(g)'],
+        balancedCoeffs: [1, 3, 2, 2],
+        coeffHint: 'Balance C -> 2 CO₂, H -> 2 H₂O. Total O on right = 4 + 2 = 6 O atoms, so use 3 O₂(g).',
+        finalMaster: 'C₂H₄(g) + 3O₂(g) → 2CO₂(g) + 2H₂O(g)'
+      }
+    ];
+
+    function populateCoachSelect() {
+      const sel = document.getElementById('coach-scenario-select');
+      sel.innerHTML = COACH_SCENARIOS.map((sc, i) => `<option value="${i}">${sc.title}</option>`).join('');
+      sel.value = String(state.coachScenarioIdx || 0);
+      sel.addEventListener('change', () => {
+        state.coachScenarioIdx = Number(sel.value);
+        state.coachStep = 0;
+        saveState();
+        renderCoachScenario();
+      });
+    }
+
+    function setCoachStep(stepIdx) {
+      state.coachStep = Number(stepIdx);
+      saveState();
+
+      document.querySelectorAll('.coach-step-pill').forEach(pill => {
+        const s = Number(pill.dataset.cstep);
+        pill.classList.remove('active', 'done');
+        if (s < state.coachStep) pill.classList.add('done');
+        else if (s === state.coachStep) pill.classList.add('active');
+      });
+
+      document.querySelectorAll('.coach-stage-panel').forEach((panel, i) => {
+        panel.style.display = i === state.coachStep ? 'block' : 'none';
+      });
+    }
+
+    function renderCoachScenario() {
+      const sc = COACH_SCENARIOS[state.coachScenarioIdx] || COACH_SCENARIOS[0];
+      document.getElementById('coach-prompt-display').textContent = sc.prompt;
+      document.getElementById('coach-pattern-display').textContent = sc.pattern;
+
+      ['coach-fb-a', 'coach-fb-b', 'coach-fb-c'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.className = 'feedback-msg';
+      });
+
+      const coeffBox = document.getElementById('coach-coeff-inputs');
+      coeffBox.innerHTML = sc.species.map((sp, i) => {
+        const plus = i > 0 && i !== sc.species.length - 1 ? '<span style="color:var(--ink-secondary);">+</span>' : (i === Math.floor(sc.species.length / 2) ? '<span style="color:var(--accent-copper); font-weight:700;">→</span>' : (i > 0 ? '<span style="color:var(--ink-secondary);">+</span>' : ''));
+        return `${plus} <input type="number" min="1" max="12" value="1" class="coeff-select coach-c-in" data-idx="${i}" /> <span class="font-mono" style="font-weight:600;">${sp}</span>`;
+      }).join(' ');
+
+      document.getElementById('coach-final-summary').innerHTML = `
+        <div style="font-size:0.8rem; font-weight:700; color:var(--accent-verdigris); text-transform:uppercase; margin-bottom:6px;">Verified Balanced Equation</div>
+        <div class="eq-display" style="margin-bottom:8px;">${sc.finalMaster}</div>
+        <p style="font-size:0.88rem; color:var(--ink-secondary); margin:0;">
+          All formulas satisfy valence/molecular rules, state symbols match physical conditions, and atom counts match on both sides.
+        </p>
+      `;
+
+      setCoachStep(state.coachStep || 0);
+    }
+
+    function showCoachHint(stageKey) {
+      const sc = COACH_SCENARIOS[state.coachScenarioIdx] || COACH_SCENARIOS[0];
+      if (stageKey === 'a') {
+        showFeedback('coach-fb-a', 'info', `<strong>Hint:</strong> Reactants: <em>${sc.reactantsHint}</em> &rarr; Products: <em>${sc.productsHint}</em>.`);
+      } else if (stageKey === 'b') {
+        showFeedback('coach-fb-b', 'info', `<strong>Hint:</strong> Check ion charges and diatomic gases. Target skeleton: <code>${sc.skeletonHint}</code>.`);
+      } else if (stageKey === 'c') {
+        showFeedback('coach-fb-c', 'info', `<strong>Hint:</strong> ${sc.coeffHint}`);
+      }
+    }
+
+    function initCoachEvents() {
+      document.getElementById('coach-check-a').addEventListener('click', () => {
+        const rVal = (document.getElementById('coach-reactants-in').value || '').toLowerCase();
+        const pVal = (document.getElementById('coach-products-in').value || '').toLowerCase();
+        const sc = COACH_SCENARIOS[state.coachScenarioIdx] || COACH_SCENARIOS[0];
+        const rFirst = sc.reactantsHint.split(',')[0].trim().split(' ')[0];
+        const pFirst = sc.productsHint.split(',')[0].trim().split(' ')[0];
+
+        if (rVal.includes(rFirst) && pVal.includes(pFirst)) {
+          showFeedback('coach-fb-a', 'ok', 'Stage A verified! Moving to Stage B: writing formulas and state symbols.');
+          setTimeout(() => setCoachStep(1), 450);
+        } else {
+          showFeedback('coach-fb-a', 'err', `Make sure you include starting reactants (<em>${sc.reactantsHint}</em>) and formed products (<em>${sc.productsHint}</em>).`);
+        }
+      });
+
+      document.getElementById('coach-check-b').addEventListener('click', () => {
+        const sc = COACH_SCENARIOS[state.coachScenarioIdx] || COACH_SCENARIOS[0];
+        const norm = normalizeFormula(document.getElementById('coach-skeleton-in').value);
+        if (sc.acceptedSkeletons.includes(norm)) {
+          showFeedback('coach-fb-b', 'ok', 'Stage B verified! Formulas and state symbols look solid. Moving to Stage C: balancing.');
+          setTimeout(() => setCoachStep(2), 450);
+        } else {
+          showFeedback('coach-fb-b', 'err', `Check your formulas and states (s, l, g, aq). Example skeleton: <code>${sc.skeletonHint}</code>.`);
+        }
+      });
+
+      document.getElementById('coach-check-c').addEventListener('click', () => {
+        const sc = COACH_SCENARIOS[state.coachScenarioIdx] || COACH_SCENARIOS[0];
+        const vals = Array.from(document.querySelectorAll('.coach-c-in')).map(inp => Number(inp.value));
+        const ok = sc.balancedCoeffs.every((exp, i) => vals[i] === exp);
+        if (ok) {
+          showFeedback('coach-fb-c', 'ok', 'Balanced in lowest whole numbers! Opening Stage D summary.');
+          setTimeout(() => setCoachStep(3), 450);
+        } else {
+          showFeedback('coach-fb-c', 'err', `Coefficients do not match the balanced equation yet. ${sc.coeffHint}`);
+        }
+      });
+
+      document.getElementById('coach-next-scenario-btn').addEventListener('click', () => {
+        const nextIdx = (state.coachScenarioIdx + 1) % COACH_SCENARIOS.length;
+        state.coachScenarioIdx = nextIdx;
+        state.coachStep = 0;
+        document.getElementById('coach-scenario-select').value = String(nextIdx);
+        document.getElementById('coach-reactants-in').value = '';
+        document.getElementById('coach-products-in').value = '';
+        document.getElementById('coach-skeleton-in').value = '';
+        saveState();
+        renderCoachScenario();
+        showToast('Loaded next guided scenario');
+      });
+    }
+
+    /* =======================================================================
+       6. MOLE & STOICHIOMETRY MATH WORKBENCH
+       ======================================================================= */
+    function runStoichWorkbench() {
+      const mN2 = Math.max(0, Number(document.getElementById('lr-n2-mass').value) || 0);
+      const mH2 = Math.max(0, Number(document.getElementById('lr-h2-mass').value) || 0);
+      const actualNH3 = Math.max(0, Number(document.getElementById('lr-actual-nh3').value) || 0);
+
+      const mmN2 = 28.02;
+      const mmH2 = 2.02;
+      const mmNH3 = 17.03;
+
+      const molN2 = mN2 / mmN2;
+      const molH2 = mH2 / mmH2;
+
+      // Reaction: 1 N2 + 3 H2 -> 2 NH3
+      const qN2 = molN2 / 1;
+      const qH2 = molH2 / 3;
+
+      let limitingName = 'N₂';
+      let excessName = 'H₂';
+      let limitingMolNH3 = molN2 * 2;
+      let excessRemainingMol = 0;
+
+      if (qH2 < qN2) {
+        limitingName = 'H₂';
+        excessName = 'N₂';
+        limitingMolNH3 = molH2 * (2 / 3);
+        const n2Used = molH2 / 3;
+        excessRemainingMol = Math.max(0, molN2 - n2Used);
+      } else {
+        const h2Used = molN2 * 3;
+        excessRemainingMol = Math.max(0, molH2 - h2Used);
+      }
+
+      const theoreticalNH3 = limitingMolNH3 * mmNH3;
+      const pctYield = theoreticalNH3 > 0 ? Math.min(999.9, (actualNH3 / theoreticalNH3) * 100) : 0;
+      const excessMassRemaining = excessRemainingMol * (excessName === 'H₂' ? mmH2 : mmN2);
+
+      document.getElementById('lr-calc-output').innerHTML = `
+        <div style="font-size:0.88rem; line-height:1.7;">
+          <div><strong>Step 1 (Moles given):</strong> n(N₂) = ${mN2.toFixed(2)} / 28.02 = <strong>${molN2.toFixed(4)} mol</strong> &bull; n(H₂) = ${mH2.toFixed(2)} / 2.02 = <strong>${molH2.toFixed(4)} mol</strong></div>
+          <div><strong>Step 2 (Compare moles / coefficient):</strong> N₂ quotient = ${qN2.toFixed(4)} &bull; H₂ quotient = ${qH2.toFixed(4)} &rarr; <strong>Limiting Reagent = ${limitingName}</strong> (Excess = ${excessName}, ~${excessMassRemaining.toFixed(2)} g unused)</div>
+          <div><strong>Step 3 (Theoretical Yield of NH₃):</strong> ${limitingMolNH3.toFixed(4)} mol NH₃ &times; 17.03 g&middot;mol<sup>&minus;1</sup> = <strong>${theoreticalNH3.toFixed(2)} g NH₃</strong></div>
+          <div><strong>Step 4 (Percent Yield):</strong> (${actualNH3.toFixed(2)} / ${theoreticalNH3.toFixed(2)}) &times; 100% = <strong style="color:var(--accent-verdigris);">${theoreticalNH3 > 0 ? pctYield.toFixed(1) : '0.0'}%</strong></div>
+        </div>
+      `;
+
+      const cVal = Math.max(0, Number(document.getElementById('sol-c').value) || 0);
+      const mlVal = Math.max(0, Number(document.getElementById('sol-ml').value) || 0);
+      const mmVal = Math.max(0.001, Number(document.getElementById('sol-mm').value) || 1);
+      const volL = mlVal / 1000;
+      const nSol = cVal * volL;
+      const massSol = nSol * mmVal;
+
+      document.getElementById('sol-calc-output').innerHTML = `
+        <div style="font-size:0.88rem; line-height:1.7;">
+          <div><strong>Volume in litres:</strong> ${mlVal.toFixed(1)} mL &divide; 1000 = <strong>${volL.toFixed(4)} L</strong></div>
+          <div><strong>Moles of solute (n = c &times; V):</strong> ${cVal.toFixed(3)} mol&middot;L<sup>&minus;1</sup> &times; ${volL.toFixed(4)} L = <strong>${nSol.toFixed(5)} mol</strong></div>
+          <div><strong>Mass of solute (m = n &times; M):</strong> ${nSol.toFixed(5)} mol &times; ${mmVal.toFixed(2)} g&middot;mol<sup>&minus;1</sup> = <strong style="color:var(--accent-cobalt);">${massSol.toFixed(3)} g</strong></div>
+        </div>
+      `;
+    }
+
+    /* =======================================================================
+       7. 12-QUESTION MASTERY CHALLENGE
+       ======================================================================= */
+    const MASTERY_QUESTIONS = [
+      {
+        id: 'q1',
+        topic: 'Level 0 • Diatomic Elements',
+        q: 'Which list contains ONLY elements that exist as diatomic molecules in their standard elemental state?',
+        options: ['H₂, Cl₂, O₂', 'Na, Cl₂, Ne', 'H₂, He, N₂', 'O₂, S₂, Ar'],
+        correct: 0,
+        explain: 'Hydrogen (H₂), chlorine (Cl₂), and oxygen (O₂) are part of the seven diatomic elements (H₂, N₂, O₂, F₂, Cl₂, Br₂, I₂). Noble gases (Ne, He, Ar) are monatomic.'
+      },
+      {
+        id: 'q2',
+        topic: 'Level 0 • State Symbols',
+        q: 'When barium chloride solution and sodium sulfate solution react to form a white precipitate of barium sulfate, what state symbol belongs on BaSO₄?',
+        options: ['(aq)', '(l)', '(s)', '(g)'],
+        correct: 2,
+        explain: 'A precipitate is an insoluble solid formed from aqueous solutions, so it takes the state symbol (s): BaSO₄(s).'
+      },
+      {
+        id: 'q3',
+        topic: 'Level 1 • Ionic Formulas',
+        q: 'What is the correct chemical formula for magnesium phosphate (Mg²⁺ and PO₄³⁻)?',
+        options: ['MgPO₄', 'Mg₃(PO₄)₂', 'Mg₂(PO₄)₃', 'Mg₃PO₄₂'],
+        correct: 1,
+        explain: 'Three Mg²⁺ ions (+6 total charge) balance two PO₄³⁻ ions (−6 total charge), giving Mg₃(PO₄)₂ with parentheses around PO₄.'
+      },
+      {
+        id: 'q4',
+        topic: 'Level 1 • Roman Numerals',
+        q: 'What is the formula of iron(III) chloride?',
+        options: ['Fe₃Cl', 'FeCl₂', 'FeCl₃', 'Fe₃Cl₂'],
+        correct: 2,
+        explain: 'The Roman numeral (III) indicates Fe³⁺. Pairing Fe³⁺ with Cl⁻ requires three chloride ions: FeCl₃.'
+      },
+      {
+        id: 'q5',
+        topic: 'Level 1 • Balancing Rule',
+        q: 'Why must you NEVER balance an equation by changing chemical subscripts (like changing H₂O to H₂O₂)?',
+        options: [
+          'Subscripts are only used for gases',
+          'Changing a subscript changes the chemical identity of the substance',
+          'Subscripts cannot be multiplied by whole numbers',
+          'Subscripts only apply to ionic compounds'
+        ],
+        correct: 1,
+        explain: 'Changing a subscript alters the actual compound (H₂O is water; H₂O₂ is hydrogen peroxide). Only coefficients in front of formulas may be changed to balance.'
+      },
+      {
+        id: 'q6',
+        topic: 'Level 2 • Reaction Patterns',
+        q: 'Heating solid copper(II) carbonate (CuCO₃) produces which two products?',
+        options: [
+          'Cu(s) + CO₂(g)',
+          'CuO(s) + CO₂(g)',
+          'CuOH(s) + CO(g)',
+          'Cu₂O(s) + O₂(g)'
+        ],
+        correct: 1,
+        explain: 'Metal carbonates typically decompose on heating into the metal oxide and carbon dioxide gas: CuCO₃(s) → CuO(s) + CO₂(g).'
+      },
+      {
+        id: 'q7',
+        topic: 'Level 3 • Balancing Coefficients',
+        q: 'When balanced in lowest whole numbers, what are the coefficients for: __FeS₂ + __O₂ → __Fe₂O₃ + __SO₂?',
+        options: ['2, 7, 1, 4', '4, 11, 2, 8', '1, 3, 1, 2', '2, 5, 1, 4'],
+        correct: 1,
+        explain: '4 FeS₂ + 11 O₂ → 2 Fe₂O₃ + 8 SO₂ gives 4 Fe, 8 S, and 22 O atoms on both sides (2×3 + 8×2 = 22 O on right).'
+      },
+      {
+        id: 'q8',
+        topic: 'Level 3 • Balancing Simplification',
+        q: 'A student writes 2H₂(g) + 2O₂(g) → 2H₂O(g) after balancing H first. What is wrong?',
+        options: [
+          'Oxygen is not balanced (2 O on left vs. 2 O on right? Wait: 4 O on left vs 2 O on right, AND not in lowest whole-number ratio)',
+          'Water should be written as HO₂',
+          'Coefficients must always be odd numbers',
+          'Hydrogen gas is monatomic'
+        ],
+        correct: 0,
+        explain: 'First, 2 O₂ gives 4 O atoms on the left while 2 H₂O gives only 2 O atoms on the right. The true balanced equation is 2H₂(g) + O₂(g) → 2H₂O(g).'
+      },
+      {
+        id: 'q9',
+        topic: 'Level 4 • Net Ionic Equations',
+        q: 'In AgNO₃(aq) + KCl(aq) → AgCl(s) + KNO₃(aq), which ions are spectator ions?',
+        options: ['Ag⁺(aq) and Cl⁻(aq)', 'K⁺(aq) and NO₃⁻(aq)', 'Ag⁺(aq) and NO₃⁻(aq)', 'K⁺(aq) and Cl⁻(aq)'],
+        correct: 1,
+        explain: 'K⁺(aq) and NO₃⁻(aq) remain dissolved on both sides without reacting, while Ag⁺(aq) and Cl⁻(aq) combine to form solid AgCl(s).'
+      },
+      {
+        id: 'q10',
+        topic: 'Level 5 • Mole Ratio',
+        q: 'In 2C₄H₁₀(g) + 13O₂(g) → 8CO₂(g) + 10H₂O(g), how many moles of CO₂ form from 3.0 mol of C₄H₁₀ (excess O₂)?',
+        options: ['3.0 mol', '6.0 mol', '12.0 mol', '24.0 mol'],
+        correct: 2,
+        explain: 'Mole ratio CO₂ : C₄H₁₀ = 8 : 2 = 4 : 1. Multiply 3.0 mol C₄H₁₀ × (8 / 2) = 12.0 mol CO₂.'
+      },
+      {
+        id: 'q11',
+        topic: 'Level 5 • Limiting Reagent',
+        q: 'In 2H₂(g) + O₂(g) → 2H₂O(g), if 3.0 mol H₂ and 2.0 mol O₂ are mixed, what is the limiting reagent?',
+        options: ['H₂', 'O₂', 'Neither; both run out together', 'H₂O'],
+        correct: 0,
+        explain: '3.0 mol H₂ needs 1.5 mol O₂ (3.0 / 2 = 1.5 < 2.0 / 1 = 2.0). Therefore H₂ runs out first and is limiting; 0.5 mol O₂ stays in excess.'
+      },
+      {
+        id: 'q12',
+        topic: 'Level 5 • Percent Yield',
+        q: 'A synthesis has a theoretical yield of 50.0 g of product, and a chemist isolates 42.5 g. What is the percent yield?',
+        options: ['117.6%', '85.0%', '42.5%', '75.0%'],
+        correct: 1,
+        explain: 'Percent Yield = (Actual Yield / Theoretical Yield) × 100% = (42.5 / 50.0) × 100% = 85.0%.'
+      }
+    ];
+
+    function renderMasteryQuiz() {
+      const container = document.getElementById('mastery-questions-container');
+      container.innerHTML = MASTERY_QUESTIONS.map((item, qIdx) => {
+        const chosen = state.masterySelections[item.id];
+        const optsHtml = item.options.map((optText, oIdx) => {
+          let cls = 'quiz-option';
+          if (state.masterySubmitted) {
+            if (oIdx === item.correct) cls += ' correct';
+            else if (chosen === oIdx) cls += ' wrong';
+          } else if (chosen === oIdx) {
+            cls += ' selected';
+          }
+          return `<button type="button" class="${cls}" data-qid="${item.id}" data-oidx="${oIdx}">${optText}</button>`;
+        }).join('');
+
+        let expHtml = '';
+        if (state.masterySubmitted) {
+          const isRight = chosen === item.correct;
+          expHtml = `<div class="feedback-msg show ${isRight ? 'ok' : 'err'}"><strong>${isRight ? 'Correct' : 'Review'}:</strong> ${item.explain}</div>`;
+        }
+
+        return `
+          <div class="ledger-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px;">
+              <span class="step-badge">${item.topic}</span>
+              <span style="font-size:0.78rem; font-weight:700; color:var(--ink-muted);">Q${qIdx + 1} of 12</span>
+            </div>
+            <p style="font-weight:700; font-size:0.96rem; margin:0 0 12px;">${item.q}</p>
+            <div>${optsHtml}</div>
+            ${expHtml}
+          </div>
+        `;
+      }).join('');
+
+      container.querySelectorAll('.quiz-option').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const qid = btn.dataset.qid;
+          const oidx = Number(btn.dataset.oidx);
+          state.masterySelections[qid] = oidx;
+          state.masterySubmitted = false;
+          saveState();
+          renderMasteryQuiz();
+          updateMasteryBadge();
+        });
+      });
+
+      updateMasteryBadge();
+    }
+
+    function updateMasteryBadge() {
+      let score = 0;
+      MASTERY_QUESTIONS.forEach(q => {
+        if (state.masterySelections[q.id] === q.correct) score++;
+      });
+      const badge = document.getElementById('mastery-score-badge');
+      if (badge) {
+        badge.textContent = state.masterySubmitted
+          ? `Final Score: ${score} / 12 (${Math.round((score / 12) * 100)}%)`
+          : `Answered: ${Object.keys(state.masterySelections).length} / 12`;
+      }
+    }
+
+    function initMasteryEvents() {
+      document.getElementById('grade-mastery-btn').addEventListener('click', () => {
+        state.masterySubmitted = true;
+        saveState();
+        renderMasteryQuiz();
+        let score = 0;
+        MASTERY_QUESTIONS.forEach(q => {
+          if (state.masterySelections[q.id] === q.correct) score++;
+        });
+        showToast(`Mastery score: ${score} / 12`);
+      });
+
+      document.getElementById('clear-mastery-btn').addEventListener('click', () => {
+        state.masterySelections = {};
+        state.masterySubmitted = false;
+        saveState();
+        renderMasteryQuiz();
+        showToast('Quiz selections cleared');
+      });
+    }
+
+    /* =======================================================================
+       8. INITIALIZATION
+       ======================================================================= */
+    window.addEventListener('DOMContentLoaded', () => {
+      // Tab buttons
+      document.querySelectorAll('.ws-tab').forEach(tab => {
+        tab.addEventListener('click', () => openWorkspaceTab(tab.dataset.tab));
+      });
+
+      // Level pill buttons
+      document.querySelectorAll('.level-pill-btn').forEach(btn => {
+        btn.addEventListener('click', () => setActiveLevel(btn.dataset.level));
+      });
+
+      // Mark complete buttons
+      document.querySelectorAll('.mark-level-btn').forEach(btn => {
+        btn.addEventListener('click', () => toggleLevelComplete(btn.dataset.level));
+      });
+
+      // Reset button (two-click inline confirmation)
+      let confirmReset = false;
+      const resetBtn = document.getElementById('reset-progress-btn');
+      resetBtn.addEventListener('click', () => {
+        if (!confirmReset) {
+          confirmReset = true;
+          resetBtn.textContent = 'Click Again to Reset';
+          setTimeout(() => {
+            confirmReset = false;
+            resetBtn.textContent = 'Reset Progress';
+          }, 3000);
+        } else {
+          localStorage.removeItem(STORAGE_KEY);
+          state = { ...defaultState, completedLevels: [], masterySelections: {} };
+          confirmReset = false;
+          resetBtn.textContent = 'Reset Progress';
+          syncLevelButtons();
+          setActiveLevel(0);
+          openWorkspaceTab('curriculum');
+          populateCoachSelect();
+          renderCoachScenario();
+          renderMasteryQuiz();
+          updateOverallProgressUI();
+          showToast('All progress reset');
+        }
+      });
+
+      // Math workbench listeners
+      ['lr-n2-mass', 'lr-h2-mass', 'lr-actual-nh3', 'sol-c', 'sol-ml', 'sol-mm'].forEach(id => {
+        document.getElementById(id).addEventListener('input', runStoichWorkbench);
+      });
+
+      // Initialize sub-modules
+      initLevelChecks();
+      renderBalancerProblem(0);
+      initBalancerEvents();
+      populateCoachSelect();
+      renderCoachScenario();
+      initCoachEvents();
+      runStoichWorkbench();
+      renderMasteryQuiz();
+
+      // Restore saved active tab & level
+      syncLevelButtons();
+      setActiveLevel(state.activeLevel || 0);
+      openWorkspaceTab(state.activeTab || 'curriculum');
+      updateOverallProgressUI();
+    });
+  </script>
+</body>
+</html>

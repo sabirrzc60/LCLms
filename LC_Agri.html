@@ -1,0 +1,2029 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fieldbook H1 — Leaving Cert Agricultural Science Higher Level LMS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-parchment: #F7F4EB;
+      --bg-card: #FFFDF8;
+      --bg-subtle: #EFECE1;
+      --ink-charcoal: #1E2421;
+      --ink-muted: #525E58;
+      --accent-moss: #1F4E3D;
+      --accent-moss-soft: #E8F1ED;
+      --accent-clay: #B55233;
+      --accent-clay-soft: #FAEDE8;
+      --accent-ochre: #C98A2B;
+      --accent-ochre-soft: #FDF6E7;
+      --border-ruled: #DDD6C5;
+      --shadow-notebook: 0 2px 10px rgba(30, 36, 33, 0.045), 0 1px 2px rgba(30, 36, 33, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-parchment);
+      color: var(--ink-charcoal);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .font-serif-notebook {
+      font-family: 'Lora', Georgia, serif;
+      letter-spacing: -0.015em;
+    }
+
+    .font-mono-data {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .notebook-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-ruled);
+      border-radius: 12px;
+      box-shadow: var(--shadow-notebook);
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      text-align: left;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+    }
+
+    .nav-btn:hover {
+      background-color: var(--bg-subtle);
+      color: var(--ink-charcoal);
+    }
+
+    .nav-btn.active {
+      background-color: var(--accent-moss-soft);
+      color: var(--accent-moss);
+      border-color: #C2D9CE;
+    }
+
+    .formula-box {
+      background-color: #F4F0E4;
+      border-left: 4px solid var(--accent-ochre);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--ink-charcoal);
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-parchment);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #C9C1AE;
+      border-radius: 4px;
+    }
+
+    #toast-banner {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      transform: translateY(130%);
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #toast-banner.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col lg:flex-row">
+
+  <!-- Mobile Header Bar -->
+  <header class="lg:hidden sticky top-0 z-40 bg-[#F7F4EB]/95 backdrop-blur border-b border-[#DDD6C5] px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-2.5">
+      <div class="w-9 h-9 rounded-lg bg-[#1F4E3D] text-[#FFFDF8] flex items-center justify-center font-serif-notebook font-bold text-lg shadow-sm">
+        Ag
+      </div>
+      <div>
+        <div class="font-serif-notebook font-bold text-base leading-tight text-[#1E2421]">Fieldbook H1</div>
+        <div class="text-[11px] text-[#525E58] font-medium">LC Agricultural Science • Higher Level</div>
+      </div>
+    </div>
+    <button id="open-drawer-btn" class="px-3 py-2 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] text-[#1E2421] font-semibold text-sm flex items-center gap-1.5">
+      <span>☰</span> <span>Fieldbook</span>
+    </button>
+  </header>
+
+  <!-- Left Navigation Sidebar -->
+  <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 z-50 w-72 bg-[#F7F4EB] border-r border-[#DDD6C5] transform -translate-x-full lg:translate-x-0 lg:static lg:flex lg:flex-col justify-between transition-transform duration-200 ease-in-out overflow-y-auto">
+    <div class="p-5">
+      <!-- Brand -->
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-[#1F4E3D] text-[#FFFDF8] flex items-center justify-center font-serif-notebook font-bold text-lg shadow-sm">
+            Ag
+          </div>
+          <div>
+            <h1 class="font-serif-notebook font-bold text-lg leading-tight text-[#1E2421]">Fieldbook H1</h1>
+            <p class="text-xs text-[#525E58] font-medium">LC Ag Science • Higher Level</p>
+          </div>
+        </div>
+        <button id="close-drawer-btn" class="lg:hidden p-2 rounded-lg text-[#525E58] hover:bg-[#EFECE1]">✕</button>
+      </div>
+
+      <!-- Overall Mastery & IIS Readiness Tracker -->
+      <div class="notebook-card p-3.5 mb-5 bg-[#FFFDF8]">
+        <div class="flex items-center justify-between text-xs font-bold mb-1">
+          <span class="text-[#525E58] uppercase tracking-wider">Overall Mastery</span>
+          <span id="sidebar-mastery-pct" class="text-[#1F4E3D]">0%</span>
+        </div>
+        <div class="w-full h-2 bg-[#EFECE1] rounded-full overflow-hidden mb-2.5">
+          <div id="sidebar-mastery-bar" class="h-full bg-[#1F4E3D] transition-all duration-300" style="width: 0%"></div>
+        </div>
+        <div class="flex items-center justify-between text-[11px] text-[#525E58] border-t border-[#DDD6C5] pt-2">
+          <span id="sidebar-stages-done">0 / 6 Stages</span>
+          <span id="sidebar-iis-status" class="font-semibold text-[#B55233]">IIS: 0/5 Steps</span>
+          <span id="sidebar-mocks-done">0 / 5 Mocks</span>
+        </div>
+      </div>
+
+      <!-- Quick Global Search -->
+      <div class="mb-5">
+        <input id="sidebar-quick-search" type="text" placeholder="🔍 Quick jump to topic or SPA..." class="w-full px-3 py-2 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] text-xs focus:outline-none focus:border-[#1F4E3D]" />
+      </div>
+
+      <!-- Navigation Modules -->
+      <div class="space-y-1">
+        <div class="px-3 pb-1 text-[11px] font-bold uppercase tracking-wider text-[#525E58]">Study Modules</div>
+        <button class="nav-btn active" data-view="blueprint">
+          <span>🧭</span>
+          <span>Exam Blueprint & Strategy</span>
+        </button>
+        <button class="nav-btn" data-view="curriculum">
+          <span>🌾</span>
+          <span>Zero-to-Hero Curriculum (6)</span>
+        </button>
+        <button class="nav-btn" data-view="labs">
+          <span>🧪</span>
+          <span>Farm Simulators & Ag-Calc</span>
+        </button>
+        <button class="nav-btn" data-view="glossary">
+          <span>📋</span>
+          <span>12 SPAs & H1 Glossary</span>
+        </button>
+        <button class="nav-btn" data-view="mocks">
+          <span>📝</span>
+          <span>5 Full Mock Papers (400m)</span>
+        </button>
+      </div>
+
+      <!-- Stage Jump Links -->
+      <div class="mt-6 pt-4 border-t border-[#DDD6C5]">
+        <div class="px-3 pb-2 text-[11px] font-bold uppercase tracking-wider text-[#525E58]">Syllabus Stages</div>
+        <div id="sidebar-stage-shortcuts" class="space-y-1 text-xs">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar Footer -->
+    <div class="p-4 border-t border-[#DDD6C5] bg-[#EFECE1]/60 text-xs flex items-center justify-between">
+      <span class="text-[#525E58]">Progress saved locally</span>
+      <button id="reset-all-btn" class="text-[#B55233] font-bold hover:underline">Reset</button>
+    </div>
+  </aside>
+
+  <!-- Mobile Backdrop -->
+  <div id="drawer-backdrop" class="fixed inset-0 bg-black/30 z-40 hidden lg:hidden"></div>
+
+  <!-- Main Workspace -->
+  <main class="flex-1 min-w-0 p-4 sm:p-6 lg:p-10 max-w-5xl mx-auto w-full">
+
+    <!-- Top Persistent Progress Header -->
+    <div class="notebook-card px-4 py-3 mb-6 bg-[#FFFDF8] flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-3">
+        <span class="px-2.5 py-1 rounded-md bg-[#E8F1ED] text-[#1F4E3D] font-bold">SEC Leaving Cert • Higher Level</span>
+        <span class="text-[#525E58] hidden sm:inline">400 Marks Total = 100m IIS (25%) + 300m Written Paper (75%)</span>
+      </div>
+      <div class="flex items-center gap-4 font-semibold">
+        <span id="header-mastery-label" class="text-[#1F4E3D]">Mastery: 0%</span>
+        <span id="header-iis-label" class="text-[#B55233]">IIS Readiness: 0%</span>
+      </div>
+    </div>
+
+    <!-- ==================== VIEW 1: EXAM BLUEPRINT & STRATEGY ==================== -->
+    <section id="view-blueprint" class="app-view space-y-8">
+      <div class="notebook-card p-6 sm:p-8 bg-[#FFFDF8]">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FDF6E7] border border-[#EED9A9] text-[#C98A2B] text-xs font-bold uppercase tracking-wider mb-3">
+          <span>Complete Field-Notebook System • Zero to H1</span>
+        </div>
+        <h2 class="font-serif-notebook text-2xl sm:text-4xl font-bold text-[#1E2421] mb-3 leading-tight">
+          Leaving Certificate Agricultural Science Higher Level
+        </h2>
+        <p class="text-[#525E58] text-base max-w-3xl mb-6">
+          Every strand of the SEC specification taught clearly in plain English—from soil chemistry and grass physiology to ruminant digestion, genetics, nitrates compliance, the 12 Specified Practical Activities (SPAs), the 100-mark Individual Investigative Study (IIS), and 5 full-length Higher Level mock exams.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <button onclick="navigateTo('curriculum')" class="px-5 py-2.5 rounded-xl bg-[#1F4E3D] hover:bg-[#173B2E] text-[#FFFDF8] font-semibold text-sm shadow-sm transition">
+            Start Stage 1: Scientific Practices & IIS →
+          </button>
+          <button onclick="navigateTo('mocks')" class="px-5 py-2.5 rounded-xl bg-[#FFFDF8] hover:bg-[#EFECE1] text-[#1E2421] border border-[#DDD6C5] font-semibold text-sm transition">
+            Open 5 Full Mock Papers
+          </button>
+        </div>
+      </div>
+
+      <!-- 400-Mark Assessment Architecture -->
+      <div>
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-4 gap-2">
+          <div>
+            <h3 class="font-serif-notebook text-xl sm:text-2xl font-bold text-[#1E2421]">Official 400-Mark SEC Assessment Breakdown</h3>
+            <p class="text-sm text-[#525E58]">H1 requires 360–400 marks (90%+). Banking 90+ in your IIS gives you a massive head start before June.</p>
+          </div>
+          <span class="text-xs font-bold px-3 py-1.5 rounded-lg bg-[#E8F1ED] text-[#1F4E3D] border border-[#C2D9CE]">
+            H1 Target: 360+ / 400 Marks
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="notebook-card p-5 border-t-4 border-t-[#B55233]">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#B55233]">Component 1 • Coursework</span>
+              <span class="font-serif-notebook font-bold text-lg text-[#1E2421]">100 Marks (25%)</span>
+            </div>
+            <h4 class="font-serif-notebook font-bold text-lg mb-2">Individual Investigative Study (IIS)</h4>
+            <ul class="text-sm text-[#525E58] space-y-1.5">
+              <li>• <strong class="text-[#1E2421]">2,500-word limit</strong> digital report based on the annual SEC thematic brief.</li>
+              <li>• Requires primary agricultural data, replication, variables, graphs/stats, and evaluation.</li>
+            </ul>
+          </div>
+
+          <div class="notebook-card p-5 border-t-4 border-t-[#1F4E3D]">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#1F4E3D]">Component 2 • Section A</span>
+              <span class="font-serif-notebook font-bold text-lg text-[#1E2421]">100 Marks (25%)</span>
+            </div>
+            <h4 class="font-serif-notebook font-bold text-lg mb-2">Written Paper: Short Questions</h4>
+            <ul class="text-sm text-[#525E58] space-y-1.5">
+              <li>• Answer <strong class="text-[#1E2421]">10 of 12</strong> structured short questions (10 marks each).</li>
+              <li>• Tests definitions, diagrams, SPA apparatus, genetics ratios, and rapid calculations across all 4 strands.</li>
+            </ul>
+          </div>
+
+          <div class="notebook-card p-5 border-t-4 border-t-[#C98A2B]">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#C98A2B]">Component 2 • Section B</span>
+              <span class="font-serif-notebook font-bold text-lg text-[#1E2421]">200 Marks (50%)</span>
+            </div>
+            <h4 class="font-serif-notebook font-bold text-lg mb-2">Written Paper: Synoptic Long Qs</h4>
+            <ul class="text-sm text-[#525E58] space-y-1.5">
+              <li>• Answer <strong class="text-[#1E2421]">4 of 6</strong> long questions (50 marks each).</li>
+              <li>• Synoptic questions link Soil + Grass + Animal + Sustainability data tables and experimental design.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- June 150-Minute Timing Plan & SEC Command Verbs -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div class="notebook-card p-6 bg-[#FFFDF8]">
+          <h3 class="font-serif-notebook text-lg font-bold text-[#1E2421] mb-3">⏱️ June Written Paper Pacing (2 Hours 30 Mins)</h3>
+          <div class="space-y-2.5 text-sm">
+            <div class="p-3 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5] flex justify-between items-center">
+              <div>
+                <div class="font-bold text-[#1E2421]">0:00 – 0:10 (10 mins)</div>
+                <div class="text-xs text-[#525E58]">Read entire paper; pick best 10 in Sec A & best 4 in Sec B.</div>
+              </div>
+              <span class="font-mono-data text-xs font-bold text-[#1F4E3D]">Plan</span>
+            </div>
+            <div class="p-3 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5] flex justify-between items-center">
+              <div>
+                <div class="font-bold text-[#1E2421]">0:10 – 0:45 (35 mins)</div>
+                <div class="text-xs text-[#525E58]">Section A: ~3.5 mins per short question (10 × 10m = 100m).</div>
+              </div>
+              <span class="font-mono-data text-xs font-bold text-[#1F4E3D]">100m</span>
+            </div>
+            <div class="p-3 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5] flex justify-between items-center">
+              <div>
+                <div class="font-bold text-[#1E2421]">0:45 – 2:20 (95 mins)</div>
+                <div class="text-xs text-[#525E58]">Section B: ~23 mins per long question (4 × 50m = 200m).</div>
+              </div>
+              <span class="font-mono-data text-xs font-bold text-[#B55233]">200m</span>
+            </div>
+            <div class="p-3 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5] flex justify-between items-center">
+              <div>
+                <div class="font-bold text-[#1E2421]">2:20 – 2:30 (10 mins)</div>
+                <div class="text-xs text-[#525E58]">Verify calculation units (kg/ha, %, LU/ha) & attempt extra Q if time allows.</div>
+              </div>
+              <span class="font-mono-data text-xs font-bold text-[#C98A2B]">Audit</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="notebook-card p-6 bg-[#FFFDF8]">
+          <h3 class="font-serif-notebook text-lg font-bold text-[#1E2421] mb-3">🎯 SEC Command Verbs (How Marks Are Awarded)</h3>
+          <div class="space-y-2.5 text-sm">
+            <div class="p-3 rounded-xl bg-[#E8F1ED]/60 border border-[#C2D9CE]">
+              <span class="font-bold text-[#1F4E3D]">State / List / Identify:</span>
+              <span class="text-[#1E2421]"> Give a concise, direct fact or term. No long essay needed (usually 2m or 3m per point).</span>
+            </div>
+            <div class="p-3 rounded-xl bg-[#FDF6E7] border border-[#EED9A9]">
+              <span class="font-bold text-[#C98A2B]">Explain / Account for:</span>
+              <span class="text-[#1E2421]"> Give the <strong>scientific mechanism ("how" or "why")</strong>. State the point AND link it to cause-and-effect (e.g., <em>"Lime raises pH, which increases earthworm & bacterial activity, improving nutrient availability"</em>).</span>
+            </div>
+            <div class="p-3 rounded-xl bg-[#FAEDE8] border border-[#E8C5B9]">
+              <span class="font-bold text-[#B55233]">Evaluate / Discuss:</span>
+              <span class="text-[#1E2421]"> Weigh up <strong>both advantages and limitations</strong> using agricultural evidence, then give a reasoned judgement.</span>
+            </div>
+            <div class="p-3 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5]">
+              <span class="font-bold text-[#1E2421]">Design an Investigation:</span>
+              <span class="text-[#1E2421]"> Always include: (1) Hypothesis, (2) Independent & Dependent variables, (3) Control & fixed variables, (4) Replication/sample size, (5) Data recorded & safety.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive IIS Readiness Checklist (Saved in localStorage) -->
+      <div class="notebook-card p-6 bg-[#FFFDF8]">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-[#B55233]">Component 1 Tracker • 100 Marks (25%)</span>
+            <h3 class="font-serif-notebook text-xl font-bold text-[#1E2421]">IIS (Individual Investigative Study) Milestone Checklist</h3>
+          </div>
+          <span class="text-xs text-[#525E58]">Tick milestones as you build your 2,500-word report</span>
+        </div>
+        <div id="iis-checklist-container" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- 6-Stage Curriculum Cards -->
+      <div>
+        <h3 class="font-serif-notebook text-xl sm:text-2xl font-bold text-[#1E2421] mb-2">6-Stage Zero-to-Hero Syllabus Roadmap</h3>
+        <p class="text-sm text-[#525E58] mb-4">Click any stage to study the complete notes, diagrams, formulas, and checkpoint quiz.</p>
+        <div id="blueprint-stages-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 2: 6-STAGE ZERO-TO-HERO CURRICULUM ==================== -->
+    <section id="view-curriculum" class="app-view hidden space-y-6">
+      <div class="notebook-card p-4 bg-[#FFFDF8]">
+        <div class="text-xs font-bold uppercase tracking-wider text-[#525E58] mb-2.5">Select Syllabus Stage</div>
+        <div id="stage-selector-bar" class="flex flex-wrap gap-2">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <div id="stage-detail-container" class="space-y-6">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 3: FARM SIMULATORS & AG-CALC ==================== -->
+    <section id="view-labs" class="app-view hidden space-y-6">
+      <!-- Tool 1: Soil & Agronomic Decision Simulator -->
+      <div class="notebook-card p-6 sm:p-8 bg-[#FFFDF8] space-y-5">
+        <div class="border-b border-[#DDD6C5] pb-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#1F4E3D]">Interactive Agronomy Lab • Strands 2, 3 & 5</span>
+          <h2 class="font-serif-notebook text-2xl sm:text-3xl font-bold text-[#1E2421] mt-1">Soil, Liming & Nitrates Decision Simulator</h2>
+          <p class="text-sm text-[#525E58] mt-1">Adjust paddock soil pH, texture, drainage class, and organic nitrogen stocking rate to generate H1 agronomic and Nitrates Directive recommendations.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-3.5 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5]">
+            <label class="block text-xs font-bold text-[#1E2421] mb-1">Soil pH (<span id="sim-ph-val" class="font-mono-data text-[#B55233]">5.6</span>)</label>
+            <input id="sim-ph" type="range" min="4.8" max="7.4" step="0.1" value="5.6" class="w-full accent-[#1F4E3D]" />
+            <div class="flex justify-between text-[10px] text-[#525E58] mt-1"><span>4.8 Acidic</span><span>6.3 Ideal</span><span>7.4 Alkaline</span></div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5]">
+            <label class="block text-xs font-bold text-[#1E2421] mb-1">Soil Texture Class</label>
+            <select id="sim-texture" class="w-full px-2.5 py-2 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] text-xs font-semibold">
+              <option value="loam">Loam (Balanced 40/40/20)</option>
+              <option value="clay">Heavy Clay (>40% Clay)</option>
+              <option value="sandy">Sandy Soil (>70% Sand)</option>
+              <option value="peat">Peat / High Organic Matter</option>
+            </select>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5]">
+            <label class="block text-xs font-bold text-[#1E2421] mb-1">Drainage Status</label>
+            <select id="sim-drainage" class="w-full px-2.5 py-2 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] text-xs font-semibold">
+              <option value="free">Free-Draining (Brown Earth)</option>
+              <option value="imperfect">Imperfectly Drained (Gley)</option>
+              <option value="waterlogged">Waterlogged / Iron Pan</option>
+            </select>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5]">
+            <label class="block text-xs font-bold text-[#1E2421] mb-1">Organic N Load (<span id="sim-n-val" class="font-mono-data text-[#1F4E3D]">185</span> kg/ha)</label>
+            <input id="sim-n" type="range" min="100" max="260" step="5" value="185" class="w-full accent-[#B55233]" />
+            <div class="flex justify-between text-[10px] text-[#525E58] mt-1"><span>100</span><span>170 Limit</span><span>220 Derog.</span></div>
+          </div>
+        </div>
+
+        <div id="sim-output-panel" class="p-5 rounded-xl bg-[#E8F1ED]/70 border border-[#C2D9CE] space-y-3 text-sm">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Tool 2: Ag-Calc Leaving Cert Formula Sandbox -->
+      <div class="notebook-card p-6 sm:p-8 bg-[#FFFDF8] space-y-6">
+        <div class="border-b border-[#DDD6C5] pb-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#C98A2B]">Stage 6 Quantitative Trainer</span>
+          <h2 class="font-serif-notebook text-2xl sm:text-3xl font-bold text-[#1E2421] mt-1">Ag-Calc: Worked Exam Formula Calculators</h2>
+          <p class="text-sm text-[#525E58] mt-1">Enter exam values to verify step-by-step workings for Leaving Cert Section A & Section B numerical questions.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- Calculator A: Soil Organic Matter & Moisture % -->
+          <div class="p-4 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5] space-y-3">
+            <h3 class="font-serif-notebook font-bold text-lg text-[#1E2421]">1. Soil Moisture % & Organic Matter %</h3>
+            <div class="grid grid-cols-3 gap-2 text-xs">
+              <div>
+                <label class="font-bold block mb-1">Fresh Soil (g)</label>
+                <input id="calc-soil-fresh" type="number" value="50" class="w-full px-2.5 py-1.5 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] font-mono-data" />
+              </div>
+              <div>
+                <label class="font-bold block mb-1">Oven-Dry 105°C (g)</label>
+                <input id="calc-soil-dry" type="number" value="40" class="w-full px-2.5 py-1.5 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] font-mono-data" />
+              </div>
+              <div>
+                <label class="font-bold block mb-1">Burned Ash (g)</label>
+                <input id="calc-soil-ash" type="number" value="36" class="w-full px-2.5 py-1.5 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] font-mono-data" />
+              </div>
+            </div>
+            <div id="calc-soil-result" class="formula-box text-xs"></div>
+          </div>
+
+          <!-- Calculator B: Compound Fertilizer N-P-K Bag Math -->
+          <div class="p-4 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5] space-y-3">
+            <h3 class="font-serif-notebook font-bold text-lg text-[#1E2421]">2. Compound Fertilizer (N-P-K) Nutrients</h3>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <label class="font-bold block mb-1">Compound Type</label>
+                <select id="calc-fert-type" class="w-full px-2.5 py-1.5 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] font-semibold">
+                  <option value="18,6,12">18-6-12 (Grass/Silage)</option>
+                  <option value="27,2.5,5">27-2.5-5 (Grazing)</option>
+                  <option value="10,10,20">10-10-20 (Tillage/Potatoes)</option>
+                  <option value="46,0,0">46-0-0 (Protected Urea)</option>
+                </select>
+              </div>
+              <div>
+                <label class="font-bold block mb-1">Application Rate (kg/ha)</label>
+                <input id="calc-fert-rate" type="number" value="350" class="w-full px-2.5 py-1.5 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] font-mono-data" />
+              </div>
+            </div>
+            <div id="calc-fert-result" class="formula-box text-xs"></div>
+          </div>
+
+          <!-- Calculator C: Stocking Rate (LU/ha) -->
+          <div class="p-4 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5] space-y-3">
+            <h3 class="font-serif-notebook font-bold text-lg text-[#1E2421]">3. Farm Stocking Rate (LU/ha)</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+              <div>
+                <label class="font-bold block mb-1">Cows (1.0 LU)</label>
+                <input id="calc-lu-cows" type="number" value="60" class="w-full px-2 py-1.5 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] font-mono-data" />
+              </div>
+              <div>
+                <label class="font-bold block mb-1">1–2yr Cattle (0.6)</label>
+                <input id="calc-lu-cattle" type="number" value="25" class="w-full px-2 py-1.5 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] font-mono-data" />
+              </div>
+              <div>
+                <label class="font-bold block mb-1">Ewes (0.15 LU)</label>
+                <input id="calc-lu-ewes" type="number" value="40" class="w-full px-2 py-1.5 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] font-mono-data" />
+              </div>
+              <div>
+                <label class="font-bold block mb-1">Farm Area (ha)</label>
+                <input id="calc-lu-ha" type="number" value="45" class="w-full px-2.5 py-1.5 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] font-mono-data" />
+              </div>
+            </div>
+            <div id="calc-lu-result" class="formula-box text-xs"></div>
+          </div>
+
+          <!-- Calculator D: Killing Out % & Carcass Weight -->
+          <div class="p-4 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5] space-y-3">
+            <h3 class="font-serif-notebook font-bold text-lg text-[#1E2421]">4. Beef Killing Out Percentage (KO%)</h3>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <label class="font-bold block mb-1">Live Weight (kg)</label>
+                <input id="calc-ko-live" type="number" value="640" class="w-full px-2.5 py-1.5 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] font-mono-data" />
+              </div>
+              <div>
+                <label class="font-bold block mb-1">Cold Carcass Weight (kg)</label>
+                <input id="calc-ko-dead" type="number" value="352" class="w-full px-2.5 py-1.5 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] font-mono-data" />
+              </div>
+            </div>
+            <div id="calc-ko-result" class="formula-box text-xs"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 4: 12 SPAs & H1 GLOSSARY ==================== -->
+    <section id="view-glossary" class="app-view hidden space-y-6">
+      <div class="notebook-card p-6 sm:p-8 bg-[#FFFDF8]">
+        <span class="text-xs font-bold uppercase tracking-wider text-[#1F4E3D]">Mandatory Practicals & Key Definitions</span>
+        <h2 class="font-serif-notebook text-2xl sm:text-3xl font-bold text-[#1E2421] mt-1">12 SEC Specified Practical Activities (SPAs) & H1 Glossary</h2>
+        <p class="text-sm text-[#525E58] mt-1 mb-5">
+          Filter by Specified Practicals or Syllabus Strand. Click any card to flip/reveal the exact exam definition, method, or control!
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3 mb-5">
+          <input id="glossary-search" type="text" placeholder="Search SPA, definition, enzyme, hormone, disease..." class="flex-1 px-4 py-2.5 rounded-xl border border-[#DDD6C5] bg-[#F7F4EB] text-sm focus:outline-none focus:border-[#1F4E3D]" />
+          <select id="glossary-filter" class="px-4 py-2.5 rounded-xl border border-[#DDD6C5] bg-[#FFFDF8] text-sm font-semibold">
+            <option value="ALL">All Items (12 SPAs + H1 Glossary)</option>
+            <option value="SPA">12 Specified Practical Activities (SPAs)</option>
+            <option value="Soils">Strand 2: Soils</option>
+            <option value="Grass & Crops">Strand 3: Grass & Crops</option>
+            <option value="Animals">Strand 4: Animals & Genetics</option>
+            <option value="Sustainability">Sustainability & Agri-Tech</option>
+          </select>
+        </div>
+
+        <div id="glossary-cards-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 5: 5 FULL ORIGINAL MOCK EXAMS ==================== -->
+    <section id="view-mocks" class="app-view hidden space-y-6">
+      <div class="notebook-card p-6 bg-[#FFFDF8]">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-[#B55233]">Complete SEC Higher Level Practice Suite</span>
+            <h2 class="font-serif-notebook text-2xl sm:text-3xl font-bold text-[#1E2421] mt-1">5 Original Leaving Cert Mock Papers</h2>
+            <p class="text-sm text-[#525E58] mt-1">
+              Each paper mirrors the real June exam: <strong>Section A (10 Short Questions = 100m)</strong> + <strong>Section B (4 Synoptic Long Questions = 200m)</strong>, plus an integrated <strong>400-Mark H1–H8 Calculator</strong> combining your Written Paper (/300) and IIS (/100).
+            </p>
+          </div>
+          <!-- 150-Min Exam Countdown Timer -->
+          <div class="bg-[#F7F4EB] border border-[#DDD6C5] rounded-xl p-3.5 flex items-center gap-3 shrink-0">
+            <div>
+              <div class="text-[11px] font-bold uppercase text-[#525E58]">Written Timer</div>
+              <div id="exam-timer-clock" class="font-mono-data text-xl font-bold text-[#1E2421]">02:30:00</div>
+            </div>
+            <div class="flex flex-col gap-1">
+              <button id="exam-timer-start" class="px-3 py-1 rounded-lg bg-[#1F4E3D] text-white text-xs font-semibold">Start</button>
+              <button id="exam-timer-reset" class="px-3 py-1 rounded-lg bg-[#FFFDF8] border border-[#DDD6C5] text-[#525E58] text-xs font-semibold">Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="mock-paper-tabs" class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <div id="mock-paper-body" class="space-y-6">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Non-blocking Toast Message -->
+  <div id="toast-banner" class="bg-[#1E2421] text-[#FFFDF8] px-4 py-3 rounded-xl shadow-lg text-sm font-medium flex items-center gap-2.5 max-w-sm">
+    <span id="toast-icon">🌾</span>
+    <span id="toast-msg">Saved</span>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       1. DATA: IIS MILESTONES
+       ========================================================================== */
+    const IIS_MILESTONES = [
+      { id: 'iis1', title: '1. Research Question & Hypothesis', desc: 'Linked directly to the annual SEC thematic brief with clear Independent & Dependent variables.' },
+      { id: 'iis2', title: '2. Experimental Design & Controls', desc: 'Specified control group, fixed variables, sample size, and minimum 3 replicates to reduce bias.' },
+      { id: 'iis3', title: '3. Primary Data & Raw Tables', desc: 'Recorded primary measurements with SI units, anomalies noted, and clear photo evidence.' },
+      { id: 'iis4', title: '4. Statistical Processing & Graphs', desc: 'Calculated mean, range/standard deviation, and plotted labelled bar/line graphs.' },
+      { id: 'iis5', title: '5. Evaluation & Word Count Audit', desc: 'Discussed limitations, improvements, environmental/farm relevance, and verified ≤ 2,500 words.' }
+    ];
+
+    /* ==========================================================================
+       2. DATA: 6-STAGE ZERO-TO-HERO CURRICULUM (ALL 4 STRANDS + CROSS-CUTTING)
+       ========================================================================== */
+    const CURRICULUM_STAGES = [
+      {
+        id: 1,
+        badge: 'Stage 1 • Strand 1 (100 Marks IIS + Written)',
+        title: 'Scientific Practices, Experimental Design & The IIS Blueprint',
+        subtitle: 'Master variables, replication, statistical validity, and how to bank 90+ marks in your 2,500-word IIS.',
+        weight: '25% Coursework (100m) + Tested in Sec A & B',
+        diagramSvg: `
+          <svg viewBox="0 0 680 155" class="w-full max-w-2xl mx-auto rounded-xl border border-[#DDD6C5] bg-[#F7F4EB] p-2">
+            <rect x="12" y="20" width="120" height="110" rx="10" fill="#FFFDF8" stroke="#1F4E3D" stroke-width="2"/>
+            <text x="72" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="#1F4E3D">1. HYPOTHESIS</text>
+            <text x="72" y="68" text-anchor="middle" font-size="9.5" fill="#1E2421">Testable prediction</text>
+            <text x="72" y="84" text-anchor="middle" font-size="9.5" fill="#1E2421">linked to SEC</text>
+            <text x="72" y="100" text-anchor="middle" font-size="9.5" fill="#1E2421">thematic brief</text>
+
+            <path d="M135 75 L155 75" stroke="#B55233" stroke-width="2.5" marker-end="url(#arrow)"/>
+            <rect x="158" y="20" width="120" height="110" rx="10" fill="#FFFDF8" stroke="#1F4E3D" stroke-width="2"/>
+            <text x="218" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="#1F4E3D">2. VARIABLES</text>
+            <text x="218" y="68" text-anchor="middle" font-size="9.5" fill="#1E2421">IV (Changed)</text>
+            <text x="218" y="84" text-anchor="middle" font-size="9.5" fill="#1E2421">DV (Measured)</text>
+            <text x="218" y="100" text-anchor="middle" font-size="9.5" fill="#1E2421">Control & Fixed</text>
+
+            <path d="M281 75 L301 75" stroke="#B55233" stroke-width="2.5"/>
+            <rect x="304" y="20" width="120" height="110" rx="10" fill="#FFFDF8" stroke="#1F4E3D" stroke-width="2"/>
+            <text x="364" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="#1F4E3D">3. REPLICATION</text>
+            <text x="364" y="68" text-anchor="middle" font-size="9.5" fill="#1E2421">Randomisation</text>
+            <text x="364" y="84" text-anchor="middle" font-size="9.5" fill="#1E2421">n ≥ 3 replicates</text>
+            <text x="364" y="100" text-anchor="middle" font-size="9.5" fill="#1E2421">Removes bias</text>
+
+            <path d="M427 75 L447 75" stroke="#B55233" stroke-width="2.5"/>
+            <rect x="450" y="20" width="100" height="110" rx="10" fill="#FFFDF8" stroke="#1F4E3D" stroke-width="2"/>
+            <text x="500" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="#1F4E3D">4. DATA</text>
+            <text x="500" y="68" text-anchor="middle" font-size="9.5" fill="#1E2421">Mean & SD</text>
+            <text x="500" y="84" text-anchor="middle" font-size="9.5" fill="#1E2421">Error bars</text>
+            <text x="500" y="100" text-anchor="middle" font-size="9.5" fill="#1E2421">SI Units</text>
+
+            <path d="M553 75 L573 75" stroke="#B55233" stroke-width="2.5"/>
+            <rect x="576" y="20" width="92" height="110" rx="10" fill="#E8F1ED" stroke="#1F4E3D" stroke-width="2"/>
+            <text x="622" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="#1F4E3D">5. EVALUATE</text>
+            <text x="622" y="68" text-anchor="middle" font-size="9.5" fill="#1E2421">Limitations</text>
+            <text x="622" y="84" text-anchor="middle" font-size="9.5" fill="#1E2421">Farm impact</text>
+            <text x="622" y="100" text-anchor="middle" font-size="9.5" fill="#1E2421">≤2500 words</text>
+          </svg>
+        `,
+        sections: [
+          {
+            heading: '1. The Scientific Method in Agricultural Experiments',
+            body: 'Examiners frequently ask you to critique a poorly designed farm trial or design a valid investigation from scratch. To score full marks, always define and apply these core principles:',
+            points: [
+              { term: 'Testable Hypothesis', detail: 'A clear, directional statement predicting how the Independent Variable affects the Dependent Variable (e.g., "Increasing white clover seed inclusion from 0% to 20% will significantly increase total sward dry matter yield without synthetic N").' },
+              { term: 'Independent vs. Dependent vs. Control Variables', detail: 'Independent Variable (IV) = the single factor you deliberately change. Dependent Variable (DV) = the outcome you measure with units. Control Group = baseline treatment (e.g., 0 kg N/ha) for comparison. Fixed/Controlled Variables = factors kept constant (soil type, sowing date, cutting height).' },
+              { term: 'Replication, Sample Size & Randomisation', detail: 'Replication (repeating each treatment on multiple plots/animals) reduces the effect of random anomalies and allows statistical testing. Randomisation (e.g., random block design or random quadrat throws) eliminates selection bias.' },
+              { term: 'Accuracy vs. Precision vs. Reliability', detail: 'Accuracy = how close a reading is to the true value (calibrated pH meter). Precision = closeness of repeated readings to each other. Reliability = consistency when repeated by others.' }
+            ]
+          },
+          {
+            heading: '2. Individual Investigative Study (IIS) — 100 Marks (25%) Section Guide',
+            body: 'Your IIS must strictly stay within 2,500 words (excluding tables, captions, graphs, and references). Structure it into 5 clear sections:',
+            points: [
+              { term: '1. Introduction & Literature Review (~400 words)', detail: 'Link your question to the SEC annual thematic brief, cite 2–3 Irish agricultural sources (Teagasc, DAFM), and state a clear hypothesis.' },
+              { term: '2. Materials & Method (~550 words)', detail: 'Detail step-by-step protocol so another student could replicate it. Explicitly list IV, DV, Control, Fixed Variables, Safety/Risk Assessment, and include labelled photos of your setup.' },
+              { term: '3. Results & Data Processing (~450 words)', detail: 'Present raw data tables with SI units, calculate averages and standard deviation/range, and include computer-generated graphs with error bars.' },
+              { term: '4. Discussion & Evaluation (~750 words)', detail: 'Explain the biological/chemical science behind your trends, compare with Teagasc benchmarks, identify sources of error (weather, edge effects), and suggest improvements.' },
+              { term: '5. Conclusion & Relevance (~350 words)', detail: 'Accept or reject your hypothesis based on data and explain practical economic/environmental benefits for Irish farmers.' }
+            ]
+          }
+        ],
+        quiz: {
+          q: 'In an experiment testing whether Protected Urea produces higher grass yield than CAN at 150 kg N/ha, what is the Control treatment?',
+          options: [
+            'Plots receiving 150 kg N/ha of Protected Urea',
+            'Plots receiving 0 kg N/ha (no fertilizer applied) under identical soil and grazing conditions',
+            'Cutting the grass to 4 cm height every 21 days'
+          ],
+          correct: 1,
+          feedback: 'Correct! A control group receives zero treatment (0 kg N/ha) so you can prove the yield increase came from the nitrogen fertilizers rather than background soil nitrogen.'
+        }
+      },
+      {
+        id: 2,
+        badge: 'Stage 2 • Strand 2 (Soils)',
+        title: 'Soils: Formation, Horizons, Texture, Chemistry & Nutrient Cycles',
+        subtitle: 'Physical structure, flocculation, CEC, liming, drainage, and the Nitrogen & Carbon cycles.',
+        weight: 'Core Strand • Appears in Every Section A & B',
+        diagramSvg: `
+          <svg viewBox="0 0 680 185" class="w-full max-w-2xl mx-auto rounded-xl border border-[#DDD6C5] bg-[#F7F4EB] p-2">
+            <!-- Soil Profile Horizons -->
+            <rect x="20" y="12" width="210" height="22" fill="#3B2F2F"/>
+            <text x="125" y="27" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFDF8">O Horizon — Organic Litter / Humus</text>
+
+            <rect x="20" y="34" width="210" height="38" fill="#5C4033"/>
+            <text x="125" y="57" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFDF8">A Horizon — Topsoil (Dark, Roots, Worms)</text>
+
+            <rect x="20" y="72" width="210" height="42" fill="#9C6644"/>
+            <text x="125" y="97" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFDF8">B Horizon — Subsoil (Illuviation / Clay)</text>
+
+            <rect x="20" y="114" width="210" height="32" fill="#B0A899"/>
+            <text x="125" y="134" text-anchor="middle" font-size="10" font-weight="700" fill="#1E2421">C Horizon — Weathered Parent Material</text>
+
+            <rect x="20" y="146" width="210" height="26" fill="#6C757D"/>
+            <text x="125" y="163" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFDF8">R Horizon — Solid Bedrock</text>
+
+            <!-- Ideal Loam Composition -->
+            <rect x="260" y="12" width="400" height="160" rx="10" fill="#FFFDF8" stroke="#DDD6C5"/>
+            <text x="460" y="34" text-anchor="middle" font-size="12" font-weight="700" fill="#1F4E3D">Ideal Agricultural Loam Composition (By Volume)</text>
+            <rect x="285" y="50" width="157" height="28" fill="#8D6E63"/>
+            <text x="363" y="68" text-anchor="middle" font-size="10" font-weight="700" fill="#FFF">45% Mineral</text>
+            <rect x="442" y="50" width="18" height="28" fill="#2E7D32"/>
+            <rect x="460" y="50" width="87" height="28" fill="#4FC3F7"/>
+            <text x="503" y="68" text-anchor="middle" font-size="10" font-weight="700" fill="#1E2421">25% Water</text>
+            <rect x="547" y="50" width="88" height="28" fill="#EFECE1" stroke="#CCC"/>
+            <text x="591" y="68" text-anchor="middle" font-size="10" font-weight="700" fill="#1E2421">25% Air</text>
+            <text x="460" y="98" text-anchor="middle" font-size="10" fill="#1E2421">• Green sliver = 5% Organic Matter (Humus + Soil Biota)</text>
+            <text x="460" y="116" text-anchor="middle" font-size="10" fill="#525E58">• Flocculation: Ca²⁺ ions bind negatively charged clay/humus micelles into crumbs.</text>
+            <text x="460" y="134" text-anchor="middle" font-size="10" fill="#525E58">• Podzolisation: Heavy rainfall leaches Fe/Al oxides from A → B forming an iron pan.</text>
+            <text x="460" y="152" text-anchor="middle" font-size="10" fill="#B55233" font-weight="600">• Target Grassland pH: 6.3 – 6.5 | Tillage pH: 6.5 – 7.0 | Peat pH: 5.5 – 5.8</text>
+          </svg>
+        `,
+        sections: [
+          {
+            heading: '1. Soil Formation, Great Soil Groups & Physical Properties',
+            body: 'Soil forms through the interaction of 5 factors (CLORPT): Climate, Living Organisms, Relief (topography), Parent Material, and Time.',
+            points: [
+              { term: 'Irish Great Soil Groups', detail: 'Brown Earths (well-drained, fertile, unbleached A/B horizons, ideal for tillage/dairy), Podzols (acidic, leached E horizon, impermeable iron pan in B horizon), Gleys (waterlogged, blue-grey mottled subsoil due to anaerobic iron reduction), Blanket/Basin Peats (high organic matter >20%, low pH).' },
+              { term: 'Soil Texture vs. Soil Structure', detail: 'Texture is the fixed % of Sand (2.0–0.05 mm), Silt (0.05–0.002 mm), and Clay (<0.002 mm). Structure is how particles aggregate into peds (crumb structure = ideal aeration & drainage; platy/massive = compacted).' },
+              { term: 'Flocculation vs. Dispersion', detail: 'Clay and humus colloids carry negative charges. Polyvalent cations like Calcium (Ca²⁺ from lime) bridge colloids together into stable crumbs (flocculation). Monovalent Sodium (Na⁺) causes colloids to repel and collapse (dispersion).' },
+              { term: 'Soil Water & Drainage Systems', detail: 'Field Capacity = maximum water held against gravity after 24–48h drainage. Permanent Wilting Point = water held too tightly (hygroscopic) for roots to extract. Available Water = FC − PWP. Drainage: Mole plough (plastic clay soils without stones), Gravel tunnel drains (stony clays), Piped stone drains.' }
+            ]
+          },
+          {
+            heading: '2. Soil Chemistry, Liming & The Nitrogen Cycle',
+            body: 'Cation Exchange Capacity (CEC) is the soil’s ability to hold and exchange positively charged nutrient ions (Ca²⁺, Mg²⁺, K⁺, NH₄⁺) on negatively charged clay-humus micelles, preventing leaching.',
+            points: [
+              { term: 'Liming & Ground Limestone (CaCO₃)', detail: 'Lime neutralises H⁺ ions in acidic soils. Benefits: (1) Increases nutrient availability (especially Phosphorus), (2) Promotes flocculation & crumb structure, (3) Boosts earthworm and nitrifying/Rhizobium bacteria activity. Total Neutralising Value (TNV) must be >90%.' },
+              { term: 'Nitrogen Cycle (4 Key Microbial Steps)', detail: '1. Nitrogen Fixation: Rhizobium in clover root nodules (or Azotobacter free-living) converts N₂ gas → NH₄⁺. 2. Ammonification: Decomposers convert organic N → NH₄⁺. 3. Nitrification: Aerobic Nitrosomonas oxidises NH₄⁺ → NO₂⁻, then Nitrobacter oxidises NO₂⁻ → NO₃⁻ (nitrate). 4. Denitrification: Anaerobic Pseudomonas in waterlogged soils converts NO₃⁻ → N₂ & N₂O greenhouse gas.' },
+              { term: 'Carbon Sequestration & Humus', detail: 'Minimum tillage, multispecies swards, cover crops, and returning farmyard manure increase soil organic matter, storing atmospheric CO₂ and boosting CEC.' }
+            ]
+          }
+        ],
+        quiz: {
+          q: 'Which two aerobic bacteria carry out Nitrification in well-aerated, limed soil?',
+          options: [
+            'Rhizobium and Pseudomonas',
+            'Nitrosomonas (NH₄⁺ → NO₂⁻) and Nitrobacter (NO₂⁻ → NO₃⁻)',
+            'Lactobacillus and Clostridia'
+          ],
+          correct: 1,
+          feedback: 'Spot on! Nitrosomonas converts ammonium to nitrite, and Nitrobacter converts nitrite to plant-available nitrate.'
+        }
+      },
+      {
+        id: 3,
+        badge: 'Stage 3 • Strand 3 (Grass & Crops)',
+        title: 'Grassland Management, Silage Fermentation & Tillage Crops',
+        subtitle: 'Perennial ryegrass, white clover, rotational grazing, pit silage biochemistry, barley & potatoes.',
+        weight: 'Core Strand • High-Frequency Section B Topic',
+        diagramSvg: `
+          <svg viewBox="0 0 680 155" class="w-full max-w-2xl mx-auto rounded-xl border border-[#DDD6C5] bg-[#F7F4EB] p-2">
+            <text x="340" y="24" text-anchor="middle" font-size="12" font-weight="700" fill="#1F4E3D">Anaerobic Pit Silage Preservation Pathway</text>
+            <rect x="16" y="40" width="145" height="95" rx="8" fill="#FFFDF8" stroke="#1F4E3D" stroke-width="1.5"/>
+            <text x="88" y="60" text-anchor="middle" font-size="10" font-weight="700" fill="#1F4E3D">1. Cut & Wilt (24h)</text>
+            <text x="88" y="78" text-anchor="middle" font-size="9" fill="#1E2421">Cut in afternoon (peak</text>
+            <text x="88" y="92" text-anchor="middle" font-size="9" fill="#1E2421">WSC sugars). Wilt to</text>
+            <text x="88" y="106" text-anchor="middle" font-size="9" fill="#1E2421">28–30% DM; chop short.</text>
+
+            <rect x="180" y="40" width="150" height="95" rx="8" fill="#FFFDF8" stroke="#1F4E3D" stroke-width="1.5"/>
+            <text x="255" y="60" text-anchor="middle" font-size="10" font-weight="700" fill="#1F4E3D">2. Roll & Seal Airtight</text>
+            <text x="255" y="78" text-anchor="middle" font-size="9" fill="#1E2421">Expel O₂ to stop plant</text>
+            <text x="255" y="92" text-anchor="middle" font-size="9" fill="#1E2421">respiration & overheating.</text>
+            <text x="255" y="106" text-anchor="middle" font-size="9" fill="#1E2421">Double polythene sheet.</text>
+
+            <rect x="348" y="40" width="155" height="95" rx="8" fill="#E8F1ED" stroke="#1F4E3D" stroke-width="1.5"/>
+            <text x="425" y="60" text-anchor="middle" font-size="10" font-weight="700" fill="#1F4E3D">3. Lactobacillus Action</text>
+            <text x="425" y="78" text-anchor="middle" font-size="9" fill="#1E2421">Anaerobic bacteria ferment</text>
+            <text x="425" y="92" text-anchor="middle" font-size="9" fill="#1E2421">WSC sugars → Lactic Acid.</text>
+            <text x="425" y="106" text-anchor="middle" font-size="9" font-weight="700" fill="#1F4E3D">pH drops to 3.8 – 4.2</text>
+
+            <rect x="520" y="40" width="145" height="95" rx="8" fill="#FAEDE8" stroke="#B55233" stroke-width="1.5"/>
+            <text x="592" y="60" text-anchor="middle" font-size="10" font-weight="700" fill="#B55233">4. Clostridia Risk!</text>
+            <text x="592" y="78" text-anchor="middle" font-size="9" fill="#1E2421">If wet/low sugar (pH > 5),</text>
+            <text x="592" y="92" text-anchor="middle" font-size="9" fill="#1E2421">Clostridia make Butyric</text>
+            <text x="592" y="106" text-anchor="middle" font-size="9" fill="#1E2421">Acid (rotten, unpalatable).</text>
+          </svg>
+        `,
+        sections: [
+          {
+            heading: '1. Grassland Science: Perennial Ryegrass, White Clover & Grazing Systems',
+            body: 'Grass provides the cheapest feed on Irish farms (~75% of a dairy cow’s diet). Swards are evaluated on Dry Matter yield, D-value (digestibility), persistence, and heading date.',
+            points: [
+              { term: 'Perennial Ryegrass (Lolium perenne) & White Clover (Trifolium repens)', detail: 'PRG has high D-value (>72%), high sugar (WSC), tillers densely, and tolerates treading. White Clover hosts Rhizobium bacteria in root nodules, fixing 100–150 kg N/ha/year, boosting summer protein intake and reducing chemical N bills.' },
+              { term: 'Rotational / Paddock Grazing & Leader-Follower', detail: 'Paddock grazing (21-day rotation in peak growth): animals graze a paddock down to 4 cm residual in 1–2 days, then rest it to replenish leaf area and root reserves. Leader-Follower: young calves/lambs ("leaders") graze fresh paddocks first for high-DMD grass & low worm burden; older stock ("followers") clean out stems.' },
+              { term: 'Grass Measuring & Reseeding', detail: 'Measured in kg DM/ha using a Rising Plate Meter or Quadrat & Shears (pre-grazing target: 1,400–1,600 kg DM/ha). Reseed when PRG drops below 60% using Certified Seed (min 98% purity, 85% germination) via ploughing or minimum-till stitching.' }
+            ]
+          },
+          {
+            heading: '2. Tillage Crops: Spring/Winter Barley, Potatoes & IPM',
+            body: 'Crop rotation (e.g., Grass → Winter Wheat → Spring Barley → Potatoes/Beet) breaks soil-borne pest and disease lifecycles, improves soil structure, and balances nutrient demand.',
+            points: [
+              { term: 'Barley (Hordeum vulgare) — Feeding vs. Malting', detail: 'Malting barley requires low grain protein (<10.5% N) and high germination (>98%), so lower N fertilizer is applied. Feeding barley allows higher protein/yield. Key stages: Tillering (producing side shoots), Stem Extension (apply growth regulators to prevent lodging), Ear Emergence, Ripening (<15% moisture at harvest).' },
+              { term: 'Potatoes (Solanum tuberosum) & Potato Blight', detail: 'Planted in deep, stone-separated ridges ("earthing up" prevents greening/solanine toxicity, controls weeds, and protects tubers from blight spores). Potato Blight is caused by the fungus-like oomycete Phytophthora infestans in warm, humid weather (Beaumont periods); controlled with certified resistant varieties, systemic/contact fungicides, and haulm desiccation before harvest.' },
+              { term: 'Integrated Pest Management (IPM)', detail: 'Combines crop rotation, resistant cultivars, biological control (ladybirds/lacewings eating aphids), mechanical weeding, and targeted spraying only when pest thresholds are exceeded.' }
+            ]
+          }
+        ],
+        quiz: {
+          q: 'Why should grass for silage ideally be cut in the afternoon on a dry, sunny day?',
+          options: [
+            'Photosynthesis during the day maximizes Water-Soluble Carbohydrates (sugars) for Lactobacillus fermentation',
+            'It encourages Clostridia bacteria to produce butyric acid',
+            'It increases the moisture content above 85%'
+          ],
+          correct: 0,
+          feedback: 'Spot on! Afternoon cutting maximizes sugar (WSC) concentration, ensuring rapid lactic acid production and a stable pH below 4.2.'
+        }
+      },
+      {
+        id: 4,
+        badge: 'Stage 4 • Strand 4 (Animals)',
+        title: 'Animal Physiology, Genetics (EBI/Euro-Star), Dairy, Beef & Sheep',
+        subtitle: 'Ruminant digestion, breeding indices, lactation, carcass grading, sheep calendar & herd health.',
+        weight: 'Core Strand • Largest Exam Component',
+        diagramSvg: `
+          <svg viewBox="0 0 680 155" class="w-full max-w-2xl mx-auto rounded-xl border border-[#DDD6C5] bg-[#F7F4EB] p-2">
+            <text x="340" y="23" text-anchor="middle" font-size="12" font-weight="700" fill="#1F4E3D">The Four-Chambered Ruminant Stomach (Cattle & Sheep)</text>
+            <rect x="16" y="38" width="155" height="102" rx="8" fill="#E8F1ED" stroke="#1F4E3D" stroke-width="1.8"/>
+            <text x="93" y="57" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1F4E3D">1. RUMEN (~80% vol)</text>
+            <text x="93" y="74" text-anchor="middle" font-size="9" fill="#1E2421">Anaerobic microbes digest</text>
+            <text x="93" y="88" text-anchor="middle" font-size="9" fill="#1E2421">cellulose (cellulase) →</text>
+            <text x="93" y="102" text-anchor="middle" font-size="9" fill="#1E2421">VFAs (acetic, propionic,</text>
+            <text x="93" y="116" text-anchor="middle" font-size="9" fill="#1E2421">butyric) + B & K vitamins.</text>
+
+            <rect x="182" y="38" width="148" height="102" rx="8" fill="#FFFDF8" stroke="#1F4E3D" stroke-width="1.8"/>
+            <text x="256" y="57" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1F4E3D">2. RETICULUM</text>
+            <text x="256" y="74" text-anchor="middle" font-size="9" fill="#1E2421">"Honeycomb" lining;</text>
+            <text x="256" y="88" text-anchor="middle" font-size="9" fill="#1E2421">forms bolus for cud</text>
+            <text x="256" y="102" text-anchor="middle" font-size="9" fill="#1E2421">regurgitation; traps</text>
+            <text x="256" y="116" text-anchor="middle" font-size="9" fill="#B55233">swallowed wire/stones.</text>
+
+            <rect x="342" y="38" width="148" height="102" rx="8" fill="#FFFDF8" stroke="#1F4E3D" stroke-width="1.8"/>
+            <text x="416" y="57" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1F4E3D">3. OMASUM</text>
+            <text x="416" y="74" text-anchor="middle" font-size="9" fill="#1E2421">"Bible" muscular leaves</text>
+            <text x="416" y="88" text-anchor="middle" font-size="9" fill="#1E2421">squeeze digesta and</text>
+            <text x="416" y="102" text-anchor="middle" font-size="9" fill="#1E2421">absorb water &</text>
+            <text x="416" y="116" text-anchor="middle" font-size="9" fill="#1E2421">bicarbonate ions.</text>
+
+            <rect x="502" y="38" width="162" height="102" rx="8" fill="#FDF6E7" stroke="#C98A2B" stroke-width="1.8"/>
+            <text x="583" y="57" text-anchor="middle" font-size="10.5" font-weight="700" fill="#C98A2B">4. ABOMASUM</text>
+            <text x="583" y="74" text-anchor="middle" font-size="9" fill="#1E2421">"True Stomach": secretes</text>
+            <text x="583" y="88" text-anchor="middle" font-size="9" fill="#1E2421">HCl (pH 2) + pepsin to</text>
+            <text x="583" y="102" text-anchor="middle" font-size="9" fill="#1E2421">digest microbial protein.</text>
+            <text x="583" y="116" text-anchor="middle" font-size="9" fill="#1E2421">(Only functional at birth)</text>
+          </svg>
+        `,
+        sections: [
+          {
+            heading: '1. Genetics & Breeding: EBI, Euro-Star & Mendelian Crosses',
+            body: 'Selective breeding combines Artificial Insemination (AI), Genomic Selection (DNA testing at birth), Performance Testing (measuring the animal’s own growth/FCR), and Progeny Testing (evaluating offspring performance).',
+            points: [
+              { term: 'Dairy EBI (Economic Breeding Index)', detail: 'Expressed in € profit per lactation above baseline. Key sub-indices: Milk (kg fat & protein %), Fertility (calving interval & survival), Calving (ease & gestation), Beef, Maintenance, and Health.' },
+              { term: 'Beef ICBF Euro-Star Indices (1–5 Stars)', detail: 'Terminal Index: ranks sires for slaughter progeny (carcass weight, EUROP conformation, feed intake, calving ease). Replacement Index: ranks sires for breeding maternal suckler heifers (milk yield, fertility, docility).' },
+              { term: 'Mendelian Genetics & Lethal Alleles', detail: 'Polled (P) is dominant over Horned (p). Incomplete dominance: Red (RR) × White (WW) Shorthorn → 100% Roan (RW). Lethal allele example: Dexter cattle Bulldog gene (Bd) — heterozygous (Bd bd) are short-legged; homozygous dominant (Bd Bd) die in utero (2:1 live ratio).' }
+            ]
+          },
+          {
+            heading: '2. Dairy, Beef, Sheep Production & Biosecurity',
+            body: 'Irish ruminant systems synchronize spring calving/lambing with peak grass growth to maximize profitability.',
+            points: [
+              { term: 'Dairy Management (305-Day Lactation & Mastitis)', detail: '60-day dry period repairs udder tissue. Feed 3 litres of colostrum within 2 hours of birth for passive immunity (immunoglobulins). Target Body Condition Score (BCS) at calving: 3.0–3.25 (too fat → difficult calving/ketosis; too thin → poor fertility). Mastitis (bacterial udder inflammation) raises Somatic Cell Count (SCC > 200,000 cells/ml), reducing milk quality & price.' },
+              { term: 'Beef Production (Compensatory Growth & EUROP)', detail: 'Compensatory growth: rapid accelerated weight gain when cattle restricted over winter are turned onto lush spring grass. EUROP Grid: Conformation E (excellent muscularity) to P (poor); Fat score 1 (very lean) to 5 (very fat) — target R=3= or U=3=.' },
+              { term: 'Sheep Husbandry & Parasite Lifecycles', detail: 'Flushing: moving ewes onto high-plane grass 3 weeks pre-mating boosts ovulation & lambing %. Sponging (progesterone sponge for 12–14 days + PMSG injection at removal) synchronises oestrus for compact lambing. Twin Lamb Disease (Pregnancy Toxaemia): energy deficiency in late pregnancy carrying multiples. Liver Fluke (Fasciola hepatica) requires the mud snail (Galba truncatula) intermediate host on wet land.' }
+            ]
+          }
+        ],
+        quiz: {
+          q: 'Why must a newborn calf receive at least 3 litres of colostrum within the first 2 hours of birth?',
+          options: [
+            'To stimulate cellulose digestion in the rumen immediately',
+            'Because the calf’s small intestine can only absorb large immunoglobulin (antibody) molecules intact for the first few hours',
+            'To increase the calf’s Body Condition Score to 4.5'
+          ],
+          correct: 1,
+          feedback: 'Exact! Gut closure occurs rapidly after birth; early colostrum transfer provides essential passive immunity against scours and pneumonia.'
+        }
+      },
+      {
+        id: 5,
+        badge: 'Stage 5 • Cross-Cutting Themes',
+        title: 'Environment, Nitrates Directive, Climate Action & Agri-Tech',
+        subtitle: 'EU Nitrates rules, LESS slurry spreading, protected urea, methane mitigation & precision farming.',
+        weight: 'Cross-Cutting Theme • Tested Across All Strands',
+        diagramSvg: null,
+        sections: [
+          {
+            heading: '1. Water Quality & The EU Nitrates Directive (GAP Regulations)',
+            body: 'Excess nitrate (NO₃⁻) leaching and phosphate (PO₄³⁻) runoff cause Eutrophication: algal blooms die and are decomposed by aerobic bacteria, spiking Biochemical Oxygen Demand (BOD) and depleting dissolved oxygen, killing fish.',
+            points: [
+              { term: 'Organic Nitrogen Stocking Limits', detail: 'Standard limit = 170 kg Organic N/ha/year. Farms with a Nitrates Derogation may stock up to 220 (or 250) kg N/ha subject to stricter rules (liming, clover inclusion, LESS, soil sampling).' },
+              { term: 'Slurry Spreading Rules & LESS', detail: 'Closed spreading period (mid-October to mid-January) when grass is dormant and rainfall/leaching risk is highest. Buffer zones (5m–10m from watercourses, 20m from lakes). Low Emission Slurry Spreading (LESS — trailing shoe, dribble bar, shallow injection) places slurry directly onto soil under the grass canopy, cutting ammonia (NH₃) volatilisation by 30–60% and keeping grass clean.' }
+            ]
+          },
+          {
+            heading: '2. Greenhouse Gases & Modern Precision Agri-Tech',
+            body: 'Irish agriculture targets a 25% GHG reduction by 2030 while maintaining food output.',
+            points: [
+              { term: 'Methane (CH₄) & Nitrous Oxide (N₂O) Mitigation', detail: 'Methane: produced by methanogenic archaea in the rumen; reduced via earlier finishing age (24 months), high-EBI/Euro-Star genetics, white clover swards, and feed additives (3-NOP / red seaweed). Nitrous Oxide: 265× warming potential of CO₂; reduced by switching from CAN to Protected Urea (coated with urease inhibitor NBPT).' },
+              { term: 'Precision Agriculture & Smart Dairy Tech', detail: 'GPS RTK autosteer + variable-rate spreaders eliminate fertilizer overlap. Robotic milking parlours automatically record yield, milk conductivity (early mastitis detection), and cow activity/rumination collars for heat detection.' }
+            ]
+          }
+        ],
+        quiz: {
+          q: 'How does Low Emission Slurry Spreading (LESS) such as a trailing shoe benefit both the environment and farm economics?',
+          options: [
+            'It sprays slurry high into the air to evaporate ammonia faster',
+            'It places slurry directly at soil level beneath the grass, reducing ammonia loss and increasing plant-available nitrogen',
+            'It allows slurry spreading on frozen or waterlogged ground in December'
+          ],
+          correct: 1,
+          feedback: 'Correct! LESS reduces ammonia emissions by up to 30–60%, retains more nitrogen for grass growth, and avoids contaminating grass leaves.'
+        }
+      },
+      {
+        id: 6,
+        badge: 'Stage 6 • Quantitative & Data Mastery',
+        title: 'Leaving Cert Calculations, Formulas & Data Graph Interpretation',
+        subtitle: 'Every formula tested in Section A & Section B with worked step-by-step exam solutions.',
+        weight: '15–20% of Written Paper Marks',
+        diagramSvg: null,
+        sections: [
+          {
+            heading: '1. Essential Leaving Cert Formulas (Memorize These!)',
+            body: 'Always show your formula, substitute numbers clearly, and include the exact SI or agricultural unit in your final answer.',
+            points: [
+              { term: 'Soil Moisture % & Organic Matter %', detail: 'Moisture % = [(Fresh Mass − Oven-Dry Mass) ÷ Fresh Mass] × 100. Organic Matter % = [(Oven-Dry Mass − Burned Ash Mass) ÷ Oven-Dry Mass] × 100.' },
+              { term: 'Silage / Grass Dry Matter % (DM%)', detail: 'DM% = (Oven-Dry Mass ÷ Fresh Mass) × 100. Example: 400 g fresh silage dried at 105°C to 112 g → (112 ÷ 400) × 100 = 28% DM.' },
+              { term: 'Stocking Rate (LU/ha)', detail: 'Dairy/Suckler Cow = 1.0 LU | Cattle 1–2 yrs = 0.6 LU | Cattle <1 yr = 0.4 LU | Lowland Ewe = 0.15 LU. Stocking Rate = Total Livestock Units ÷ Total Farm Area (ha).' },
+              { term: 'Compound Fertilizer Nutrient Calculation', detail: 'A 50 kg bag of 18-6-12 contains 18% N (9 kg), 6% P (3 kg), and 12% K (6 kg). At 400 kg/ha: N = 400 × 0.18 = 72 kg N/ha; P = 400 × 0.06 = 24 kg P/ha; K = 400 × 0.12 = 48 kg K/ha.' },
+              { term: 'Killing Out % (KO%) & Feed Conversion Ratio (FCR)', detail: 'KO% = (Cold Carcass Weight ÷ Live Weight) × 100 (typical continental steer: 55–58%; dairy steer: 50–52%). FCR = Total Feed Consumed (kg) ÷ Live Weight Gain (kg) (pig FCR ≈ 2.4:1 — lower is better).' }
+            ]
+          }
+        ],
+        quiz: {
+          q: 'A farmer spreads 300 kg/ha of 18-6-12 compound fertilizer on a silage field. How many kg of Phosphorus (P) are applied per hectare?',
+          options: [
+            '54 kg P/ha',
+            '18 kg P/ha',
+            '36 kg P/ha'
+          ],
+          correct: 1,
+          feedback: 'Spot on! 18-6-12 contains 6% Phosphorus (the middle number). 300 kg × 0.06 = 18 kg P/ha.'
+        }
+      }
+    ];
+
+    /* ==========================================================================
+       3. DATA: 12 MANDATORY SEC SPAs & H1 GLOSSARY
+       ========================================================================== */
+    const GLOSSARY_AND_SPAS = [
+      { type: 'SPA', tag: 'SPA 1 • Soils', title: 'Determine Soil Texture by Sedimentation', body: 'Shake a soil sample with water and Calgon (deflocculant) in a graduated cylinder; allow 24h to settle. Sand settles first (bottom), silt second, clay third, humus floats. Measure layer heights ÷ total mineral height × 100 and read the Soil Texture Triangle.' },
+      { type: 'SPA', tag: 'SPA 2 • Soils', title: 'Determine % Moisture & % Organic Matter in Soil', body: 'Weigh crucible + fresh soil. Dry in oven at 105°C to constant mass (evaporates water without burning humus) → calculate Moisture %. Then ignite over Bunsen burner / muffle furnace until glowing stops (burns off organic matter) → calculate OM %.' },
+      { type: 'SPA', tag: 'SPA 3 • Soils', title: 'Compare Capillary Rise & Water Retention in Sand vs. Clay', body: 'Place equal masses of dry sand and clay in glass tubes plugged with cotton wool standing in water. Clay shows higher capillary rise (smaller pore spaces) and greater water retention, whereas sand drains fastest (largest macropores).' },
+      { type: 'SPA', tag: 'SPA 4 • Soils', title: 'Demonstrate Flocculation in Clay Soil', body: 'Add distilled water to two test tubes of clay suspension. Add calcium chloride/lime (Ca²⁺) to Tube A and keep Tube B as control. Tube A clumps together (flocculates) and settles rapidly into clear supernatant water; Tube B stays cloudy (dispersed).' },
+      { type: 'SPA', tag: 'SPA 5 • Soils', title: 'Estimate Earthworm Population in Pasture', body: 'Place a 0.5m × 0.5m quadrat randomly on pasture, water slowly with dilute potassium permanganate or mustard solution (irritant) to bring worms to surface, count and multiply by 4 to express per m². Control: compare permanent pasture vs. tilled field.' },
+      { type: 'SPA', tag: 'SPA 6 • Soils', title: 'Measure Soil pH & Lime Requirement', body: 'Mix 1 part soil with 2.5 parts distilled water, stir, and measure with a calibrated pH probe or universal indicator/SMP buffer. Compare against target pH (6.3 grassland, 6.5 tillage).' },
+      { type: 'SPA', tag: 'SPA 7 • Crops', title: 'Determine Botanical Composition of a Grass Sward', body: 'Use a point quadrat or throw a 0.5m × 0.5m quadrat randomly 10 times across a paddock. Identify plant species (PRG, white clover, docks, buttercup) to calculate % cover and decide if reseeding is needed (<60% PRG).' },
+      { type: 'SPA', tag: 'SPA 8 • Crops', title: 'Determine Dry Matter (DM%) of Grass or Silage', body: 'Weigh 100g of chopped fresh grass/silage on a foil tray. Dry in an oven at 105°C for 24 hours until constant weight. DM% = (Dry mass ÷ Fresh mass) × 100. Also test silage pH (target 3.8–4.2).' },
+      { type: 'SPA', tag: 'SPA 9 • Crops', title: 'Determine % Seed Germination & Purity', body: 'Place 100 seeds on moist filter paper in a Petri dish at 20°C (with an unmoistened/cold control). Count germinated seeds after 7–10 days. Certified seed requires ≥85% germination and ≥98% analytical purity.' },
+      { type: 'SPA', tag: 'SPA 10 • Crops', title: 'Investigate Effect of Nitrogen/Minerals on Plant Growth', body: 'Grow barley or radish seedlings in vermiculite/sand watered with complete Sachs solution vs. solutions lacking N (stunted, yellow chlorosis), P (purple leaves, poor roots), or K (scorched leaf margins).' },
+      { type: 'SPA', tag: 'SPA 11 • Animals', title: 'Assess Hygienic Milk Quality (Resazurin / Methylene Blue Test)', body: 'Add resazurin dye to milk samples in sterile tubes and incubate at 37°C. Bacteria consume dissolved O₂, changing dye from blue → pink → colourless. Faster colour loss = higher bacterial load / poorer hygiene.' },
+      { type: 'SPA', tag: 'SPA 12 • Animals', title: 'Dissect / Examine Ruminant Digestive Tract or Mammalian Heart/Kidney', body: 'Identify the 4 stomach chambers (rumen honeycomb vs. reticulum, omasum leaves, abomasum smooth glandular lining) and relate structural adaptations to function.' },
+      { type: 'Soils', tag: 'Soils', title: 'Cation Exchange Capacity (CEC)', body: 'The capacity of negatively charged clay and humus micelles to adsorb and exchange positively charged nutrient ions (Ca²⁺, Mg²⁺, K⁺, NH₄⁺), protecting them from leaching.' },
+      { type: 'Soils', tag: 'Soils', title: 'Podzolisation & Iron Pan', body: 'In high-rainfall acidic regions, organic acids leach iron and aluminium oxides from the A/E horizon and deposit them in the B horizon, cementing into an impermeable iron pan that causes waterlogging.' },
+      { type: 'Grass & Crops', tag: 'Grass & Crops', title: 'D-Value (Digestibility)', body: 'The percentage of Dry Matter in a forage crop that is digestible by a ruminant animal. Leafy Perennial Ryegrass before ear emergence has a high D-value (>72%).' },
+      { type: 'Grass & Crops', tag: 'Grass & Crops', title: 'Tillering', body: 'The ability of grass and cereal plants to produce additional side-shoots from the base of the plant, stimulated by light reaching the base (close grazing to 4 cm) and nitrogen.' },
+      { type: 'Animals', tag: 'Animals', title: 'Compensatory Growth', body: 'Accelerated growth rate exhibited by cattle when placed on high-quality spring pasture after a period of restricted winter feeding, reducing overall feed costs.' },
+      { type: 'Animals', tag: 'Animals', title: 'Zoonosis', body: 'An infectious disease that can be transmitted directly or indirectly between vertebrate animals and humans (e.g., Bovine Tuberculosis, Brucellosis, Leptospirosis, Ringworm).' },
+      { type: 'Sustainability', tag: 'Sustainability', title: 'Eutrophication & BOD', body: 'Nutrient enrichment (N and P runoff) of waterways causing excessive algal blooms; bacterial decay of dead algae increases Biochemical Oxygen Demand (BOD), suffocating aquatic life.' },
+      { type: 'Sustainability', tag: 'Sustainability', title: 'Protected Urea', body: 'Urea fertilizer coated with a urease inhibitor (e.g., NBPT) that slows conversion to ammonia gas, cutting ammonia volatilisation and nitrous oxide (N₂O) greenhouse gas emissions.' }
+    ];
+
+    /* ==========================================================================
+       4. DATA: 5 COMPLETE ORIGINAL LEAVING CERT MOCK EXAMS (300M WRITTEN + 100M IIS)
+       ========================================================================== */
+    const MOCK_PAPERS = [
+      {
+        id: 1,
+        title: 'Mock Paper 1: Soils, Grass Conservation & Dairy Systems',
+        subtitle: 'Section A (100m) + Section B Synoptic Questions (200m) • Complete SEC Marking Scheme',
+        sectionA: [
+          { q: 'Q1. Distinguish between Soil Texture and Soil Structure. (10m)', ans: 'Soil Texture is the relative proportion of sand, silt, and clay particles in a soil (fixed property) [5m]. Soil Structure is how these mineral particles bind together with humus into aggregates or peds (e.g., crumb, platy) [5m].' },
+          { q: 'Q2. State TWO functions of Earthworms in agricultural grassland. (10m)', ans: '1. Burrowing creates macropores that improve soil aeration and drainage [5m]. 2. Pull organic matter into soil and produce nutrient-rich worm casts [5m].' },
+          { q: 'Q3. Name the causative organism of Potato Blight and state ONE cultural control method. (10m)', ans: 'Causative organism: Phytophthora infestans (oomycete) [5m]. Cultural control: Earthing up ridges / planting certified blight-resistant varieties / crop rotation [5m].' },
+          { q: 'Q4. What is meant by the D-value of grass, and how does ear emergence affect it? (10m)', ans: 'D-value is the percentage of dry matter digestible by the animal [5m]. At ear emergence, lignification increases stem fibre, causing D-value to fall rapidly [5m].' },
+          { q: 'Q5. State the target Body Condition Score (BCS) for a dairy cow at calving and give ONE consequence of over-fatness. (10m)', ans: 'Target BCS: 3.0 – 3.25 (on 1–5 scale) [5m]. Consequence of over-fatness (BCS > 3.75): Dystocia (difficult calving) / ketosis / milk fever [5m].' },
+          { q: 'Q6. Calculate the kg of Nitrogen applied per hectare when 350 kg/ha of 27-2.5-5 is spread. (10m)', ans: '350 kg × 27% (0.27) = 94.5 kg N/ha [10m].' },
+          { q: 'Q7. Identify the intermediate host of the Liver Fluke (Fasciola hepatica) and name ONE habitat control. (10m)', ans: 'Intermediate host: Mud snail (Galba truncatula) [5m]. Control: Land drainage / fencing off wet marshy areas [5m].' },
+          { q: 'Q8. State TWO economic traits included in the Dairy Economic Breeding Index (EBI). (10m)', ans: 'Any two: Milk sub-index (fat/protein kg), Fertility (calving interval/survival), Calving ease, Maintenance, Health, Beef [5m + 5m].' },
+          { q: 'Q9. Why is a 60-day dry period recommended for dairy cows before calving? (10m)', ans: 'Allows udder secretory tissue to regenerate for the next lactation [5m] and allows the cow to rebuild body condition and replenish mineral reserves [5m].' },
+          { q: 'Q10. Define Eutrophication in freshwater rivers. (10m)', ans: 'Enrichment of water with nutrients (nitrates/phosphates), stimulating excessive algal growth whose bacterial decomposition depletes dissolved oxygen (high BOD) [10m].' }
+        ],
+        sectionB: [
+          {
+            title: 'Question 11 (50 Marks) — Soil Chemistry, Liming & The Nitrogen Cycle',
+            scenario: 'A dairy farmer tests two adjacent paddocks: Paddock A (Brown Earth, pH 6.4, white clover present) and Paddock B (Gley soil, pH 5.2, rushes dominant, heavy poaching).',
+            parts: [
+              '(a) Explain THREE agronomic benefits of applying ground limestone (CaCO₃) to Paddock B. (15m)',
+              '(b) Outline the microbial steps of Nitrification and explain why this process is inhibited in Paddock B. (15m)',
+              '(c) Describe a laboratory experiment (SPA) to demonstrate flocculation in a clay soil sample. (20m)'
+            ],
+            scheme: '(a) 1. Raises pH towards 6.3, unlocking locked-up Phosphorus [5m]. 2. Ca²⁺ ions promote flocculation into crumb structure [5m]. 3. Stimulates Rhizobium and earthworm activity [5m].\n(b) Aerobic Nitrosomonas oxidises NH₄⁺ → NO₂⁻ [4m]; Nitrobacter oxidises NO₂⁻ → NO₃⁻ [4m]. Inhibited in Paddock B because waterlogged Gley soil lacks O₂ (anaerobic) and low pH (<5.5) suppresses nitrifying bacteria [7m].\n(c) Shake equal clay samples in two cylinders of distilled water [4m]; add CaCl₂/lime to Tube A, keep Tube B as control [6m]; observe clumping and clear water in A vs cloudy dispersion in B [6m]; conclude Ca²⁺ bridges negative clay micelles [4m].'
+          },
+          {
+            title: 'Question 12 (50 Marks) — Silage Conservation & Feed Quality Analysis',
+            scenario: 'Two silage pits were analysed: Pit 1 (DM 29%, pH 3.9, Lactic Acid 8.5%) and Pit 2 (DM 18%, pH 5.3, Butyric Acid 2.4%).',
+            parts: [
+              '(a) Compare the fermentation quality and animal intake potential of Pit 1 and Pit 2. (15m)',
+              '(b) Explain FOUR management practices used during harvesting and ensiling to achieve Pit 1 quality. (20m)',
+              '(c) Calculate the fresh weight of Pit 2 silage required to supply 12 kg of Dry Matter to a finishing steer. (15m)'
+            ],
+            scheme: '(a) Pit 1 is well-preserved (pH 3.8–4.2, high lactic acid, high DM) giving high palatability & intake [8m]. Pit 2 underwent secondary Clostridial fermentation (wet, high pH > 5, butyric acid), causing foul smell, protein breakdown & low intake [7m].\n(b) 1. Cut in afternoon for peak WSC sugars [5m]. 2. Wilt for 24h to ~28–30% DM [5m]. 3. Roll thoroughly to expel air/O₂ [5m]. 4. Seal airtight with weighted polythene sheets [5m].\n(c) 18% DM means 0.18 kg DM per 1 kg fresh silage. Fresh weight = 12 ÷ 0.18 = 66.67 kg fresh silage [15m].'
+          },
+          {
+            title: 'Question 13 (50 Marks) — Ruminant Digestion & Dairy Mastitis Control',
+            scenario: 'A spring-calving dairy herd experiences a spike in bulk tank Somatic Cell Count (SCC) from 140,000 to 380,000 cells/ml during wet weather.',
+            parts: [
+              '(a) State TWO causes of high SCC and outline THREE parlour hygiene measures to reduce mastitis. (20m)',
+              '(b) Describe the role of microbes in the Rumen and name the three Volatile Fatty Acids (VFAs) absorbed. (15m)',
+              '(c) Explain the hormonal mechanism of milk let-down in a dairy cow. (15m)'
+            ],
+            scheme: '(a) Causes: Bacterial infection (Staphylococcus aureus / Streptococcus uberis) or damaged teat liners [8m]. Measures: Post-milking teat dipping, wearing nitrile gloves, California Mastitis Test (CMT) & separating infected cows, servicing milking machine [12m].\n(b) Anaerobic bacteria/protozoa secrete cellulase to break down cellulose into VFAs (acetic, propionic, butyric acids) and synthesise B/K vitamins & microbial protein [15m].\n(c) Tactile stimulation of teats sends nerve impulses to hypothalamus → posterior pituitary releases Oxytocin into blood → contracts myoepithelial cells around alveoli, squeezing milk into cistern [15m].'
+          },
+          {
+            title: 'Question 14 (50 Marks) — Synoptic: Sustainable Nitrogen & Clover Swards',
+            scenario: 'To comply with the EU Nitrates Directive (170 kg N/ha organic limit), a farmer incorporates White Clover into perennial ryegrass paddocks and adopts a Trailing Shoe slurry applicator.',
+            parts: [
+              '(a) Explain the symbiotic relationship between White Clover and Rhizobium bacteria. (15m)',
+              '(b) Evaluate the environmental and economic benefits of using a Trailing Shoe (LESS) instead of a splashplate. (20m)',
+              '(c) Design a valid field investigation to test whether 20% white clover inclusion maintains grass yield when chemical N is halved. (15m)'
+            ],
+            scheme: '(a) Rhizobium in root nodules fixes atmospheric N₂ into ammonium (NH₄⁺) for the plant; the clover supplies carbohydrates (sugars) and an anaerobic leghaemoglobin environment to the bacteria [15m].\n(b) Environmental: Cuts ammonia volatilisation by 30–60%, reduces odour and nitrate runoff [10m]. Economic: Retains ~3–6 units N per 1,000 gallons, saves synthetic fertilizer, prevents leaf contamination so cows return to graze sooner [10m].\n(c) IV: Sward type (PRG + 20% clover at 100 kg N/ha vs Control PRG-only at 200 kg N/ha) [4m]. DV: Total seasonal DM yield (kg DM/ha) [3m]. Fixed: Soil pH 6.3, cutting interval, P & K [4m]. Replication: Minimum 3 randomised plots per treatment [4m].'
+          }
+        ]
+      },
+      {
+        id: 2,
+        title: 'Mock Paper 2: Tillage Crops, Genetics & Beef Production',
+        subtitle: 'Section A (100m) + Section B Synoptic Questions (200m) • Complete SEC Marking Scheme',
+        sectionA: [
+          { q: 'Q1. Distinguish between Certified Seed and Home-Saved Seed under DAFM standards. (10m)', ans: 'Certified seed is officially inspected for high germination (≥85%), analytical purity (≥98%), freedom from wild oats, and true varietal identity [10m].' },
+          { q: 'Q2. Explain the purpose of "earthing up" drills in potato cultivation. (10m)', ans: 'Protects developing tubers from sunlight (preventing greening/toxic solanine), reduces blight spores washing onto tubers, improves drainage, and smothers weeds [10m].' },
+          { q: 'Q3. State TWO differences between Mitosis and Meiosis in farm animals. (10m)', ans: '1. Mitosis produces 2 diploid somatic cells for growth; Meiosis produces 4 haploid gametes [5m]. 2. Meiosis introduces genetic variation via crossing over & independent assortment [5m].' },
+          { q: 'Q4. Define Compensatory Growth in beef cattle production. (10m)', ans: 'Accelerated live weight gain achieved when cattle fed on a restricted winter diet are turned out onto high-quality spring pasture [10m].' },
+          { q: 'Q5. A steer weighs 660 kg live and produces a 376.2 kg cold carcass. Calculate its Killing Out %. (10m)', ans: 'KO% = (376.2 ÷ 660) × 100 = 57.0% [10m].' },
+          { q: 'Q6. Distinguish between ICBF Terminal Index and Replacement Index in beef breeding. (10m)', ans: 'Terminal Index selects bulls for slaughter progeny (carcass weight, EUROP conformation, FCR) [5m]; Replacement Index selects bulls for maternal breeding heifers (milk, fertility) [5m].' },
+          { q: 'Q7. What is "lodging" in cereal crops and state ONE way to prevent it? (10m)', ans: 'Lodging is the flattening of cereal stems by wind/rain [5m]. Prevention: Apply straw-shortening growth regulators (PGRs) / avoid excessive Nitrogen / choose stiff-strawed varieties [5m].' },
+          { q: 'Q8. State TWO differences between Ruminant and Monogastric (pig) digestion. (10m)', ans: '1. Ruminants have a 4-chambered stomach with microbial cellulase digestion; pigs have a single acidic stomach [5m]. 2. Ruminants chew the cud and absorb VFAs; pigs absorb mainly glucose & amino acids [5m].' },
+          { q: 'Q9. Name ONE notifiable animal disease in Ireland and state the legal obligation upon suspicion. (10m)', ans: 'Foot and Mouth Disease / BSE / Avian Influenza / Bluetongue [5m]. Farmer must immediately notify the Department of Agriculture (DAFM) / Regional Veterinary Office and isolate stock [5m].' },
+          { q: 'Q10. Explain what is meant by a Zoonotic disease and give ONE example. (10m)', ans: 'A disease naturally transmissible between vertebrate animals and humans [5m]. Example: Bovine TB, Brucellosis, Leptospirosis, or Ringworm [5m].' }
+        ],
+        sectionB: [
+          {
+            title: 'Question 11 (50 Marks) — Mendelian Genetics & Animal Breeding',
+            scenario: 'In cattle, the Polled (hornless) allele (P) is dominant over the Horned allele (p). In Shorthorn cattle, coat colour shows incomplete dominance: Red (RR), White (WW), and Roan (RW).',
+            parts: [
+              '(a) Show a Punnett square cross between a heterozygous Polled, Roan bull (PpRW) and a Horned, White cow (ppWW). State expected offspring phenotypes and ratios. (20m)',
+              '(b) Explain how Genomic Selection accelerates genetic gain compared to traditional Progeny Testing. (15m)',
+              '(c) Describe TWO advantages and ONE biosecurity risk of using Artificial Insemination (AI) on a suckler farm. (15m)'
+            ],
+            scheme: '(a) Bull gametes: PR, PW, pR, pW [4m]. Cow gametes: pW [2m]. Offspring genotypes: PpRW (25% Polled Roan), PpWW (25% Polled White), ppRW (25% Horned Roan), ppWW (25% Horned White) → 1:1:1:1 phenotypic ratio [14m].\n(b) Genomic selection analyses DNA markers (SNPs) from hair/ear-notch samples at birth to predict breeding values immediately, cutting generation interval from ~5 years (waiting for daughters to milk/calve) to ~1.5 years [15m].\n(c) Advantages: Access to elite high-reliability sires without keeping a dangerous stock bull; prevents venereal disease spread [10m]. Risk: Requires accurate heat detection; technician visiting farms must disinfect boots/equipment [5m].'
+          },
+          {
+            title: 'Question 12 (50 Marks) — Malting vs. Feeding Barley Agronomy',
+            scenario: 'A tillage farmer grows Spring Barley on a fertile Brown Earth (pH 6.7) following a break crop of oilseed rape.',
+            parts: [
+              '(a) Compare the Nitrogen management and grain quality targets for Malting Barley versus Feeding Barley. (15m)',
+              '(b) Explain THREE benefits of including a break crop in a cereal rotation. (15m)',
+              '(c) Outline how Integrated Pest Management (IPM) is applied to control aphids and Barley Yellow Dwarf Virus (BYDV). (20m)'
+            ],
+            scheme: '(a) Malting barley receives lower N (~100–120 kg/ha) to keep grain protein <10.5% and requires >98% germination [8m]. Feeding barley receives higher N (~140–160 kg/ha) to maximise yield and grain protein [7m].\n(b) 1. Breaks soil-borne disease cycles (Take-all, Eyespot) [5m]. 2. Allows control of grass weeds (wild oats/blackgrass) using different herbicide modes of action [5m]. 3. Improves soil structure and root depth [5m].\n(c) Sowing later in autumn to avoid peak aphid flight [5m], preserving natural predators (ladybirds/hoverflies) in field margins [5m], monitoring crop thresholds [5m], and applying targeted aphicide only when threshold exceeded [5m].'
+          },
+          {
+            title: 'Question 13 (50 Marks) — Suckler-to-Beef System & Carcass Grading',
+            scenario: 'A spring-calving suckler herd uses a Charolais terminal sire on Limousin × Friesian cows, finishing steers at 22 months.',
+            parts: [
+              '(a) Explain why crossbreeding (hybrid vigour / heterosis) is used in commercial suckler herds. (15m)',
+              '(b) Outline the feeding and management of a spring-born suckler calf from birth to housing in November. (20m)',
+              '(c) Explain the EUROP carcass classification grid and state why bulls have higher Killing Out % than steers. (15m)'
+            ],
+            scheme: '(a) Combines maternal traits (milk, fertility, calving ease of Limousin×Friesian dam) with terminal growth/muscle conformation (Charolais sire) and generates hybrid vigour (offspring outperform parental average) [15m].\n(b) Colostrum within 2h [4m]; turnout to rotational pasture with dams [4m]; creep grazing ahead of cows for best grass & low worm burden [4m]; meal feeding 4 weeks pre-weaning to reduce stress [4m]; castrate, dose for lungworm/stomach worms & vaccinate for pneumonia pre-housing [4m].\n(c) E–P measures muscularity/conformation; 1–5 measures subcutaneous fat cover [9m]. Bulls produce testosterone, increasing lean muscle mass and reducing fat trim/gut fill, raising KO% by 2–3% [6m].'
+          },
+          {
+            title: 'Question 14 (50 Marks) — Synoptic: Soil Physical Health & Compaction',
+            scenario: 'Heavy machinery traffic on wet tillage soil has damaged soil crumb structure, leading to surface ponding and poor barley emergence.',
+            parts: [
+              '(a) Explain how soil compaction reduces germination and root nutrient uptake. (15m)',
+              '(b) Contrast Ploughing with Minimum Tillage (Min-Till) in terms of soil organic matter, fuel cost, and weed control. (20m)',
+              '(c) Describe the SPA used to determine Soil Moisture % and Soil Organic Matter % in the lab. (15m)'
+            ],
+            scheme: '(a) Compaction destroys macropores, reducing O₂ for aerobic seed respiration and root active transport of minerals, while physical resistance impedes root elongation [15m].\n(b) Min-till retains crop residues at surface, boosting earthworms & soil organic matter [7m] and cutting diesel/labour costs [6m], whereas ploughing inverts soil to bury weed seeds/trash effectively [7m].\n(c) Weigh crucible + fresh soil; dry at 105°C to constant mass → Moisture % = [(Fresh − Dry)/Fresh]×100 [8m]. Ignite dry soil over Bunsen/furnace until all carbon burns off → OM % = [(Dry − Ash)/Dry]×100 [7m].'
+          }
+        ]
+      },
+      {
+        id: 3,
+        title: 'Mock Paper 3: Sustainability, Nitrates & Sheep Husbandry',
+        subtitle: 'Section A (100m) + Section B Synoptic Questions (200m) • Complete SEC Marking Scheme',
+        sectionA: [
+          { q: 'Q1. Define "Flushing" in sheep management and state its physiological effect. (10m)', ans: 'Moving ewes from poor pasture onto high-quality grass 2–3 weeks before mating [5m]; increases ovulation rate, resulting in more twins and a higher lambing percentage [5m].' },
+          { q: 'Q2. State TWO causes and ONE treatment for Twin Lamb Disease (Pregnancy Toxaemia). (10m)', ans: 'Causes: Inadequate energy intake in late pregnancy + carrying multiple foetuses [6m]. Treatment: Oral propylene glycol / glucose drench [4m].' },
+          { q: 'Q3. What is the maximum standard Organic Nitrogen stocking rate under the EU Nitrates Directive? (10m)', ans: '170 kg Organic Nitrogen per hectare per year (up to 220/250 kg N/ha with an approved Nitrates Derogation) [10m].' },
+          { q: 'Q4. Explain how Protected Urea reduces greenhouse gas emissions compared to CAN. (10m)', ans: 'Protected urea contains a urease inhibitor that slows conversion to ammonia gas, reducing both ammonia volatilisation and nitrous oxide (N₂O) emissions [10m].' },
+          { q: 'Q5. State TWO advantages of ultrasound pregnancy scanning of ewes at 70–90 days gestation. (10m)', ans: '1. Separates single-, twin-, and triplet-bearing ewes for targeted concentrate feeding [5m]. 2. Identifies barren ewes early for culling [5m].' },
+          { q: 'Q6. Calculate the Stocking Rate (LU/ha) of a 50 ha farm carrying 60 dairy cows (1.0 LU) and 100 ewes (0.15 LU). (10m)', ans: 'Total LU = (60 × 1.0) + (100 × 0.15) = 60 + 15 = 75 LU. Stocking Rate = 75 ÷ 50 = 1.50 LU/ha [10m].' },
+          { q: 'Q7. Name TWO infectious causes of lameness in sheep and state ONE preventative measure. (10m)', ans: 'Footrot (Dichelobacter nodosus) and Scald (Fusobacterium necrophorum) [6m]. Prevention: Regular footbathing in zinc/copper sulphate, paring hooves, culling chronic carriers [4m].' },
+          { q: 'Q8. What is a "buffer zone" under Good Agricultural Practice (GAP) regulations? (10m)', ans: 'An unfertilised/unsprayed strip of land adjacent to rivers, lakes, or drains (e.g., 5m–10m for slurry, 2m–3m for chemical fertilizer) to prevent nutrient runoff and eutrophication [10m].' },
+          { q: 'Q9. State TWO functions of hedgerows on an Irish livestock farm. (10m)', ans: '1. Provides wildlife habitats/biodiversity corridors and carbon sequestration [5m]. 2. Acts as stock-proof boundary and shelter/windbreak for livestock [5m].' },
+          { q: 'Q10. Distinguish between Condition Scoring and Live Weighing in sheep. (10m)', ans: 'Condition scoring palpates fat and muscle cover over the lumbar vertebrae (1–5 scale) independent of frame size/fleece [5m]; live weighing measures total body mass in kg [5m].' }
+        ],
+        sectionB: [
+          {
+            title: 'Question 11 (50 Marks) — Mid-Season Prime Lamb Production Calendar',
+            scenario: 'A lowland sheep farmer manages 150 Belclare-cross ewes targeting a March lambing date and a 1.85 lambs weaned per ewe joined.',
+            parts: [
+              '(a) Explain how oestrus synchronisation (sponging) works and state TWO advantages for a sheep farmer. (15m)',
+              '(b) Outline the nutritional management of twin-bearing ewes during the final 6 weeks of pregnancy. (15m)',
+              '(c) Describe the prevention and control of (i) Clostridial diseases and (ii) Blowfly strike in lambs. (20m)'
+            ],
+            scheme: '(a) Progesterone-impregnated intravaginal sponge inserted for 12–14 days prevents ovulation; on removal, PMSG injection stimulates follicle maturation & synchronised ovulation 48h later [9m]. Advantages: Compact lambing (easier labour/supervision), uniform batch of lambs for market [6m].\n(b) 75% of foetal growth occurs in final 6 weeks while rumen capacity is compressed by foetuses [5m]. Feed high-DMD silage (>72% DMD) plus stepped-up 18% crude protein concentrates (up to 0.7–0.9 kg/day) to prevent twin lamb disease and ensure colostrum supply [10m].\n(c) (i) Clostridial (pulpy kidney/tetanus): vaccinate ewes 4–6 weeks pre-lambing for colostral antibodies, then vaccinate lambs twice [10m]. (ii) Blowfly strike: dagging/crutching dirty wool, shearing ewes, applying pour-on insect growth regulator [10m].'
+          },
+          {
+            title: 'Question 12 (50 Marks) — Water Quality, Slurry & Agricultural Runoff',
+            scenario: 'Water testing downstream of an intensive farm shows elevated nitrate levels and a sharp drop in dissolved oxygen during July.',
+            parts: [
+              '(a) Explain the biological sequence linking fertilizer/slurry runoff to fish kills in summer. (15m)',
+              '(b) Outline FOUR Good Agricultural Practice (GAP) regulations designed to protect waterways from slurry and fertilizer pollution. (20m)',
+              '(c) Design an experiment to compare the Biochemical Oxygen Demand (BOD) or algal growth in water samples with different nitrate concentrations. (15m)'
+            ],
+            scheme: '(a) Runoff adds N & P → rapid algal bloom blocks light to submerged plants → algae die → aerobic bacteria multiply rapidly to decompose dead organic matter, consuming dissolved O₂ (spiking BOD) → fish suffocate [15m].\n(b) 1. Closed slurry spreading periods (Oct–Jan) [5m]. 2. Mandatory buffer zones along rivers/wells [5m]. 3. Ban on spreading on waterlogged, frozen, or steeply sloping ground [5m]. 4. Adequate 16–22 week slurry storage capacity [5m].\n(c) Prepare standard water jars with 0 (control), 10, 25, and 50 mg/L nitrate [4m]; keep temperature, light intensity, and initial pond-water inoculum constant [4m]; replicate 3 jars per level [3m]; measure dissolved oxygen drop (using DO meter/Winkler method) or chlorophyll density after 7 days [4m].'
+          },
+          {
+            title: 'Question 13 (50 Marks) — Climate Change Mitigation & Biodiversity Schemes',
+            scenario: 'Irish farms are adopting multi-species swards (ryegrass, clover, chicory, plantain) and ACRES biodiversity actions.',
+            parts: [
+              '(a) Name the TWO main agricultural greenhouse gases and identify the primary biological source of each. (15m)',
+              '(b) Evaluate the agronomic and environmental benefits of Multi-Species Swards (MSS). (20m)',
+              '(c) Explain THREE ways a dairy or beef farmer can lower their farm’s carbon footprint per kg of product. (15m)'
+            ],
+            scheme: '(a) Methane (CH₄) from enteric fermentation by methanogenic microbes in the rumen & slurry storage [8m]. Nitrous Oxide (N₂O) from denitrification of soil nitrates by anaerobic bacteria [7m].\n(b) Deep-rooting herbs (chicory/plantain) improve drought tolerance & mineral uptake [6m], clover fixes N reducing synthetic fertilizer [6m], natural anthelmintic compounds reduce worm burden [4m]; limitation: harder weed control (herbicides kill herbs/clover) [4m].\n(c) 1. Improve EBI/Euro-Star genetics for higher efficiency [5m]. 2. Reduce slaughter age of beef cattle to ~22–24 months [5m]. 3. Switch to protected urea & clover swards [5m].'
+          },
+          {
+            title: 'Question 14 (50 Marks) — Synoptic: Soil Drainage & Land Reclamation',
+            scenario: 'A sheep and beef farm has 15 hectares of heavy, imperfectly drained Gley soil prone to rush infestation and liver fluke.',
+            parts: [
+              '(a) Account for the characteristic blue-grey mottled colour of a Gley subsoil. (15m)',
+              '(b) Compare Mole Drainage and Gravel Tunnel Drainage, stating the soil conditions suited to each. (20m)',
+              '(c) Explain how improving drainage increases grass yield and reduces liver fluke incidence. (15m)'
+            ],
+            scheme: '(a) Prolonged waterlogging excludes O₂ (anaerobic conditions); anaerobic bacteria reduce insoluble ferric iron (Fe³⁺, reddish-brown) into soluble ferrous iron (Fe²⁺, blue-grey), with seasonal air entry creating orange mottles [15m].\n(b) Mole drainage pulls a torpedo-shaped bullet through stone-free plastic clay to form unlined channels [10m]. Gravel tunnel drainage backfills the mole channel with washed gravel/stones, suited to stony clays where unlined moles would collapse [10m].\n(c) Drainage raises soil temperature in spring for earlier grass growth, allows roots to respire aerobically, extends grazing season [9m], and eliminates wet mud habitats needed by the mud snail intermediate host of liver fluke [6m].'
+          }
+        ]
+      },
+      {
+        id: 4,
+        title: 'Mock Paper 4: Synoptic Science, SPAs & Modern Agri-Tech',
+        subtitle: 'Section A (100m) + Section B Synoptic Questions (200m) • Complete SEC Marking Scheme',
+        sectionA: [
+          { q: 'Q1. State TWO safety precautions when conducting the Soil Organic Matter by Ignition SPA. (10m)', ans: 'Wear heat-resistant gloves/tongs when handling hot crucibles and safety goggles; use a fume hood or well-ventilated room [5m + 5m].' },
+          { q: 'Q2. Explain the principle of the Resazurin / Methylene Blue milk hygiene test. (10m)', ans: 'Bacteria in milk respire and consume dissolved oxygen, causing the redox indicator dye to change colour from blue → pink → colourless; faster reduction indicates higher bacterial contamination [10m].' },
+          { q: 'Q3. Give TWO benefits of GPS RTK Autosteer and Variable-Rate Spreading in tillage. (10m)', ans: '1. Eliminates overlap/misses, saving fertilizer, seed, and fuel [5m]. 2. Matches nutrient inputs to soil fertility zones, reducing leaching [5m].' },
+          { q: 'Q4. Define "Feed Conversion Ratio (FCR)" and explain why pigs have a lower FCR than cattle. (10m)', ans: 'FCR = kg feed consumed ÷ kg live weight gain [5m]. Pigs are monogastric fed energy-dense concentrates with lower maintenance/methane energy losses than ruminants [5m].' },
+          { q: 'Q5. State TWO physiological signs of oestrus (heat) in a cow and name ONE automated detection sensor. (10m)', ans: 'Signs: Standing to be mounted, restlessness/increased walking, clear mucus discharge [6m]. Sensor: Neck collar accelerometer / pedometer [4m].' },
+          { q: 'Q6. Calculate the % Organic Matter in a soil sample: Crucible = 20g; Crucible + Oven-Dry Soil = 45g; Crucible + Ash = 42g. (10m)', ans: 'Dry soil mass = 45 − 20 = 25g. OM lost = 45 − 42 = 3g. OM% = (3 ÷ 25) × 100 = 12.0% [10m].' },
+          { q: 'Q7. Distinguish between Contact and Systemic fungicides used against Potato Blight. (10m)', ans: 'Contact fungicides remain on the leaf surface and can be washed off by rain [5m]; systemic fungicides are absorbed into plant sap, protecting new growth from within [5m].' },
+          { q: 'Q8. State the causative agent and ONE symptom of Bovine Tuberculosis (TB). (10m)', ans: 'Bacterium: Mycobacterium bovis [5m]. Symptom: Chronic weight loss, persistent cough, enlarged lymph nodes (or positive comparative tuberculin skin test) [5m].' },
+          { q: 'Q9. Why is Calgon (sodium hexametaphosphate) added during the Soil Sedimentation SPA? (10m)', ans: 'Acts as a dispersing/deflocculating agent: Na⁺ ions replace Ca²⁺ ions on clay micelles, separating soil crumbs into individual sand, silt, and clay particles [10m].' },
+          { q: 'Q10. Name TWO nutrients required in macro-quantities by grass and state ONE deficiency symptom of either. (10m)', ans: 'Nitrogen (N) and Phosphorus (P) / Potassium (K) [5m]. N deficiency: stunted growth and yellowing (chlorosis) of older leaves [5m].' }
+        ],
+        sectionB: [
+          {
+            title: 'Question 11 (50 Marks) — Experimental Design & SPA Data Analysis',
+            scenario: 'A student investigated earthworm populations across three field types (n = 5 quadrats of 0.25 m² each): Permanent Pasture (mean 18 worms/quadrat), 3-Year Ley (mean 12), and Continuous Tillage (mean 3).',
+            parts: [
+              '(a) Convert the mean counts into earthworms per m² and explain the differences observed across the three fields. (20m)',
+              '(b) Describe the field method used to extract and count earthworms accurately without harming them. (15m)',
+              '(c) Identify TWO sources of experimental error in this investigation and how to minimise them. (15m)'
+            ],
+            scheme: '(a) Multiply by 4 (since 0.25 m² × 4 = 1 m²): Pasture = 72/m², 3-Yr Ley = 48/m², Tillage = 12/m² [6m]. Permanent pasture has undisturbed burrows, continuous root/dung organic matter food supply, and higher moisture [8m]; continuous tillage destroys burrows mechanically, exposes worms to predators/drying, and has lower OM [6m].\n(b) Place 0.5m×0.5m quadrat randomly; clip tall grass; pour dilute mustard suspension (or KMnO₄) slowly onto soil; collect and count worms emerging over 15 mins; rinse worms in clean water [15m].\n(c) 1. Soil moisture/temperature differences between days → sample all fields on the same day [8m]. 2. Edge bias → throw quadrats randomly using coordinates away from headlands [7m].'
+          },
+          {
+            title: 'Question 12 (50 Marks) — Precision Dairy Farming & Herd Health',
+            scenario: 'A 140-cow dairy farm installs robotic milking units equipped with automated milk conductivity sensors and activity collars.',
+            parts: [
+              '(a) Evaluate the advantages and limitations of robotic milking compared to a conventional herringbone parlour. (20m)',
+              '(b) Explain how automated milk electrical conductivity and rumination data assist in early disease detection. (15m)',
+              '(c) Outline a biosecurity protocol when purchasing replacement heifers onto a closed herd. (15m)'
+            ],
+            scheme: '(a) Advantages: Cuts milking labour, cows milk voluntarily 2.5–3× daily boosting yield, cow-level quarter data [12m]. Limitations: High capital & maintenance cost, requires strong grazing infrastructure/cow traffic flow [8m].\n(b) Mastitis damages udder cells, increasing Na⁺ and Cl⁻ ions in milk which spikes electrical conductivity before visible clots appear [8m]. Sudden drop in rumination minutes signals ketosis, acidosis, or calving onset [7m].\n(c) Check pre-movement TB/BVD/Johne’s health status [5m], transport in disinfected trailer [4m], isolate in quarantine paddock/shed for 28 days and re-test before mixing with main herd [6m].'
+          },
+          {
+            title: 'Question 13 (50 Marks) — Pig Production & Monogastric Nutrition',
+            scenario: 'An integrated Irish pig unit manages sows from farrowing through weaning to finishing at 115 kg live weight.',
+            parts: [
+              '(a) Explain why farrowing crates and infrared heat lamps are used in the farrowing house. (15m)',
+              '(b) Outline how pig diets change across Creep, Weaner, and Finisher stages in terms of protein and energy. (20m)',
+              '(c) State THREE strict biosecurity measures enforced on commercial pig farms. (15m)'
+            ],
+            scheme: '(a) Farrowing crates prevent the heavy sow from lying on and crushing newborn piglets [8m]; piglets lack brown fat/thermoregulation at birth and require 30–32°C creep area via heat lamps while the sow prefers ~18°C [7m].\n(b) Creep feed (from day 7): very high protein (~22% lysine-rich), milk-based, highly digestible to mature gut enzymes [7m]. Weaner: ~19–20% protein, high energy [6m]. Finisher: lower protein (~16%) to avoid excess fat/nitrogen excretion and reduce feed cost [7m].\n(c) Perimeter fencing & locked gates; mandatory boot-dip/shower-in and farm-only coveralls; strict ban on feeding catering/meat waste (prevents African Swine Fever / Foot & Mouth) [15m].'
+          },
+          {
+            title: 'Question 14 (50 Marks) — Synoptic: Crop Protection & Biodiversity Balance',
+            scenario: 'A mixed farm aims to maximise spring barley yield while complying with EU pesticide reduction targets and protecting pollinators.',
+            parts: [
+              '(a) Explain how herbicides, fungicides, and insecticides differ in target organisms and timing of application. (15m)',
+              '(b) Describe FOUR non-chemical (cultural/biological) methods of weed and pest control in crops. (20m)',
+              '(c) Explain how excessive pesticide use can negatively impact soil biology and aquatic ecosystems. (15m)'
+            ],
+            scheme: '(a) Herbicides target weeds (pre-emergence or early post-emergence); fungicides target fungal/oomycete diseases like Septoria/blight (preventative at key growth stages); insecticides target insect pests like aphids (only when threshold reached) [15m].\n(b) 1. Crop rotation [5m]. 2. Stale seedbed technique & mechanical hoeing [5m]. 3. Certified clean seed & competitive high-tillering cultivars [5m]. 4. Beetle banks / wildflower margins supporting ladybirds and carabid beetles [5m].\n(c) Broad-spectrum insecticides kill beneficial pollinators and soil arthropods; non-target fungicides suppress mycorrhizal fungi; spray drift/runoff into streams poisons aquatic invertebrates [15m].'
+          }
+        ]
+      },
+      {
+        id: 5,
+        title: 'Mock Paper 5: Full June Simulation — Comprehensive Higher Level Paper',
+        subtitle: 'Section A (100m) + Section B Synoptic Questions (200m) • Complete SEC Marking Scheme',
+        sectionA: [
+          { q: 'Q1. State the 5 factors of soil formation (CLORPT). (10m)', ans: 'Climate, Living organisms, Relief (topography), Parent material, and Time [2m each = 10m].' },
+          { q: 'Q2. Explain why Peat soils have high Cation Exchange Capacity (CEC) yet require lime and trace elements. (10m)', ans: 'High humus content provides abundant negatively charged micelles (high CEC), but organic acids create low pH (<5.0) and peat lacks mineral reserves (Cu, Co, Se) [10m].' },
+          { q: 'Q3. Name the plant hormone/growth regulator used to prevent lodging in winter wheat/barley. (10m)', ans: 'Chlormequat (CCC) / Trinexapac-ethyl (anti-gibberellin growth regulator that shortens and thickens internodes) [10m].' },
+          { q: 'Q4. State TWO differences between Hay and Silage preservation. (10m)', ans: '1. Hay is preserved by drying to >85% DM in sun; silage is preserved anaerobically at ~28–30% DM via lactic acid [5m]. 2. Silage is less weather-dependent and retains higher D-value [5m].' },
+          { q: 'Q5. Define "Colostrum" and state TWO components essential for newborn livestock. (10m)', ans: 'First milk produced for 24–48h post-parturition [4m]. Contains immunoglobulins (antibodies), high fat/energy, and Vitamin A/magnesium [3m + 3m].' },
+          { q: 'Q6. In cattle, Red (RR) × White (WW) gives Roan (RW). What phenotypic ratio results from Roan × Roan? (10m)', ans: '1 Red (RR) : 2 Roan (RW) : 1 White (WW) [10m].' },
+          { q: 'Q7. State ONE symptom and ONE preventative measure for Hoose (Lungworm) in calves. (10m)', ans: 'Symptom: Husk/harsh coughing especially after exercise [5m]. Prevention: Pasture rotation (leader-follower) / anthelmintic dosing / Huskvac oral vaccine [5m].' },
+          { q: 'Q8. Calculate the kg of Potassium (K) in four 50 kg bags of 10-10-20 compound fertilizer. (10m)', ans: 'Total weight = 4 × 50 kg = 200 kg. K = 200 kg × 20% (0.20) = 40 kg K [10m].' },
+          { q: 'Q9. What is "Minimum Tillage" and give ONE environmental benefit? (10m)', ans: 'Cultivating only the top 5–10 cm of soil without inverting with a plough [5m]. Benefit: Reduces carbon oxidation/CO₂ loss, prevents soil erosion, preserves earthworms [5m].' },
+          { q: 'Q10. Explain the term "Carbon Sequestration" in grassland farming. (10m)', ans: 'The capture and long-term storage of atmospheric CO₂ in soil organic matter (humus) and woody biomass (hedgerows/trees) via photosynthesis [10m].' }
+        ],
+        sectionB: [
+          {
+            title: 'Question 11 (50 Marks) — Soil Profile, Weathering & Nutrient Availability',
+            scenario: 'A soil pit dug on an upland farm reveals a dark organic O horizon, a pale grey leached E horizon, a hard reddish-brown B horizon, and granite bedrock.',
+            parts: [
+              '(a) Identify the Great Soil Group shown and explain how physical and chemical weathering contributed to its formation. (20m)',
+              '(b) Explain the agricultural limitations of this soil and outline THREE reclamation steps to improve its productivity. (15m)',
+              '(c) Describe how Soil pH affects the availability of Phosphorus (P) and trace elements to grass. (15m)'
+            ],
+            scheme: '(a) Podzol [4m]. Physical weathering: freeze-thaw action and temperature fluctuations shatter granite parent material [8m]. Chemical weathering: carbonic and humic acids dissolve minerals (hydrolysis/solution) and leach Fe/Al down the profile [8m].\n(b) Limitations: Acidic pH, nutrient-poor, waterlogged above iron pan [6m]. Reclamation: Subsoiling/deep ripping to break iron pan [3m], installing piped drains [3m], applying ground limestone and P/K + reseeding [3m].\n(c) Below pH 5.5, P reacts with soluble iron and aluminium to form insoluble Fe/Al phosphates unavailable to roots [8m]; above pH 7.2, P binds with calcium and trace elements (Mn, B, Cu) become locked up [7m].'
+          },
+          {
+            title: 'Question 12 (50 Marks) — Grassland Reseeding & Grazing Management',
+            scenario: 'An old permanent pasture with 35% Perennial Ryegrass, 45% weed grasses (bent/meadow grass), and 20% docks is scheduled for autumn reseeding.',
+            parts: [
+              '(a) Outline the step-by-step operations involved in reseeding this paddock using a full ploughing method. (20m)',
+              '(b) Explain the principles of Rotational Paddock Grazing and why leaving a 4 cm post-grazing residual is critical. (15m)',
+              '(c) Describe an SPA to determine the Botanical Composition of the newly established sward next spring. (15m)'
+            ],
+            scheme: '(a) 1. Spray off old sward with glyphosate; wait 10–14 days [4m]. 2. Soil test and apply lime/P/K [4m]. 3. Plough, disc/power-harrow to create a fine, firm seedbed [4m]. 4. Sow certified PRG + white clover seed at shallow depth (1–1.5 cm) and roll for seed-soil contact [4m]. 5. Apply post-emergence clover-safe herbicide and graze lightly with calves/sheep to encourage tillering [4m].\n(b) Animals graze high-DMD grass in 24–48h then move on, giving a 21-day rest period [8m]. Leaving 4 cm residual removes stemmy base, lets light reach the crown to stimulate tillering, and maintains high D-value in subsequent rotations [7m].\n(c) Randomly throw a 0.5m×0.5m quadrat 10 times across the paddock [5m]; identify and record % cover of PRG, white clover, and weeds in each quadrat [6m]; calculate mean % composition [4m].'
+          },
+          {
+            title: 'Question 13 (50 Marks) — Dairy Calf-to-Beef vs. Spring Milk Production',
+            scenario: 'A dairy farmer uses sexed semen on top EBI cows for herd replacements and beef AI bulls (Angus/Belgian Blue) on the remaining cows.',
+            parts: [
+              '(a) Evaluate the benefits and challenges of using Sexed Semen in a spring-calving dairy herd. (15m)',
+              '(b) Explain how the three Volatile Fatty Acids (VFAs) produced in the rumen influence milk yield and milk fat/protein %. (20m)',
+              '(c) State THREE calf rearing practices that prevent infectious scours (diarrhoea) in the first 4 weeks of life. (15m)'
+            ],
+            scheme: '(a) Benefits: Generates replacements from highest-EBI dams, produces higher-value beef-cross calves from lower-EBI cows, reduces unwanted dairy bull calves [10m]. Challenges: Slightly lower conception rate (~5–10% lower) and higher straw cost [5m].\n(b) Acetic acid (from fibrous grass) is the precursor for milk fat synthesis [7m]; Propionic acid (from concentrates/sugars) converts to glucose in the liver, driving total milk volume and milk protein % [7m]; Butyric acid fuels rumen papillae development [6m].\n(c) 1. Feed 3L colostrum within 2h of birth [5m]. 2. Clean, dry, well-bedded straw pens with good ventilation and no draughts [5m]. 3. Sanitise feeding buckets/teats between feeds and vaccinate dams pre-calving for rotavirus/coronavirus/E. coli [5m].'
+          },
+          {
+            title: 'Question 14 (50 Marks) — Synoptic: The IIS & Scientific Investigation in Agriculture',
+            scenario: 'A Leaving Cert student investigates the effect of different slurry application rates (0, 20, 40, and 60 m³/ha) on grass dry matter yield and soil nitrate leaching.',
+            parts: [
+              '(a) Formulate a clear hypothesis and identify the Independent Variable, Dependent Variables, Control, and TWO Fixed Variables. (20m)',
+              '(b) Explain why applying 60 m³/ha in a single dressing violates Good Agricultural Practice and reduces nitrogen use efficiency. (15m)',
+              '(c) Explain how the student should process and present their data to achieve top marks in the IIS Results & Evaluation sections. (15m)'
+            ],
+            scheme: '(a) Hypothesis: Increasing slurry rate up to 40 m³/ha will increase DM yield, whereas 60 m³/ha will cause excessive nitrate leaching without proportional yield gain [4m]. IV: Slurry rate (0, 20, 40, 60 m³/ha) [3m]. DV: Grass DM yield (kg/ha) & leachate nitrate (mg/L) [4m]. Control: 0 m³/ha plots [3m]. Fixed: Soil type/pH, grass variety, application date, cutting height [6m].\n(b) Exceeds plant uptake capacity; surplus nitrate leaches rapidly into groundwater/rivers causing eutrophication, smothers sward, and risks breaching the 170 kg organic N/ha limit [15m].\n(c) Calculate mean and standard deviation across replicates (n ≥ 3) [5m]; plot labelled bar/line graphs with error bars and SI units [5m]; evaluate weather variability, soil heterogeneity, and farm economic/environmental implications [5m].'
+          }
+        ]
+      }
+    ];
+
+    /* ==========================================================================
+       5. STATE MANAGEMENT & LOCALSTORAGE
+       ========================================================================== */
+    const STORAGE_KEY = 'fieldbook_h1_lc_ag_v1';
+    let state = {
+      activeView: 'blueprint',
+      activeStageId: 1,
+      activeMockId: 1,
+      completedStages: [],
+      iisChecklist: [],
+      quizChoices: {},
+      mockScores: {} // { 1: { secA: 0, q11: 0, q12: 0, q13: 0, q14: 0, iis: 85 } }
+    };
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) state = { ...state, ...JSON.parse(raw) };
+      } catch (e) {
+        console.warn('State load error:', e);
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        console.warn('State save error:', e);
+      }
+      refreshProgressBadges();
+    }
+
+    function notify(msg, icon = '🌾') {
+      const banner = document.getElementById('toast-banner');
+      document.getElementById('toast-icon').textContent = icon;
+      document.getElementById('toast-msg').textContent = msg;
+      banner.classList.add('show');
+      clearTimeout(window.__fbToast);
+      window.__fbToast = setTimeout(() => banner.classList.remove('show'), 3000);
+    }
+
+    function refreshProgressBadges() {
+      const stagesCount = state.completedStages.length;
+      const iisCount = state.iisChecklist.length;
+      const mocksCount = Object.keys(state.mockScores).length;
+
+      const totalSteps = 6 + 5 + 5;
+      const doneSteps = stagesCount + iisCount + mocksCount;
+      const masteryPct = Math.round((doneSteps / totalSteps) * 100);
+      const iisPct = Math.round((iisCount / 5) * 100);
+
+      document.getElementById('sidebar-mastery-pct').textContent = `${masteryPct}%`;
+      document.getElementById('sidebar-mastery-bar').style.width = `${masteryPct}%`;
+      document.getElementById('sidebar-stages-done').textContent = `${stagesCount} / 6 Stages`;
+      document.getElementById('sidebar-iis-status').textContent = `IIS: ${iisCount}/5`;
+      document.getElementById('sidebar-mocks-done').textContent = `${mocksCount} / 5 Mocks`;
+
+      document.getElementById('header-mastery-label').textContent = `Mastery: ${masteryPct}%`;
+      document.getElementById('header-iis-label').textContent = `IIS Readiness: ${iisPct}%`;
+
+      renderSidebarStages();
+    }
+
+    /* ==========================================================================
+       6. NAVIGATION & BLUEPRINT RENDERERS
+       ========================================================================== */
+    function navigateTo(viewName) {
+      state.activeView = viewName;
+      saveState();
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.view === viewName);
+      });
+      document.querySelectorAll('.app-view').forEach(sec => sec.classList.add('hidden'));
+      const target = document.getElementById(`view-${viewName}`);
+      if (target) target.classList.remove('hidden');
+
+      closeMobileDrawer();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openStage(stageId) {
+      state.activeStageId = stageId;
+      navigateTo('curriculum');
+      renderCurriculumView();
+    }
+
+    function toggleStageDone(stageId) {
+      const idx = state.completedStages.indexOf(stageId);
+      if (idx === -1) {
+        state.completedStages.push(stageId);
+        notify(`Stage ${stageId} marked as mastered!`, '✓');
+      } else {
+        state.completedStages.splice(idx, 1);
+        notify(`Stage ${stageId} unmarked.`, '↩️');
+      }
+      saveState();
+      renderBlueprintView();
+      renderCurriculumView();
+    }
+
+    function toggleIisItem(itemId) {
+      const idx = state.iisChecklist.indexOf(itemId);
+      if (idx === -1) {
+        state.iisChecklist.push(itemId);
+        notify('IIS milestone checked off!', '📋');
+      } else {
+        state.iisChecklist.splice(idx, 1);
+      }
+      saveState();
+      renderBlueprintView();
+    }
+
+    function renderSidebarStages() {
+      const el = document.getElementById('sidebar-stage-shortcuts');
+      el.innerHTML = CURRICULUM_STAGES.map(st => {
+        const done = state.completedStages.includes(st.id);
+        return `<button onclick="openStage(${st.id})" class="w-full flex items-center justify-between px-3 py-1.5 rounded-lg hover:bg-[#EFECE1] text-left text-[#525E58] hover:text-[#1E2421] transition">
+          <span class="truncate pr-2">${st.id}. ${st.title.split(':')[0]}</span>
+          <span class="font-bold ${done ? 'text-[#1F4E3D]' : 'text-[#C9C1AE]'}">${done ? '✓' : '○'}</span>
+        </button>`;
+      }).join('');
+    }
+
+    function renderBlueprintView() {
+      const iisEl = document.getElementById('iis-checklist-container');
+      iisEl.innerHTML = IIS_MILESTONES.map(m => {
+        const checked = state.iisChecklist.includes(m.id);
+        return `<div onclick="toggleIisItem('${m.id}')" class="p-3.5 rounded-xl border cursor-pointer transition flex items-start gap-3 ${
+          checked ? 'bg-[#E8F1ED]/70 border-[#1F4E3D]' : 'bg-[#F7F4EB] border-[#DDD6C5] hover:border-[#B55233]'
+        }">
+          <div class="w-5 h-5 mt-0.5 rounded flex items-center justify-center text-xs font-bold shrink-0 ${
+            checked ? 'bg-[#1F4E3D] text-white' : 'bg-[#FFFDF8] border border-[#DDD6C5] text-transparent'
+          }">✓</div>
+          <div>
+            <div class="font-bold text-xs sm:text-sm text-[#1E2421]">${m.title}</div>
+            <div class="text-xs text-[#525E58] mt-0.5">${m.desc}</div>
+          </div>
+        </div>`;
+      }).join('');
+
+      const stagesGrid = document.getElementById('blueprint-stages-grid');
+      stagesGrid.innerHTML = CURRICULUM_STAGES.map(st => {
+        const done = state.completedStages.includes(st.id);
+        return `<div onclick="openStage(${st.id})" class="notebook-card p-5 flex flex-col justify-between hover:border-[#1F4E3D] cursor-pointer transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#B55233]">${st.badge}</span>
+              <span class="text-xs font-bold px-2.5 py-0.5 rounded-full ${done ? 'bg-[#E8F1ED] text-[#1F4E3D]' : 'bg-[#EFECE1] text-[#525E58]'}">
+                ${done ? '✓ Mastered' : 'Study'}
+              </span>
+            </div>
+            <h4 class="font-serif-notebook font-bold text-lg text-[#1E2421] mb-1.5">${st.title}</h4>
+            <p class="text-sm text-[#525E58] mb-3">${st.subtitle}</p>
+          </div>
+          <div class="pt-3 border-t border-[#DDD6C5] flex items-center justify-between text-xs">
+            <span class="font-semibold text-[#1F4E3D]">${st.weight}</span>
+            <span class="font-bold text-[#B55233]">Open Notes →</span>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    /* ==========================================================================
+       7. CURRICULUM STAGE VIEW RENDERER
+       ========================================================================== */
+    function renderCurriculumView() {
+      const bar = document.getElementById('stage-selector-bar');
+      bar.innerHTML = CURRICULUM_STAGES.map(st => {
+        const active = st.id === state.activeStageId;
+        const done = state.completedStages.includes(st.id);
+        return `<button onclick="openStage(${st.id})" class="px-3.5 py-2 rounded-xl text-xs font-bold border transition ${
+          active
+            ? 'bg-[#1F4E3D] text-[#FFFDF8] border-[#1F4E3D]'
+            : 'bg-[#F7F4EB] text-[#1E2421] border-[#DDD6C5] hover:border-[#1F4E3D]'
+        }">
+          Stage ${st.id} ${done ? '✓' : ''}
+        </button>`;
+      }).join('');
+
+      const stage = CURRICULUM_STAGES.find(s => s.id === state.activeStageId) || CURRICULUM_STAGES[0];
+      const done = state.completedStages.includes(stage.id);
+      const userChoice = state.quizChoices[stage.id];
+
+      const detail = document.getElementById('stage-detail-container');
+      detail.innerHTML = `
+        <div class="notebook-card p-6 sm:p-8 bg-[#FFFDF8]">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#DDD6C5] pb-5 mb-6">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-[#B55233]">${stage.badge} • ${stage.weight}</span>
+              <h2 class="font-serif-notebook text-2xl sm:text-3xl font-bold text-[#1E2421] mt-1">${stage.title}</h2>
+              <p class="text-sm text-[#525E58] mt-1">${stage.subtitle}</p>
+            </div>
+            <button onclick="toggleStageDone(${stage.id})" class="px-4 py-2.5 rounded-xl text-xs font-bold border shrink-0 transition ${
+              done ? 'bg-[#E8F1ED] text-[#1F4E3D] border-[#C2D9CE]' : 'bg-[#1E2421] text-white border-[#1E2421] hover:bg-[#333D38]'
+            }">
+              ${done ? '✓ Stage Mastered' : 'Mark Stage Complete'}
+            </button>
+          </div>
+
+          ${stage.diagramSvg ? `<div class="mb-7">${stage.diagramSvg}</div>` : ''}
+
+          <div class="space-y-8">
+            ${stage.sections.map(sec => `
+              <div class="space-y-3">
+                <h3 class="font-serif-notebook text-xl font-bold text-[#1E2421]">${sec.heading}</h3>
+                <p class="text-sm sm:text-base text-[#525E58]">${sec.body}</p>
+                <div class="grid grid-cols-1 gap-3 pt-1">
+                  ${sec.points.map(pt => `
+                    <div class="p-4 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5]">
+                      <div class="font-bold text-sm text-[#1F4E3D] mb-1">${pt.term}</div>
+                      <p class="text-sm text-[#1E2421] leading-relaxed">${pt.detail}</p>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- Stage Checkpoint Quiz -->
+          <div class="mt-8 p-5 rounded-xl bg-[#FDF6E7] border border-[#EED9A9]">
+            <div class="text-xs font-bold uppercase tracking-wider text-[#C98A2B] mb-1">Stage ${stage.id} Exam Checkpoint</div>
+            <h4 class="font-serif-notebook font-bold text-lg text-[#1E2421] mb-3">${stage.quiz.q}</h4>
+            <div class="space-y-2">
+              ${stage.quiz.options.map((opt, i) => {
+                let cls = 'bg-[#FFFDF8] border-[#DDD6C5] text-[#1E2421] hover:border-[#C98A2B]';
+                if (userChoice !== undefined) {
+                  if (i === stage.quiz.correct) cls = 'bg-[#E8F1ED] border-[#1F4E3D] text-[#1F4E3D] font-bold';
+                  else if (i === userChoice) cls = 'bg-[#FAEDE8] border-[#B55233] text-[#B55233]';
+                }
+                return `<button onclick="selectStageQuiz(${stage.id}, ${i})" class="w-full text-left px-4 py-3 rounded-xl border text-sm transition ${cls}">
+                  ${String.fromCharCode(65 + i)}. ${opt}
+                </button>`;
+              }).join('')}
+            </div>
+            ${userChoice !== undefined ? `
+              <div class="mt-3 p-3 rounded-lg bg-[#FFFDF8] border border-[#DDD6C5] text-xs sm:text-sm text-[#1E2421]">
+                <strong>SEC Examiner Note:</strong> ${stage.quiz.feedback}
+              </div>
+            ` : ''}
+          </div>
+
+          <div class="mt-6 pt-5 border-t border-[#DDD6C5] flex justify-between items-center">
+            ${stage.id > 1 ? `<button onclick="openStage(${stage.id - 1})" class="text-sm font-bold text-[#525E58] hover:text-[#1E2421]">← Stage ${stage.id - 1}</button>` : '<span></span>'}
+            ${stage.id < 6 ? `<button onclick="openStage(${stage.id + 1})" class="px-5 py-2.5 rounded-xl bg-[#1F4E3D] text-white text-sm font-bold hover:bg-[#173B2E]">Next: Stage ${stage.id + 1} →</button>` : `<button onclick="navigateTo('mocks')" class="px-5 py-2.5 rounded-xl bg-[#B55233] text-white text-sm font-bold">Attempt Mock Paper 1 →</button>`}
+          </div>
+        </div>
+      `;
+    }
+
+    function selectStageQuiz(stageId, optIdx) {
+      state.quizChoices[stageId] = optIdx;
+      saveState();
+      renderCurriculumView();
+    }
+
+    /* ==========================================================================
+       8. INTERACTIVE FARM SIMULATOR & AG-CALC ENGINE
+       ========================================================================== */
+    function updateAgronomySimulator() {
+      const ph = parseFloat(document.getElementById('sim-ph').value);
+      const texture = document.getElementById('sim-texture').value;
+      const drainage = document.getElementById('sim-drainage').value;
+      const orgN = parseInt(document.getElementById('sim-n').value, 10);
+
+      document.getElementById('sim-ph-val').textContent = ph.toFixed(1);
+      document.getElementById('sim-n-val').textContent = orgN;
+
+      const targetPh = texture === 'peat' ? 5.6 : 6.3;
+      const phDiff = Math.max(0, targetPh - ph);
+      const limeTonnes = (phDiff * (texture === 'clay' ? 8.5 : texture === 'sandy' ? 5.5 : 7.0)).toFixed(1);
+
+      let drainAdvice = 'Well-aerated Brown Earth conditions: aerobic Nitrosomonas & Nitrobacter thrive, low denitrification risk.';
+      if (drainage === 'imperfect') {
+        drainAdvice = 'Imperfectly drained Gley: install piped/gravel tunnel drains; restrict early spring slurry spreading to prevent compaction & runoff.';
+      } else if (drainage === 'waterlogged') {
+        drainAdvice = 'Waterlogged / Iron Pan: subsoiling + gravel tunnel/mole drainage required. High denitrification (N₂O loss) and mud snail (liver fluke) habitat.';
+      }
+
+      let nStatus = `Compliant with standard 170 kg Organic N/ha limit (${orgN} kg N/ha).`;
+      if (orgN > 220) {
+        nStatus = `⚠️ BREACH (${orgN} kg N/ha): Exceeds even the 220 kg N/ha Nitrates Derogation ceiling! Must export slurry, rent additional land, or reduce herd size.`;
+      } else if (orgN > 170) {
+        nStatus = `Derogation Band (${orgN} kg N/ha): Requires an approved DAFM Nitrates Derogation, mandatory Trailing Shoe/LESS slurry spreading, liming plan, and clover incorporation.`;
+      }
+
+      const cloverOk = ph >= 6.0 && drainage === 'free'
+        ? 'Ideal conditions for White Clover (Rhizobium fixes 100–150 kg N/ha/yr).'
+        : 'Sub-optimal for White Clover: raise pH ≥ 6.2 and improve drainage before oversowing clover.';
+
+      document.getElementById('sim-output-panel').innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="p-3 rounded-lg bg-[#FFFDF8] border border-[#DDD6C5]">
+            <div class="text-xs font-bold uppercase text-[#1F4E3D]">1. Liming & Phosphorus Availability</div>
+            <div class="mt-1 text-xs sm:text-sm text-[#1E2421]">
+              ${phDiff > 0
+                ? `Apply ~<strong>${limeTonnes} t/ha</strong> of Ground Limestone (CaCO₃, TNV >90%) to raise pH from ${ph.toFixed(1)} to ${targetPh}. Unlocks locked-up Phosphorus and promotes Ca²⁺ flocculation.`
+                : `Soil pH (${ph.toFixed(1)}) is optimal! No lime required; Phosphorus and trace elements are readily available.`}
+            </div>
+          </div>
+          <div class="p-3 rounded-lg bg-[#FFFDF8] border border-[#DDD6C5]">
+            <div class="text-xs font-bold uppercase text-[#B55233]">2. EU Nitrates Directive Compliance</div>
+            <div class="mt-1 text-xs sm:text-sm text-[#1E2421]">${nStatus}</div>
+          </div>
+          <div class="p-3 rounded-lg bg-[#FFFDF8] border border-[#DDD6C5]">
+            <div class="text-xs font-bold uppercase text-[#1F4E3D]">3. Soil Water & Drainage Prescription</div>
+            <div class="mt-1 text-xs sm:text-sm text-[#1E2421]">${drainAdvice}</div>
+          </div>
+          <div class="p-3 rounded-lg bg-[#FFFDF8] border border-[#DDD6C5]">
+            <div class="text-xs font-bold uppercase text-[#C98A2B]">4. White Clover & Sward Suitability</div>
+            <div class="mt-1 text-xs sm:text-sm text-[#1E2421]">${cloverOk}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function updateAgCalculators() {
+      // 1. Soil Moisture & OM
+      const fresh = parseFloat(document.getElementById('calc-soil-fresh').value) || 0;
+      const dry = parseFloat(document.getElementById('calc-soil-dry').value) || 0;
+      const ash = parseFloat(document.getElementById('calc-soil-ash').value) || 0;
+      const moisturePct = fresh > 0 ? (((fresh - dry) / fresh) * 100).toFixed(1) : '0.0';
+      const omPct = dry > 0 ? (((dry - ash) / dry) * 100).toFixed(1) : '0.0';
+      document.getElementById('calc-soil-result').innerHTML =
+        `Moisture % = [(${fresh} − ${dry}) ÷ ${fresh}] × 100 = <strong>${moisturePct}%</strong><br>` +
+        `Organic Matter % = [(${dry} − ${ash}) ÷ ${dry}] × 100 = <strong>${omPct}%</strong>`;
+
+      // 2. Fertilizer
+      const [nPct, pPct, kPct] = document.getElementById('calc-fert-type').value.split(',').map(Number);
+      const rate = parseFloat(document.getElementById('calc-fert-rate').value) || 0;
+      const nKg = ((rate * nPct) / 100).toFixed(1);
+      const pKg = ((rate * pPct) / 100).toFixed(1);
+      const kKg = ((rate * kPct) / 100).toFixed(1);
+      document.getElementById('calc-fert-result').innerHTML =
+        `At ${rate} kg/ha of ${nPct}-${pPct}-${kPct}:<br>` +
+        `<strong>${nKg} kg N/ha</strong> | <strong>${pKg} kg P/ha</strong> | <strong>${kKg} kg K/ha</strong>`;
+
+      // 3. Stocking Rate
+      const cows = parseFloat(document.getElementById('calc-lu-cows').value) || 0;
+      const cattle = parseFloat(document.getElementById('calc-lu-cattle').value) || 0;
+      const ewes = parseFloat(document.getElementById('calc-lu-ewes').value) || 0;
+      const ha = parseFloat(document.getElementById('calc-lu-ha').value) || 1;
+      const totalLu = cows * 1.0 + cattle * 0.6 + ewes * 0.15;
+      const sr = (totalLu / ha).toFixed(2);
+      document.getElementById('calc-lu-result').innerHTML =
+        `Total LUs = (${cows}×1.0) + (${cattle}×0.6) + (${ewes}×0.15) = <strong>${totalLu.toFixed(1)} LU</strong><br>` +
+        `Stocking Rate = ${totalLu.toFixed(1)} ÷ ${ha} ha = <strong>${sr} LU/ha</strong>`;
+
+      // 4. Killing Out %
+      const live = parseFloat(document.getElementById('calc-ko-live').value) || 0;
+      const dead = parseFloat(document.getElementById('calc-ko-dead').value) || 0;
+      const ko = live > 0 ? ((dead / live) * 100).toFixed(1) : '0.0';
+      document.getElementById('calc-ko-result').innerHTML =
+        `KO% = (${dead} kg ÷ ${live} kg) × 100 = <strong>${ko}%</strong>`;
+    }
+
+    /* ==========================================================================
+       9. 12 SPAs & H1 GLOSSARY RENDERER
+       ========================================================================== */
+    function renderGlossaryCards() {
+      const q = (document.getElementById('glossary-search').value || '').toLowerCase().trim();
+      const filter = document.getElementById('glossary-filter').value;
+
+      const list = GLOSSARY_AND_SPAS.filter(item => {
+        const matchesFilter = filter === 'ALL' || item.type === filter;
+        const matchesQuery =
+          !q ||
+          item.title.toLowerCase().includes(q) ||
+          item.body.toLowerCase().includes(q) ||
+          item.tag.toLowerCase().includes(q);
+        return matchesFilter && matchesQuery;
+      });
+
+      const grid = document.getElementById('glossary-cards-grid');
+      if (list.length === 0) {
+        grid.innerHTML = `<div class="col-span-full p-8 text-center text-sm text-[#525E58]">No matching SPAs or terms found.</div>`;
+        return;
+      }
+
+      grid.innerHTML = list.map((item, idx) => `
+        <div class="p-4 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5] flex flex-col justify-between gap-2.5">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <span class="text-[11px] font-bold uppercase tracking-wider ${item.type === 'SPA' ? 'text-[#B55233]' : 'text-[#1F4E3D]'}">${item.tag}</span>
+              <button onclick="document.getElementById('g-body-${idx}').classList.toggle('hidden')" class="text-[11px] font-bold text-[#525E58] hover:text-[#1E2421] underline">Toggle Note</button>
+            </div>
+            <h4 class="font-serif-notebook font-bold text-base text-[#1E2421]">${item.title}</h4>
+          </div>
+          <p id="g-body-${idx}" class="text-xs sm:text-sm text-[#1E2421] leading-relaxed pt-2 border-t border-[#DDD6C5]">
+            ${item.body}
+          </p>
+        </div>
+      `).join('');
+    }
+
+    /* ==========================================================================
+       10. 5 COMPLETE MOCK PAPERS & 400-MARK GRADE CALCULATOR
+       ========================================================================== */
+    function selectMockPaper(mockId) {
+      state.activeMockId = mockId;
+      saveState();
+      renderMockPapersView();
+    }
+
+    function calculateLeavingCertGrade(total400) {
+      const pct = (total400 / 400) * 100;
+      if (pct >= 90) return { grade: 'H1', desc: '90–100% (Outstanding)', badge: 'bg-[#E8F1ED] text-[#1F4E3D]' };
+      if (pct >= 80) return { grade: 'H2', desc: '80–89% (Very Good)', badge: 'bg-[#E8F1ED] text-[#1F4E3D]' };
+      if (pct >= 70) return { grade: 'H3', desc: '70–79% (Good)', badge: 'bg-[#FDF6E7] text-[#C98A2B]' };
+      if (pct >= 60) return { grade: 'H4', desc: '60–69% (Credit)', badge: 'bg-[#FDF6E7] text-[#C98A2B]' };
+      if (pct >= 50) return { grade: 'H5', desc: '50–59% (Pass)', badge: 'bg-[#EFECE1] text-[#525E58]' };
+      if (pct >= 40) return { grade: 'H6', desc: '40–49% (Elementary)', badge: 'bg-[#FAEDE8] text-[#B55233]' };
+      return { grade: 'H7/H8', desc: 'Below 40% — Review Stages 1–6', badge: 'bg-[#FAEDE8] text-[#B55233]' };
+    }
+
+    function updateMockPartScore(mockId, field, maxVal, raw) {
+      let v = parseInt(raw, 10);
+      if (isNaN(v) || v < 0) v = 0;
+      if (v > maxVal) v = maxVal;
+
+      if (!state.mockScores[mockId]) {
+        state.mockScores[mockId] = { secA: 0, q11: 0, q12: 0, q13: 0, q14: 0, iis: 85 };
+      }
+      state.mockScores[mockId][field] = v;
+      saveState();
+      renderMockScoreBanner(mockId);
+    }
+
+    function renderMockScoreBanner(mockId) {
+      const s = state.mockScores[mockId] || { secA: 0, q11: 0, q12: 0, q13: 0, q14: 0, iis: 85 };
+      const writtenTotal = (s.secA || 0) + (s.q11 || 0) + (s.q12 || 0) + (s.q13 || 0) + (s.q14 || 0);
+      const grandTotal = writtenTotal + (s.iis || 0);
+      const pct = ((grandTotal / 400) * 100).toFixed(1);
+      const info = calculateLeavingCertGrade(grandTotal);
+
+      const box = document.getElementById('mock-grade-banner');
+      if (box) {
+        box.innerHTML = `
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-[#525E58]">Combined Leaving Cert Result (Written /300 + IIS /100)</div>
+              <div class="font-serif-notebook text-2xl sm:text-3xl font-bold text-[#1E2421]">
+                ${grandTotal} / 400 Marks <span class="text-sm font-sans font-semibold text-[#525E58]">(Written: ${writtenTotal}/300 • ${pct}%)</span>
+              </div>
+            </div>
+            <div class="px-4 py-2 rounded-xl font-bold text-sm ${info.badge}">
+              Grade: ${info.grade} • ${info.desc}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function renderMockPapersView() {
+      const tabs = document.getElementById('mock-paper-tabs');
+      tabs.innerHTML = MOCK_PAPERS.map(m => {
+        const active = m.id === state.activeMockId;
+        const graded = !!state.mockScores[m.id];
+        return `<button onclick="selectMockPaper(${m.id})" class="px-3 py-2.5 rounded-xl text-xs font-bold border transition ${
+          active
+            ? 'bg-[#1E2421] text-[#FFFDF8] border-[#1E2421]'
+            : 'bg-[#F7F4EB] text-[#1E2421] border-[#DDD6C5] hover:border-[#1E2421]'
+        }">
+          Mock Paper ${m.id} ${graded ? '★' : ''}
+        </button>`;
+      }).join('');
+
+      const mock = MOCK_PAPERS.find(m => m.id === state.activeMockId) || MOCK_PAPERS[0];
+      const sc = state.mockScores[mock.id] || { secA: 0, q11: 0, q12: 0, q13: 0, q14: 0, iis: 85 };
+
+      const body = document.getElementById('mock-paper-body');
+      body.innerHTML = `
+        <div class="notebook-card p-6 bg-[#FFFDF8] border-l-4 border-l-[#1F4E3D]">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#1F4E3D]">${mock.subtitle}</span>
+          <h3 class="font-serif-notebook text-2xl font-bold text-[#1E2421] mt-1">${mock.title}</h3>
+        </div>
+
+        <!-- SECTION A: 10 SHORT QUESTIONS (100 MARKS) -->
+        <div class="notebook-card p-6 bg-[#FFFDF8] space-y-4">
+          <div class="border-b border-[#DDD6C5] pb-3 flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span class="text-xs font-bold uppercase text-[#1F4E3D]">Section A • 100 Marks (10 × 10 Marks)</span>
+              <h4 class="font-serif-notebook text-xl font-bold text-[#1E2421]">Structured Short-Answer Questions</h4>
+            </div>
+            <button onclick="document.querySelectorAll('.m${mock.id}-seca-ans').forEach(el => el.classList.toggle('hidden'))" class="px-3.5 py-1.5 rounded-lg bg-[#E8F1ED] text-[#1F4E3D] text-xs font-bold border border-[#C2D9CE]">
+              Toggle All Section A Answers
+            </button>
+          </div>
+
+          <div class="space-y-4">
+            ${mock.sectionA.map((item, idx) => `
+              <div class="p-4 rounded-xl bg-[#F7F4EB] border border-[#DDD6C5] space-y-2">
+                <div class="flex items-start justify-between gap-3">
+                  <div class="font-bold text-sm text-[#1E2421]">${item.q}</div>
+                  <button onclick="document.getElementById('m${mock.id}-sa-${idx}').classList.toggle('hidden')" class="text-xs font-bold text-[#B55233] shrink-0 underline">Marking Scheme</button>
+                </div>
+                <input type="text" placeholder="Type your concise answer..." class="w-full px-3 py-2 rounded-lg border border-[#DDD6C5] bg-[#FFFDF8] text-sm" />
+                <div id="m${mock.id}-sa-${idx}" class="m${mock.id}-seca-ans hidden p-3 rounded-lg bg-[#E8F1ED] border border-[#C2D9CE] text-xs sm:text-sm text-[#1E2421]">
+                  <strong>SEC Marking Scheme:</strong> ${item.ans}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- SECTION B: 4 SYNOPTIC LONG QUESTIONS (200 MARKS) -->
+        <div class="space-y-4">
+          ${mock.sectionB.map((bq, bIdx) => `
+            <div class="notebook-card p-6 bg-[#FFFDF8] space-y-4">
+              <div class="border-b border-[#DDD6C5] pb-3">
+                <span class="text-xs font-bold uppercase text-[#B55233]">Section B • 50 Marks</span>
+                <h4 class="font-serif-notebook text-xl font-bold text-[#1E2421]">${bq.title}</h4>
+              </div>
+              <div class="p-3.5 rounded-xl bg-[#FDF6E7] border border-[#EED9A9] text-sm text-[#1E2421]">
+                <strong>Farm / Experimental Context:</strong> ${bq.scenario}
+              </div>
+              <div class="space-y-2 text-sm font-medium text-[#1E2421]">
+                ${bq.parts.map(p => `<div>${p}</div>`).join('')}
+              </div>
+              <textarea rows="4" placeholder="Draft your structured points (a), (b), and (c) here..." class="w-full p-3 rounded-xl border border-[#DDD6C5] bg-[#F7F4EB] text-sm"></textarea>
+              <button onclick="document.getElementById('m${mock.id}-sb-${bIdx}').classList.toggle('hidden')" class="px-3.5 py-1.5 rounded-lg bg-[#FAEDE8] text-[#B55233] text-xs font-bold border border-[#E8C5B9]">
+                Reveal SEC Marking Scheme (50m)
+              </button>
+              <div id="m${mock.id}-sb-${bIdx}" class="hidden p-4 rounded-xl bg-[#FAEDE8] border border-[#E8C5B9] text-xs sm:text-sm">
+                <div class="font-bold text-[#B55233] mb-1">SEC Marking Scheme Breakdown:</div>
+                <pre class="whitespace-pre-wrap font-sans text-[#1E2421]">${bq.scheme}</pre>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+
+        <!-- SELF-GRADING 400-MARK CALCULATOR -->
+        <div class="notebook-card p-6 bg-[#F7F4EB] border-2 border-[#1F4E3D]/30 space-y-4">
+          <h4 class="font-serif-notebook text-xl font-bold text-[#1E2421]">📊 Mock Paper ${mock.id} — 400-Mark Leaving Cert Grade Calculator</h4>
+          <p class="text-xs text-[#525E58]">Enter your self-graded marks for Section A (/100), Section B Questions 11–14 (/50 each), and your projected IIS score (/100):</p>
+          <div class="grid grid-cols-2 sm:grid-cols-6 gap-2.5">
+            <div class="bg-[#FFFDF8] p-3 rounded-xl border border-[#DDD6C5]">
+              <label class="block text-[11px] font-bold text-[#525E58]">Sec A (/100)</label>
+              <input type="number" min="0" max="100" value="${sc.secA}" oninput="updateMockPartScore(${mock.id}, 'secA', 100, this.value)" class="mt-1 w-full px-2 py-1.5 rounded-lg border border-[#DDD6C5] font-mono-data font-bold text-sm" />
+            </div>
+            <div class="bg-[#FFFDF8] p-3 rounded-xl border border-[#DDD6C5]">
+              <label class="block text-[11px] font-bold text-[#525E58]">Q11 (/50)</label>
+              <input type="number" min="0" max="50" value="${sc.q11}" oninput="updateMockPartScore(${mock.id}, 'q11', 50, this.value)" class="mt-1 w-full px-2 py-1.5 rounded-lg border border-[#DDD6C5] font-mono-data font-bold text-sm" />
+            </div>
+            <div class="bg-[#FFFDF8] p-3 rounded-xl border border-[#DDD6C5]">
+              <label class="block text-[11px] font-bold text-[#525E58]">Q12 (/50)</label>
+              <input type="number" min="0" max="50" value="${sc.q12}" oninput="updateMockPartScore(${mock.id}, 'q12', 50, this.value)" class="mt-1 w-full px-2 py-1.5 rounded-lg border border-[#DDD6C5] font-mono-data font-bold text-sm" />
+            </div>
+            <div class="bg-[#FFFDF8] p-3 rounded-xl border border-[#DDD6C5]">
+              <label class="block text-[11px] font-bold text-[#525E58]">Q13 (/50)</label>
+              <input type="number" min="0" max="50" value="${sc.q13}" oninput="updateMockPartScore(${mock.id}, 'q13', 50, this.value)" class="mt-1 w-full px-2 py-1.5 rounded-lg border border-[#DDD6C5] font-mono-data font-bold text-sm" />
+            </div>
+            <div class="bg-[#FFFDF8] p-3 rounded-xl border border-[#DDD6C5]">
+              <label class="block text-[11px] font-bold text-[#525E58]">Q14 (/50)</label>
+              <input type="number" min="0" max="50" value="${sc.q14}" oninput="updateMockPartScore(${mock.id}, 'q14', 50, this.value)" class="mt-1 w-full px-2 py-1.5 rounded-lg border border-[#DDD6C5] font-mono-data font-bold text-sm" />
+            </div>
+            <div class="bg-[#E8F1ED] p-3 rounded-xl border border-[#C2D9CE]">
+              <label class="block text-[11px] font-bold text-[#1F4E3D]">IIS (/100)</label>
+              <input type="number" min="0" max="100" value="${sc.iis}" oninput="updateMockPartScore(${mock.id}, 'iis', 100, this.value)" class="mt-1 w-full px-2 py-1.5 rounded-lg border border-[#C2D9CE] bg-[#FFFDF8] font-mono-data font-bold text-sm" />
+            </div>
+          </div>
+          <div id="mock-grade-banner" class="p-4 rounded-xl bg-[#FFFDF8] border border-[#DDD6C5]"></div>
+        </div>
+      `;
+
+      renderMockScoreBanner(mock.id);
+    }
+
+    /* ==========================================================================
+       11. TIMER, DRAWER & INITIALIZATION
+       ========================================================================== */
+    let remainingSecs = 150 * 60;
+    let countdownHandle = null;
+
+    function formatClock(s) {
+      const hh = String(Math.floor(s / 3600)).padStart(2, '0');
+      const mm = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
+      const ss = String(s % 60).padStart(2, '0');
+      return `${hh}:${mm}:${ss}`;
+    }
+
+    function toggleExamClock() {
+      const btn = document.getElementById('exam-timer-start');
+      if (countdownHandle) {
+        clearInterval(countdownHandle);
+        countdownHandle = null;
+        btn.textContent = 'Resume';
+        btn.classList.replace('bg-[#B55233]', 'bg-[#1F4E3D]');
+      } else {
+        btn.textContent = 'Pause';
+        btn.classList.replace('bg-[#1F4E3D]', 'bg-[#B55233]');
+        countdownHandle = setInterval(() => {
+          if (remainingSecs > 0) {
+            remainingSecs--;
+            document.getElementById('exam-timer-clock').textContent = formatClock(remainingSecs);
+          } else {
+            clearInterval(countdownHandle);
+            countdownHandle = null;
+            notify('150 minutes complete! Check the marking schemes.', '⏰');
+          }
+        }, 1000);
+      }
+    }
+
+    function resetExamClock() {
+      if (countdownHandle) {
+        clearInterval(countdownHandle);
+        countdownHandle = null;
+      }
+      remainingSecs = 150 * 60;
+      document.getElementById('exam-timer-clock').textContent = formatClock(remainingSecs);
+      const btn = document.getElementById('exam-timer-start');
+      btn.textContent = 'Start';
+      btn.classList.remove('bg-[#B55233]');
+      btn.classList.add('bg-[#1F4E3D]');
+    }
+
+    function openMobileDrawer() {
+      document.getElementById('sidebar-drawer').classList.remove('-translate-x-full');
+      document.getElementById('drawer-backdrop').classList.remove('hidden');
+    }
+
+    function closeMobileDrawer() {
+      document.getElementById('sidebar-drawer').classList.add('-translate-x-full');
+      document.getElementById('drawer-backdrop').classList.add('hidden');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadState();
+
+      // Sidebar navigation
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', () => navigateTo(btn.dataset.view));
+      });
+
+      // Mobile drawer
+      document.getElementById('open-drawer-btn').addEventListener('click', openMobileDrawer);
+      document.getElementById('close-drawer-btn').addEventListener('click', closeMobileDrawer);
+      document.getElementById('drawer-backdrop').addEventListener('click', closeMobileDrawer);
+
+      // Quick sidebar search jumps directly to Glossary/SPAs
+      document.getElementById('sidebar-quick-search').addEventListener('input', e => {
+        const val = e.target.value;
+        if (val.trim().length > 1) {
+          document.getElementById('glossary-search').value = val;
+          navigateTo('glossary');
+          renderGlossaryCards();
+        }
+      });
+
+      // Simulator & Calculators listeners
+      ['sim-ph', 'sim-texture', 'sim-drainage', 'sim-n'].forEach(id => {
+        document.getElementById(id).addEventListener('input', updateAgronomySimulator);
+      });
+      [
+        'calc-soil-fresh', 'calc-soil-dry', 'calc-soil-ash',
+        'calc-fert-type', 'calc-fert-rate',
+        'calc-lu-cows', 'calc-lu-cattle', 'calc-lu-ewes', 'calc-lu-ha',
+        'calc-ko-live', 'calc-ko-dead'
+      ].forEach(id => {
+        document.getElementById(id).addEventListener('input', updateAgCalculators);
+      });
+
+      // Glossary filters
+      document.getElementById('glossary-search').addEventListener('input', renderGlossaryCards);
+      document.getElementById('glossary-filter').addEventListener('change', renderGlossaryCards);
+
+      // Exam clock
+      document.getElementById('exam-timer-start').addEventListener('click', toggleExamClock);
+      document.getElementById('exam-timer-reset').addEventListener('click', resetExamClock);
+
+      // Two-step inline reset button (no confirm() dialog)
+      let pendingReset = false;
+      const resetBtn = document.getElementById('reset-all-btn');
+      resetBtn.addEventListener('click', () => {
+        if (!pendingReset) {
+          pendingReset = true;
+          resetBtn.textContent = 'Confirm?';
+          setTimeout(() => {
+            pendingReset = false;
+            resetBtn.textContent = 'Reset';
+          }, 3200);
+        } else {
+          localStorage.removeItem(STORAGE_KEY);
+          state = {
+            activeView: 'blueprint',
+            activeStageId: 1,
+            activeMockId: 1,
+            completedStages: [],
+            iisChecklist: [],
+            quizChoices: {},
+            mockScores: {}
+          };
+          pendingReset = false;
+          resetBtn.textContent = 'Reset';
+          refreshProgressBadges();
+          renderBlueprintView();
+          renderCurriculumView();
+          renderMockPapersView();
+          navigateTo('blueprint');
+          notify('All fieldbook progress reset.', '🗑️');
+        }
+      });
+
+      // Render all views on load
+      refreshProgressBadges();
+      renderBlueprintView();
+      renderCurriculumView();
+      updateAgronomySimulator();
+      updateAgCalculators();
+      renderGlossaryCards();
+      renderMockPapersView();
+      navigateTo(state.activeView || 'blueprint');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1890 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biosphere H1 — Leaving Certificate Biology Higher Level</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-paper: #F7F6F1;
+      --bg-card: #FFFFFF;
+      --bg-well: #F0EFE8;
+      --ink-primary: #16201C;
+      --ink-secondary: #43524B;
+      --ink-muted: #677770;
+      --accent-forest: #1B5E43;
+      --accent-forest-dark: #12432F;
+      --accent-forest-soft: #E6F2EC;
+      --accent-amber: #A65A16;
+      --accent-amber-soft: #FDF3E7;
+      --accent-teal: #1D5D66;
+      --accent-teal-soft: #E6F1F3;
+      --border-subtle: #DDE3DF;
+      --border-strong: #C3CDC7;
+      --shadow-card: 0 2px 8px rgba(22, 32, 28, 0.045), 0 1px 2px rgba(22, 32, 28, 0.04);
+      --radius-card: 12px;
+      --radius-ctrl: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-paper);
+      color: var(--ink-primary);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink-primary);
+      letter-spacing: -0.015em;
+      margin-top: 0;
+    }
+
+    code, pre, .font-mono {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    /* Sticky Top Header */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: rgba(247, 246, 241, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .top-bar-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-emblem {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background-color: var(--accent-forest);
+      color: #FFFFFF;
+      border: 1px solid var(--accent-forest-dark);
+      display: grid;
+      place-items: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .brand-tag {
+      font-size: 0.78rem;
+      color: var(--ink-secondary);
+      margin: 2px 0 0;
+    }
+
+    .top-right-tools {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .progress-widget {
+      min-width: 220px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-ctrl);
+      padding: 8px 12px;
+    }
+
+    .progress-widget-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--ink-secondary);
+      margin-bottom: 5px;
+    }
+
+    .progress-rail {
+      height: 7px;
+      width: 100%;
+      background-color: var(--bg-well);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--accent-forest);
+      transition: width 0.25s ease;
+    }
+
+    /* Main Tabs */
+    .tab-strip {
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .tab-strip-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+    }
+
+    .main-tab {
+      appearance: none;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      padding: 13px 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.14s ease, border-color 0.14s ease;
+    }
+
+    .main-tab:hover {
+      color: var(--ink-primary);
+    }
+
+    .main-tab.active {
+      color: var(--accent-forest);
+      border-bottom-color: var(--accent-forest);
+      font-weight: 700;
+    }
+
+    /* Container & Views */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 24px 20px 64px;
+    }
+
+    .tab-view {
+      display: none;
+    }
+
+    .tab-view.active {
+      display: block;
+    }
+
+    /* Surface Cards */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 18px 16px;
+      }
+    }
+
+    .well {
+      background-color: var(--bg-well);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 16px;
+      margin: 14px 0;
+    }
+
+    .callout-forest {
+      background-color: var(--accent-forest-soft);
+      border: 1px solid #C2DDD0;
+      border-left: 4px solid var(--accent-forest);
+      border-radius: 8px;
+      padding: 13px 16px;
+      margin: 14px 0;
+    }
+
+    .callout-amber {
+      background-color: var(--accent-amber-soft);
+      border: 1px solid #EAD2B5;
+      border-left: 4px solid var(--accent-amber);
+      border-radius: 8px;
+      padding: 13px 16px;
+      margin: 14px 0;
+    }
+
+    .callout-label {
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    .callout-forest .callout-label {
+      color: var(--accent-forest);
+    }
+
+    .callout-amber .callout-label {
+      color: var(--accent-amber);
+    }
+
+    /* Pills & Badges */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .pill-forest {
+      background-color: var(--accent-forest-soft);
+      color: var(--accent-forest);
+      border: 1px solid #C2DDD0;
+    }
+
+    .pill-amber {
+      background-color: var(--accent-amber-soft);
+      color: var(--accent-amber);
+      border: 1px solid #EBD3B6;
+    }
+
+    .pill-teal {
+      background-color: var(--accent-teal-soft);
+      color: var(--accent-teal);
+      border: 1px solid #C0DCE0;
+    }
+
+    /* Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 820px) {
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Buttons & Form Inputs */
+    .btn {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 15px;
+      border-radius: var(--radius-ctrl);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.14s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-forest);
+      color: #FFFFFF;
+      border-color: var(--accent-forest-dark);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-forest-dark);
+    }
+
+    .btn-amber {
+      background-color: var(--accent-amber);
+      color: #FFFFFF;
+      border-color: #84450E;
+    }
+
+    .btn-amber:hover {
+      background-color: #8B490F;
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-card);
+      color: var(--ink-primary);
+      border-color: var(--border-strong);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-well);
+    }
+
+    .btn-sm {
+      padding: 6px 11px;
+      font-size: 0.8rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      padding: 8px 11px;
+      border-radius: var(--radius-ctrl);
+      border: 1px solid var(--border-strong);
+      background-color: var(--bg-card);
+      color: var(--ink-primary);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 76px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: 2px solid rgba(27, 94, 67, 0.22);
+      border-color: var(--accent-forest);
+    }
+
+    /* Checklist Rows */
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-ctrl);
+      border: 1px solid var(--border-subtle);
+      background-color: var(--bg-card);
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+
+    .check-row:hover {
+      background-color: var(--bg-well);
+    }
+
+    .check-row input[type="checkbox"] {
+      margin-top: 3px;
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent-forest);
+      flex-shrink: 0;
+    }
+
+    /* Syllabus Split Layout */
+    .syllabus-layout {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .syllabus-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .syllabus-nav {
+      position: sticky;
+      top: 126px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 12px;
+      box-shadow: var(--shadow-card);
+    }
+
+    @media (max-width: 900px) {
+      .syllabus-nav {
+        position: static;
+      }
+    }
+
+    .level-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      text-align: left;
+      padding: 9px 11px;
+      border-radius: var(--radius-ctrl);
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--ink-secondary);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 4px;
+    }
+
+    .level-btn:hover {
+      background-color: var(--bg-well);
+      color: var(--ink-primary);
+    }
+
+    .level-btn.active {
+      background-color: var(--accent-forest-soft);
+      border-color: #C2DDD0;
+      color: var(--accent-forest);
+      font-weight: 700;
+    }
+
+    /* Self-check & Mock Solution Panels */
+    .option-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 9px 13px;
+      border-radius: var(--radius-ctrl);
+      border: 1px solid var(--border-subtle);
+      background-color: var(--bg-card);
+      color: var(--ink-primary);
+      font-size: 0.88rem;
+      cursor: pointer;
+      margin-bottom: 7px;
+    }
+
+    .option-btn:hover {
+      background-color: var(--bg-well);
+    }
+
+    .option-btn.correct {
+      background-color: var(--accent-forest-soft);
+      border-color: var(--accent-forest);
+      font-weight: 600;
+    }
+
+    .option-btn.wrong {
+      background-color: var(--accent-amber-soft);
+      border-color: var(--accent-amber);
+    }
+
+    .solution-drawer {
+      margin-top: 12px;
+      padding: 14px 16px;
+      border-radius: var(--radius-ctrl);
+      background-color: var(--accent-forest-soft);
+      border: 1px solid #BBD8CA;
+      display: none;
+    }
+
+    .solution-drawer.open {
+      display: block;
+    }
+
+    /* Punnett Grid */
+    .punnett-table {
+      width: 100%;
+      max-width: 420px;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+    }
+
+    .punnett-table th,
+    .punnett-table td {
+      border: 1px solid var(--border-strong);
+      padding: 8px 10px;
+      text-align: center;
+    }
+
+    .punnett-table th {
+      background-color: var(--bg-well);
+      font-weight: 700;
+    }
+
+    .punnett-table td {
+      background-color: var(--bg-card);
+      font-weight: 600;
+    }
+
+    /* Mock Exam Selector Strip */
+    .mock-selector-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .mock-pill-btn {
+      appearance: none;
+      padding: 8px 14px;
+      border-radius: var(--radius-ctrl);
+      border: 1px solid var(--border-strong);
+      background-color: var(--bg-card);
+      color: var(--ink-secondary);
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .mock-pill-btn.active {
+      background-color: var(--accent-forest);
+      border-color: var(--accent-forest-dark);
+      color: #FFFFFF;
+    }
+
+    .subq-block {
+      padding: 14px 0;
+      border-top: 1px dashed var(--border-strong);
+    }
+
+    .subq-block:first-of-type {
+      border-top: none;
+      padding-top: 4px;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 95;
+      background-color: var(--ink-primary);
+      color: #FFFFFF;
+      padding: 10px 16px;
+      border-radius: var(--radius-ctrl);
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <div class="brand-lockup">
+        <div class="brand-emblem">Bio</div>
+        <div>
+          <h1 class="brand-name">Biosphere H1 &mdash; Leaving Certificate Biology Higher Level</h1>
+          <p class="brand-tag">NCCA Specification &bull; SEC Assessment Structure &bull; Zero-to-H1 Study Companion</p>
+        </div>
+      </div>
+
+      <div class="top-right-tools">
+        <div class="progress-widget">
+          <div class="progress-widget-top">
+            <span>H1 Study Progress</span>
+            <span id="overall-progress-pct">0%</span>
+          </div>
+          <div class="progress-rail">
+            <div id="overall-progress-bar" class="progress-bar-fill"></div>
+          </div>
+        </div>
+        <button id="reset-progress-btn" type="button" class="btn btn-secondary btn-sm">Reset Progress</button>
+      </div>
+    </div>
+
+    <nav class="tab-strip" aria-label="Main learning tabs">
+      <div class="tab-strip-inner">
+        <button type="button" class="main-tab active" data-tab="blueprint">1. H1 Blueprint &amp; Strands</button>
+        <button type="button" class="main-tab" data-tab="syllabus">2. Zero-to-Hero Syllabus (0&ndash;5)</button>
+        <button type="button" class="main-tab" data-tab="labs">3. Interactive Biology Labs</button>
+        <button type="button" class="main-tab" data-tab="mocks">4. 5 Complete H1 Mock Exams</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- =====================================================================
+         TAB 1: H1 BLUEPRINT & STRANDS
+         ===================================================================== -->
+    <section id="view-blueprint" class="tab-view active">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+          <span class="pill pill-forest">NCCA Higher Level Specification</span>
+          <span class="pill pill-amber">H1 Target = 90%+ (450 / 500 Marks)</span>
+        </div>
+        <h2>Specification Strands, Themes &amp; SEC Assessment Structure</h2>
+        <p style="color:var(--ink-secondary); margin-bottom:14px;">
+          Leaving Certificate Biology is assessed across two components totaling <strong>500 marks</strong>: a <strong>60% Written Examination (300 marks, 2 hours 30 minutes)</strong> and a <strong>40% Biology in Practice Investigation (200 marks)</strong>. Reaching an <strong>H1 (90%+)</strong> requires command of both strands and precise scientific language.
+        </p>
+
+        <div class="grid-2">
+          <div class="well" style="margin:0;">
+            <span class="pill pill-teal">Written Examination &bull; 60% (300 Marks)</span>
+            <h3 style="margin-top:8px; font-size:1.08rem;">2 Hours 30 Minutes &bull; Question 1 + 5 of 6</h3>
+            <ul style="padding-left:18px; margin:6px 0 0; font-size:0.88rem; color:var(--ink-secondary);">
+              <li><strong>Question 1 (50 marks &mdash; Compulsory):</strong> Multi-part question drawing across diverse syllabus topics&mdash;no topic can be safely ignored.</li>
+              <li><strong>Questions 2&ndash;7 (50 marks each &mdash; Choose any 5):</strong> Six structured/extended questions spanning the unifying strand, contextual strands, and cross-cutting themes.</li>
+              <li><strong>Total answered:</strong> 6 questions &times; 50 marks = <strong>300 marks</strong> (~25 minutes per question at even pace).</li>
+              <li><strong>Units &amp; working:</strong> Show full mathematical working and include units wherever relevant.</li>
+            </ul>
+          </div>
+
+          <div class="well" style="margin:0;">
+            <span class="pill pill-amber">Biology in Practice Investigation &bull; 40% (200 Marks)</span>
+            <h3 style="margin-top:8px; font-size:1.08rem;">SEC Common Brief &bull; Research, Primary Data &amp; Report</h3>
+            <ul style="padding-left:18px; margin:6px 0 0; font-size:0.88rem; color:var(--ink-secondary);">
+              <li><strong>Common brief &amp; timeline:</strong> Respond to the SEC investigation brief in 5th/6th year (~20 hours guided work, submitted ahead of the written exam).</li>
+              <li><strong>Core stages:</strong> Secondary source research, testable hypothesis, designed primary experiment with controls/replicates, data analysis &amp; evaluation, and investigation log/report.</li>
+              <li><strong>H1 edge:</strong> Bank strong marks here before June by linking biological mechanisms directly to quantitative evidence and realistic limitations.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="margin-top:20px;">Unifying Strand, Contextual Strands &amp; Cross-Cutting Themes</h3>
+        <div class="grid-3">
+          <div class="well" style="margin:0;">
+            <div style="font-weight:700; color:var(--accent-forest);">Unifying Strand: Nature of Science</div>
+            <p style="font-size:0.85rem; color:var(--ink-secondary); margin:6px 0 0;">
+              Scientific inquiry, fair testing, variables, reliability/validity, peer evidence, ethical/societal implications, and how biological models evolve.
+            </p>
+          </div>
+          <div class="well" style="margin:0;">
+            <div style="font-weight:700; color:var(--accent-teal);">Three Contextual Strands</div>
+            <p style="font-size:0.85rem; color:var(--ink-secondary); margin:6px 0 0;">
+              <strong>1. Organisation of Life</strong> &bull; <strong>2. Structures &amp; Processes of Life</strong> &bull; <strong>3. Interactions of Life</strong> (ecology, genetics, evolution, physiology).
+            </p>
+          </div>
+          <div class="well" style="margin:0;">
+            <div style="font-weight:700; color:var(--accent-amber);">Cross-Cutting Themes</div>
+            <p style="font-size:0.85rem; color:var(--ink-secondary); margin:6px 0 0;">
+              <strong>Health</strong>, <strong>Sustainability</strong>, and <strong>Technology</strong> woven into scenarios, data interpretation, and extended H1 responses.
+            </p>
+          </div>
+        </div>
+
+        <div class="callout-forest" style="margin-top:18px;">
+          <span class="callout-label">H1 Marking Scheme Tactics</span>
+          <p style="margin:0; font-size:0.89rem;">
+            <strong>1. Name exact structures &amp; molecules:</strong> Write <em>thylakoid membrane / stroma</em>, <em>mitochondrial matrix / inner membrane</em>, <em>glomerulus / proximal convoluted tubule</em>, <em>mRNA / tRNA / codon / anticodon</em> rather than vague substitutes. &nbsp;
+            <strong>2. Match the command word:</strong> <em>Outline</em> = concise key stages; <em>Compare</em> = explicit similarity or difference stating both items; <em>Justify / Evaluate</em> = claim + biological reasoning + evidence/limitation. &nbsp;
+            <strong>3. Never leave surplus conflicting answers</strong> when a question asks for a specific number or single term.
+          </p>
+        </div>
+      </div>
+
+      <!-- Interactive H1 Readiness & Investigation Checklist -->
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+          <span class="pill pill-forest">Interactive H1 Checklist</span>
+          <span id="checklist-count-label" style="font-size:0.82rem; font-weight:700; color:var(--ink-secondary);">0 / 8 Completed</span>
+        </div>
+        <h3>H1 Exam &amp; Biology in Practice Readiness Checklist</h3>
+        <div id="h1-checklist-container"></div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 2: ZERO-TO-HERO SYLLABUS (LEVELS 0–5)
+         ===================================================================== -->
+    <section id="view-syllabus" class="tab-view">
+      <div class="syllabus-layout">
+        <aside class="syllabus-nav" aria-label="Syllabus levels">
+          <div style="font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-muted); padding:4px 8px 8px;">
+            Zero-to-Hero Levels
+          </div>
+          <button type="button" class="level-btn active" data-lvl="0"><span>Level 0: Foundations &amp; Biomolecules</span><span id="lvl-chk-0"></span></button>
+          <button type="button" class="level-btn" data-lvl="1"><span>Level 1: Cells, Division &amp; DNA</span><span id="lvl-chk-1"></span></button>
+          <button type="button" class="level-btn" data-lvl="2"><span>Level 2: Bioenergetics</span><span id="lvl-chk-2"></span></button>
+          <button type="button" class="level-btn" data-lvl="3"><span>Level 3: Genetics, Evolution &amp; Ecology</span><span id="lvl-chk-3"></span></button>
+          <button type="button" class="level-btn" data-lvl="4"><span>Level 4: Human &amp; Plant Systems</span><span id="lvl-chk-4"></span></button>
+          <button type="button" class="level-btn" data-lvl="5"><span>Level 5: H1 Synthesis &amp; Command Words</span><span id="lvl-chk-5"></span></button>
+        </aside>
+
+        <div id="syllabus-detail-area"></div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 3: INTERACTIVE BIOLOGY LABS
+         ===================================================================== -->
+    <section id="view-labs" class="tab-view">
+
+      <!-- Lab 1: Simpson's Diversity Index & Quadrat Calculator -->
+      <div class="card">
+        <span class="pill pill-forest">Lab 1 &bull; Ecology &amp; Biodiversity</span>
+        <h2 style="margin-top:8px;">Simpson&rsquo;s Diversity Index (D<sub>s</sub>) &amp; Quadrat Calculator</h2>
+        <p style="color:var(--ink-secondary); font-size:0.9rem;">
+          Formula: <code class="font-mono">D_s = 1 - [ &Sigma; n(n - 1) / N(N - 1) ]</code>, where <code>n</code> is the number of individuals of a species and <code>N</code> is total individuals across all species in the sample. Higher <code>D_s</code> (closer to 1) indicates greater species diversity.
+        </p>
+
+        <div class="grid-2">
+          <div>
+            <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:4px;">Species A count (n<sub>1</sub>) &mdash; e.g. Perennial ryegrass</label>
+            <input id="sim-n1" type="number" min="0" value="18" style="width:100%; margin-bottom:10px;" />
+
+            <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:4px;">Species B count (n<sub>2</sub>) &mdash; e.g. White clover</label>
+            <input id="sim-n2" type="number" min="0" value="12" style="width:100%; margin-bottom:10px;" />
+
+            <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:4px;">Species C count (n<sub>3</sub>) &mdash; e.g. Ribwort plantain</label>
+            <input id="sim-n3" type="number" min="0" value="10" style="width:100%;" />
+          </div>
+
+          <div id="simpson-output" class="well" style="margin:0;"></div>
+        </div>
+      </div>
+
+      <!-- Lab 2: Genetic Cross & Punnett Square Explorer -->
+      <div class="card">
+        <span class="pill pill-teal">Lab 2 &bull; Mendelian Genetics &amp; Test Crosses</span>
+        <h2 style="margin-top:8px;">Monohybrid &amp; Test-Cross Ratio Explorer</h2>
+        <p style="color:var(--ink-secondary); font-size:0.9rem;">
+          Explore expected gamete formation, Punnett grid outcomes, genotypic and phenotypic ratios, and how a test cross distinguishes homozygous dominant (<code>AA</code>) from heterozygous (<code>Aa</code>) individuals.
+        </p>
+
+        <div class="grid-2">
+          <div>
+            <label for="cross-preset-select" style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:4px;">Select Parental Cross (A = dominant allele, a = recessive allele)</label>
+            <select id="cross-preset-select" style="width:100%; margin-bottom:10px;">
+              <option value="het_x_het">Heterozygous &times; Heterozygous (Aa &times; Aa)</option>
+              <option value="het_x_rec">Test Cross: Heterozygous &times; Homozygous Recessive (Aa &times; aa)</option>
+              <option value="dom_x_rec">Homozygous Dominant &times; Homozygous Recessive (AA &times; aa)</option>
+              <option value="het_x_dom">Heterozygous &times; Homozygous Dominant (Aa &times; AA)</option>
+            </select>
+
+            <div id="punnett-grid-box"></div>
+          </div>
+
+          <div id="punnett-analysis-box" class="well" style="margin:0;"></div>
+        </div>
+      </div>
+
+      <!-- Lab 3: Enzyme Kinetics & Limiting Factors Simulator -->
+      <div class="card">
+        <span class="pill pill-amber">Lab 3 &bull; Physiology &amp; Bioenergetics</span>
+        <h2 style="margin-top:8px;">Enzyme Activity &amp; Limiting Factor Simulator</h2>
+        <p style="color:var(--ink-secondary); font-size:0.9rem;">
+          Adjust temperature (&deg;C) and pH to see how kinetic collisions and active-site tertiary structure shape reaction rate (relative % of V<sub>max</sub>).
+        </p>
+
+        <div class="grid-2">
+          <div>
+            <label for="enz-temp-range" style="font-size:0.84rem; font-weight:700; display:block; margin-bottom:4px;">
+              Temperature: <span id="enz-temp-val" class="font-mono">37</span> &deg;C
+            </label>
+            <input id="enz-temp-range" type="range" min="5" max="70" value="37" style="width:100%; margin-bottom:14px;" />
+
+            <label for="enz-ph-range" style="font-size:0.84rem; font-weight:700; display:block; margin-bottom:4px;">
+              Medium pH: <span id="enz-ph-val" class="font-mono">7.0</span>
+            </label>
+            <input id="enz-ph-range" type="range" min="2" max="11" step="0.5" value="7.0" style="width:100%;" />
+          </div>
+
+          <div id="enzyme-sim-output" class="well" style="margin:0;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 4: 5 COMPLETE H1 MOCK EXAMS (NEW 300-MARK WRITTEN FORMAT)
+         ===================================================================== -->
+    <section id="view-mocks" class="tab-view">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px;">
+          <span class="pill pill-forest">5 Complete Higher Level Written Mocks</span>
+          <span id="mock-timer-readout" class="pill pill-teal">Timer: 150:00 (2h 30m)</span>
+        </div>
+        <h2>SEC-Style 300-Mark Written Mock Examinations (Q1 Compulsory + 5 of 6 @ 50 Marks)</h2>
+        <p style="color:var(--ink-secondary); font-size:0.9rem; margin-bottom:10px;">
+          Each mock provides <strong>Question 1 (50 marks, compulsory)</strong> plus <strong>Questions 2&ndash;7 (50 marks each)</strong>. Draft notes in the scratchpads, click <strong>Reveal H1 Solution &amp; Marking Explanation</strong> on any question or sub-part, and record your self-marked score to convert your 300-mark written performance into an H1&ndash;H8 grade band.
+        </p>
+
+        <div class="mock-selector-bar" id="mock-selector-bar"></div>
+
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;">
+          <button type="button" class="btn btn-primary btn-sm" id="timer-toggle-btn">Start Exam Timer</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="timer-reset-btn">Reset Timer</button>
+          <button type="button" class="btn btn-amber btn-sm" id="reveal-all-mock-btn">Reveal All Solutions in Current Mock</button>
+        </div>
+      </div>
+
+      <div id="active-mock-container"></div>
+
+      <!-- Self-Assessment Grade Estimator -->
+      <div class="card">
+        <h3>Written Exam Score &amp; Grade Band Converter (out of 300 Marks)</h3>
+        <p style="font-size:0.88rem; color:var(--ink-secondary);">
+          Enter your self-assessed mark (0&ndash;300) for the active mock to see the corresponding Leaving Certificate percentage and grade tier (H1 = 90%+).
+        </p>
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+          <label for="mock-score-input" style="font-size:0.84rem; font-weight:700;">Marks Scored (/ 300):</label>
+          <input id="mock-score-input" type="number" min="0" max="300" value="270" style="width:110px;" />
+          <button type="button" class="btn btn-primary btn-sm" id="save-mock-score-btn">Save Mock Score</button>
+          <span id="mock-grade-readout" class="pill pill-forest">270 / 300 (90.0%) &rarr; H1</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="toast-box" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    /* =======================================================================
+       1. PERSISTENT STATE & UTILITIES
+       ======================================================================= */
+    const STORAGE_KEY = 'biosphere_h1_lc_biology_v1';
+
+    const DEFAULT_STATE = {
+      activeTab: 'blueprint',
+      activeLevel: 0,
+      completedLevels: [],
+      checklistIds: [],
+      activeMockIdx: 0,
+      mockScores: {}, // mockId -> score out of 300
+      scratchpads: {}, // key -> text
+      timerSeconds: 9000 // 150 minutes = 9000s
+    };
+
+    let state = loadState();
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return { ...DEFAULT_STATE };
+        const parsed = JSON.parse(raw);
+        return {
+          ...DEFAULT_STATE,
+          ...parsed,
+          completedLevels: Array.isArray(parsed.completedLevels) ? parsed.completedLevels : [],
+          checklistIds: Array.isArray(parsed.checklistIds) ? parsed.checklistIds : [],
+          mockScores: parsed.mockScores && typeof parsed.mockScores === 'object' ? parsed.mockScores : {},
+          scratchpads: parsed.scratchpads && typeof parsed.scratchpads === 'object' ? parsed.scratchpads : {}
+        };
+      } catch (e) {
+        console.warn('Storage load error:', e);
+        return { ...DEFAULT_STATE };
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        console.warn('Storage save error:', e);
+      }
+      updateProgressBar();
+    }
+
+    function notify(msg) {
+      const el = document.getElementById('toast-box');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(notify._t);
+      notify._t = setTimeout(() => el.classList.remove('show'), 2200);
+    }
+
+    function updateProgressBar() {
+      const lvlPts = Math.min(30, state.completedLevels.length * 5);
+      const chkPts = Math.min(25, Math.round((state.checklistIds.length / 8) * 25));
+      const mockValues = Object.values(state.mockScores || {});
+      const mockPts = mockValues.length > 0
+        ? Math.min(45, Math.round((mockValues.length / 5) * 25 + (mockValues.reduce((a, b) => a + Number(b || 0), 0) / (mockValues.length * 300)) * 20))
+        : 0;
+      const pct = Math.min(100, lvlPts + chkPts + mockPts);
+      const bar = document.getElementById('overall-progress-bar');
+      const lbl = document.getElementById('overall-progress-pct');
+      if (bar) bar.style.width = `${pct}%`;
+      if (lbl) lbl.textContent = `${pct}%`;
+    }
+
+    /* =======================================================================
+       2. BLUEPRINT CHECKLIST
+       ======================================================================= */
+    const H1_CHECKLIST_ITEMS = [
+      { id: 'c1', text: 'I can state the exact assessment split: 60% Written Exam (300 marks: Q1 compulsory + 5 of 6 @ 50 marks) and 40% Biology in Practice Investigation (200 marks).' },
+      { id: 'c2', text: 'I can connect every topic to the Unifying Strand (Nature of Science), Contextual Strands, and cross-cutting themes (Health, Sustainability, Technology).' },
+      { id: 'c3', text: 'I always show full calculation steps and include SI/biological units (e.g., cm³, g, mol, µm, s⁻¹) on every numerical answer.' },
+      { id: 'c4', text: 'I know how to calculate and interpret Simpson’s Diversity Index D_s = 1 - [Σ n(n-1) / N(N-1)] from quadrat or sampling data.' },
+      { id: 'c5', text: 'I can distinguish and explain light-dependent vs. Calvin cycle roles in photosynthesis and glycolysis vs. aerobic/anaerobic ATP pathways.' },
+      { id: 'c6', text: 'I can construct gametes, Punnett grids, and test crosses cleanly for monohybrid, co-dominant/incomplete, and sex-linked inheritance.' },
+      { id: 'c7', text: 'I tailor my answers to command words (Outline, Compare, Evaluate, Justify, Analyse) using precise biological terminology.' },
+      { id: 'c8', text: 'My Biology in Practice Investigation links secondary research, a clear hypothesis, controlled primary data, error evaluation, and authentic log entries.' }
+    ];
+
+    function renderChecklist() {
+      const container = document.getElementById('h1-checklist-container');
+      if (!container) return;
+      container.innerHTML = H1_CHECKLIST_ITEMS.map(item => {
+        const checked = state.checklistIds.includes(item.id);
+        return `
+          <label class="check-row">
+            <input type="checkbox" data-cid="${item.id}" ${checked ? 'checked' : ''} />
+            <span style="font-size:0.89rem; color:var(--ink-primary);">${item.text}</span>
+          </label>
+        `;
+      }).join('');
+
+      container.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', () => {
+          const cid = cb.dataset.cid;
+          if (cb.checked && !state.checklistIds.includes(cid)) state.checklistIds.push(cid);
+          if (!cb.checked) state.checklistIds = state.checklistIds.filter(x => x !== cid);
+          saveState();
+          updateChecklistLabel();
+        });
+      });
+
+      updateChecklistLabel();
+    }
+
+    function updateChecklistLabel() {
+      const lbl = document.getElementById('checklist-count-label');
+      if (lbl) lbl.textContent = `${state.checklistIds.length} / ${H1_CHECKLIST_ITEMS.length} Completed`;
+    }
+
+    /* =======================================================================
+       3. ZERO-TO-HERO SYLLABUS (LEVELS 0 TO 5)
+       ======================================================================= */
+    const SYLLABUS_LEVELS = [
+      {
+        lvl: 0,
+        badge: 'Level 0 • Foundations & Biomolecules',
+        title: 'Scientific Method, Biomolecules, Enzymes & Classification',
+        summary: 'Build airtight foundations in experimental design, structural/functional biomolecules, induced-fit enzyme catalysis, viruses, and the domains/kingdoms of life.',
+        sections: [
+          {
+            heading: 'Nature of Science & Controlled Investigation',
+            body: 'A valid experiment isolates one <strong>independent variable</strong> while holding <strong>controlled variables</strong> constant and measuring a quantitative <strong>dependent variable</strong> across replicates. A <strong>control</strong> provides a baseline comparison where the experimental factor is absent or inactive.'
+          },
+          {
+            heading: 'Biomolecules & Induced-Fit Enzyme Model',
+            body: '<strong>Carbohydrates</strong> (monosaccharides like glucose → disaccharides/polysaccharides like starch, glycogen, cellulose), <strong>lipids</strong> (triglycerides from glycerol + 3 fatty acids; phospholipids for membranes), <strong>proteins</strong> (amino acids joined by peptide bonds; primary to quaternary folding), and <strong>vitamins/minerals</strong>. In the <strong>induced-fit model</strong>, the enzyme’s active site changes shape slightly as the substrate binds, straining bonds and lowering activation energy (E_a). Extremes of temperature or pH alter non-covalent bonds, causing <strong>denaturation</strong> (loss of 3D active-site shape).'
+          },
+          {
+            heading: 'Viruses & Classification Across Domains/Kingdoms',
+            body: '<strong>Viruses</strong> are acellular obligate intracellular parasites with a nucleic acid core (DNA or RNA) and protein coat (capsid), lacking cellular organelles or independent metabolism. Cellular life is grouped across domains/kingdoms based on cell structure (prokaryotic vs. eukaryotic), cell walls, and nutrition (autotrophic vs. heterotrophic).'
+          }
+        ],
+        h1Tip: 'State clearly that denaturation alters the three-dimensional tertiary structure of the active site so the substrate no longer fits—do not say the enzyme is "killed" (enzymes are proteins, not living organisms).',
+        checkQ: 'Why does heating an enzyme well above its optimum temperature permanently reduce reaction rate?',
+        checkOpts: [
+          'Substrate molecules lose all kinetic energy and stop moving',
+          'Excess thermal energy disrupts bonds holding the enzyme’s 3D active-site shape (denaturation)',
+          'The enzyme converts into a competitive inhibitor',
+          'Water evaporates from the substrate molecules'
+        ],
+        checkAns: 1,
+        checkExp: 'High temperatures break weak bonds maintaining tertiary structure, altering the active site so substrate binding is prevented.'
+      },
+      {
+        lvl: 1,
+        badge: 'Level 1 • Cells, Division & DNA',
+        title: 'Cellular Organisation, Membranes, Cell Cycle & Gene Expression',
+        summary: 'Connect organelle specialization and membrane transport to mitosis, meiosis, DNA replication, transcription, and translation.',
+        sections: [
+          {
+            heading: 'Prokaryotic vs. Eukaryotic Cells & Membranes',
+            body: 'Eukaryotic cells possess membrane-bound organelles (nucleus, mitochondria, chloroplasts in photosynthetic eukaryotes, endoplasmic reticulum, Golgi apparatus, lysosomes/vacuoles); prokaryotic cells lack a membrane-bound nucleus. The <strong>fluid-mosaic model</strong> features a phospholipid bilayer with embedded channel/carrier proteins, cholesterol (modulating fluidity), and glycoproteins/glycolipids.'
+          },
+          {
+            heading: 'Passive vs. Active Transport',
+            body: '<strong>Diffusion</strong> moves particles down a concentration gradient; <strong>osmosis</strong> is net movement of water molecules across a selectively permeable membrane from higher water potential (less concentrated solute) to lower water potential (more concentrated solute). <strong>Active transport</strong> moves substances against a concentration gradient using carrier proteins and <strong>ATP</strong>.'
+          },
+          {
+            heading: 'Mitosis, Meiosis & DNA → RNA → Protein',
+            body: '<strong>Mitosis</strong> produces two genetically identical diploid (2n) daughter cells for growth, repair, and asexual reproduction. <strong>Meiosis</strong> produces four genetically varied haploid (n) gametes via crossing over (prophase I) and independent assortment. During gene expression, <strong>transcription</strong> synthesizes mRNA from a DNA template in the nucleus, and <strong>translation</strong> at ribosomes assembles amino acids using mRNA codons and tRNA anticodons.'
+          }
+        ],
+        h1Tip: 'Define osmosis using water movement and water/solute potential—avoid saying "water moves from high concentration to low concentration" without specifying water molecules or solute concentration.',
+        checkQ: 'Which process generates new combinations of linked alleles during meiosis?',
+        checkOpts: [
+          'Cytokinesis',
+          'Crossing over between homologous chromosomes in prophase I',
+          'Semi-conservative DNA replication in S phase',
+          'Binary fission'
+        ],
+        checkAns: 1,
+        checkExp: 'Crossing over swaps corresponding segments between non-sister chromatids of homologous chromosomes during prophase I.'
+      },
+      {
+        lvl: 2,
+        badge: 'Level 2 • Bioenergetics',
+        title: 'Photosynthesis & Cellular Respiration',
+        summary: 'Track energy capture in chloroplasts and energy release/ATP synthesis in cells across aerobic and anaerobic pathways.',
+        sections: [
+          {
+            heading: 'Photosynthesis: Light-Dependent & Calvin Cycle',
+            body: 'Overall summary: <code class="font-mono">6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂</code> (light + chlorophyll). In <strong>light-dependent reactions</strong> (thylakoid membranes), light energy excites electrons in chlorophyll, driving photolysis/water splitting (releasing O₂), ATP synthesis, and NADPH/reduced NADP formation. In the <strong>Calvin cycle</strong> (stroma), ATP and reduced NADP fix CO₂ into organic carbohydrates.'
+          },
+          {
+            heading: 'Cellular Respiration: Glycolysis, Aerobic & Anaerobic',
+            body: '<strong>Glycolysis</strong> occurs in the cytosol, splitting glucose (6C) into pyruvate (3C) with a small net yield of ATP and reduced coenzymes. In the presence of oxygen (<strong>aerobic respiration</strong> in mitochondria), pyruvate is further oxidized through link/Krebs pathways and electron transport/chemiosmosis to yield a large amount of ATP, CO₂, and H₂O. In oxygen shortage (<strong>anaerobic respiration</strong>), cells regenerate NAD⁺ via lactate (e.g., muscle) or ethanol + CO₂ (e.g., yeast) with much lower ATP yield per glucose.'
+          }
+        ],
+        h1Tip: 'Always state where each stage happens (thylakoid vs. stroma; cytosol vs. mitochondrion) and note that oxygen is the final electron acceptor in aerobic respiration.',
+        checkQ: 'Where does glycolysis take place in a eukaryotic cell?',
+        checkOpts: [
+          'Mitochondrial matrix',
+          'Cytosol (cytoplasm)',
+          'Thylakoid lumen',
+          'Nucleolus'
+        ],
+        checkAns: 1,
+        checkExp: 'Glycolysis occurs in the cytosol and does not require oxygen directly.'
+      },
+      {
+        lvl: 3,
+        badge: 'Level 3 • Genetics, Evolution & Ecology',
+        title: 'Inheritance, Population Genetics, Evolution & Ecological Sampling',
+        summary: 'Master Mendelian laws, non-Mendelian patterns, natural selection/evolution, trophic energy transfer, nutrient cycling, and biodiversity metrics.',
+        sections: [
+          {
+            heading: 'Inheritance & Variation',
+            body: '<strong>Segregation</strong> separates allele pairs during gamete formation; <strong>independent assortment</strong> distributes alleles of unlinked genes independently. Sex-linked traits (often X-linked) show different frequencies between males and females because Y chromosomes lack corresponding loci.'
+          },
+          {
+            heading: 'Evolution & Natural Selection',
+            body: 'Heritable variation arises via mutation and sexual recombination. Individuals with advantageous phenotypes in a given environment survive and reproduce more successfully (<strong>differential reproductive success</strong>), increasing favorable allele frequencies in the gene pool over generations.'
+          },
+          {
+            heading: 'Ecology, Energy Flow & Simpson’s Diversity Index',
+            body: 'Energy enters ecosystems mainly via producers and decreases along food chains (~10% ecological transfer efficiency at each trophic level due to respiration, heat loss, and incomplete consumption). Use random quadrats or line/belt transects for sampling, and compute <code class="font-mono">D_s = 1 - [Σ n(n - 1) / N(N - 1)]</code>.'
+          }
+        ],
+        h1Tip: 'In natural selection answers, explicitly link heritable variation → selective advantage → higher survival/reproduction → higher allele frequency in future generations.',
+        checkQ: 'Why do food chains rarely exceed four or five trophic levels?',
+        checkOpts: [
+          'Decomposers consume all primary consumers first',
+          'Substantial energy is lost at each trophic transfer (respiration, heat, undigested material), leaving insufficient energy to support higher levels',
+          'Herbivores cannot digest plant cell walls at high temperatures',
+          'Sunlight stops reaching secondary consumers'
+        ],
+        checkAns: 1,
+        checkExp: 'Only a fraction of energy at one trophic level becomes biomass at the next level, limiting chain length.'
+      },
+      {
+        lvl: 4,
+        badge: 'Level 4 • Human & Plant Systems',
+        title: 'Transport, Gas Exchange, Digestion, Homeostasis, Coordination & Plants',
+        summary: 'Integrate physiological structure and feedback regulation across human organ systems and flowering plants.',
+        sections: [
+          {
+            heading: 'Human Transport, Gas Exchange & Digestion',
+            body: 'Double circulation separates oxygenated and deoxygenated blood through the heart; arteries carry blood away under higher pressure with thick elastic/muscular walls, capillaries enable exchange via thin walls/large surface area, and veins return blood with valves. Alveoli maximize gas diffusion; the digestive system uses mechanical breakdown, enzymes, and villi/microvilli for absorption.'
+          },
+          {
+            heading: 'Homeostasis, Excretion & Coordination',
+            body: '<strong>Homeostasis</strong> maintains internal stability (e.g., blood glucose via insulin/glucagon, water/ion balance via nephrons/osmoregulation, temperature control) using <strong>negative feedback</strong>. The nervous system transmits rapid electrical/synaptic signals; the endocrine system uses hormones transported in blood for longer-term regulation.'
+          },
+          {
+            heading: 'Plant Transport, Responses & Reproduction',
+            body: '<strong>Xylem</strong> transports water and mineral ions upward (transpiration pull, cohesion-tension); <strong>phloem</strong> translocates organic assimilates (e.g., sucrose) from source to sink. Plant growth responses (tropisms) and sexual/vegetative reproduction coordinate adaptation and life cycles.'
+          }
+        ],
+        h1Tip: 'Explain negative feedback as a reversal of change: when a variable rises above set point, effectors act to bring it back down (and vice versa).',
+        checkQ: 'What is the main role of negative feedback in homeostasis?',
+        checkOpts: [
+          'Amplifying a change away from the normal set point',
+          'Detecting deviations from a set point and triggering responses that restore stability',
+          'Stopping all hormone secretion permanently',
+          'Replacing nervous reflexes with muscle fatigue'
+        ],
+        checkAns: 1,
+        checkExp: 'Negative feedback counteracts changes from set point to keep internal conditions within narrow limits.'
+      },
+      {
+        lvl: 5,
+        badge: 'Level 5 • H1 Synthesis & Command Words',
+        title: 'Command-Word Mastery, Data Analysis & Cross-Topic Integration',
+        summary: 'Convert solid biological knowledge into top-band H1 answers across multi-strand exam questions.',
+        sections: [
+          {
+            heading: 'Decoding SEC Command Words',
+            body: '<strong>Outline:</strong> give essential features/sequence clearly without excessive fluff. <strong>Compare:</strong> state both similarities and differences explicitly referencing both subjects. <strong>Evaluate / Justify:</strong> weigh evidence, state a clear conclusion, and support it with biological reasoning and limitations. <strong>Analyse:</strong> break data/trends into specific numerical or causal relationships.'
+          },
+          {
+            heading: 'Data & Graph Reading for H1 Marks',
+            body: 'Quote exact figures and units from tables/graphs before explaining the biology. Distinguish <strong>correlation</strong> from <strong>causation</strong>, identify anomalous points, and note experimental limitations (such as small sample size or unmeasured confounding variables).'
+          }
+        ],
+        h1Tip: 'Always end a data-interpretation answer with the biological mechanism explaining WHY the graph rises, plateaus, or falls—quoting numbers alone often earns only partial credit.',
+        checkQ: 'A student is asked to "Compare" mitosis and meiosis. Which statement earns full comparison marks?',
+        checkOpts: [
+          'Mitosis produces two genetically identical diploid cells, whereas meiosis produces four genetically varied haploid cells',
+          'Mitosis happens in animals and meiosis happens in plants',
+          'Mitosis has no chromosomes and meiosis has extra nuclei',
+          'Mitosis only occurs in gametes'
+        ],
+        checkAns: 0,
+        checkExp: 'A high-mark comparison explicitly contrasts both processes across key biological outcomes (cell count, ploidy, and genetic variation).'
+      }
+    ];
+
+    function renderSyllabusLevels() {
+      for (let i = 0; i <= 5; i++) {
+        const chk = document.getElementById(`lvl-chk-${i}`);
+        if (chk) chk.textContent = state.completedLevels.includes(i) ? '✓' : '';
+      }
+
+      document.querySelectorAll('.level-btn').forEach(btn => {
+        btn.classList.toggle('active', Number(btn.dataset.lvl) === Number(state.activeLevel));
+      });
+
+      const item = SYLLABUS_LEVELS.find(s => s.lvl === Number(state.activeLevel)) || SYLLABUS_LEVELS[0];
+      const isDone = state.completedLevels.includes(item.lvl);
+      const area = document.getElementById('syllabus-detail-area');
+      if (!area) return;
+
+      area.innerHTML = `
+        <article class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+            <span class="pill pill-forest">${item.badge}</span>
+            <button type="button" class="btn ${isDone ? 'btn-primary' : 'btn-secondary'} btn-sm" id="toggle-lvl-done-btn">
+              ${isDone ? 'Completed ✓' : 'Mark Level Complete'}
+            </button>
+          </div>
+          <h2>${item.title}</h2>
+          <p style="color:var(--ink-secondary);">${item.summary}</p>
+
+          ${item.sections.map(sec => `
+            <div class="well">
+              <h3 style="font-size:1.03rem; margin-bottom:6px;">${sec.heading}</h3>
+              <p style="margin:0; font-size:0.9rem; color:var(--ink-primary);">${sec.body}</p>
+            </div>
+          `).join('')}
+
+          <div class="callout-amber">
+            <span class="callout-label">H1 Precision Rule</span>
+            <p style="margin:0; font-size:0.89rem;">${item.h1Tip}</p>
+          </div>
+
+          <div class="well" style="margin-bottom:0;">
+            <span class="pill pill-teal">Level Self-Check</span>
+            <p style="font-weight:700; margin:8px 0 8px; font-size:0.94rem;">${item.checkQ}</p>
+            <div id="lvl-self-opts">
+              ${item.checkOpts.map((opt, idx) => `<button type="button" class="option-btn" data-oidx="${idx}">${opt}</button>`).join('')}
+            </div>
+            <div id="lvl-self-fb" class="solution-drawer"></div>
+          </div>
+        </article>
+      `;
+
+      document.getElementById('toggle-lvl-done-btn').addEventListener('click', () => {
+        const idx = state.completedLevels.indexOf(item.lvl);
+        if (idx === -1) {
+          state.completedLevels.push(item.lvl);
+          notify(`Level ${item.lvl} marked complete`);
+        } else {
+          state.completedLevels.splice(idx, 1);
+          notify(`Level ${item.lvl} unmarked`);
+        }
+        saveState();
+        renderSyllabusLevels();
+      });
+
+      area.querySelectorAll('#lvl-self-opts .option-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const chosen = Number(btn.dataset.oidx);
+          area.querySelectorAll('#lvl-self-opts .option-btn').forEach(b => b.classList.remove('correct', 'wrong'));
+          const fb = document.getElementById('lvl-self-fb');
+          fb.classList.add('open');
+          if (chosen === item.checkAns) {
+            btn.classList.add('correct');
+            fb.innerHTML = `<strong>Correct!</strong> ${item.checkExp}`;
+          } else {
+            btn.classList.add('wrong');
+            fb.innerHTML = `<strong>Review:</strong> ${item.checkExp}`;
+          }
+        });
+      });
+    }
+
+    /* =======================================================================
+       4. INTERACTIVE BIOLOGY LABS (SIMPSON, GENETICS, ENZYME KINETICS)
+       ======================================================================= */
+    function updateSimpsonLab() {
+      const n1 = Math.max(0, Math.floor(Number(document.getElementById('sim-n1').value) || 0));
+      const n2 = Math.max(0, Math.floor(Number(document.getElementById('sim-n2').value) || 0));
+      const n3 = Math.max(0, Math.floor(Number(document.getElementById('sim-n3').value) || 0));
+
+      const N = n1 + n2 + n3;
+      const out = document.getElementById('simpson-output');
+      if (N < 2) {
+        out.innerHTML = '<p style="margin:0; font-size:0.88rem; color:var(--ink-secondary);">Enter at least 2 total individuals across species to compute D<sub>s</sub>.</p>';
+        return;
+      }
+
+      const sumNn1 = n1 * (n1 - 1) + n2 * (n2 - 1) + n3 * (n3 - 1);
+      const denom = N * (N - 1);
+      const ds = 1 - (sumNn1 / denom);
+
+      let interp = 'Moderate species diversity.';
+      if (ds >= 0.65) interp = 'Relatively high species diversity and evenness in this sample.';
+      else if (ds < 0.35) interp = 'Low diversity / strong dominance by one or more species.';
+
+      out.innerHTML = `
+        <div style="font-size:0.88rem; line-height:1.7;">
+          <div><strong>Total individuals (N):</strong> <span class="font-mono">${N}</span></div>
+          <div><strong>Denominator N(N − 1):</strong> <span class="font-mono">${N} &times; ${N - 1} = ${denom}</span></div>
+          <div><strong>Numerator &Sigma;n(n − 1):</strong> <span class="font-mono">${n1}&times;${Math.max(0,n1-1)} + ${n2}&times;${Math.max(0,n2-1)} + ${n3}&times;${Math.max(0,n3-1)} = ${sumNn1}</span></div>
+          <div style="margin-top:6px; font-size:0.96rem;"><strong>Simpson’s Index (D<sub>s</sub>):</strong> <span class="font-mono" style="color:var(--accent-forest); font-weight:700;">${ds.toFixed(3)}</span></div>
+          <p style="margin:6px 0 0; font-size:0.84rem; color:var(--ink-secondary);">${interp}</p>
+        </div>
+      `;
+    }
+
+    const CROSS_DATA = {
+      het_x_het: {
+        p1: ['A', 'a'],
+        p2: ['A', 'a'],
+        geno: '1 AA : 2 Aa : 1 aa',
+        pheno: '3 Dominant (A_) : 1 Recessive (aa)',
+        note: 'Classic monohybrid F1 × F1 cross. Expect 75% dominant phenotype and 25% homozygous recessive phenotype in large samples.'
+      },
+      het_x_rec: {
+        p1: ['A', 'a'],
+        p2: ['a', 'a'],
+        geno: '1 Aa : 1 aa',
+        pheno: '1 Dominant (Aa) : 1 Recessive (aa)',
+        note: 'Test cross against homozygous recessive (aa). Appearance of any recessive offspring proves the unknown parent is heterozygous (Aa).'
+      },
+      dom_x_rec: {
+        p1: ['A', 'A'],
+        p2: ['a', 'a'],
+        geno: 'All Aa (100%)',
+        pheno: 'All Dominant (100%)',
+        note: 'Crossing true-breeding dominant and recessive parents yields 100% heterozygous dominant offspring.'
+      },
+      het_x_dom: {
+        p1: ['A', 'a'],
+        p2: ['A', 'A'],
+        geno: '1 AA : 1 Aa',
+        pheno: 'All Dominant (100%)',
+        note: 'All offspring display the dominant phenotype, split 50:50 between AA and Aa genotypes.'
+      }
+    };
+
+    function updateGeneticsLab() {
+      const key = document.getElementById('cross-preset-select').value;
+      const c = CROSS_DATA[key] || CROSS_DATA.het_x_het;
+
+      const cells = [];
+      for (let r = 0; r < 2; r++) {
+        for (let col = 0; col < 2; col++) {
+          const pair = [c.p1[r], c.p2[col]].sort((x, y) => (x === y ? 0 : (x === 'A' ? -1 : 1)));
+          cells.push(pair.join(''));
+        }
+      }
+
+      document.getElementById('punnett-grid-box').innerHTML = `
+        <table class="punnett-table">
+          <thead>
+            <tr>
+              <th>Parent 1 \\ Parent 2</th>
+              <th>${c.p2[0]}</th>
+              <th>${c.p2[1]}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>${c.p1[0]}</th>
+              <td>${cells[0]}</td>
+              <td>${cells[1]}</td>
+            </tr>
+            <tr>
+              <th>${c.p1[1]}</th>
+              <td>${cells[2]}</td>
+              <td>${cells[3]}</td>
+            </tr>
+          </tbody>
+        </table>
+      `;
+
+      document.getElementById('punnett-analysis-box').innerHTML = `
+        <div style="font-size:0.88rem; line-height:1.7;">
+          <div><strong>Gametes:</strong> Parent 1 produces <span class="font-mono">${c.p1.join(', ')}</span> &bull; Parent 2 produces <span class="font-mono">${c.p2.join(', ')}</span></div>
+          <div><strong>Expected Genotypic Ratio:</strong> <span class="font-mono" style="font-weight:700;">${c.geno}</span></div>
+          <div><strong>Expected Phenotypic Ratio:</strong> <span class="font-mono" style="color:var(--accent-forest); font-weight:700;">${c.pheno}</span></div>
+          <p style="margin:8px 0 0; font-size:0.85rem; color:var(--ink-secondary);">${c.note}</p>
+        </div>
+      `;
+    }
+
+    function updateEnzymeLab() {
+      const temp = Number(document.getElementById('enz-temp-range').value);
+      const ph = Number(document.getElementById('enz-ph-range').value);
+      document.getElementById('enz-temp-val').textContent = String(temp);
+      document.getElementById('enz-ph-val').textContent = ph.toFixed(1);
+
+      // Model optimum around 37°C and pH 7.0; steep drop above 45°C due to denaturation
+      let tempFactor = Math.exp(-Math.pow((temp - 37) / 14, 2));
+      if (temp > 45) {
+        tempFactor *= Math.max(0.02, 1 - (temp - 45) * 0.045);
+      }
+      const phFactor = Math.max(0.05, Math.exp(-Math.pow((ph - 7.0) / 2.2, 2)));
+      const relRate = Math.min(100, Math.round(tempFactor * phFactor * 100));
+
+      let statusText = 'Near optimal catalytic activity.';
+      if (temp >= 52) statusText = 'Severe thermal denaturation: active-site 3D shape is disrupted.';
+      else if (temp < 20) statusText = 'Low kinetic energy: fewer enzyme–substrate collisions per second.';
+      else if (Math.abs(ph - 7.0) >= 2.5) statusText = 'pH shift alters ionic/hydrogen bonding in the active site.';
+
+      document.getElementById('enzyme-sim-output').innerHTML = `
+        <div style="font-size:0.88rem; line-height:1.7;">
+          <div><strong>Simulated Relative Rate:</strong> <span class="font-mono" style="font-size:1.05rem; font-weight:700; color:var(--accent-forest);">${relRate}%</span> of peak activity</div>
+          <div><strong>Temperature Factor:</strong> <span class="font-mono">${Math.round(tempFactor * 100)}%</span> &bull; <strong>pH Factor:</strong> <span class="font-mono">${Math.round(phFactor * 100)}%</span></div>
+          <p style="margin:8px 0 0; font-size:0.85rem; color:var(--ink-secondary);">${statusText}</p>
+        </div>
+      `;
+    }
+
+    /* =======================================================================
+       5. 5 COMPLETE HIGHER LEVEL MOCK EXAMS (NEW 300-MARK WRITTEN FORMAT)
+       ======================================================================= */
+    function makeQ(num, title, compulsory, parts) {
+      return { num, title, compulsory, marks: 50, parts };
+    }
+
+    const FIVE_MOCK_EXAMS = [
+      {
+        id: 'mock1',
+        label: 'Mock 1 • Core Physiology & Ecology',
+        subtitle: 'Focus: Homeostasis, Enzymes, Photosynthesis, Genetics & Quadrat Sampling',
+        questions: [
+          makeQ(1, 'Question 1 (Compulsory — 50 Marks): Cross-Strand Short & Data Parts', true, [
+            { id: 'm1_q1a', label: '(a) [10m] State the induced-fit model of enzyme action and explain what happens during denaturation.', sol: 'In the induced-fit model, the active site changes shape slightly to fit the substrate more closely, straining bonds to lower activation energy. Denaturation alters the 3D tertiary shape of the active site (via excess heat or extreme pH) so the substrate no longer binds effectively.' },
+            { id: 'm1_q1b', label: '(b) [10m] Distinguish between osmosis and active transport across a cell membrane.', sol: 'Osmosis is net movement of water molecules across a selectively permeable membrane from higher to lower water potential (passive). Active transport moves specific solutes against a concentration gradient using membrane carrier proteins and ATP.' },
+            { id: 'm1_q1c', label: '(c) [10m] A quadrat survey records 12 daisies, 8 buttercups, and 5 clover plants (N = 25). Calculate Simpson’s Diversity Index D_s.', sol: 'Σn(n−1) = 12×11 + 8×7 + 5×4 = 132 + 56 + 20 = 208. N(N−1) = 25×24 = 600. D_s = 1 − (208 / 600) = 1 − 0.347 = 0.653 (or 0.65).' },
+            { id: 'm1_q1d', label: '(d) [10m] Explain how negative feedback regulates blood glucose after a carbohydrate-rich meal.', sol: 'Elevated blood glucose is detected by pancreatic islets, stimulating insulin release. Insulin promotes glucose uptake by liver/muscle cells and glycogenesis (glucose → glycogen), lowering blood glucose back toward set point.' },
+            { id: 'm1_q1e', label: '(e) [10m] Outline two structural adaptations of alveoli for efficient gas exchange.', sol: 'Very thin one-cell-thick walls (short diffusion pathway), large total surface area from millions of alveoli, rich capillary network maintaining concentration gradients, and moist inner lining for gas dissolution.' }
+          ]),
+          makeQ(2, 'Question 2 (50 Marks): Photosynthesis & Energy Transfer', false, [
+            { id: 'm1_q2a', label: '(a) [18m] Write the balanced overall equation for photosynthesis and identify where light-dependent reactions vs. the Calvin cycle occur.', sol: '6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂ (in light/chlorophyll). Light-dependent stage occurs on thylakoid membranes; Calvin cycle occurs in the stroma.' },
+            { id: 'm1_q2b', label: '(b) [16m] Explain the roles of ATP and reduced NADP produced in the light stage during the Calvin cycle.', sol: 'ATP supplies chemical energy and reduced NADP supplies reducing power (electrons/hydrogen) to convert carbon dioxide intermediates into triose/hexose carbohydrates.' },
+            { id: 'm1_q2c', label: '(c) [16m] Evaluate why increasing light intensity eventually stops increasing photosynthesis rate in a glasshouse.', sol: 'Once light is no longer limiting, another factor—such as CO₂ concentration or temperature—becomes limiting (plateau). High light alone cannot raise rate further without sufficient CO₂ or optimal enzyme temperature.' }
+          ]),
+          makeQ(3, 'Question 3 (50 Marks): Genetics, Meiosis & Variation', false, [
+            { id: 'm1_q3a', label: '(a) [16m] Compare mitosis and meiosis in terms of daughter cell chromosome number and genetic variation.', sol: 'Mitosis produces two diploid (2n) genetically identical cells; meiosis produces four haploid (n) genetically varied cells (via crossing over and independent assortment).' },
+            { id: 'm1_q3b', label: '(b) [18m] In a plant, tall (T) is dominant to dwarf (t). Show the gametes, Punnett grid, and phenotypic ratio for a cross between two heterozygous (Tt) plants.', sol: 'Gametes: T and t from each parent. Offspring: TT, Tt, Tt, tt → 3 Tall : 1 Dwarf phenotypic ratio (1 TT : 2 Tt : 1 tt genotypic ratio).' },
+            { id: 'm1_q3c', label: '(c) [16m] Explain how a test cross determines whether a tall plant is TT or Tt.', sol: 'Cross the tall plant with a homozygous recessive dwarf plant (tt). If any dwarf offspring appear, the tall parent must be Tt; if all offspring are tall (in a reasonable sample), TT is indicated.' }
+          ]),
+          makeQ(4, 'Question 4 (50 Marks): Human Circulation, Digestion & Excretion', false, [
+            { id: 'm1_q4a', label: '(a) [16m] Compare arteries and veins structurally and relate structure to function.', sol: 'Arteries have thicker muscular/elastic walls and narrower lumens to withstand high pressure from ventricular pumping; veins have thinner walls, wider lumens, and valves to prevent backflow under low pressure.' },
+            { id: 'm1_q4b', label: '(b) [18m] Describe how villi in the small intestine maximize absorption of digested nutrients.', sol: 'Finger-like projections and microvilli give a huge surface area; single-cell epithelium shortens diffusion distance; dense capillary networks and lacteals transport absorbed sugars/amino acids and lipids away.' },
+            { id: 'm1_q4c', label: '(c) [16m] Outline how the kidney nephron filters blood and reabsorbs useful substances.', sol: 'High pressure in the glomerulus forces water, ions, glucose, and urea through Bowman’s capsule into the nephron (ultrafiltration). Selective reabsorption in the proximal tubule reclaims glucose, amino acids, and required water/ions.' }
+          ]),
+          makeQ(5, 'Question 5 (50 Marks): Ecology, Nutrient Cycling & Sustainability', false, [
+            { id: 'm1_q5a', label: '(a) [16m] Explain why energy flow through an ecosystem is non-cyclic whereas mineral/nutrient cycles are cyclical.', sol: 'Energy enters as light, transfers across trophic levels, and exits continuously as heat; nutrients/elements are recycled between abiotic pools, producers, consumers, and decomposers.' },
+            { id: 'm1_q5b', label: '(b) [18m] Outline the role of decomposers and nitrogen-fixing/nitrifying microorganisms in nutrient recycling.', sol: 'Decomposers break down dead organic matter and waste into simpler inorganic compounds; nitrogen-fixing bacteria convert N₂ to usable nitrogen compounds, and nitrifying bacteria convert ammonia to nitrites/nitrates.' },
+            { id: 'm1_q5c', label: '(c) [16m] Evaluate the impact of excess agricultural fertilizer runoff on freshwater ecosystems.', sol: 'Nutrient enrichment (eutrophication) triggers algal blooms; when algae die and decompose, aerobic bacteria consume dissolved oxygen (BOD rises), causing hypoxia/death of fish and aerobic organisms.' }
+          ]),
+          makeQ(6, 'Question 6 (50 Marks): Plant Transport, Responses & Reproduction', false, [
+            { id: 'm1_q6a', label: '(a) [18m] Explain how transpiration pull and cohesion-tension move water upward in xylem vessels.', sol: 'Evaporation/transpiration from leaf mesophyll lowers water potential, pulling water from adjacent cells and xylem columns; hydrogen bonding (cohesion) and wall adhesion keep the water column continuous.' },
+            { id: 'm1_q6b', label: '(b) [16m] Distinguish between translocation in phloem and water transport in xylem.', sol: 'Xylem carries water and minerals upward (transpirational stream, dead lignified vessels); phloem translocates sugars/organic solutes bidirectionally from sources to sinks via living sieve elements.' },
+            { id: 'm1_q6c', label: '(c) [16m] Outline a tropism in flowering plants and its adaptive benefit.', sol: 'Phototropism (shoots growing toward light) increases light capture for photosynthesis; gravitropism (roots growing downward) anchors the plant and accesses water/minerals.' }
+          ]),
+          makeQ(7, 'Question 7 (50 Marks): DNA, Gene Expression & Nature of Science', false, [
+            { id: 'm1_q7a', label: '(a) [18m] Outline the roles of DNA, mRNA, and tRNA during protein synthesis.', sol: 'DNA stores genetic sequence; mRNA transcribes a complementary copy of a gene and carries codons to ribosomes; tRNA carries specific amino acids matching mRNA codons via anticodons.' },
+            { id: 'm1_q7b', label: '(b) [16m] Explain why a mutation in a gene may have no effect, a mild effect, or a major effect on phenotype.', sol: 'Because the genetic code is degenerate (multiple codons can code for one amino acid) or a substitution may leave protein folding largely intact, whereas frameshifts or active-site changes can alter function.' },
+            { id: 'm1_q7c', label: '(c) [16m] Justify why replicates and controlled variables are essential in scientific investigations.', sol: 'Controlled variables isolate causal effects of the independent variable; replicates reduce random error, reveal anomalies, and support reliable conclusions.' }
+          ])
+        ]
+      },
+      {
+        id: 'mock2',
+        label: 'Mock 2 • Bioenergetics & Molecules',
+        subtitle: 'Focus: Respiration, Biomolecules, Membrane Transport, Nervous System & Evolution',
+        questions: [
+          makeQ(1, 'Question 1 (Compulsory — 50 Marks): Cross-Strand Short & Data Parts', true, [
+            { id: 'm2_q1a', label: '(a) [10m] Name the monomer units of proteins and starch.', sol: 'Proteins are built from amino acids; starch is a polymer of α-glucose.' },
+            { id: 'm2_q1b', label: '(b) [10m] State two structural features of a phospholipid bilayer that support selective permeability.', sol: 'Hydrophobic fatty-acid interior repels charged/polar ions directly, while membrane proteins mediate selective passage.' },
+            { id: 'm2_q1c', label: '(c) [10m] Compare aerobic respiration and lactic acid fermentation in terms of oxygen requirement and ATP yield.', sol: 'Aerobic respiration requires O₂ and yields much more ATP per glucose; anaerobic lactic fermentation occurs without O₂ and yields far less ATP per glucose.' },
+            { id: 'm2_q1d', label: '(d) [10m] Explain how neurotransmitters cross a synapse.', sol: 'An action potential arriving at the presynaptic terminal triggers Ca²⁺ influx and vesicle fusion, releasing neurotransmitter across the synaptic cleft to bind receptors on the postsynaptic membrane.' },
+            { id: 'm2_q1e', label: '(e) [10m] Define carrying capacity in ecology.', sol: 'Carrying capacity is the maximum population size of a species that a habitat can sustain indefinitely given available resources and limiting factors.' }
+          ]),
+          makeQ(2, 'Question 2 (50 Marks): Cellular Respiration Pathways', false, [
+            { id: 'm2_q2a', label: '(a) [18m] Outline glycolysis and state its cellular location and net ATP output.', sol: 'Occurs in the cytosol; glucose (6C) is phosphorylated and split into two pyruvate (3C) molecules, yielding a small net gain of ATP and reduced coenzymes.' },
+            { id: 'm2_q2b', label: '(b) [16m] Explain what happens to pyruvate under aerobic conditions versus oxygen deficiency in animal muscle.', sol: 'With O₂, pyruvate enters mitochondria for full oxidation (releasing CO₂ and generating high ATP); in oxygen debt/deficiency, pyruvate is reduced to lactate to regenerate NAD⁺ so glycolysis can continue.' },
+            { id: 'm2_q2c', label: '(c) [16m] Analyse why sprinters accumulate lactate during intense effort and how recovery clears it.', sol: 'ATP demand exceeds O₂ delivery, driving anaerobic lactate formation; post-exercise oxygen consumption oxidizes/processes lactate and restores ATP/creatine phosphate and O₂ stores.' }
+          ]),
+          makeQ(3, 'Question 3 (50 Marks): Biomolecules & Biochemical Testing', false, [
+            { id: 'm2_q3a', label: '(a) [16m] Compare the structural roles of cellulose and glycogen in organisms.', sol: 'Cellulose forms rigid structural cell walls in plants; glycogen acts as a branched energy-storage polysaccharide in animals and fungi.' },
+            { id: 'm2_q3b', label: '(b) [18m] Explain why protein function depends on three-dimensional folding.', sol: 'Specific 3D folding positions R-groups in exact spatial arrangements to form binding pockets, active sites, or structural motifs; losing 3D shape destroys specificity.' },
+            { id: 'm2_q3c', label: '(c) [16m] Design a controlled investigation comparing enzyme activity across four temperatures, identifying variables and safety precautions.', sol: 'Independent: temperature (e.g., 10, 25, 37, 55 °C). Dependent: rate of product formation/substrate disappearance. Controlled: enzyme concentration, substrate concentration, pH, equilibration time. Include thermal/reagent safety.' }
+          ]),
+          makeQ(4, 'Question 4 (50 Marks): Nervous & Endocrine Coordination', false, [
+            { id: 'm2_q4a', label: '(a) [16m] Contrast nervous signalling and endocrine (hormonal) signalling in speed, pathway, and duration.', sol: 'Nervous impulses travel rapidly along neurons/synapses for brief/targeted responses; hormones travel via blood more slowly for broader, longer-lasting regulation.' },
+            { id: 'm2_q4b', label: '(b) [18m] Explain the role of sensory neurons, interneurons (relay), and motor neurons in a reflex arc.', sol: 'Receptor/sensory neuron carries impulse from stimulus to CNS; interneuron integrates within spinal cord/CNS; motor neuron conducts impulse to effector (muscle/gland) for rapid protective response.' },
+            { id: 'm2_q4c', label: '(c) [16m] Explain how a hormone target cell responds only to specific hormones.', sol: 'Target cells possess complementary receptor proteins specific to that hormone’s shape/chemistry, triggering intracellular signalling cascades.' }
+          ]),
+          makeQ(5, 'Question 5 (50 Marks): Natural Selection & Evolutionary Evidence', false, [
+            { id: 'm2_q5a', label: '(a) [18m] Explain how natural selection can increase antibiotic resistance in a bacterial population.', sol: 'Random mutations create rare resistant variants; antibiotic exposure kills susceptible bacteria while resistant ones survive and reproduce, passing resistance alleles to offspring.' },
+            { id: 'm2_q5b', label: '(b) [16m] Explain why overusing antibiotics without medical indication accelerates resistance.', sol: 'Frequent or incomplete antibiotic exposure repeatedly selects for resistant strains and eliminates competing sensitive bacteria, allowing resistant populations to expand.' },
+            { id: 'm2_q5c', label: '(c) [16m] Outline how comparative anatomy, genetics/molecular data, or fossil records support evolutionary relationships.', sol: 'Shared homologous features, conserved DNA/protein sequences, and transitional/stratified fossil evidence indicate common ancestry and divergence over time.' }
+          ]),
+          makeQ(6, 'Question 6 (50 Marks): Ecological Sampling & Population Dynamics', false, [
+            { id: 'm2_q6a', label: '(a) [16m] Compare random quadrat sampling with belt/line transect sampling.', sol: 'Random quadrats estimate abundance/diversity across a uniform habitat without bias; transects sample along an environmental gradient (e.g., shore height or light gradient) to show zonation.' },
+            { id: 'm2_q6b', label: '(b) [18m] A quadrat of 0.25 m² contains 14 individuals of a plant species. Estimate density per m² and discuss sampling limitations.', sol: 'Density = 14 / 0.25 = 56 individuals m⁻². Limitations: small sample area or too few quadrats can misrepresent patchy distributions; edge rules must be applied consistently.' },
+            { id: 'm2_q6c', label: '(c) [16m] Explain how competition and predation act as ecological factors in a community.', sol: 'Interspecific/intraspecific competition for limited resources (light, space, food) constrains growth/survival; predator–prey interactions regulate population fluctuations.' }
+          ]),
+          makeQ(7, 'Question 7 (50 Marks): Cell Division & Biotechnology Contexts', false, [
+            { id: 'm2_q7a', label: '(a) [16m] Explain why DNA replication occurs before cell division.', sol: 'Each daughter cell requires a complete copy of the genome so genetic information is preserved across divisions.' },
+            { id: 'm2_q7b', label: '(b) [18m] Outline how recombinant DNA technology allows a human gene to be expressed in a host organism.', sol: 'The target gene is isolated, inserted into a vector (such as a plasmid) using compatible sticky ends/ligation, introduced into host cells, and selected transformants express the encoded protein.' },
+            { id: 'm2_q7c', label: '(c) [16m] Evaluate benefits and safety/ethical considerations of biotechnology in medicine or agriculture.', sol: 'Benefits include targeted therapeutics (e.g., insulin) or disease/stress-resilient crops; considerations include containment, off-target/ecological impacts, regulatory oversight, and equitable access.' }
+          ])
+        ]
+      },
+      {
+        id: 'mock3',
+        label: 'Mock 3 • Genetics & Systems Integration',
+        subtitle: 'Focus: Inheritance, Transport, Gas Exchange, Homeostasis & Photosynthesis',
+        questions: [
+          makeQ(1, 'Question 1 (Compulsory — 50 Marks): Cross-Strand Short & Data Parts', true, [
+            { id: 'm3_q1a', label: '(a) [10m] Define the terms allele and heterozygous.', sol: 'An allele is an alternative form/variant of a gene; heterozygous means possessing two different alleles at a gene locus (e.g., Aa).' },
+            { id: 'm3_q1b', label: '(b) [10m] State the function of haemoglobin and explain why red blood cells lack a nucleus when mature.', sol: 'Haemoglobin binds and transports oxygen reversibly; lacking a nucleus (and other organelles) maximizes space for haemoglobin and flexibility through capillaries.' },
+            { id: 'm3_q1c', label: '(c) [10m] Identify the raw materials and products of the light-dependent reactions of photosynthesis.', sol: 'Inputs: light energy, H₂O, NADP⁺/ADP+Pᵢ. Outputs: O₂ (by-product), reduced NADP, ATP.' },
+            { id: 'm3_q1d', label: '(d) [10m] Explain how ventilation maintains steep O₂ and CO₂ gradients across alveoli.', sol: 'Inhalation brings fresh O₂-rich air into alveoli and exhalation removes CO₂-rich air, preventing equilibrium with capillary blood.' },
+            { id: 'm3_q1e', label: '(e) [10m] State two ways water is lost from a terrestrial plant and how guard cells regulate stomata.', sol: 'Transpiration through stomata and cuticle; guard cells swell (turgid) to open stomata when water/light/low internal CO₂ favour photosynthesis and become flaccid to close them under water stress.' }
+          ]),
+          makeQ(2, 'Question 2 (50 Marks): Sex Linkage & Pedigree Analysis', false, [
+            { id: 'm3_q2a', label: '(a) [16m] Explain why X-linked recessive conditions appear more frequently in males than in females.', sol: 'Males have only one X chromosome (XY), so a single recessive allele on X is expressed; females have two X chromosomes (XX) and can be unaffected carriers (XᴴXʰ).' },
+            { id: 'm3_q2b', label: '(b) [18m] Show a genetic cross between a carrier female (XᴴXʰ) and an unaffected male (XᴴY), giving offspring genotypes and phenotypes.', sol: 'Female gametes: Xᴴ, Xʰ; Male gametes: Xᴴ, Y. Offspring: XᴴXᴴ (unaffected girl), XᴴXʰ (carrier girl), XᴴY (unaffected boy), XʰY (affected boy) — 3 unaffected : 1 affected.' },
+            { id: 'm3_q2c', label: '(c) [16m] Explain why observed offspring ratios in a small family can differ from expected Mendelian probabilities.', sol: 'Small sample sizes experience random chance variation in gamete fusion and fertilization; expected ratios reflect large-sample probabilities.' }
+          ]),
+          makeQ(3, 'Question 3 (50 Marks): Enzymes & Limiting Factors in Investigations', false, [
+            { id: 'm3_q3a', label: '(a) [16m] Sketch/describe an enzyme rate vs. temperature curve and explain the peak and decline.', sol: 'Rate rises with temperature as molecular kinetic energy and collision frequency increase up to the optimum, then drops sharply above the optimum as denaturation distorts the active site.' },
+            { id: 'm3_q3b', label: '(b) [18m] Explain how substrate concentration affects enzyme rate when enzyme concentration is fixed.', sol: 'At low substrate levels, active sites are available so rate rises steeply; at saturation (V_max), all active sites are occupied continuously, so adding more substrate alone does not increase rate.' },
+            { id: 'm3_q3c', label: '(c) [16m] Why is it important to equilibrate enzyme and substrate solutions separately to the target temperature before mixing?', sol: 'Pre-equilibrating ensures the reaction starts immediately at the intended temperature rather than mixing at room temperature and drifting mid-assay.' }
+          ]),
+          makeQ(4, 'Question 4 (50 Marks): Osmoregulation & Kidney Function', false, [
+            { id: 'm3_q4a', label: '(a) [16m] Explain what osmoregulation means and why it is vital for cells.', sol: 'Osmoregulation is controlling water and solute balance in body fluids so cells do not swell/lyse in hypotonic conditions or crenate/shrink in hypertonic conditions.' },
+            { id: 'm3_q4b', label: '(b) [18m] Trace the path of filtrate through a nephron and state what is reabsorbed.', sol: 'Glomerular filtrate enters Bowman’s capsule → proximal convoluted tubule (glucose, amino acids, much water/ions reabsorbed) → loop of Henle → distal tubule & collecting duct (fine water/ion adjustment).' },
+            { id: 'm3_q4c', label: '(c) [16m] Predict and explain what happens to urine volume and concentration after heavy sweating without drinking water.', sol: 'Blood water potential drops/osmolarity rises, prompting increased water conservation in the kidney so urine becomes more concentrated and smaller in volume.' }
+          ]),
+          makeQ(5, 'Question 5 (50 Marks): Carbon & Nitrogen Cycles in Ecosystems', false, [
+            { id: 'm3_q5a', label: '(a) [18m] Outline how carbon moves from atmospheric CO₂ into organic compounds and back to the atmosphere.', sol: 'Photosynthesis fixes CO₂ into glucose/biomass; respiration by plants, animals, and decomposers (and combustion) releases CO₂ back into the atmosphere.' },
+            { id: 'm3_q5b', label: '(b) [16m] Distinguish between nitrogen fixation and nitrification.', sol: 'Nitrogen fixation converts atmospheric N₂ into ammonia/ammonium compounds; nitrification oxidizes ammonium to nitrite and then nitrate.' },
+            { id: 'm3_q5c', label: '(c) [16m] Justify sustainable land-management practices that maintain soil fertility and biodiversity.', sol: 'Maintaining diverse habitats, avoiding over-application of soluble nutrients, and protecting organic matter/decomposers sustain nutrient turnover and species richness.' }
+          ]),
+          makeQ(6, 'Question 6 (50 Marks): Transport & Gas Exchange in Plants', false, [
+            { id: 'm3_q6a', label: '(a) [16m] Explain how root hairs increase water and mineral uptake.', sol: 'Root hairs vastly increase surface area for absorption and provide a thin barrier close to soil water and mineral ions.' },
+            { id: 'm3_q6b', label: '(b) [18m] Explain how environmental factors (e.g., wind, humidity, temperature) affect transpiration rate.', sol: 'Higher temperature increases evaporation rate; higher wind removes humid boundary layer air; lower air humidity steepens the water-vapour gradient out of leaves—each increases transpiration.' },
+            { id: 'm3_q6c', label: '(c) [16m] Explain why excessive transpiration can wilt a non-woody plant.', sol: 'When water loss exceeds uptake, cells lose turgor pressure and become flaccid, causing stems and leaves to droop (wilting).' }
+          ]),
+          makeQ(7, 'Question 7 (50 Marks): Scientific Method & Data Evaluation', false, [
+            { id: 'm3_q7a', label: '(a) [16m] Formulate a testable hypothesis and prediction for a named biological factor.', sol: 'A strong hypothesis states a clear causal relationship (e.g., changing light intensity alters O₂ bubble production rate in pondweed) with a specific measurable prediction.' },
+            { id: 'm3_q7b', label: '(b) [18m] Explain how to identify an anomalous result in a table of replicates and how to handle it.', sol: 'An anomaly deviates sharply from consistent replicates under identical conditions; verify possible recording/procedural error and report it transparently rather than silently fabricating data.' },
+            { id: 'm3_q7c', label: '(c) [16m] Explain why correlation between two variables in observational data does not prove direct causation.', sol: 'An unmeasured confounding variable may drive both variables, or the causal direction may be reversed; controlled testing is needed to establish mechanism.' }
+          ])
+        ]
+      },
+      {
+        id: 'mock4',
+        label: 'Mock 4 • H1 Synthesis & Case Analysis',
+        subtitle: 'Focus: Multi-Strand Scenarios, Gene Expression, Bioenergetics & Ecology',
+        questions: [
+          makeQ(1, 'Question 1 (Compulsory — 50 Marks): Cross-Strand Short & Data Parts', true, [
+            { id: 'm4_q1a', label: '(a) [10m] Name the complementary base pairs in DNA and state how RNA differs from DNA.', sol: 'DNA pairs A with T and C with G. RNA is typically single-stranded, contains ribose instead of deoxyribose, and uses uracil (U) instead of thymine (T).' },
+            { id: 'm4_q1b', label: '(b) [10m] State two functions of lipids in living organisms.', sol: 'Long-term high-energy storage (triglycerides), thermal insulation/cushioning, and membrane bilayers (phospholipids).' },
+            { id: 'm4_q1c', label: '(c) [10m] In a quadrat survey of 20 total organisms (N = 20): Species X = 10, Species Y = 6, Species Z = 4. Compute D_s.', sol: 'Σn(n−1) = 10×9 + 6×5 + 4×3 = 90 + 30 + 12 = 132. N(N−1) = 20×19 = 380. D_s = 1 − (132 / 380) = 1 − 0.3474 = 0.653.' },
+            { id: 'm4_q1d', label: '(d) [10m] Explain how insulin lowers elevated blood glucose.', sol: 'Insulin binds receptors on target cells (liver/skeletal muscle), stimulating glucose uptake and conversion of glucose into glycogen.' },
+            { id: 'm4_q1e', label: '(e) [10m] State one difference between a virus and a bacterium.', sol: 'Bacteria are living cellular prokaryotes with cytoplasm, ribosomes, and cell walls; viruses are non-cellular particles lacking independent cellular machinery.' }
+          ]),
+          makeQ(2, 'Question 2 (50 Marks): Transcription, Translation & Mutations', false, [
+            { id: 'm4_q2a', label: '(a) [18m] Outline how mRNA is formed from a DNA template and used to assemble a polypeptide.', sol: 'During transcription, RNA polymerase unwinds DNA and builds complementary mRNA; at the ribosome, mRNA codons pair with tRNA anticodons to link amino acids into a polypeptide chain.' },
+            { id: 'm4_q2b', label: '(b) [16m] Explain how a single nucleotide change can alter a protein’s function.', sol: 'A base substitution can change a codon to a different amino acid (or stop codon), altering primary sequence and potentially 3D folding or active-site geometry.' },
+            { id: 'm4_q2c', label: '(c) [16m] Evaluate the importance of accurate DNA proofreading and repair mechanisms.', sol: 'Repair systems minimize accumulation of harmful mutations across cell divisions, protecting genome stability and organismal health.' }
+          ]),
+          makeQ(3, 'Question 3 (50 Marks): Bioenergetics — Light & Dark / Aerobic & Anaerobic', false, [
+            { id: 'm4_q3a', label: '(a) [16m] Explain why plants require both light-dependent reactions and the Calvin cycle to make glucose.', sol: 'Light reactions generate ATP and reduced NADP needed to drive reduction/fixation in the Calvin cycle; without both stages, carbohydrate synthesis stalls.' },
+            { id: 'm4_q3b', label: '(b) [18m] Compare net ATP yield and end products of aerobic respiration versus alcoholic/lactic fermentation.', sol: 'Aerobic respiration yields far more ATP and produces CO₂ + H₂O; fermentation yields little ATP and leaves organic end products (lactate in muscle, or ethanol + CO₂ in yeast).' },
+            { id: 'm4_q3c', label: '(c) [16m] Explain how an investigation can measure rate of photosynthesis or respiration quantitatively.', sol: 'Measure a measurable rate per unit time—such as O₂ volume/bubbles evolved or CO₂ uptake in photosynthesis, or O₂ consumption / CO₂ production / temperature change in respiration—under controlled conditions.' }
+          ]),
+          makeQ(4, 'Question 4 (50 Marks): Transport & Homeostasis in Mammals', false, [
+            { id: 'm4_q4a', label: '(a) [16m] Trace blood flow from the right atrium through the pulmonary circuit and back to the left atrium.', sol: 'Right atrium → tricuspid valve → right ventricle → pulmonary artery → lung capillaries (gas exchange) → pulmonary veins → left atrium.' },
+            { id: 'm4_q4b', label: '(b) [18m] Explain how the heart’s pacemaker/conduction system coordinates contraction.', sol: 'Pacemaker tissue initiates excitation, spreading across atria to contract them, then through the AV node/bundle/Purkinje fibres to contract ventricles smoothly for effective pumping.' },
+            { id: 'm4_q4c', label: '(c) [16m] Explain how sweating and blood vessel changes in skin help regulate body temperature.', sol: 'Vasodilation increases warm blood flow near skin surface to lose heat; sweat evaporation removes latent heat from the skin surface.' }
+          ]),
+          makeQ(5, 'Question 5 (50 Marks): Biodiversity, Food Webs & Conservation', false, [
+            { id: 'm4_q5a', label: '(a) [16m] Explain how a food web gives a more realistic model of feeding relationships than a single food chain.', sol: 'Organisms typically feed on multiple species and occupy multiple trophic positions, so interconnected webs capture alternative energy pathways and resilience.' },
+            { id: 'm4_q5b', label: '(b) [18m] Explain why high species diversity (high D_s) often indicates a more resilient community.', sol: 'Multiple species with overlapping ecological functions provide functional redundancy if one species declines due to disease or environmental fluctuation.' },
+            { id: 'm4_q5c', label: '(c) [16m] Justify conservation strategies that protect habitats and native species.', sol: 'Preserving habitats maintains ecological niches, genetic diversity, carbon/nutrient sinks, and ecosystem services for future generations.' }
+          ]),
+          makeQ(6, 'Question 6 (50 Marks): Plant Reproduction & Growth Regulation', false, [
+            { id: 'm4_q6a', label: '(a) [16m] Compare sexual reproduction and vegetative propagation in flowering plants.', sol: 'Sexual reproduction involves gametes/fertilization and generates genetic variation; vegetative propagation produces genetically identical clones rapidly from parent tissue.' },
+            { id: 'm4_q6b', label: '(b) [18m] Explain how differential growth/auxin distribution produces phototropism in a shoot.', sol: 'Unilateral light causes uneven distribution/transport of growth regulator (auxin) toward the shaded side of the shoot tip, stimulating greater cell elongation on the shaded side so the shoot bends toward light.' },
+            { id: 'm4_q6c', label: '(c) [16m] Outline how seed germination depends on water, oxygen, and suitable temperature.', sol: 'Water activates enzymes and swells seed tissues; oxygen supports aerobic respiration for energy; suitable temperature enables enzyme-catalysed metabolic reactions.' }
+          ]),
+          makeQ(7, 'Question 7 (50 Marks): Experimental Design & Scientific Reasoning', false, [
+            { id: 'm4_q7a', label: '(a) [16m] Distinguish between accuracy and precision/reliability in experimental measurements.', sol: 'Accuracy reflects closeness to a true/accepted value (free of systematic bias); precision/reliability reflects consistency of repeated measurements under the same conditions.' },
+            { id: 'm4_q7b', label: '(b) [18m] Identify two sources of systematic error in a biological investigation and explain how to reduce them.', sol: 'Examples: miscalibrated balance/sensor or unadjusted blank/baseline; reduce by calibrating instruments beforehand, running blanks/controls, and checking experimental setup.' },
+            { id: 'm4_q7c', label: '(c) [16m] Evaluate a claim made from a small or non-random sample.', sol: 'Non-random or small samples risk selection bias and wide margin of error; robust conclusions require representative sampling and appropriate replication.' }
+          ])
+        ]
+      },
+      {
+        id: 'mock5',
+        label: 'Mock 5 • Final H1 Dress Rehearsal',
+        subtitle: 'Focus: Full Exam Simulation Across All Strands & H1 Synthesis',
+        questions: [
+          makeQ(1, 'Question 1 (Compulsory — 50 Marks): Cross-Strand Short & Data Parts', true, [
+            { id: 'm5_q1a', label: '(a) [10m] State the role of enzymes in metabolic pathways and explain why they are reusable.', sol: 'Enzymes lower activation energy to speed up reactions without being consumed; once products leave the active site, the enzyme returns to its original shape to bind another substrate.' },
+            { id: 'm5_q1b', label: '(b) [10m] Identify the organelle where aerobic ATP synthesis via electron transport occurs and state its main inputs/outputs.', sol: 'Mitochondrion; uses reduced coenzymes and O₂ (plus ADP+Pᵢ) to generate ATP and H₂O.' },
+            { id: 'm5_q1c', label: '(c) [10m] A cross between two Aa individuals produces 80 offspring. How many are expected to show the recessive phenotype (aa)?', sol: 'Expected proportion of aa from Aa × Aa is 1/4 = 25%. 80 × (1/4) = 20 offspring.' },
+            { id: 'm5_q1d', label: '(d) [10m] State two differences between xylem vessels and phloem sieve tubes.', sol: 'Xylem cells are dead at maturity with lignified walls transporting water/minerals upward; phloem sieve tubes are living cells (with companion cells) transporting organic solutes.' },
+            { id: 'm5_q1e', label: '(e) [10m] Define homeostasis and give one physiological example.', sol: 'Maintenance of a relatively constant internal environment despite external changes—e.g., blood glucose or core body temperature regulation.' }
+          ]),
+          makeQ(2, 'Question 2 (50 Marks): Cell Structure, Membranes & Transport', false, [
+            { id: 'm5_q2a', label: '(a) [16m] Explain what happens to a plant cell placed in a concentrated salt/sucrose solution (hypertonic).', sol: 'Water leaves the cell by osmosis down the water potential gradient; vacuole shrinks and protoplast pulls away from the cell wall (plasmolysis), leaving the cell flaccid.' },
+            { id: 'm5_q2b', label: '(b) [18m] Explain why active transport stops if a metabolic poison inhibits ATP production.', sol: 'Active transport requires ATP energy to drive conformational changes in carrier proteins against a concentration gradient; without ATP, active pumping halts.' },
+            { id: 'm5_q2c', label: '(c) [16m] Relate the Biology in Practice Investigation themes of membranes, osmosis, and experimental controls to reliable data.', sol: 'Consistent initial mass/volume, identical solution volumes/times, replicates, and clear controls isolate osmotic water movement from measurement noise.' }
+          ]),
+          makeQ(3, 'Question 3 (50 Marks): Photosynthesis & Respiration Comparison', false, [
+            { id: 'm5_q3a', label: '(a) [16m] Compare photosynthesis and aerobic respiration in terms of energy transformation and gas exchange.', sol: 'Photosynthesis converts light energy into chemical energy in carbohydrates (consuming CO₂, releasing O₂); respiration releases chemical energy to form ATP (consuming O₂, releasing CO₂).' },
+            { id: 'm5_q3b', label: '(b) [18m] Explain why a green plant carries out respiration continuously, including in the dark.', sol: 'Living plant cells need ATP at all times for active transport, growth, repair, and maintenance; in darkness photosynthesis stops while respiration continues.' },
+            { id: 'm5_q3c', label: '(c) [16m] Analyse how temperature and CO₂ interact to limit photosynthesis in a crop.', sol: 'At low CO₂, raising temperature alone has limited effect because carbon fixation is capped by CO₂ supply; when CO₂ is abundant, raising temperature toward the optimum increases rate until enzyme denaturation occurs.' }
+          ]),
+          makeQ(4, 'Question 4 (50 Marks): Genetics, Evolution & Population Change', false, [
+            { id: 'm5_q4a', label: '(a) [16m] Explain the difference between genotype and phenotype.', sol: 'Genotype is the genetic allele makeup of an organism; phenotype is the observable physical, physiological, or behavioural trait resulting from genotype and environment.' },
+            { id: 'm5_q4b', label: '(b) [18m] Explain how geographic or reproductive isolation can lead to divergence between populations.', sol: 'Separated populations experience different mutations, selection pressures, or genetic drift without gene flow; over time allele frequencies diverge substantially.' },
+            { id: 'm5_q4c', label: '(c) [16m] Explain why variation within a population increases its chance of surviving environmental change.', sol: 'Diverse alleles/phenotypes mean some individuals are more likely to possess traits suited to new conditions, allowing survival and reproduction.' }
+          ]),
+          makeQ(5, 'Question 5 (50 Marks): Ecology, Sampling & Diversity Calculations', false, [
+            { id: 'm5_q5a', label: '(a) [18m] Calculate Simpson’s Diversity Index D_s where N = 50 and Σn(n − 1) = 610, and interpret the value.', sol: 'D_s = 1 − (610 / (50×49)) = 1 − (610 / 2450) = 1 − 0.249 = 0.751. A value of 0.751 indicates relatively high biodiversity in the sampled area.' },
+            { id: 'm5_q5b', label: '(b) [16m] Explain how a researcher ensures quadrat placement is unbiased across a meadow.', sol: 'Use a grid with random number coordinates or random throws/sampling points rather than deliberately choosing lush patches.' },
+            { id: 'm5_q5c', label: '(c) [16m] Evaluate two human activities that threaten biodiversity and suggest practical mitigation.', sol: 'Habitat fragmentation/destruction and pollution reduce available niches and survival; mitigation includes habitat corridors/protected areas and pollution/nutrient controls.' }
+          ]),
+          makeQ(6, 'Question 6 (50 Marks): Human Systems — Homeostasis & Coordination', false, [
+            { id: 'm5_q6a', label: '(a) [16m] Explain how glucagon helps restore blood glucose when levels fall below normal.', sol: 'Low blood glucose triggers glucagon release, stimulating glycogenolysis (glycogen → glucose) and glucose release in the liver to raise blood glucose back to normal.' },
+            { id: 'm5_q6b', label: '(b) [18m] Outline how a nerve impulse is transmitted across a synapse without reversing direction.', sol: 'Neurotransmitter is released only from presynaptic vesicles and binds receptors only on the postsynaptic membrane, enforcing one-way transmission.' },
+            { id: 'm5_q6c', label: '(c) [16m] Explain how the respiratory and circulatory systems work together during vigorous exercise.', sol: 'Breathing rate/depth and cardiac output increase to deliver more O₂ to working muscles and remove CO₂ and heat faster.' }
+          ]),
+          makeQ(7, 'Question 7 (50 Marks): H1 Synthesis — Health, Sustainability & Technology', false, [
+            { id: 'm5_q7a', label: '(a) [16m] Discuss how biological knowledge informs public health decisions (e.g., vaccination or hygiene).', sol: 'Understanding pathogen transmission and immune memory supports immunization programmes, infection control, and evidence-based health guidance.' },
+            { id: 'm5_q7b', label: '(b) [18m] Discuss how biological principles support environmental sustainability.', sol: 'Understanding ecosystem limits, nutrient cycling, and biodiversity guides sustainable agriculture, resource management, and conservation.' },
+            { id: 'm5_q7c', label: '(c) [16m] Summarize your personal strategy to achieve an H1 across the 60% written paper and 40% investigation.', sol: 'Secure high marks early in the Biology in Practice Investigation (200m), master core mechanisms and exact terminology across all strands, practice compulsory Q1 + 5 full 50-mark questions under timed conditions, and show full working/units.' }
+          ])
+        ]
+      }
+    ];
+
+    function renderMockSelector() {
+      const bar = document.getElementById('mock-selector-bar');
+      if (!bar) return;
+      bar.innerHTML = FIVE_MOCK_EXAMS.map((m, idx) => {
+        const active = idx === Number(state.activeMockIdx);
+        const saved = state.mockScores[m.id];
+        const tag = typeof saved === 'number' ? ` (${saved}/300)` : '';
+        return `<button type="button" class="mock-pill-btn ${active ? 'active' : ''}" data-midx="${idx}">${m.label}${tag}</button>`;
+      }).join('');
+
+      bar.querySelectorAll('.mock-pill-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.activeMockIdx = Number(btn.dataset.midx);
+          saveState();
+          renderMockSelector();
+          renderActiveMock();
+          syncMockScoreInput();
+        });
+      });
+    }
+
+    function renderActiveMock() {
+      const mock = FIVE_MOCK_EXAMS[state.activeMockIdx] || FIVE_MOCK_EXAMS[0];
+      const container = document.getElementById('active-mock-container');
+      if (!container) return;
+
+      container.innerHTML = `
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <span class="pill pill-forest">${mock.label}</span>
+            <span style="font-size:0.82rem; font-weight:700; color:var(--ink-secondary);">Total: 300 Marks (Q1 Compulsory + Any 5 of Q2&ndash;Q7 @ 50m each)</span>
+          </div>
+          <p style="color:var(--ink-secondary); margin:8px 0 0; font-size:0.9rem;">${mock.subtitle}</p>
+        </div>
+      ` + mock.questions.map(q => `
+        <article class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+            <span class="pill ${q.compulsory ? 'pill-amber' : 'pill-teal'}">${q.compulsory ? 'Compulsory (50 Marks)' : 'Optional Choice (50 Marks)'}</span>
+            <button type="button" class="btn btn-secondary btn-sm toggle-q-sol-btn" data-qnum="${q.num}">Reveal Question ${q.num} H1 Solutions</button>
+          </div>
+          <h3 style="font-size:1.1rem; margin-bottom:10px;">${q.title}</h3>
+
+          ${q.parts.map(p => {
+            const draftVal = state.scratchpads[p.id] || '';
+            return `
+              <div class="subq-block">
+                <p style="font-weight:600; font-size:0.92rem; margin:0 0 8px;">${p.label}</p>
+                <textarea class="mock-scratch" data-pid="${p.id}" placeholder="Draft your key points, calculation steps, or terms here...">${draftVal}</textarea>
+                <div id="sol-${p.id}" class="solution-drawer q-${q.num}-sol">
+                  <strong>H1 Solution &amp; Marking Explanation:</strong> ${p.sol}
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </article>
+      `).join('');
+
+      // Save scratchpad text
+      container.querySelectorAll('.mock-scratch').forEach(ta => {
+        ta.addEventListener('input', () => {
+          state.scratchpads[ta.dataset.pid] = ta.value;
+          saveState();
+        });
+      });
+
+      // Toggle question solutions
+      container.querySelectorAll('.toggle-q-sol-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const qnum = btn.dataset.qnum;
+          const drawers = container.querySelectorAll(`.q-${qnum}-sol`);
+          const anyClosed = Array.from(drawers).some(d => !d.classList.contains('open'));
+          drawers.forEach(d => d.classList.toggle('open', anyClosed));
+          btn.textContent = anyClosed ? `Hide Question ${qnum} Solutions` : `Reveal Question ${qnum} H1 Solutions`;
+        });
+      });
+    }
+
+    function syncMockScoreInput() {
+      const mock = FIVE_MOCK_EXAMS[state.activeMockIdx] || FIVE_MOCK_EXAMS[0];
+      const inp = document.getElementById('mock-score-input');
+      const saved = state.mockScores[mock.id];
+      inp.value = typeof saved === 'number' ? String(saved) : '270';
+      updateGradeReadout();
+    }
+
+    function updateGradeReadout() {
+      const raw = Math.max(0, Math.min(300, Number(document.getElementById('mock-score-input').value) || 0));
+      const pct = (raw / 300) * 100;
+      let grade = 'H8';
+      if (pct >= 90) grade = 'H1';
+      else if (pct >= 80) grade = 'H2';
+      else if (pct >= 70) grade = 'H3';
+      else if (pct >= 60) grade = 'H4';
+      else if (pct >= 50) grade = 'H5';
+      else if (pct >= 40) grade = 'H6';
+      else if (pct >= 30) grade = 'H7';
+
+      const pill = document.getElementById('mock-grade-readout');
+      pill.textContent = `${raw} / 300 (${pct.toFixed(1)}%) → ${grade}`;
+      pill.className = `pill ${pct >= 90 ? 'pill-forest' : (pct >= 70 ? 'pill-teal' : 'pill-amber')}`;
+    }
+
+    /* =======================================================================
+       6. EXAM TIMER & NAVIGATION
+       ======================================================================= */
+    let timerInterval = null;
+
+    function formatTimer(secs) {
+      const s = Math.max(0, Number(secs) || 0);
+      const mins = Math.floor(s / 60);
+      const rem = s % 60;
+      return `Timer: ${String(mins).padStart(3, '0')}:${String(rem).padStart(2, '0')}`;
+    }
+
+    function renderTimerDisplay() {
+      const el = document.getElementById('mock-timer-readout');
+      if (el) el.textContent = formatTimer(state.timerSeconds);
+    }
+
+    function initTimerControls() {
+      const toggleBtn = document.getElementById('timer-toggle-btn');
+      const resetBtn = document.getElementById('timer-reset-btn');
+      const revealAllBtn = document.getElementById('reveal-all-mock-btn');
+
+      toggleBtn.addEventListener('click', () => {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          toggleBtn.textContent = 'Resume Exam Timer';
+          notify('Exam timer paused');
+        } else {
+          toggleBtn.textContent = 'Pause Exam Timer';
+          notify('Exam timer running (150:00)');
+          timerInterval = setInterval(() => {
+            if (state.timerSeconds > 0) {
+              state.timerSeconds -= 1;
+              renderTimerDisplay();
+              if (state.timerSeconds % 15 === 0) saveState();
+            } else {
+              clearInterval(timerInterval);
+              timerInterval = null;
+              toggleBtn.textContent = 'Start Exam Timer';
+              saveState();
+              notify('150-minute written exam window complete');
+            }
+          }, 1000);
+        }
+      });
+
+      resetBtn.addEventListener('click', () => {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+        state.timerSeconds = 9000;
+        toggleBtn.textContent = 'Start Exam Timer';
+        renderTimerDisplay();
+        saveState();
+        notify('Timer reset to 150:00');
+      });
+
+      revealAllBtn.addEventListener('click', () => {
+        const drawers = document.querySelectorAll('#active-mock-container .solution-drawer');
+        const allOpen = Array.from(drawers).every(d => d.classList.contains('open'));
+        drawers.forEach(d => d.classList.toggle('open', !allOpen));
+        revealAllBtn.textContent = !allOpen ? 'Hide All Solutions in Current Mock' : 'Reveal All Solutions in Current Mock';
+      });
+    }
+
+    function openMainTab(tabName) {
+      state.activeTab = tabName;
+      saveState();
+
+      document.querySelectorAll('.main-tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.tab === tabName);
+      });
+      document.querySelectorAll('.tab-view').forEach(v => {
+        v.classList.toggle('active', v.id === `view-${tabName}`);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.main-tab').forEach(btn => {
+        btn.addEventListener('click', () => openMainTab(btn.dataset.tab));
+      });
+
+      document.querySelectorAll('.level-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.activeLevel = Number(btn.dataset.lvl);
+          saveState();
+          renderSyllabusLevels();
+        });
+      });
+
+      // Two-step inline reset button
+      let resetArmed = false;
+      const resetBtn = document.getElementById('reset-progress-btn');
+      resetBtn.addEventListener('click', () => {
+        if (!resetArmed) {
+          resetArmed = true;
+          resetBtn.textContent = 'Click Again to Reset';
+          setTimeout(() => {
+            resetArmed = false;
+            resetBtn.textContent = 'Reset Progress';
+          }, 3000);
+        } else {
+          if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+          }
+          localStorage.removeItem(STORAGE_KEY);
+          state = {
+            ...DEFAULT_STATE,
+            completedLevels: [],
+            checklistIds: [],
+            mockScores: {},
+            scratchpads: {}
+          };
+          resetArmed = false;
+          resetBtn.textContent = 'Reset Progress';
+          document.getElementById('timer-toggle-btn').textContent = 'Start Exam Timer';
+          renderChecklist();
+          renderSyllabusLevels();
+          renderMockSelector();
+          renderActiveMock();
+          syncMockScoreInput();
+          renderTimerDisplay();
+          openMainTab('blueprint');
+          updateProgressBar();
+          notify('Progress reset');
+        }
+      });
+
+      // Lab listeners
+      ['sim-n1', 'sim-n2', 'sim-n3'].forEach(id => {
+        document.getElementById(id).addEventListener('input', updateSimpsonLab);
+      });
+      document.getElementById('cross-preset-select').addEventListener('change', updateGeneticsLab);
+      document.getElementById('enz-temp-range').addEventListener('input', updateEnzymeLab);
+      document.getElementById('enz-ph-range').addEventListener('input', updateEnzymeLab);
+
+      // Mock score listeners
+      document.getElementById('mock-score-input').addEventListener('input', updateGradeReadout);
+      document.getElementById('save-mock-score-btn').addEventListener('click', () => {
+        const mock = FIVE_MOCK_EXAMS[state.activeMockIdx] || FIVE_MOCK_EXAMS[0];
+        const val = Math.max(0, Math.min(300, Number(document.getElementById('mock-score-input').value) || 0));
+        state.mockScores[mock.id] = val;
+        saveState();
+        renderMockSelector();
+        updateGradeReadout();
+        notify(`Saved ${val}/300 for ${mock.label}`);
+      });
+
+      renderChecklist();
+      renderSyllabusLevels();
+      updateSimpsonLab();
+      updateGeneticsLab();
+      updateEnzymeLab();
+      renderMockSelector();
+      renderActiveMock();
+      syncMockScoreInput();
+      renderTimerDisplay();
+      initTimerControls();
+      openMainTab(state.activeTab || 'blueprint');
+      updateProgressBar();
+    });
+  </script>
+</body>
+</html>

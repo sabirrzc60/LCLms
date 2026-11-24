@@ -1,0 +1,1649 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bench &amp; Ledger H1 — LC Chemistry Equations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper-bg: #F7F5F0;
+      --paper-card: #FFFDF9;
+      --paper-well: #EFECE4;
+      --paper-rule: rgba(31, 41, 51, 0.05);
+      --ink-charcoal: #1F2933;
+      --ink-slate: #4A5568;
+      --ink-muted: #6C7886;
+      --cobalt: #2B4C7E;
+      --cobalt-deep: #1E375C;
+      --cobalt-soft: #E9EFF7;
+      --terracotta: #B84A27;
+      --terracotta-deep: #91381B;
+      --terracotta-soft: #FBECE6;
+      --moss: #285943;
+      --moss-soft: #E7F2EC;
+      --border-hairline: #D8D2C5;
+      --border-emphasis: #BEB6A4;
+      --shadow-notebook: 0 2px 6px rgba(31, 41, 51, 0.05), 0 1px 2px rgba(31, 41, 51, 0.04);
+      --radius-card: 12px;
+      --radius-ctrl: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--paper-bg);
+      background-image: linear-gradient(to bottom, var(--paper-rule) 1px, transparent 1px);
+      background-size: 100% 28px;
+      color: var(--ink-charcoal);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .font-serif-display {
+      font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+      color: var(--ink-charcoal);
+      letter-spacing: -0.01em;
+      margin-top: 0;
+    }
+
+    code, pre, .font-mono {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    sub, sup {
+      font-size: 72%;
+      line-height: 0;
+    }
+
+    /* Sticky Top Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: rgba(247, 245, 240, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .header-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-crest {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background-color: var(--cobalt);
+      color: #FFFDF9;
+      border: 1px solid var(--cobalt-deep);
+      display: grid;
+      place-items: center;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 1.24rem;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .brand-subtitle {
+      font-size: 0.78rem;
+      color: var(--ink-slate);
+      margin: 2px 0 0;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mastery-meter {
+      min-width: 225px;
+      background-color: var(--paper-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-ctrl);
+      padding: 8px 12px;
+    }
+
+    .mastery-meter-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--ink-slate);
+      margin-bottom: 5px;
+    }
+
+    .mastery-track {
+      height: 7px;
+      width: 100%;
+      background-color: var(--paper-well);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .mastery-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--cobalt);
+      transition: width 0.25s ease;
+    }
+
+    /* Navigation Bar */
+    .primary-nav {
+      background-color: var(--paper-card);
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .nav-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+    }
+
+    .nav-tab {
+      appearance: none;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      padding: 13px 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink-slate);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .nav-tab:hover {
+      color: var(--ink-charcoal);
+    }
+
+    .nav-tab.active {
+      color: var(--cobalt);
+      border-bottom-color: var(--cobalt);
+      font-weight: 700;
+    }
+
+    /* Main Container */
+    .main-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 20px 64px;
+    }
+
+    .section-view {
+      display: none;
+    }
+
+    .section-view.active {
+      display: block;
+    }
+
+    /* Notebook Cards */
+    .notebook-card {
+      background-color: var(--paper-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      box-shadow: var(--shadow-notebook);
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .notebook-card {
+        padding: 18px 16px;
+      }
+    }
+
+    .well-box {
+      background-color: var(--paper-well);
+      border: 1px solid var(--border-hairline);
+      border-radius: 10px;
+      padding: 16px;
+      margin: 14px 0;
+    }
+
+    .h1-note-box {
+      background-color: var(--terracotta-soft);
+      border: 1px solid #E5C2B4;
+      border-left: 4px solid var(--terracotta);
+      border-radius: 8px;
+      padding: 13px 16px;
+      margin: 14px 0;
+    }
+
+    .h1-note-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--terracotta);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .equation-strip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem;
+      font-weight: 600;
+      background-color: var(--paper-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: 8px;
+      padding: 10px 14px;
+      overflow-x: auto;
+      white-space: nowrap;
+      color: var(--ink-charcoal);
+    }
+
+    /* Badges & Tier Chips */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .badge-cobalt {
+      background-color: var(--cobalt-soft);
+      color: var(--cobalt);
+      border: 1px solid #C5D4EA;
+    }
+
+    .badge-terracotta {
+      background-color: var(--terracotta-soft);
+      color: var(--terracotta);
+      border: 1px solid #E6C3B4;
+    }
+
+    .badge-moss {
+      background-color: var(--moss-soft);
+      color: var(--moss);
+      border: 1px solid #BCD8CA;
+    }
+
+    /* Buttons & Inputs */
+    .btn {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 15px;
+      border-radius: var(--radius-ctrl);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.14s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--cobalt);
+      color: #FFFDF9;
+      border-color: var(--cobalt-deep);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--cobalt-deep);
+    }
+
+    .btn-accent {
+      background-color: var(--terracotta);
+      color: #FFFDF9;
+      border-color: var(--terracotta-deep);
+    }
+
+    .btn-accent:hover {
+      background-color: var(--terracotta-deep);
+    }
+
+    .btn-secondary {
+      background-color: var(--paper-card);
+      color: var(--ink-charcoal);
+      border-color: var(--border-emphasis);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--paper-well);
+    }
+
+    .btn-sm {
+      padding: 6px 11px;
+      font-size: 0.8rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      padding: 8px 11px;
+      border-radius: var(--radius-ctrl);
+      border: 1px solid var(--border-emphasis);
+      background-color: var(--paper-card);
+      color: var(--ink-charcoal);
+    }
+
+    input:focus,
+    select:focus {
+      outline: 2px solid rgba(43, 76, 126, 0.22);
+      border-color: var(--cobalt);
+    }
+
+    .feedback-box {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: var(--radius-ctrl);
+      font-size: 0.88rem;
+      display: none;
+    }
+
+    .feedback-box.show {
+      display: block;
+    }
+
+    .feedback-box.ok {
+      background-color: var(--moss-soft);
+      border: 1px solid #B5D5C5;
+      color: #1A4330;
+    }
+
+    .feedback-box.err {
+      background-color: var(--terracotta-soft);
+      border: 1px solid #E4BCAE;
+      color: #7D2F16;
+    }
+
+    .feedback-box.info {
+      background-color: var(--cobalt-soft);
+      border: 1px solid #C2D2EA;
+      color: #1B3357;
+    }
+
+    /* Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 820px) {
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Roadmap Domain Cards */
+    .domain-card {
+      background-color: var(--paper-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-card);
+      padding: 18px;
+      box-shadow: var(--shadow-notebook);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    /* Domain Lessons Split Layout */
+    .lessons-layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    @media (max-width: 920px) {
+      .lessons-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .domain-sidebar {
+      position: sticky;
+      top: 126px;
+      background-color: var(--paper-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-card);
+      padding: 12px;
+      box-shadow: var(--shadow-notebook);
+    }
+
+    @media (max-width: 920px) {
+      .domain-sidebar {
+        position: static;
+      }
+    }
+
+    .domain-nav-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      text-align: left;
+      padding: 9px 11px;
+      border-radius: var(--radius-ctrl);
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--ink-slate);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: all 0.14s ease;
+    }
+
+    .domain-nav-btn:hover {
+      background-color: var(--paper-well);
+      color: var(--ink-charcoal);
+    }
+
+    .domain-nav-btn.active {
+      background-color: var(--cobalt-soft);
+      border-color: #C2D2EA;
+      color: var(--cobalt);
+      font-weight: 700;
+    }
+
+    /* Balancer & Tally */
+    .equation-builder-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      padding: 14px;
+      background-color: var(--paper-well);
+      border: 1px solid var(--border-hairline);
+      border-radius: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.94rem;
+      font-weight: 600;
+    }
+
+    .coeff-box {
+      width: 56px;
+      font-family: 'JetBrains Mono', monospace !important;
+      font-weight: 700 !important;
+      text-align: center;
+      padding: 6px 4px !important;
+    }
+
+    .tally-board {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .tally-item {
+      background-color: var(--paper-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tally-item.ok {
+      background-color: var(--moss-soft);
+      border-color: #B4D4C4;
+    }
+
+    .tally-item.diff {
+      background-color: var(--terracotta-soft);
+      border-color: #E3B9A8;
+    }
+
+    /* Quiz Styling */
+    .quiz-choice {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+      text-align: left;
+      padding: 10px 14px;
+      border-radius: var(--radius-ctrl);
+      border: 1px solid var(--border-hairline);
+      background-color: var(--paper-card);
+      color: var(--ink-charcoal);
+      font-size: 0.9rem;
+      cursor: pointer;
+      margin-bottom: 8px;
+      transition: all 0.14s ease;
+    }
+
+    .quiz-choice:hover {
+      background-color: var(--paper-well);
+      border-color: var(--border-emphasis);
+    }
+
+    .quiz-choice.selected {
+      background-color: var(--cobalt-soft);
+      border-color: var(--cobalt);
+      font-weight: 600;
+    }
+
+    .quiz-choice.correct {
+      background-color: var(--moss-soft);
+      border-color: var(--moss);
+      font-weight: 600;
+    }
+
+    .quiz-choice.wrong {
+      background-color: var(--terracotta-soft);
+      border-color: var(--terracotta);
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .filter-pill {
+      appearance: none;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-emphasis);
+      background-color: var(--paper-card);
+      color: var(--ink-slate);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .filter-pill.active {
+      background-color: var(--cobalt);
+      border-color: var(--cobalt-deep);
+      color: #FFFDF9;
+    }
+
+    /* Toast */
+    .toast-banner {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 90;
+      background-color: var(--ink-charcoal);
+      color: #FFFDF9;
+      padding: 10px 16px;
+      border-radius: var(--radius-ctrl);
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+    }
+
+    .toast-banner.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Top Header with Brand Identity, H1 Mastery Meter, Tabs & Reset -->
+  <header class="site-header">
+    <div class="header-wrap">
+      <div class="brand-group">
+        <div class="brand-crest">H1</div>
+        <div>
+          <h1 class="brand-title">Bench &amp; Ledger H1 &mdash; Leaving Certificate Chemistry</h1>
+          <p class="brand-subtitle">Equation Writing, Stoichiometry &amp; SEC Exam Mastery &bull; Beginner to H1 Achiever</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="mastery-meter">
+          <div class="mastery-meter-top">
+            <span>H1 Mastery Progress</span>
+            <span id="mastery-pct-label">0%</span>
+          </div>
+          <div class="mastery-track">
+            <div id="mastery-fill-bar" class="mastery-fill"></div>
+          </div>
+        </div>
+        <button id="reset-btn" type="button" class="btn btn-secondary btn-sm">Reset Progress</button>
+      </div>
+    </div>
+
+    <nav class="primary-nav" aria-label="Primary learning views">
+      <div class="nav-wrap">
+        <button type="button" class="nav-tab active" data-view="roadmap">1. Beginner-to-H1 Roadmap (7 Domains)</button>
+        <button type="button" class="nav-tab" data-view="lessons">2. Step-by-Step Domain Lessons</button>
+        <button type="button" class="nav-tab" data-view="lab">3. Interactive Equation &amp; Balancing Lab</button>
+        <button type="button" class="nav-tab" data-view="quiz">4. H1 Exam Readiness Quiz (16 Qs)</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main-container">
+
+    <!-- =====================================================================
+         SECTION 1: BEGINNER-TO-H1 ROADMAP & 7 LC EQUATION DOMAINS
+         ===================================================================== -->
+    <section id="view-roadmap" class="section-view active">
+      <div class="notebook-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+          <span class="badge badge-cobalt">Irish Leaving Certificate Chemistry</span>
+          <span class="badge badge-terracotta">Zero &rarr; H1 Progression</span>
+        </div>
+        <h2>How Equations Anchor Every Leaving Cert Chemistry Question</h2>
+        <p style="color:var(--ink-slate); margin-bottom:14px;">
+          In Leaving Certificate Chemistry, a balanced equation is rarely an isolated exercise&mdash;it is the <strong>mole ledger</strong> behind volumetric titration calculations, heats of reaction and combustion, $K_c$ equilibrium expressions, organic reactions, nuclear decay, and water analysis.
+        </p>
+
+        <div class="grid-3">
+          <div class="well-box" style="margin:0;">
+            <span class="badge badge-moss">Stage 1 &bull; Beginner</span>
+            <h3 style="margin-top:8px; font-size:1.05rem;">Formulas, Ions &amp; States</h3>
+            <p style="font-size:0.86rem; color:var(--ink-slate); margin:4px 0 0;">
+              Write valid ionic and covalent formulas first, recognize diatomics (<code>H₂, N₂, O₂, F₂, Cl₂, Br₂, I₂</code>), and apply state symbols <code>(s), (l), (g), (aq)</code> or reversible arrows <code>&rightleftharpoons;</code>.
+            </p>
+          </div>
+          <div class="well-box" style="margin:0;">
+            <span class="badge badge-cobalt">Stage 2 &bull; Intermediate</span>
+            <h3 style="margin-top:8px; font-size:1.05rem;">Atoms, Half-Equations &amp; Charge</h3>
+            <p style="font-size:0.86rem; color:var(--ink-slate); margin:4px 0 0;">
+              Balance coefficients by inspection without changing subscripts, balance half-equations using <code>H₂O</code>, <code>H⁺</code>, and <code>e⁻</code>, and conserve mass (<code>A</code>) and charge (<code>Z</code>) in nuclear decay.
+            </p>
+          </div>
+          <div class="well-box" style="margin:0;">
+            <span class="badge badge-terracotta">Stage 3 &bull; H1 Achiever</span>
+            <h3 style="margin-top:8px; font-size:1.05rem;">SEC Mole Ratios &amp; Precision</h3>
+            <p style="font-size:0.86rem; color:var(--ink-slate); margin:4px 0 0;">
+              Extract exact mole ratios for titrations, thermochemistry ($\Delta H$), and $K_c$ powers; avoid common sign, factor-of-two, and spectator-ion traps under exam time pressure.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 Leaving Cert Equation Domains Grid -->
+      <div class="grid-2" id="roadmap-domains-grid"></div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 2: STEP-BY-STEP DOMAIN LESSONS (DOMAINS 1 TO 7)
+         ===================================================================== -->
+    <section id="view-lessons" class="section-view">
+      <div class="lessons-layout">
+        <aside class="domain-sidebar" aria-label="LC Chemistry Domains">
+          <div style="font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-muted); padding:4px 8px 8px;">
+            7 LC Equation Domains
+          </div>
+          <div id="domain-sidebar-list"></div>
+          <div style="margin-top:10px; padding-top:10px; border-top:1px solid var(--border-hairline);">
+            <button type="button" class="btn btn-primary btn-sm" style="width:100%;" onclick="openSectionView('lab')">
+              Practice in Interactive Lab &rarr;
+            </button>
+          </div>
+        </aside>
+
+        <div id="domain-lesson-panel"></div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 3: INTERACTIVE EQUATION & BALANCING LAB (ALL 7 DOMAINS)
+         ===================================================================== -->
+    <section id="view-lab" class="section-view">
+
+      <!-- Lab 3A: Universal Multi-Domain Coefficient Balancer -->
+      <div class="notebook-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px;">
+          <span class="badge badge-cobalt">Lab A &bull; Multi-Domain Balancer</span>
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <label for="lab-eq-select" style="font-size:0.82rem; font-weight:700; color:var(--ink-slate);">Choose LC Equation:</label>
+            <select id="lab-eq-select"></select>
+          </div>
+        </div>
+        <h2>Interactive Stoichiometric Coefficient Balancer</h2>
+        <p style="color:var(--ink-slate); font-size:0.92rem; margin-bottom:12px;">
+          Select whole-number coefficients for each species and inspect the live atom/charge balance tally. Every equation checks both conservation and lowest whole-number ratio.
+        </p>
+
+        <div id="lab-eq-meta" class="well-box" style="margin-bottom:12px;"></div>
+        <div id="lab-eq-row" class="equation-builder-row"></div>
+        <div id="lab-eq-tally" class="tally-board"></div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;">
+          <button type="button" class="btn btn-primary btn-sm" id="lab-check-btn">Verify Balance</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="lab-hint-btn">Show Step Hint</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="lab-reveal-btn">Reveal Solution</button>
+        </div>
+        <div id="lab-eq-fb" class="feedback-box"></div>
+      </div>
+
+      <!-- Lab 3B: Half-Equation & Overall Redox Combiner -->
+      <div class="notebook-card">
+        <span class="badge badge-terracotta">Lab B &bull; Redox Half-Equations</span>
+        <h2 style="margin-top:8px;">Half-Equation Electron Balancing &amp; Redox Combiner</h2>
+        <p style="color:var(--ink-slate); font-size:0.92rem;">
+          In acidic solution (typical for LC volumetric redox titrations), balance each half-equation in order:
+          <strong>(1) Main atoms &rarr; (2) O with H₂O &rarr; (3) H with H⁺ &rarr; (4) Charge with e⁻</strong>.
+        </p>
+
+        <div class="well-box">
+          <div style="font-weight:700; color:var(--cobalt); margin-bottom:6px;">Guided Example: Manganate(VII) + Iron(II) in Acidic Solution</div>
+          <div class="equation-strip" style="margin-bottom:8px;">Reduction half: MnO₄⁻ + 8H⁺ + 5e⁻ &rarr; Mn²⁺ + 4H₂O</div>
+          <div class="equation-strip" style="margin-bottom:8px;">Oxidation half: Fe²⁺ &rarr; Fe³⁺ + 1e⁻ &nbsp;(multiply by 5 so electrons match: 5Fe²⁺ &rarr; 5Fe³⁺ + 5e⁻)</div>
+          <div class="equation-strip" style="background-color:var(--moss-soft); border-color:#B4D4C4;">
+            Overall redox: MnO₄⁻ + 5Fe²⁺ + 8H⁺ &rarr; Mn²⁺ + 5Fe³⁺ + 4H₂O &nbsp;[Mole ratio n(MnO₄⁻) : n(Fe²⁺) = 1 : 5]
+          </div>
+        </div>
+
+        <div class="well-box">
+          <div style="font-weight:700; margin-bottom:8px;">Interactive Electron Multiplier Check: Oxalate / Ethanedioate &amp; Manganate(VII)</div>
+          <p style="font-size:0.88rem; color:var(--ink-slate); margin:0 0 10px;">
+            The reduction half uses <code>5e⁻</code> per <code>MnO₄⁻</code>, while the oxidation half <code>C₂O₄²⁻ &rarr; 2CO₂ + 2e⁻</code> releases <code>2e⁻</code> per <code>C₂O₄²⁻</code>.
+            To cancel electrons cleanly (LCM of 5 and 2 is 10), what multiplier must you apply to <code>MnO₄⁻</code> and what multiplier to <code>C₂O₄²⁻</code>?
+          </p>
+          <div class="grid-2">
+            <div>
+              <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:4px;">Multiplier for MnO₄⁻ half-equation</label>
+              <input id="redox-mult-mno4" type="number" min="1" max="10" class="coeff-box" style="width:100%; text-align:left;" placeholder="e.g. 2" />
+            </div>
+            <div>
+              <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:4px;">Multiplier for C₂O₄²⁻ half-equation</label>
+              <input id="redox-mult-ox" type="number" min="1" max="10" class="coeff-box" style="width:100%; text-align:left;" placeholder="e.g. 5" />
+            </div>
+          </div>
+          <div style="margin-top:10px;">
+            <button type="button" class="btn btn-primary btn-sm" id="redox-check-btn">Check Electron Balance</button>
+          </div>
+          <div id="redox-fb" class="feedback-box"></div>
+        </div>
+      </div>
+
+      <!-- Lab 3C: Nuclear Decay & Titration Mole-Ratio Trainer -->
+      <div class="grid-2">
+        <div class="notebook-card" style="margin-bottom:0;">
+          <span class="badge badge-moss">Lab C1 &bull; Nuclear Decay (A &amp; Z)</span>
+          <h3 style="margin-top:8px;">Nuclear Mass &amp; Atomic Number Trainer</h3>
+          <p style="font-size:0.86rem; color:var(--ink-slate);">
+            Parent: <code>²¹⁰₈₄Po</code> undergoes <strong>alpha (&alpha;) decay</strong> (<code>⁴₂He</code>): <code>²¹⁰₈₄Po &rarr; ᴬ₂Pb + ⁴₂He</code>.
+          </p>
+          <div class="grid-2">
+            <div>
+              <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Mass Number A (top)</label>
+              <input id="nuc-a-in" type="number" class="coeff-box" style="width:100%;" placeholder="206" />
+            </div>
+            <div>
+              <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Atomic Number Z (bottom)</label>
+              <input id="nuc-z-in" type="number" class="coeff-box" style="width:100%;" placeholder="82" />
+            </div>
+          </div>
+          <div style="margin-top:10px;">
+            <button type="button" class="btn btn-primary btn-sm" id="nuc-check-btn">Verify Conservation</button>
+          </div>
+          <div id="nuc-fb" class="feedback-box"></div>
+        </div>
+
+        <div class="notebook-card" style="margin-bottom:0;">
+          <span class="badge badge-cobalt">Lab C2 &bull; Titration Mole Ratios</span>
+          <h3 style="margin-top:8px;">Titration &amp; Thermochemistry Ratio Extractor</h3>
+          <p style="font-size:0.86rem; color:var(--ink-slate);">
+            Equation: <code>2NaOH(aq) + H₂SO₄(aq) &rarr; Na₂SO₄(aq) + 2H₂O(l)</code>.
+            If <code>0.010 mol</code> of <code>H₂SO₄</code> reacts completely, how many moles of <code>NaOH</code> are neutralized, and how many moles of <code>H₂O</code> form?
+          </p>
+          <div class="grid-2">
+            <div>
+              <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Moles of NaOH (mol)</label>
+              <input id="titr-naoh-in" type="number" step="0.001" class="coeff-box" style="width:100%;" placeholder="0.020" />
+            </div>
+            <div>
+              <label style="font-size:0.8rem; font-weight:700; display:block; margin-bottom:4px;">Moles of H₂O (mol)</label>
+              <input id="titr-h2o-in" type="number" step="0.001" class="coeff-box" style="width:100%;" placeholder="0.020" />
+            </div>
+          </div>
+          <div style="margin-top:10px;">
+            <button type="button" class="btn btn-primary btn-sm" id="titr-check-btn">Check Mole Ratio</button>
+          </div>
+          <div id="titr-fb" class="feedback-box"></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =====================================================================
+         SECTION 4: H1 EXAM READINESS QUIZ (16 QUESTIONS ACROSS ALL 7 DOMAINS)
+         ===================================================================== -->
+    <section id="view-quiz" class="section-view">
+      <div class="notebook-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px;">
+          <span class="badge badge-terracotta">H1 Readiness Assessment</span>
+          <span id="quiz-score-pill" class="badge badge-cobalt">Answered: 0 / 16</span>
+        </div>
+        <h2>Leaving Certificate Equation &amp; Stoichiometry Exam Bank</h2>
+        <p style="color:var(--ink-slate); margin-bottom:10px;">
+          Sixteen exam-style questions spanning all seven LC equation domains from Beginner to H1 Achiever. Filter by difficulty tier or grade all questions at once.
+        </p>
+
+        <div class="filter-row">
+          <button type="button" class="filter-pill active" data-tier="all">All Tiers (16)</button>
+          <button type="button" class="filter-pill" data-tier="Beginner">Beginner</button>
+          <button type="button" class="filter-pill" data-tier="Intermediate">Intermediate</button>
+          <button type="button" class="filter-pill" data-tier="H1 Achiever">H1 Achiever</button>
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+          <button type="button" class="btn btn-primary btn-sm" id="grade-quiz-btn">Grade &amp; Show Explanations</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="clear-quiz-btn">Clear Answers</button>
+        </div>
+      </div>
+
+      <div id="quiz-questions-list"></div>
+    </section>
+
+  </main>
+
+  <div id="toast-banner" class="toast-banner" role="status" aria-live="polite"></div>
+
+  <script>
+    /* =======================================================================
+       1. STATE MANAGEMENT & LOCAL STORAGE
+       ======================================================================= */
+    const STORAGE_KEY = 'bench_ledger_lc_chem_v1';
+
+    const DEFAULT_STATE = {
+      activeView: 'roadmap',
+      activeDomainId: 1,
+      visitedDomains: [1],
+      labEqIdx: 0,
+      quizFilter: 'all',
+      quizAnswers: {},
+      quizGraded: false
+    };
+
+    let appState = loadSavedState();
+
+    function loadSavedState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return { ...DEFAULT_STATE };
+        const data = JSON.parse(raw);
+        return {
+          ...DEFAULT_STATE,
+          ...data,
+          visitedDomains: Array.isArray(data.visitedDomains) ? data.visitedDomains : [1],
+          quizAnswers: data.quizAnswers && typeof data.quizAnswers === 'object' ? data.quizAnswers : {}
+        };
+      } catch (err) {
+        console.warn('LocalStorage unavailable:', err);
+        return { ...DEFAULT_STATE };
+      }
+    }
+
+    function persistState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      } catch (err) {
+        console.warn('Could not persist state:', err);
+      }
+      refreshMasteryMeter();
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById('toast-banner');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add('visible');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => el.classList.remove('visible'), 2200);
+    }
+
+    function setFeedback(elId, type, htmlText) {
+      const el = document.getElementById(elId);
+      if (!el) return;
+      el.className = `feedback-box show ${type}`;
+      el.innerHTML = htmlText;
+    }
+
+    function refreshMasteryMeter() {
+      // 7 domains (up to 42 pts) + quiz answers (up to 32 pts) + graded bonus (up to 26 pts) = 100%
+      const domainFrac = Math.min(1, (appState.visitedDomains.length || 0) / 7);
+      const ansCount = Object.keys(appState.quizAnswers || {}).length;
+      const ansFrac = Math.min(1, ansCount / 16);
+
+      let correctCount = 0;
+      if (appState.quizGraded) {
+        LC_QUIZ_BANK.forEach(q => {
+          if (appState.quizAnswers[q.id] === q.answer) correctCount++;
+        });
+      }
+      const gradeFrac = appState.quizGraded ? (correctCount / 16) : 0;
+
+      const pct = Math.min(100, Math.round(domainFrac * 40 + ansFrac * 25 + gradeFrac * 35));
+      const bar = document.getElementById('mastery-fill-bar');
+      const label = document.getElementById('mastery-pct-label');
+      if (bar) bar.style.width = `${pct}%`;
+      if (label) label.textContent = `${pct}%`;
+    }
+
+    /* =======================================================================
+       2. ALL 7 IRISH LEAVING CERTIFICATE EQUATION DOMAINS DATA
+       ======================================================================= */
+    const LC_DOMAINS = [
+      {
+        id: 1,
+        shortTitle: '1. Volumetric & Titration',
+        badgeClass: 'badge-cobalt',
+        examContext: 'Mandatory Experiments • Acid–Base & Redox Titrations',
+        summary: 'Every volumetric analysis calculation hinges on the exact mole ratio from the balanced equation—especially diprotic/carbonate acid–base reactions and MnO₄⁻ / I₂ redox titrations.',
+        beginnerBasics: 'Write correct ionic formulas first (e.g., Na₂CO₃ has two Na⁺ ions for one CO₃²⁻ ion, so 2 mol HCl are needed per 1 mol Na₂CO₃). Remember that CO₂ gas and H₂O liquid form when carbonates react with strong acids.',
+        intermediateMechanics: 'Balance non-oxygen/hydrogen species first, count polyatomic groups carefully, and use half-equations in redox titrations (such as MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O paired with Fe²⁺ → Fe³⁺ + e⁻, or 2S₂O₃²⁻ + I₂ → S₄O₆²⁻ + 2I⁻).',
+        h1Trap: 'H1 Trap: Do NOT assume a 1:1 acid-to-base mole ratio! With HCl and Na₂CO₃, the ratio is 2 mol HCl : 1 mol Na₂CO₃. With MnO₄⁻ and Fe²⁺ in acid, the ratio is 1 mol MnO₄⁻ : 5 mol Fe²⁺.',
+        workedEquation: '2HCl(aq) + Na₂CO₃(aq) → 2NaCl(aq) + H₂O(l) + CO₂(g)',
+        workedWalkthrough: '1 Na₂CO₃ supplies 2 Na⁺ and 1 CO₃²⁻. Two HCl molecules provide 2 H⁺ (forming H₂O) and 2 Cl⁻ (forming 2 NaCl), with 1 CO₂ released. Mole ratio: n(HCl) : n(Na₂CO₃) = 2 : 1.'
+      },
+      {
+        id: 2,
+        shortTitle: '2. Half-Equations & Redox',
+        badgeClass: 'badge-terracotta',
+        examContext: 'Electrochemistry & Redox • Acidic Half-Equation Method',
+        summary: 'Oxidation is electron loss and reduction is electron gain. Leaving Cert Higher Level routinely asks you to construct and combine half-equations in acidic solution.',
+        beginnerBasics: 'Assign oxidation numbers to spot which species is oxidised (oxidation number increases) and which is reduced (oxidation number decreases).',
+        intermediateMechanics: 'Balance each half-equation in four steps: (1) atoms other than O and H, (2) O using H₂O, (3) H using H⁺, (4) electrical charge using e⁻. Multiply half-equations by whole integers so electrons lost equal electrons gained, then add and cancel.',
+        h1Trap: 'H1 Trap: Always check net charge on both sides of a half-equation! For MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O, left charge is (−1) + (+8) + (−5) = +2, matching Mn²⁺ (+2) on the right.',
+        workedEquation: 'MnO₄⁻ + 5Fe²⁺ + 8H⁺ → Mn²⁺ + 5Fe³⁺ + 4H₂O',
+        workedWalkthrough: 'MnO₄⁻ (Mn at +7) gains 5e⁻ to become Mn²⁺ (+2) using 8H⁺ and 4H₂O. Five Fe²⁺ ions lose 5e⁻ to form 5Fe³⁺. Adding both halves cancels the 5e⁻ cleanly.'
+      },
+      {
+        id: 3,
+        shortTitle: '3. Thermochemistry (ΔH)',
+        badgeClass: 'badge-moss',
+        examContext: 'Heats of Reaction, Combustion, Neutralisation & Bond Enthalpy',
+        summary: 'Enthalpy changes (ΔH) are extensive and tied directly to the molar amounts in the balanced equation—especially per 1 mole of fuel burned in heat of combustion.',
+        beginnerBasics: 'Write complete combustion equations for fuels with excess oxygen to give CO₂ and H₂O, and balance carbon and hydrogen before oxygen.',
+        intermediateMechanics: 'When a fuel already contains oxygen (like ethanol C₂H₅OH), subtract the oxygen inside the fuel formula when counting how many O₂ molecules are needed. In bond enthalpy questions, draw full structural/displayed formulas so you count every single, double, or triple bond broken and formed.',
+        h1Trap: 'H1 Trap: Heat of combustion is defined per 1 mole of substance burned completely. If you write 2C₂H₅OH + 6O₂ → 4CO₂ + 6H₂O, the enthalpy for that equation is 2 × ΔHc°(ethanol).',
+        workedEquation: 'C₂H₅OH(l) + 3O₂(g) → 2CO₂(g) + 3H₂O(l)',
+        workedWalkthrough: '1 mol C₂H₅OH gives 2 CO₂ (4 O) and 3 H₂O (3 O) = 7 O atoms on the right. Since C₂H₅OH already contains 1 O atom, 6 O atoms (3 O₂ molecules) are required from oxygen gas.'
+      },
+      {
+        id: 4,
+        shortTitle: '4. Equilibrium & Kc',
+        badgeClass: 'badge-cobalt',
+        examContext: 'Chemical Equilibrium • Reversible Arrows, Kc & Le Chatelier',
+        summary: 'Reversible reactions use double arrows (⇌). Balanced stoichiometric coefficients become exponents in Kc expressions and govern how pressure shifts gas equilibria.',
+        beginnerBasics: 'Use ⇌ for reversible equilibria and check that every atom on the left matches the right before writing Kc = [products]^coeff / [reactants]^coeff.',
+        intermediateMechanics: 'Compare total moles of gas on the reactant side versus product side: increasing pressure shifts equilibrium toward the side with fewer moles of gas (provided Δn_gas ≠ 0).',
+        h1Trap: 'H1 Trap: Changing temperature changes the value of Kc (for a fixed balanced equation), whereas changing concentration or pressure does NOT change Kc—and writing the equation with doubled coefficients squares Kc!',
+        workedEquation: 'N₂(g) + 3H₂(g) ⇌ 2NH₃(g)',
+        workedWalkthrough: '1 mol N₂ + 3 mol H₂ = 4 mol gas on left, versus 2 mol NH₃ gas on right. Increasing pressure favours the forward reaction (fewer gas moles), and Kc = [NH₃]² / ([N₂][H₂]³).'
+      },
+      {
+        id: 5,
+        shortTitle: '5. Organic Equations',
+        badgeClass: 'badge-terracotta',
+        examContext: 'Organic Families • Esterification, Saponification, Addition & Combustion',
+        summary: 'Organic chemistry requires accurate molecular/structural formulas across functional groups: alkanes, alkenes, alkynes, alcohols, aldehydes/ketones, carboxylic acids, esters, and triglycerides.',
+        beginnerBasics: 'Know homologous series formulas (e.g., alkanes CₙH₂ₙ₊₂, alkenes CₙH₂ₙ, saturated monocarboxylic acids CₙH₂ₙ₊₁COOH) and keep carbon chains intact unless C–C cleavage occurs.',
+        intermediateMechanics: 'Carboxylic acid + alcohol ⇌ ester + water (esterification); triglyceride (fat/oil) + 3NaOH → glycerol + 3 sodium carboxylate/soap (saponification); alkene + Br₂ → dibromoalkane (addition).',
+        h1Trap: 'H1 Trap: Base hydrolysis (saponification) of a triglyceride with NaOH is NOT reversible like mild esterification and produces 3 moles of soap per 1 mole of triester plus 1 mole of propane-1,2,3-triol (glycerol).',
+        workedEquation: 'CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O',
+        workedWalkthrough: 'Ethanoic acid and ethanol condense reversibly to form ethyl ethanoate (an ester) and water. Every C (4), H (8), and O (3) balances across both sides.'
+      },
+      {
+        id: 6,
+        shortTitle: '6. Nuclear Decay (A & Z)',
+        badgeClass: 'badge-moss',
+        examContext: 'Atomic Structure & Radioactivity • Alpha & Beta Conservation',
+        summary: 'Nuclear equations do NOT conserve element symbols—new elements form when proton number (Z) changes. Instead, total mass number (top, A) and total atomic/charge number (bottom, Z) are conserved.',
+        beginnerBasics: 'Alpha particle = ⁴₂He (mass 4, charge +2); beta particle (β⁻) = ⁰₋₁e (mass 0, charge −1).',
+        intermediateMechanics: 'Set up two simple arithmetic equations: A_parent = A_daughter + A_particle and Z_parent = Z_daughter + Z_particle. Then identify the new element symbol from its new atomic number Z_daughter on the periodic table.',
+        h1Trap: 'H1 Trap: In β⁻ decay (⁰₋₁e), the atomic number Z increases by 1 (a neutron converts into a proton + electron), while mass number A stays unchanged.',
+        workedEquation: '²²³₈₇Fr → ²²³₈₈Ra + ⁰₋₁e',
+        workedWalkthrough: 'Mass number: 223 = 223 + 0. Atomic number: 87 = 88 + (−1). Atomic number 88 is radium (Ra).'
+      },
+      {
+        id: 7,
+        shortTitle: '7. Water & Precipitation',
+        badgeClass: 'badge-cobalt',
+        examContext: 'Water Chemistry • Hardness, Ion Exchange & Precipitation Stoichiometry',
+        summary: 'Water treatment and hardness questions rely on ionic and precipitation equations to calculate moles of Ca²⁺/Mg²⁺ ions, reagents added, or insoluble precipitates formed.',
+        beginnerBasics: 'Temporary hardness involves HCO₃⁻ ions (removed on boiling as insoluble carbonate scale); permanent hardness involves sulfates/chlorides of Ca²⁺ and Mg²⁺ (not removed by boiling).',
+        intermediateMechanics: 'Write clean ionic or molecular equations for precipitation (such as Ag⁺ + Cl⁻ → AgCl(s) or Ba²⁺ + SO₄²⁻ → BaSO₄(s)) and convert concentrations (e.g., mg/L or ppm → mol/L) before applying mole ratios.',
+        h1Trap: 'H1 Trap: Always convert mg·L⁻¹ (ppm) to g·L⁻¹ (divide by 1000) and then to mol·L⁻¹ (divide by molar mass M) before using stoichiometric mole ratios.',
+        workedEquation: 'Ca(HCO₃)₂(aq) → CaCO₃(s) + H₂O(l) + CO₂(g)  (on heating)',
+        workedWalkthrough: 'Heating aqueous calcium hydrogencarbonate precipitates solid CaCO₃(s) along with H₂O(l) and CO₂(g), removing temporary hardness.'
+      }
+    ];
+
+    /* =======================================================================
+       3. RENDER ROADMAP & DOMAIN LESSONS
+       ======================================================================= */
+    function renderRoadmap() {
+      const grid = document.getElementById('roadmap-domains-grid');
+      if (!grid) return;
+      grid.innerHTML = LC_DOMAINS.map(d => `
+        <article class="domain-card">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px;">
+              <span class="badge ${d.badgeClass}">Domain ${d.id}</span>
+              <span style="font-size:0.76rem; font-weight:600; color:var(--ink-muted);">${d.examContext}</span>
+            </div>
+            <h3 style="font-size:1.12rem; margin-bottom:6px;">${d.shortTitle}</h3>
+            <p style="font-size:0.88rem; color:var(--ink-slate); margin:0 0 10px;">${d.summary}</p>
+            <div class="equation-strip" style="font-size:0.82rem;">${d.workedEquation}</div>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="jumpToDomainLesson(${d.id})">Study Lesson &rarr;</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openSectionView('lab')">Practice in Lab</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function renderDomainSidebar() {
+      const list = document.getElementById('domain-sidebar-list');
+      if (!list) return;
+      list.innerHTML = LC_DOMAINS.map(d => {
+        const active = Number(appState.activeDomainId) === d.id;
+        const visited = appState.visitedDomains.includes(d.id);
+        return `
+          <button type="button" class="domain-nav-btn ${active ? 'active' : ''}" data-did="${d.id}">
+            <span>${d.shortTitle}</span>
+            <span style="font-size:0.76rem; font-weight:700; color:var(--moss);">${visited ? '✓' : ''}</span>
+          </button>
+        `;
+      }).join('');
+
+      list.querySelectorAll('.domain-nav-btn').forEach(btn => {
+        btn.addEventListener('click', () => selectDomainLesson(Number(btn.dataset.did)));
+      });
+    }
+
+    function selectDomainLesson(domainId) {
+      appState.activeDomainId = Number(domainId);
+      if (!appState.visitedDomains.includes(appState.activeDomainId)) {
+        appState.visitedDomains.push(appState.activeDomainId);
+      }
+      persistState();
+      renderDomainSidebar();
+      renderActiveDomainLesson();
+    }
+
+    function jumpToDomainLesson(domainId) {
+      selectDomainLesson(domainId);
+      openSectionView('lessons');
+    }
+
+    function renderActiveDomainLesson() {
+      const d = LC_DOMAINS.find(item => item.id === Number(appState.activeDomainId)) || LC_DOMAINS[0];
+      const panel = document.getElementById('domain-lesson-panel');
+      if (!panel) return;
+
+      panel.innerHTML = `
+        <article class="notebook-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+            <span class="badge ${d.badgeClass}">Domain ${d.id} of 7 &bull; ${d.examContext}</span>
+            <div style="display:flex; gap:6px;">
+              <button type="button" class="btn btn-secondary btn-sm" ${d.id <= 1 ? 'disabled' : ''} onclick="selectDomainLesson(${Math.max(1, d.id - 1)})">&larr; Prev</button>
+              <button type="button" class="btn btn-secondary btn-sm" ${d.id >= 7 ? 'disabled' : ''} onclick="selectDomainLesson(${Math.min(7, d.id + 1)})">Next &rarr;</button>
+            </div>
+          </div>
+
+          <h2>${d.shortTitle}</h2>
+          <p style="color:var(--ink-slate);">${d.summary}</p>
+
+          <div class="well-box">
+            <span class="badge badge-moss">Step 1 &bull; Beginner Foundation</span>
+            <p style="margin:8px 0 0; font-size:0.9rem;">${d.beginnerBasics}</p>
+          </div>
+
+          <div class="well-box">
+            <span class="badge badge-cobalt">Step 2 &bull; Intermediate Equation Mechanics</span>
+            <p style="margin:8px 0 0; font-size:0.9rem;">${d.intermediateMechanics}</p>
+          </div>
+
+          <div class="h1-note-box">
+            <span class="h1-note-title">Step 3 &bull; H1 Achiever Exam Alert</span>
+            <p style="margin:0; font-size:0.9rem;">${d.h1Trap}</p>
+          </div>
+
+          <div class="well-box" style="margin-bottom:0;">
+            <span class="badge badge-terracotta">Worked LC Example</span>
+            <div class="equation-strip" style="margin:10px 0 8px;">${d.workedEquation}</div>
+            <p style="margin:0; font-size:0.88rem; color:var(--ink-slate);">${d.workedWalkthrough}</p>
+          </div>
+        </article>
+      `;
+    }
+
+    /* =======================================================================
+       4. INTERACTIVE EQUATION & BALANCING LAB (LAB A, LAB B, LAB C)
+       ======================================================================= */
+    const LAB_EQUATIONS = [
+      {
+        label: 'D1 • Acid–Base Titration (HCl + Na₂CO₃)',
+        domainTag: 'Domain 1: Volumetric Analysis',
+        description: 'Hydrochloric acid titrated against sodium carbonate solution.',
+        terms: [
+          { formula: 'HCl(aq)', side: 'L', atoms: { H: 1, Cl: 1 } },
+          { formula: 'Na₂CO₃(aq)', side: 'L', atoms: { Na: 2, C: 1, O: 3 } },
+          { arrow: true },
+          { formula: 'NaCl(aq)', side: 'R', atoms: { Na: 1, Cl: 1 } },
+          { formula: 'H₂O(l)', side: 'R', atoms: { H: 2, O: 1 } },
+          { formula: 'CO₂(g)', side: 'R', atoms: { C: 1, O: 2 } }
+        ],
+        solution: [2, 1, 2, 1, 1],
+        hint: 'Na₂CO₃ gives 2 Na and 1 C on the left. Put 2 before NaCl(aq) and 2 before HCl(aq) to balance Na, Cl, and H.'
+      },
+      {
+        label: 'D2 • Redox Titration (MnO₄⁻ + Fe²⁺ + H⁺)',
+        domainTag: 'Domain 2: Half-Equations & Redox',
+        description: 'Acidified manganate(VII) oxidising iron(II) ions in redox titration.',
+        terms: [
+          { formula: 'MnO₄⁻', side: 'L', atoms: { Mn: 1, O: 4, q: -1 } },
+          { formula: 'Fe²⁺', side: 'L', atoms: { Fe: 1, q: 2 } },
+          { formula: 'H⁺', side: 'L', atoms: { H: 1, q: 1 } },
+          { arrow: true },
+          { formula: 'Mn²⁺', side: 'R', atoms: { Mn: 1, q: 2 } },
+          { formula: 'Fe³⁺', side: 'R', atoms: { Fe: 1, q: 3 } },
+          { formula: 'H₂O', side: 'R', atoms: { H: 2, O: 1 } }
+        ],
+        solution: [1, 5, 8, 1, 5, 4],
+        hint: 'MnO₄⁻ gains 5e⁻ while Fe²⁺ loses 1e⁻, so use 5 Fe²⁺ and 5 Fe³⁺. Balance O with 4 H₂O and H with 8 H⁺.'
+      },
+      {
+        label: 'D3 • Thermochemistry (C₂H₅OH + O₂)',
+        domainTag: 'Domain 3: Thermochemistry',
+        description: 'Complete combustion of 1 mole of ethanol (watch O already in C₂H₅OH).',
+        terms: [
+          { formula: 'C₂H₅OH(l)', side: 'L', atoms: { C: 2, H: 6, O: 1 } },
+          { formula: 'O₂(g)', side: 'L', atoms: { O: 2 } },
+          { arrow: true },
+          { formula: 'CO₂(g)', side: 'R', atoms: { C: 1, O: 2 } },
+          { formula: 'H₂O(l)', side: 'R', atoms: { H: 2, O: 1 } }
+        ],
+        solution: [1, 3, 2, 3],
+        hint: 'Keep C₂H₅OH at 1 to find ΔHc° per mole: 2 CO₂ + 3 H₂O gives 7 O on the right; subtract 1 O in C₂H₅OH to leave 6 O = 3 O₂.'
+      },
+      {
+        label: 'D4 • Equilibrium (N₂ + H₂ ⇌ NH₃)',
+        domainTag: 'Domain 4: Equilibrium & Kc',
+        description: 'Reversible ammonia synthesis (Haber process).',
+        terms: [
+          { formula: 'N₂(g)', side: 'L', atoms: { N: 2 } },
+          { formula: 'H₂(g)', side: 'L', atoms: { H: 2 } },
+          { arrow: '⇌' },
+          { formula: 'NH₃(g)', side: 'R', atoms: { N: 1, H: 3 } }
+        ],
+        solution: [1, 3, 2],
+        hint: '2 NH₃ on the right gives 2 N (matching 1 N₂) and 6 H (matching 3 H₂).'
+      },
+      {
+        label: 'D5 • Organic Esterification (CH₃COOH + C₂H₅OH)',
+        domainTag: 'Domain 5: Organic Equations',
+        description: 'Reversible formation of ethyl ethanoate and water.',
+        terms: [
+          { formula: 'CH₃COOH', side: 'L', atoms: { C: 2, H: 4, O: 2 } },
+          { formula: 'C₂H₅OH', side: 'L', atoms: { C: 2, H: 6, O: 1 } },
+          { arrow: '⇌' },
+          { formula: 'CH₃COOC₂H₅', side: 'R', atoms: { C: 4, H: 8, O: 2 } },
+          { formula: 'H₂O', side: 'R', atoms: { H: 2, O: 1 } }
+        ],
+        solution: [1, 1, 1, 1],
+        hint: '1:1:1:1 already balances all 4 C, 10 H, and 3 O atoms across both sides.'
+      },
+      {
+        label: 'D7 • Water Hardness Removal (Ca(HCO₃)₂)',
+        domainTag: 'Domain 7: Water & Precipitation',
+        description: 'Thermal decomposition of dissolved calcium hydrogencarbonate on boiling.',
+        terms: [
+          { formula: 'Ca(HCO₃)₂(aq)', side: 'L', atoms: { Ca: 1, H: 2, C: 2, O: 6 } },
+          { arrow: true },
+          { formula: 'CaCO₃(s)', side: 'R', atoms: { Ca: 1, C: 1, O: 3 } },
+          { formula: 'H₂O(l)', side: 'R', atoms: { H: 2, O: 1 } },
+          { formula: 'CO₂(g)', side: 'R', atoms: { C: 1, O: 2 } }
+        ],
+        solution: [1, 1, 1, 1],
+        hint: '1 Ca(HCO₃)₂ has 1 Ca, 2 H, 2 C, and 6 O—matching 1 CaCO₃ + 1 H₂O + 1 CO₂ directly.'
+      }
+    ];
+
+    function populateLabSelect() {
+      const sel = document.getElementById('lab-eq-select');
+      if (!sel) return;
+      sel.innerHTML = LAB_EQUATIONS.map((eq, i) => `<option value="${i}">${eq.label}</option>`).join('');
+      sel.value = String(appState.labEqIdx || 0);
+      sel.addEventListener('change', () => {
+        appState.labEqIdx = Number(sel.value);
+        persistState();
+        renderLabEquation();
+      });
+    }
+
+    function renderLabEquation() {
+      const eq = LAB_EQUATIONS[appState.labEqIdx] || LAB_EQUATIONS[0];
+      document.getElementById('lab-eq-meta').innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <span class="badge badge-cobalt">${eq.domainTag}</span>
+          <span style="font-size:0.86rem; color:var(--ink-slate);">${eq.description}</span>
+        </div>
+      `;
+      document.getElementById('lab-eq-fb').className = 'feedback-box';
+
+      const row = document.getElementById('lab-eq-row');
+      row.innerHTML = '';
+
+      let coeffIdx = 0;
+      eq.terms.forEach((term, tIdx) => {
+        if (term.arrow) {
+          const ar = document.createElement('span');
+          ar.textContent = typeof term.arrow === 'string' ? term.arrow : '→';
+          ar.style.color = 'var(--terracotta)';
+          ar.style.padding = '0 6px';
+          row.appendChild(ar);
+          return;
+        }
+
+        const prev = eq.terms[tIdx - 1];
+        if (prev && !prev.arrow && prev.side === term.side) {
+          const pl = document.createElement('span');
+          pl.textContent = '+';
+          pl.style.color = 'var(--ink-slate)';
+          row.appendChild(pl);
+        }
+
+        const inp = document.createElement('select');
+        inp.className = 'coeff-box lab-coeff-sel';
+        inp.dataset.cidx = String(coeffIdx++);
+        for (let n = 1; n <= 10; n++) {
+          const opt = document.createElement('option');
+          opt.value = String(n);
+          opt.textContent = String(n);
+          if (n === 1) opt.selected = true;
+          inp.appendChild(opt);
+        }
+        inp.addEventListener('change', updateLabTally);
+        row.appendChild(inp);
+
+        const sp = document.createElement('span');
+        sp.textContent = term.formula;
+        row.appendChild(sp);
+      });
+
+      updateLabTally();
+    }
+
+    function getLabCoeffs() {
+      return Array.from(document.querySelectorAll('#lab-eq-row .lab-coeff-sel')).map(s => Number(s.value));
+    }
+
+    function updateLabTally() {
+      const eq = LAB_EQUATIONS[appState.labEqIdx] || LAB_EQUATIONS[0];
+      const coeffs = getLabCoeffs();
+      const leftMap = {};
+      const rightMap = {};
+      const keys = new Set();
+
+      let cIdx = 0;
+      eq.terms.forEach(term => {
+        if (term.arrow) return;
+        const mult = coeffs[cIdx++] || 1;
+        Object.entries(term.atoms).forEach(([k, val]) => {
+          keys.add(k);
+          if (term.side === 'L') leftMap[k] = (leftMap[k] || 0) + val * mult;
+          else rightMap[k] = (rightMap[k] || 0) + val * mult;
+        });
+      });
+
+      const board = document.getElementById('lab-eq-tally');
+      board.innerHTML = Array.from(keys).map(k => {
+        const l = leftMap[k] || 0;
+        const r = rightMap[k] || 0;
+        const balanced = l === r;
+        const label = k === 'q' ? 'Charge' : k;
+        return `
+          <div class="tally-item ${balanced ? 'ok' : 'diff'}">
+            <strong>${label}</strong>
+            <span class="font-mono">L: ${l} | R: ${r} ${balanced ? '✓' : ''}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function gcdTwo(a, b) {
+      return b === 0 ? a : gcdTwo(b, a % b);
+    }
+
+    function initLabEvents() {
+      document.getElementById('lab-check-btn').addEventListener('click', () => {
+        const eq = LAB_EQUATIONS[appState.labEqIdx] || LAB_EQUATIONS[0];
+        const coeffs = getLabCoeffs();
+        const leftMap = {};
+        const rightMap = {};
+        let cIdx = 0;
+        eq.terms.forEach(term => {
+          if (term.arrow) return;
+          const mult = coeffs[cIdx++] || 1;
+          Object.entries(term.atoms).forEach(([k, val]) => {
+            if (term.side === 'L') leftMap[k] = (leftMap[k] || 0) + val * mult;
+            else rightMap[k] = (rightMap[k] || 0) + val * mult;
+          });
+        });
+
+        const allKeys = new Set([...Object.keys(leftMap), ...Object.keys(rightMap)]);
+        const allMatch = Array.from(allKeys).every(k => (leftMap[k] || 0) === (rightMap[k] || 0));
+        if (!allMatch) {
+          setFeedback('lab-eq-fb', 'err', 'Not balanced yet—check every atom (and charge where ionic) on both sides.');
+          return;
+        }
+
+        const commonDiv = coeffs.reduce((acc, v) => gcdTwo(acc, v), 0);
+        if (commonDiv > 1) {
+          const simp = coeffs.map(x => x / commonDiv);
+          setFeedback('lab-eq-fb', 'info', `Conserved, but divide all coefficients by ${commonDiv} for simplest whole numbers: <code>${simp.join(', ')}</code>.`);
+          return;
+        }
+
+        setFeedback('lab-eq-fb', 'ok', `Verified! Coefficients <code>${coeffs.join(', ')}</code> balance all atoms/charges in simplest whole numbers.`);
+      });
+
+      document.getElementById('lab-hint-btn').addEventListener('click', () => {
+        const eq = LAB_EQUATIONS[appState.labEqIdx] || LAB_EQUATIONS[0];
+        setFeedback('lab-eq-fb', 'info', `<strong>Hint:</strong> ${eq.hint}`);
+      });
+
+      document.getElementById('lab-reveal-btn').addEventListener('click', () => {
+        const eq = LAB_EQUATIONS[appState.labEqIdx] || LAB_EQUATIONS[0];
+        const sels = document.querySelectorAll('#lab-eq-row .lab-coeff-sel');
+        eq.solution.forEach((val, i) => {
+          if (sels[i]) sels[i].value = String(val);
+        });
+        updateLabTally();
+        setFeedback('lab-eq-fb', 'info', `<strong>Solution set:</strong> Coefficients <code>${eq.solution.join(', ')}</code>.`);
+      });
+
+      // Lab B: Redox electron multiplier check
+      document.getElementById('redox-check-btn').addEventListener('click', () => {
+        const mMn = Number(document.getElementById('redox-mult-mno4').value);
+        const mOx = Number(document.getElementById('redox-mult-ox').value);
+        if (mMn === 2 && mOx === 5) {
+          setFeedback('redox-fb', 'ok', 'Correct! 2 × 5e⁻ = 10e⁻ gained and 5 × 2e⁻ = 10e⁻ lost. Combining gives 2MnO₄⁻ + 5C₂O₄²⁻ + 16H⁺ → 2Mn²⁺ + 10CO₂ + 8H₂O.');
+        } else {
+          setFeedback('redox-fb', 'err', 'LCM of 5e⁻ and 2e⁻ is 10e⁻: multiply MnO₄⁻ half by 2 and C₂O₄²⁻ half by 5.');
+        }
+      });
+
+      // Lab C1: Nuclear A & Z check
+      document.getElementById('nuc-check-btn').addEventListener('click', () => {
+        const aVal = Number(document.getElementById('nuc-a-in').value);
+        const zVal = Number(document.getElementById('nuc-z-in').value);
+        if (aVal === 206 && zVal === 82) {
+          setFeedback('nuc-fb', 'ok', 'Conserved! A = 210 − 4 = 206, and Z = 84 − 2 = 82 (lead, ²⁰⁶₈₂Pb).');
+        } else {
+          setFeedback('nuc-fb', 'err', 'Check mass (210 − 4 = 206) and atomic number (84 − 2 = 82).');
+        }
+      });
+
+      // Lab C2: Titration mole ratio check
+      document.getElementById('titr-check-btn').addEventListener('click', () => {
+        const naoh = Number(document.getElementById('titr-naoh-in').value);
+        const h2o = Number(document.getElementById('titr-h2o-in').value);
+        if (Math.abs(naoh - 0.02) < 1e-4 && Math.abs(h2o - 0.02) < 1e-4) {
+          setFeedback('titr-fb', 'ok', 'Correct! From 2NaOH + H₂SO₄ → Na₂SO₄ + 2H₂O, 0.010 mol H₂SO₄ reacts with 0.020 mol NaOH and yields 0.020 mol H₂O.');
+        } else {
+          setFeedback('titr-fb', 'err', 'Use the coefficients in 2NaOH + H₂SO₄ → Na₂SO₄ + 2H₂O: 2 mol NaOH and 2 mol H₂O per 1 mol H₂SO₄ (0.020 mol each).');
+        }
+      });
+    }
+
+    /* =======================================================================
+       5. 16-QUESTION H1 EXAM READINESS QUIZ BANK
+       ======================================================================= */
+    const LC_QUIZ_BANK = [
+      { id: 'q1', domain: 'Domain 1 • Volumetric', tier: 'Beginner', q: 'In 2HCl(aq) + Na₂CO₃(aq) → 2NaCl(aq) + H₂O(l) + CO₂(g), how many moles of HCl react with 1.0 mol of Na₂CO₃?', opts: ['1.0 mol', '2.0 mol', '3.0 mol', '0.5 mol'], answer: 1, exp: 'The balanced equation shows 2 mol HCl per 1 mol Na₂CO₃.' },
+      { id: 'q2', domain: 'Domain 1 • Redox Titration', tier: 'H1 Achiever', q: 'In a titration of acidified KMnO₄ with Fe²⁺ solution, what is the mole ratio n(MnO₄⁻) : n(Fe²⁺)?', opts: ['1 : 1', '1 : 2', '1 : 5', '5 : 1'], answer: 2, exp: 'Mn goes from +7 to +2 (gains 5e⁻) while each Fe²⁺ goes to Fe³⁺ (loses 1e⁻), giving a 1 : 5 mole ratio.' },
+      { id: 'q3', domain: 'Domain 1 • Iodine–Thiosulfate', tier: 'Intermediate', q: 'What is the mole ratio n(I₂) : n(S₂O₃²⁻) in the redox titration reaction I₂ + 2S₂O₃²⁻ → 2I⁻ + S₄O₆²⁻?', opts: ['1 : 2', '2 : 1', '1 : 1', '1 : 4'], answer: 0, exp: 'One mole of I₂ reacts with two moles of thiosulfate ions (S₂O₃²⁻).' },
+      { id: 'q4', domain: 'Domain 2 • Half-Equations', tier: 'Beginner', q: 'In acidic solution, which species is used to balance oxygen atoms when writing a half-equation?', opts: ['O₂', 'OH⁻', 'H₂O', 'H₂O₂'], answer: 2, exp: 'In standard acidic half-equation balancing, oxygen is balanced by adding H₂O molecules, then hydrogen with H⁺.' },
+      { id: 'q5', domain: 'Domain 2 • Half-Equations', tier: 'Intermediate', q: 'How many electrons are gained in the reduction half-equation MnO₄⁻ + 8H⁺ + ?e⁻ → Mn²⁺ + 4H₂O?', opts: ['2e⁻', '3e⁻', '5e⁻', '7e⁻'], answer: 2, exp: 'Left charge before e⁻ is −1 + 8 = +7; right charge is +2. Adding 5e⁻ balances charge to +2 on both sides.' },
+      { id: 'q6', domain: 'Domain 2 • Redox Charge', tier: 'H1 Achiever', q: 'When combining two half-equations into an overall redox equation, what must be equal before adding them?', opts: ['Number of H⁺ ions', 'Number of H₂O molecules', 'Number of electrons lost and gained', 'Number of oxygen atoms'], answer: 2, exp: 'Electrons must cancel completely in the overall equation, so multiply each half-equation to match electron count.' },
+      { id: 'q7', domain: 'Domain 3 • Thermochemistry', tier: 'Intermediate', q: 'In C₂H₅OH(l) + 3O₂(g) → 2CO₂(g) + 3H₂O(l), how many moles of O₂ are required for 0.50 mol of ethanol?', opts: ['0.50 mol', '1.0 mol', '1.5 mol', '3.0 mol'], answer: 2, exp: '1 mol C₂H₅OH needs 3 mol O₂, so 0.50 mol C₂H₅OH needs 0.50 × 3 = 1.5 mol O₂.' },
+      { id: 'q8', domain: 'Domain 3 • Combustion Enthalpy', tier: 'H1 Achiever', q: 'If you double every coefficient in a thermochemical equation, what happens to ΔH for that written equation?', opts: ['ΔH stays the same', 'ΔH is doubled', 'ΔH is halved', 'ΔH changes sign only'], answer: 1, exp: 'Enthalpy change ΔH is proportional to the moles in the balanced equation, so doubling coefficients doubles ΔH.' },
+      { id: 'q9', domain: 'Domain 4 • Equilibrium', tier: 'Beginner', q: 'Which arrow symbol denotes a dynamic chemical equilibrium system?', opts: ['→', '⇒', '⇌', '↔'], answer: 2, exp: 'Reversible equilibrium reactions are written with the double arrow ⇌.' },
+      { id: 'q10', domain: 'Domain 4 • Pressure & Gas Moles', tier: 'Intermediate', q: 'In N₂(g) + 3H₂(g) ⇌ 2NH₃(g), increasing pressure at constant temperature favours which direction?', opts: ['Reverse (fewer gas moles on left)', 'Forward (fewer gas moles on right: 2 vs 4)', 'Neither (equal gas moles)', 'Stops both forward and reverse rates'], answer: 1, exp: 'There are 4 mol of gas on the left and 2 mol of gas on the right; higher pressure shifts equilibrium toward fewer gas moles (forward).' },
+      { id: 'q11', domain: 'Domain 5 • Organic Equations', tier: 'Intermediate', q: 'Which reaction represents esterification?', opts: ['Alkene + H₂ → Alkane', 'Carboxylic acid + Alcohol ⇌ Ester + Water', 'Alkane + Cl₂ → Chloroalkane + HCl', 'Fat + 3NaOH → Glycerol + 3Soap'], answer: 1, exp: 'Esterification is the reversible reaction between a carboxylic acid and an alcohol to form an ester and water.' },
+      { id: 'q12', domain: 'Domain 5 • Saponification', tier: 'H1 Achiever', q: 'Complete base hydrolysis (saponification) of 1 mole of a triglyceride with excess NaOH yields:', opts: ['1 mol soap + 3 mol glycerol', '3 mol soap + 1 mol glycerol', '2 mol soap + 1 mol glycerol', '3 mol ester + 3 mol water'], answer: 1, exp: 'Each triglyceride has three ester links, so excess NaOH produces 3 moles of carboxylate salt (soap) and 1 mole of glycerol.' },
+      { id: 'q13', domain: 'Domain 6 • Nuclear Decay', tier: 'Beginner', q: 'In alpha (α) decay, mass number A decreases by ___ and atomic number Z decreases by ___.', opts: ['2 ; 4', '4 ; 2', '0 ; −1', '1 ; 1'], answer: 1, exp: 'An α-particle is ⁴₂He, reducing mass number A by 4 and atomic number Z by 2.' },
+      { id: 'q14', domain: 'Domain 6 • Beta Decay', tier: 'Intermediate', q: '²¹⁴₈₂Pb undergoes β⁻ decay (⁰₋₁e). What are the mass number A and atomic number Z of the daughter nucleus?', opts: ['A = 210, Z = 80', 'A = 214, Z = 83', 'A = 214, Z = 81', 'A = 213, Z = 82'], answer: 1, exp: 'Mass number stays 214 (214 + 0), while atomic number becomes 82 − (−1) = 83 (bismuth, ²¹⁴₈₃Bi).' },
+      { id: 'q15', domain: 'Domain 7 • Water Hardness', tier: 'Beginner', q: 'Temporary hardness in water is mainly caused by dissolved hydrogencarbonates of Ca²⁺ or Mg²⁺ and can be removed by:', opts: ['Boiling the water', 'Adding ethanol', 'Filtering through sand alone', 'Cooling to 10 °C'], answer: 0, exp: 'Boiling decomposes soluble hydrogencarbonates into insoluble carbonates (such as CaCO₃(s)), removing temporary hardness.' },
+      { id: 'q16', domain: 'Domain 7 • Ion Stoichiometry', tier: 'H1 Achiever', q: 'In AgNO₃(aq) + NaCl(aq) → AgCl(s) + NaNO₃(aq), which ions are spectators in the aqueous mixture?', opts: ['Ag⁺(aq) and Cl⁻(aq)', 'Na⁺(aq) and NO₃⁻(aq)', 'Ag⁺(aq) and NO₃⁻(aq)', 'Na⁺(aq) and Cl⁻(aq)'], answer: 1, exp: 'Na⁺(aq) and NO₃⁻(aq) remain dissolved on both sides without forming a precipitate, whereas Ag⁺(aq) and Cl⁻(aq) form AgCl(s).' }
+    ];
+
+    function renderQuizBank() {
+      const list = document.getElementById('quiz-questions-list');
+      if (!list) return;
+
+      const filtered = LC_QUIZ_BANK.filter(item =>
+        appState.quizFilter === 'all' ? true : item.tier === appState.quizFilter
+      );
+
+      list.innerHTML = filtered.map((q) => {
+        const globalIdx = LC_QUIZ_BANK.findIndex(x => x.id === q.id) + 1;
+        const chosen = appState.quizAnswers[q.id];
+        const tierBadge = q.tier === 'H1 Achiever' ? 'badge-terracotta' : (q.tier === 'Intermediate' ? 'badge-cobalt' : 'badge-moss');
+
+        const optsHtml = q.opts.map((optText, oIdx) => {
+          let cls = 'quiz-choice';
+          if (appState.quizGraded) {
+            if (oIdx === q.answer) cls += ' correct';
+            else if (chosen === oIdx) cls += ' wrong';
+          } else if (chosen === oIdx) {
+            cls += ' selected';
+          }
+          return `<button type="button" class="${cls}" data-qid="${q.id}" data-oidx="${oIdx}">${optText}</button>`;
+        }).join('');
+
+        let expHtml = '';
+        if (appState.quizGraded) {
+          const right = chosen === q.answer;
+          expHtml = `<div class="feedback-box show ${right ? 'ok' : 'err'}"><strong>${right ? 'Correct' : 'Explanation'}:</strong> ${q.exp}</div>`;
+        }
+
+        return `
+          <article class="notebook-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <span class="badge badge-cobalt">${q.domain}</span>
+                <span class="badge ${tierBadge}">${q.tier}</span>
+              </div>
+              <span style="font-size:0.78rem; font-weight:700; color:var(--ink-muted);">Question ${globalIdx} of ${LC_QUIZ_BANK.length}</span>
+            </div>
+            <p style="font-weight:700; font-size:0.96rem; margin:0 0 10px;">${q.q}</p>
+            <div>${optsHtml}</div>
+            ${expHtml}
+          </article>
+        `;
+      }).join('');
+
+      list.querySelectorAll('.quiz-choice').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const qid = btn.dataset.qid;
+          const oidx = Number(btn.dataset.oidx);
+          appState.quizAnswers[qid] = oidx;
+          appState.quizGraded = false;
+          persistState();
+          renderQuizBank();
+          updateQuizScorePill();
+        });
+      });
+
+      updateQuizScorePill();
+    }
+
+    function updateQuizScorePill() {
+      const pill = document.getElementById('quiz-score-pill');
+      if (!pill) return;
+      const ansCount = Object.keys(appState.quizAnswers || {}).length;
+      if (!appState.quizGraded) {
+        pill.textContent = `Answered: ${ansCount} / ${LC_QUIZ_BANK.length}`;
+        return;
+      }
+      let score = 0;
+      LC_QUIZ_BANK.forEach(q => {
+        if (appState.quizAnswers[q.id] === q.answer) score++;
+      });
+      pill.textContent = `Score: ${score} / ${LC_QUIZ_BANK.length} (${Math.round((score / LC_QUIZ_BANK.length) * 100)}%)`;
+    }
+
+    function initQuizEvents() {
+      document.querySelectorAll('.filter-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          appState.quizFilter = pill.dataset.tier;
+          document.querySelectorAll('.filter-pill').forEach(p => p.classList.toggle('active', p.dataset.tier === appState.quizFilter));
+          persistState();
+          renderQuizBank();
+        });
+      });
+
+      document.getElementById('grade-quiz-btn').addEventListener('click', () => {
+        appState.quizGraded = true;
+        persistState();
+        renderQuizBank();
+        let score = 0;
+        LC_QUIZ_BANK.forEach(q => {
+          if (appState.quizAnswers[q.id] === q.answer) score++;
+        });
+        showToast(`Exam Readiness Score: ${score} / ${LC_QUIZ_BANK.length}`);
+      });
+
+      document.getElementById('clear-quiz-btn').addEventListener('click', () => {
+        appState.quizAnswers = {};
+        appState.quizGraded = false;
+        persistState();
+        renderQuizBank();
+        showToast('Quiz answers cleared');
+      });
+    }
+
+    /* =======================================================================
+       6. VIEW SWITCHING & INITIALIZATION
+       ======================================================================= */
+    function openSectionView(viewId) {
+      appState.activeView = viewId;
+      persistState();
+
+      document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.view === viewId);
+      });
+
+      document.querySelectorAll('.section-view').forEach(sec => {
+        sec.classList.toggle('active', sec.id === `view-${viewId}`);
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.addEventListener('click', () => openSectionView(tab.dataset.view));
+      });
+
+      // Two-step inline reset button
+      let resetArmed = false;
+      const resetBtn = document.getElementById('reset-btn');
+      resetBtn.addEventListener('click', () => {
+        if (!resetArmed) {
+          resetArmed = true;
+          resetBtn.textContent = 'Click Again to Reset';
+          setTimeout(() => {
+            resetArmed = false;
+            resetBtn.textContent = 'Reset Progress';
+          }, 3000);
+        } else {
+          localStorage.removeItem(STORAGE_KEY);
+          appState = { ...DEFAULT_STATE, visitedDomains: [1], quizAnswers: {} };
+          resetArmed = false;
+          resetBtn.textContent = 'Reset Progress';
+          renderRoadmap();
+          renderDomainSidebar();
+          renderActiveDomainLesson();
+          populateLabSelect();
+          renderLabEquation();
+          renderQuizBank();
+          openSectionView('roadmap');
+          refreshMasteryMeter();
+          showToast('Progress reset');
+        }
+      });
+
+      renderRoadmap();
+      renderDomainSidebar();
+      renderActiveDomainLesson();
+      populateLabSelect();
+      renderLabEquation();
+      initLabEvents();
+      renderQuizBank();
+      initQuizEvents();
+
+      document.querySelectorAll('.filter-pill').forEach(p => {
+        p.classList.toggle('active', p.dataset.tier === (appState.quizFilter || 'all'));
+      });
+      openSectionView(appState.activeView || 'roadmap');
+      refreshMasteryMeter();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leaving Cert H1 — Exam Preparation Hub &amp; LMS Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-parchment: #FAF7F2;
+      --bg-card: #FFFFFF;
+      --bg-well: #F2EDE4;
+      --ink-navy: #18293D;
+      --ink-slate: #4B5B6E;
+      --ink-muted: #6E7D8F;
+      --forest: #1F4E3D;
+      --forest-dark: #15382B;
+      --forest-soft: #E7F2ED;
+      --terracotta: #B85233;
+      --terracotta-dark: #8F3E25;
+      --terracotta-soft: #FBEDE8;
+      --navy-soft: #EBF1F8;
+      --amber: #A85D14;
+      --amber-soft: #FDF4E7;
+      --border-hairline: #E4DDD2;
+      --border-strong: #CCC2B3;
+      --shadow-editorial: 0 2px 10px rgba(24, 41, 61, 0.05), 0 1px 2px rgba(24, 41, 61, 0.04);
+      --radius-card: 14px;
+      --radius-ctrl: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-parchment);
+      color: var(--ink-navy);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .font-display {
+      font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+      color: var(--ink-navy);
+      letter-spacing: -0.015em;
+      margin-top: 0;
+    }
+
+    code, pre, .font-mono {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    /* Sticky Editorial Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background-color: rgba(250, 247, 242, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .header-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-seal {
+      width: 46px;
+      height: 46px;
+      border-radius: 11px;
+      background-color: var(--ink-navy);
+      color: #FAF7F2;
+      border: 1px solid #0E1A28;
+      display: grid;
+      place-items: center;
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 1.26rem;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.18;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--ink-slate);
+      margin: 2px 0 0;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .header-link {
+      text-decoration: none;
+      color: var(--ink-slate);
+      font-size: 0.86rem;
+      font-weight: 600;
+      padding: 7px 11px;
+      border-radius: var(--radius-ctrl);
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .header-link:hover {
+      background-color: var(--bg-well);
+      color: var(--ink-navy);
+    }
+
+    .readiness-pill-box {
+      min-width: 215px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-ctrl);
+      padding: 7px 12px;
+    }
+
+    .readiness-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.73rem;
+      font-weight: 700;
+      color: var(--ink-slate);
+      margin-bottom: 4px;
+    }
+
+    .readiness-track {
+      height: 7px;
+      width: 100%;
+      background-color: var(--bg-well);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .readiness-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--forest);
+      transition: width 0.25s ease;
+    }
+
+    /* Main Container */
+    .main-wrap {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 26px 20px 72px;
+    }
+
+    /* Editorial Cards & Wells */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      box-shadow: var(--shadow-editorial);
+      margin-bottom: 22px;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 18px 16px;
+      }
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, #FFFFFF 0%, #F7F3EB 100%);
+      border: 1px solid var(--border-strong);
+      border-top: 4px solid var(--ink-navy);
+    }
+
+    .well {
+      background-color: var(--bg-well);
+      border: 1px solid var(--border-hairline);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .helper-banner {
+      background-color: var(--navy-soft);
+      border: 1px solid #C6D5E8;
+      border-left: 4px solid var(--ink-navy);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 14px;
+      font-size: 0.88rem;
+      color: var(--ink-navy);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-navy {
+      background-color: var(--navy-soft);
+      color: var(--ink-navy);
+      border: 1px solid #C5D4E6;
+    }
+
+    .badge-forest {
+      background-color: var(--forest-soft);
+      color: var(--forest);
+      border: 1px solid #BBD8CC;
+    }
+
+    .badge-terracotta {
+      background-color: var(--terracotta-soft);
+      color: var(--terracotta);
+      border: 1px solid #E7C2B6;
+    }
+
+    .badge-amber {
+      background-color: var(--amber-soft);
+      color: var(--amber);
+      border: 1px solid #ECD2B2;
+    }
+
+    /* Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Subject LMS Cards */
+    .subject-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-card);
+      padding: 22px;
+      box-shadow: var(--shadow-editorial);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      transition: transform 0.14s ease, border-color 0.14s ease;
+    }
+
+    .subject-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+    }
+
+    .subject-card-footer {
+      padding-top: 14px;
+      border-top: 1px solid var(--border-hairline);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    /* Buttons & Inputs */
+    .btn {
+      appearance: none;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 16px;
+      border-radius: var(--radius-ctrl);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.14s ease;
+    }
+
+    .btn-navy {
+      background-color: var(--ink-navy);
+      color: #FFFFFF;
+      border-color: #0E1926;
+    }
+
+    .btn-navy:hover {
+      background-color: #0F1C2B;
+    }
+
+    .btn-forest {
+      background-color: var(--forest);
+      color: #FFFFFF;
+      border-color: var(--forest-dark);
+    }
+
+    .btn-forest:hover {
+      background-color: var(--forest-dark);
+    }
+
+    .btn-terracotta {
+      background-color: var(--terracotta);
+      color: #FFFFFF;
+      border-color: var(--terracotta-dark);
+    }
+
+    .btn-terracotta:hover {
+      background-color: var(--terracotta-dark);
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-card);
+      color: var(--ink-navy);
+      border-color: var(--border-strong);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-well);
+    }
+
+    .btn-sm {
+      padding: 7px 12px;
+      font-size: 0.81rem;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    select {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.86rem;
+      padding: 7px 10px;
+      border-radius: var(--radius-ctrl);
+      border: 1px solid var(--border-strong);
+      background-color: var(--bg-card);
+      color: var(--ink-navy);
+    }
+
+    input:focus,
+    select:focus {
+      outline: 2px solid rgba(24, 41, 61, 0.2);
+      border-color: var(--ink-navy);
+    }
+
+    /* Filter Chips */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .filter-chip {
+      appearance: none;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background-color: var(--bg-card);
+      color: var(--ink-slate);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .filter-chip.active {
+      background-color: var(--ink-navy);
+      border-color: #0E1926;
+      color: #FFFFFF;
+    }
+
+    /* Weekly Planner Check Rows */
+    .planner-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-ctrl);
+      border: 1px solid var(--border-hairline);
+      background-color: var(--bg-card);
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+
+    .planner-row:hover {
+      background-color: var(--bg-well);
+    }
+
+    .planner-row input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--forest);
+      flex-shrink: 0;
+    }
+
+    /* Drawer / Modal for Link Path Customization */
+    .drawer-panel {
+      display: none;
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: 12px;
+      background-color: var(--bg-well);
+      border: 1px solid var(--border-strong);
+    }
+
+    .drawer-panel.open {
+      display: block;
+    }
+
+    .link-edit-row {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 680px) {
+      .link-edit-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+    }
+
+    /* CAO Row */
+    .cao-row {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 0.7fr;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .cao-row:last-child {
+      border-bottom: none;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 95;
+      background-color: var(--ink-navy);
+      color: #FFFFFF;
+      padding: 10px 16px;
+      border-radius: var(--radius-ctrl);
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. STICKY HEADER & BRAND -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#top" class="brand-group">
+        <div class="brand-seal">H1</div>
+        <div>
+          <h1 class="brand-title">Leaving Cert H1</h1>
+          <p class="brand-sub">Higher Level Study Hub &amp; LMS Portal</p>
+        </div>
+      </a>
+
+      <nav class="header-nav" aria-label="Hub sections">
+        <a href="#subjects-section" class="header-link">Subjects (6)</a>
+        <a href="#planner-section" class="header-link">Study Planner</a>
+        <a href="#cao-section" class="header-link">CAO Calculator</a>
+        <button type="button" class="btn btn-secondary btn-sm" id="header-link-setup-btn">Link Setup</button>
+      </nav>
+
+      <div class="readiness-pill-box">
+        <div class="readiness-top">
+          <span>Overall H1 Readiness</span>
+          <span id="overall-readiness-pct">0%</span>
+        </div>
+        <div class="readiness-track">
+          <div id="overall-readiness-bar" class="readiness-fill"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="main-wrap">
+
+    <!-- 2. HERO & EXAM READINESS OVERVIEW -->
+    <section class="card hero-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+        <span class="badge badge-navy">Irish Leaving Certificate &bull; Higher Level Suite</span>
+        <span class="badge badge-forest">Zero to H1 Achiever</span>
+      </div>
+      <h2 style="font-size:1.85rem; margin-bottom:8px;">Your Unified Leaving Certificate Higher Level Study Hub</h2>
+      <p style="color:var(--ink-slate); max-width:860px; margin:0 0 18px; font-size:0.98rem;">
+        Launch any of your six interactive Higher Level LMS workspaces from one desk, track per-subject readiness from foundational concepts through full mock papers, plan weekly revision blocks toward June, and model your 625-point CAO target.
+      </p>
+
+      <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px;">
+        <a href="#subjects-section" class="btn btn-navy">Explore All 6 LMS Modules &darr;</a>
+        <a href="#planner-section" class="btn btn-forest">Open Weekly Study Planner</a>
+        <a href="#cao-section" class="btn btn-secondary">Calculate CAO Points (Max 625)</a>
+      </div>
+
+      <div class="grid-4">
+        <div class="well" style="margin:0;">
+          <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--ink-muted);">Connected Modules</div>
+          <div style="font-family:'Fraunces', serif; font-size:1.55rem; font-weight:700; margin:2px 0;">6 LMS Apps</div>
+          <div style="font-size:0.82rem; color:var(--ink-slate);">Spanish, Ag Science, Chemistry (&times;2), Biology &amp; Maths</div>
+        </div>
+        <div class="well" style="margin:0;">
+          <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--ink-muted);">June Exam Countdown</div>
+          <div id="hero-days-left" style="font-family:'Fraunces', serif; font-size:1.55rem; font-weight:700; color:var(--terracotta); margin:2px 0;">-- Days</div>
+          <div id="hero-target-label" style="font-size:0.82rem; color:var(--ink-slate);">Target: June Written Exams</div>
+        </div>
+        <div class="well" style="margin:0;">
+          <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--ink-muted);">Weekly Study Blocks</div>
+          <div id="hero-weekly-count" style="font-family:'Fraunces', serif; font-size:1.55rem; font-weight:700; color:var(--forest); margin:2px 0;">0 / 7 Done</div>
+          <div style="font-size:0.82rem; color:var(--ink-slate);">Saved automatically in browser</div>
+        </div>
+        <div class="well" style="margin:0;">
+          <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--ink-muted);">Projected CAO Total</div>
+          <div id="hero-cao-points" style="font-family:'Fraunces', serif; font-size:1.55rem; font-weight:700; color:var(--ink-navy); margin:2px 0;">625 pts</div>
+          <div style="font-size:0.82rem; color:var(--ink-slate);">Includes +25 HL Maths bonus</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CONNECTED SUBJECT LMS DIRECTORY (ALL 6 MODULES) -->
+    <section id="subjects-section" class="card">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
+        <div>
+          <span class="badge badge-forest">Connected HTML LMS Workspaces</span>
+          <h2 style="margin-top:6px; margin-bottom:4px;">Subject LMS Directory (Beginner &rarr; H1 Achiever)</h2>
+          <p style="color:var(--ink-slate); margin:0; font-size:0.92rem;">
+            Update your personal readiness stage on each module and click <strong>Open LMS &rarr;</strong> to launch that subject&rsquo;s interactive workspace.
+          </p>
+        </div>
+        <button type="button" class="btn btn-secondary btn-sm" id="toggle-link-drawer-btn">Customize File Paths / Links</button>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar" id="subject-filter-bar">
+        <button type="button" class="filter-chip active" data-filter="ALL">All Subjects (6)</button>
+        <button type="button" class="filter-chip" data-filter="STEM">Sciences &amp; Maths</button>
+        <button type="button" class="filter-chip" data-filter="LANG_APP">Languages &amp; Applied</button>
+        <button type="button" class="filter-chip" data-filter="H1_READY">H1 Ready</button>
+      </div>
+
+      <!-- Helper Note for Local Folder Setup -->
+      <div class="helper-banner">
+        <strong>How to Connect Your Downloaded HTML Files:</strong> Place this landing page (<code>index.html</code>) and all six downloaded LMS <code>.html</code> files inside the <strong>same folder</strong> on your computer or web host, and every <strong>Open LMS &rarr;</strong> button will launch directly. If you saved any file with a different filename, click <strong>Customize File Paths / Links</strong> above to edit its target path.
+      </div>
+
+      <!-- Editable Link Path Drawer -->
+      <div id="link-setup-drawer" class="drawer-panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+          <h3 style="margin:0; font-size:1.05rem;">Custom LMS Filenames &amp; Relative Paths</h3>
+          <div style="display:flex; gap:8px;">
+            <button type="button" class="btn btn-forest btn-sm" id="save-links-btn">Save Custom Paths</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="reset-links-btn">Restore Defaults</button>
+          </div>
+        </div>
+        <p style="font-size:0.84rem; color:var(--ink-slate); margin:0 0 12px;">
+          Edit the relative filename or URL for each connected LMS file below (for example, <code>lc_spanish_lms.html</code> or <code>./maths/axiom_h1_lc_maths.html</code>).
+        </p>
+        <div id="link-editor-rows"></div>
+      </div>
+    </section>
+
+    <!-- Subject Cards Grid -->
+    <div class="grid-2" id="subjects-cards-grid"></div>
+
+    <!-- 4. INTERACTIVE WEEKLY STUDY PLANNER & JUNE EXAM COUNTDOWN -->
+    <section id="planner-section" class="card" style="margin-top:8px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px;">
+        <span class="badge badge-terracotta">June Exam Countdown &amp; Weekly Cadence</span>
+        <span id="planner-progress-badge" class="badge badge-forest">0 / 7 Weekly Sessions Complete</span>
+      </div>
+      <h2>Weekly Revision Planner &amp; Exam Date Countdown</h2>
+      <p style="color:var(--ink-slate); font-size:0.92rem; margin-bottom:14px;">
+        Set your target June Leaving Certificate start date and check off focused revision blocks across all six modules each week.
+      </p>
+
+      <div class="grid-2">
+        <div class="well" style="margin:0;">
+          <h3 style="font-size:1.06rem; margin-bottom:8px;">June Leaving Cert Target Date</h3>
+          <label for="exam-date-input" style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:5px;">Target First Exam Day:</label>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+            <input id="exam-date-input" type="date" />
+            <button type="button" class="btn btn-navy btn-sm" id="save-date-btn">Update Date</button>
+          </div>
+          <div id="countdown-detail-box" style="margin-top:14px; padding:12px; background-color:var(--bg-card); border:1px solid var(--border-hairline); border-radius:8px;"></div>
+        </div>
+
+        <div class="well" style="margin:0;">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px;">
+            <h3 style="font-size:1.06rem; margin:0;">Weekly H1 Study Blocks</h3>
+            <button type="button" class="btn btn-secondary btn-sm" id="reset-week-btn">New Week (Uncheck All)</button>
+          </div>
+          <div id="weekly-planner-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. INTERACTIVE LEAVING CERT CAO POINTS & GRADE CALCULATOR -->
+    <section id="cao-section" class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+        <span class="badge badge-navy">Irish CAO Points Table + HL Maths Bonus</span>
+        <span class="badge badge-amber">Maximum = 625 Points</span>
+      </div>
+      <h2>Leaving Certificate CAO Points &amp; Top-6 Grade Calculator</h2>
+      <p style="color:var(--ink-slate); font-size:0.92rem; margin-bottom:14px;">
+        Select expected Higher (<code>H1&ndash;H8</code>) or Ordinary (<code>O1&ndash;O8</code>) grades across your subjects. The calculator automatically sums your <strong>best 6 subjects</strong> and adds the <strong>+25 bonus points</strong> if Higher Level Mathematics is <code>H6</code> or higher.
+      </p>
+
+      <div class="grid-2">
+        <div class="well" style="margin:0;">
+          <div id="cao-subjects-rows"></div>
+        </div>
+
+        <div class="well" style="margin:0; display:flex; flex-direction:column; justify-content:space-between;">
+          <div id="cao-results-panel"></div>
+          <div style="margin-top:14px; font-size:0.8rem; color:var(--ink-muted);">
+            Standard CAO scale: H1 = 100, H2 = 88, H3 = 77, H4 = 66, H5 = 56, H6 = 46 (+25 HL Maths), H7 = 37, H8 = 0; O1 = 56, O2 = 46, O3 = 37, O4 = 28, O5 = 20, O6 = 12.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="toast-banner" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    /* =======================================================================
+       1. SUBJECT LMS METADATA & DEFAULTS
+       ======================================================================= */
+    const STORAGE_KEY = 'leaving_cert_h1_hub_v1';
+
+    const SUBJECT_MODULES = [
+      {
+        id: 'spanish',
+        category: 'LANG_APP',
+        categoryLabel: 'Languages & Applied',
+        badgeClass: 'badge-terracotta',
+        title: 'LC Spanish Higher Level',
+        defaultFile: 'lc_spanish_lms.html',
+        marksSummary: '400 Marks Total (Oral 100m • Aural 80m • Written 220m)',
+        topics: 'Pronunciation & phonetics engine, 5 SEC Oral roleplays, general conversation topics, Reading Comprehension, Opinion Piece & Section C dialogue/note templates, plus 5 full mocks.',
+        accentBtn: 'btn-terracotta'
+      },
+      {
+        id: 'ag_science',
+        category: 'LANG_APP',
+        categoryLabel: 'Languages & Applied',
+        badgeClass: 'badge-forest',
+        title: 'LC Agricultural Science Higher Level',
+        defaultFile: 'lc_ag_science_lms.html',
+        marksSummary: '400 Marks Total (IIS Project 100m • Written Exam 300m)',
+        topics: 'All 4 NCCA strands (Scientific Practices, Soils, Crops, Animals), interactive Soil/Nitrates/Ag-Calc labs, 12 Specified Practical Activities (SPAs), and 5 full SEC-style mocks.',
+        accentBtn: 'btn-forest'
+      },
+      {
+        id: 'chem_stoich',
+        category: 'STEM',
+        categoryLabel: 'Sciences & Maths',
+        badgeClass: 'badge-navy',
+        title: 'LC Chemistry — Stoichiometry & Equation Writing',
+        defaultFile: 'chemistry_stoichiometry_lms.html',
+        marksSummary: 'Core Calculation & Formula Engine (Zero → Hero)',
+        topics: 'Step-by-step ionic/covalent formula writing, skeleton equations, conservation balancing, net ionic & spectator ions, molar mass, limiting reagent, and percentage yield workbench.',
+        accentBtn: 'btn-navy'
+      },
+      {
+        id: 'chem_eqs',
+        category: 'STEM',
+        categoryLabel: 'Sciences & Maths',
+        badgeClass: 'badge-navy',
+        title: 'LC Chemistry — Equations Mastery (All 7 Domains)',
+        defaultFile: 'lc_chemistry_equations_lms.html',
+        marksSummary: 'All 7 Leaving Cert Equation Areas (Beginner → H1)',
+        topics: 'Volumetric & titration mole ratios, redox half-equations, thermochemistry (ΔH), equilibrium Kc expressions, organic reactions, nuclear decay (A & Z), and water hardness.',
+        accentBtn: 'btn-navy'
+      },
+      {
+        id: 'biology',
+        category: 'STEM',
+        categoryLabel: 'Sciences & Maths',
+        badgeClass: 'badge-forest',
+        title: 'LC Biology Higher Level',
+        defaultFile: 'biosphere_h1_lc_biology.html',
+        marksSummary: '500 Marks Total (Written 300m • Biology in Practice 200m)',
+        topics: 'NCCA strands & cross-cutting themes, Levels 0–5 syllabus, Simpson’s Diversity Index & Punnett/Enzyme labs, plus 5 complete 300-mark new-format H1 mock exams with solutions.',
+        accentBtn: 'btn-forest'
+      },
+      {
+        id: 'maths',
+        category: 'STEM',
+        categoryLabel: 'Sciences & Maths',
+        badgeClass: 'badge-navy',
+        title: 'LC Mathematics Higher Level (Paper 1 & 2)',
+        defaultFile: 'axiom_h1_lc_maths.html',
+        marksSummary: '600 Marks (Paper 1 300m + Paper 2 300m) + 25 HL Bonus',
+        topics: 'Algebra/logs, Complex Numbers & De Moivre, Series/Induction, Calculus, Line & Circle, Trigonometry, Probability & Inferential Stats, 4 interactive solvers & timed mock mode.',
+        accentBtn: 'btn-navy'
+      }
+    ];
+
+    const STATUS_OPTIONS = [
+      { value: 'Not Started', weight: 0, badge: 'badge-amber' },
+      { value: 'In Progress', weight: 0.4, badge: 'badge-navy' },
+      { value: 'Mock Testing', weight: 0.75, badge: 'badge-terracotta' },
+      { value: 'H1 Ready', weight: 1.0, badge: 'badge-forest' }
+    ];
+
+    const WEEKLY_SESSIONS = [
+      { id: 'w_maths1', title: 'Maths Paper 1 — Algebra, Complex Numbers & Calculus (60m)' },
+      { id: 'w_maths2', title: 'Maths Paper 2 — Co-ordinate Geometry, Trig & Stats (60m)' },
+      { id: 'w_chem', title: 'Chemistry — Stoichiometry & 7-Domain Equation Drills (50m)' },
+      { id: 'w_bio', title: 'Biology HL — Compulsory Q1 + Timed 50-Mark Question (50m)' },
+      { id: 'w_ag', title: 'Agricultural Science — Strand Review & SPA / IIS Check (45m)' },
+      { id: 'w_span', title: 'Spanish HL — Oral Roleplay, Aural & Opinion Piece Practice (45m)' },
+      { id: 'w_rev', title: 'Weekend Mixed Exam Review & Error Log Consolidation (60m)' }
+    ];
+
+    const CAO_DEFAULT_ROWS = [
+      { id: 'sub1', name: 'Mathematics (HL)', grade: 'H1', isHlMaths: true },
+      { id: 'sub2', name: 'Biology (HL)', grade: 'H1', isHlMaths: false },
+      { id: 'sub3', name: 'Chemistry (HL)', grade: 'H1', isHlMaths: false },
+      { id: 'sub4', name: 'Agricultural Science (HL)', grade: 'H1', isHlMaths: false },
+      { id: 'sub5', name: 'Spanish (HL)', grade: 'H1', isHlMaths: false },
+      { id: 'sub6', name: 'Subject 6 (e.g. English / Irish)', grade: 'H1', isHlMaths: false }
+    ];
+
+    const GRADE_POINTS_MAP = {
+      H1: 100, H2: 88, H3: 77, H4: 66, H5: 56, H6: 46, H7: 37, H8: 0,
+      O1: 56, O2: 46, O3: 37, O4: 28, O5: 20, O6: 12, O7: 0, O8: 0
+    };
+
+    function getDefaultJuneDate() {
+      const now = new Date();
+      let year = now.getFullYear();
+      // Leaving Cert written exams traditionally begin on the first Wednesday of June
+      if (now.getMonth() > 5 || (now.getMonth() === 5 && now.getDate() > 10)) {
+        year += 1;
+      }
+      const juneFirst = new Date(year, 5, 1);
+      const dayOfWeek = juneFirst.getDay(); // 0=Sun .. 3=Wed
+      const offsetToWed = (3 - dayOfWeek + 7) % 7;
+      const firstWed = 1 + offsetToWed;
+      return `${year}-06-${String(firstWed).padStart(2, '0')}`;
+    }
+
+    const DEFAULT_STATE = {
+      activeFilter: 'ALL',
+      statuses: {
+        spanish: 'In Progress',
+        ag_science: 'In Progress',
+        chem_stoich: 'In Progress',
+        chem_eqs: 'In Progress',
+        biology: 'In Progress',
+        maths: 'In Progress'
+      },
+      customPaths: {},
+      completedWeeklyIds: [],
+      examTargetDate: getDefaultJuneDate(),
+      caoRows: CAO_DEFAULT_ROWS.map(r => ({ ...r }))
+    };
+
+    let state = loadState();
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return { ...DEFAULT_STATE };
+        const parsed = JSON.parse(raw);
+        return {
+          ...DEFAULT_STATE,
+          ...parsed,
+          statuses: { ...DEFAULT_STATE.statuses, ...(parsed.statuses || {}) },
+          customPaths: parsed.customPaths && typeof parsed.customPaths === 'object' ? parsed.customPaths : {},
+          completedWeeklyIds: Array.isArray(parsed.completedWeeklyIds) ? parsed.completedWeeklyIds : [],
+          caoRows: Array.isArray(parsed.caoRows) && parsed.caoRows.length === 6 ? parsed.caoRows : DEFAULT_STATE.caoRows
+        };
+      } catch (err) {
+        console.warn('localStorage load error:', err);
+        return { ...DEFAULT_STATE };
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (err) {
+        console.warn('localStorage save error:', err);
+      }
+      updateOverallReadiness();
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById('toast-banner');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => el.classList.remove('show'), 2200);
+    }
+
+    function getModuleHref(mod) {
+      const custom = (state.customPaths[mod.id] || '').trim();
+      return custom || mod.defaultFile;
+    }
+
+    /* =======================================================================
+       2. OVERALL READINESS AGGREGATION
+       ======================================================================= */
+    function updateOverallReadiness() {
+      let subjectSum = 0;
+      SUBJECT_MODULES.forEach(m => {
+        const st = state.statuses[m.id] || 'Not Started';
+        const opt = STATUS_OPTIONS.find(o => o.value === st) || STATUS_OPTIONS[0];
+        subjectSum += opt.weight;
+      });
+      const subjPct = (subjectSum / SUBJECT_MODULES.length) * 75;
+      const weekPct = (Math.min(WEEKLY_SESSIONS.length, state.completedWeeklyIds.length) / WEEKLY_SESSIONS.length) * 25;
+      const totalPct = Math.min(100, Math.round(subjPct + weekPct));
+
+      const bar = document.getElementById('overall-readiness-bar');
+      const txt = document.getElementById('overall-readiness-pct');
+      if (bar) bar.style.width = `${totalPct}%`;
+      if (txt) txt.textContent = `${totalPct}%`;
+    }
+
+    /* =======================================================================
+       3. SUBJECT DIRECTORY & LINK PATH CUSTOMIZATION
+       ======================================================================= */
+    function renderLinkEditor() {
+      const container = document.getElementById('link-editor-rows');
+      if (!container) return;
+      container.innerHTML = SUBJECT_MODULES.map(m => `
+        <div class="link-edit-row">
+          <label for="path-in-${m.id}" style="font-size:0.84rem; font-weight:700;">${m.title}:</label>
+          <input id="path-in-${m.id}" type="text" class="font-mono" value="${getModuleHref(m)}" style="width:100%;" />
+        </div>
+      `).join('');
+    }
+
+    function renderSubjectCards() {
+      const grid = document.getElementById('subjects-cards-grid');
+      if (!grid) return;
+
+      const filtered = SUBJECT_MODULES.filter(m => {
+        if (state.activeFilter === 'ALL') return true;
+        if (state.activeFilter === 'H1_READY') return (state.statuses[m.id] || 'Not Started') === 'H1 Ready';
+        return m.category === state.activeFilter;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="card" style="grid-column:1 / -1; text-align:center;">
+            <p style="margin:0; color:var(--ink-slate);">No subjects currently marked <strong>H1 Ready</strong>. Switch filter to <strong>All Subjects (6)</strong> or update a subject&rsquo;s readiness status below.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(m => {
+        const currentStatus = state.statuses[m.id] || 'Not Started';
+        const statusObj = STATUS_OPTIONS.find(o => o.value === currentStatus) || STATUS_OPTIONS[0];
+        const href = getModuleHref(m);
+
+        return `
+          <article class="subject-card">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+                <span class="badge ${m.badgeClass}">${m.categoryLabel}</span>
+                <span class="badge ${statusObj.badge}">${currentStatus}</span>
+              </div>
+
+              <h3 style="font-size:1.22rem; margin-bottom:6px;">${m.title}</h3>
+              <div style="font-size:0.82rem; font-weight:700; color:var(--ink-navy); margin-bottom:8px;">${m.marksSummary}</div>
+              <p style="font-size:0.89rem; color:var(--ink-slate); margin:0 0 10px;">${m.topics}</p>
+              <div style="font-size:0.78rem; color:var(--ink-muted);">
+                Linked file: <code class="font-mono">${href}</code>
+              </div>
+            </div>
+
+            <div class="subject-card-footer">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <label for="status-sel-${m.id}" style="font-size:0.78rem; font-weight:700; color:var(--ink-slate);">Status:</label>
+                <select id="status-sel-${m.id}" class="status-selector" data-sid="${m.id}">
+                  ${STATUS_OPTIONS.map(opt => `<option value="${opt.value}" ${opt.value === currentStatus ? 'selected' : ''}>${opt.value}</option>`).join('')}
+                </select>
+              </div>
+
+              <a href="${href}" class="btn ${m.accentBtn} btn-sm">Open LMS &rarr;</a>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      grid.querySelectorAll('.status-selector').forEach(sel => {
+        sel.addEventListener('change', () => {
+          state.statuses[sel.dataset.sid] = sel.value;
+          saveState();
+          renderSubjectCards();
+          showToast(`Updated status to ${sel.value}`);
+        });
+      });
+    }
+
+    /* =======================================================================
+       4. JUNE EXAM COUNTDOWN & WEEKLY STUDY PLANNER
+       ======================================================================= */
+    function renderCountdown() {
+      const dateStr = state.examTargetDate || getDefaultJuneDate();
+      const inputEl = document.getElementById('exam-date-input');
+      if (inputEl) inputEl.value = dateStr;
+
+      const target = new Date(`${dateStr}T09:30:00`);
+      const now = new Date();
+      const diffMs = target.getTime() - now.getTime();
+      const daysLeft = Math.max(0, Math.ceil(diffMs / (1000 * 60 * 60 * 24)));
+      const weeksLeft = (daysLeft / 7).toFixed(1);
+
+      const heroDays = document.getElementById('hero-days-left');
+      const heroLbl = document.getElementById('hero-target-label');
+      if (heroDays) heroDays.textContent = `${daysLeft} Days`;
+      if (heroLbl) heroLbl.textContent = `Target: ${dateStr}`;
+
+      const detailBox = document.getElementById('countdown-detail-box');
+      if (detailBox) {
+        detailBox.innerHTML = `
+          <div style="font-size:0.9rem; line-height:1.7;">
+            <div><strong>Days Remaining:</strong> <span class="font-mono" style="color:var(--terracotta); font-weight:700; font-size:1.05rem;">${daysLeft} days</span> (~${weeksLeft} weeks)</div>
+            <div><strong>Target Exam Start:</strong> <span class="font-mono">${dateStr}</span> (09:30 IST)</div>
+            <div style="font-size:0.82rem; color:var(--ink-slate); margin-top:4px;">Tip: Aim to complete all 5 full mocks per subject at least 2 weeks before your first paper.</div>
+          </div>
+        `;
+      }
+    }
+
+    function renderWeeklyPlanner() {
+      const list = document.getElementById('weekly-planner-list');
+      if (!list) return;
+
+      list.innerHTML = WEEKLY_SESSIONS.map(item => {
+        const checked = state.completedWeeklyIds.includes(item.id);
+        return `
+          <label class="planner-row">
+            <span style="display:flex; align-items:center; gap:10px; font-size:0.87rem;">
+              <input type="checkbox" data-wid="${item.id}" ${checked ? 'checked' : ''} />
+              <span style="${checked ? 'text-decoration:line-through; color:var(--ink-muted);' : ''}">${item.title}</span>
+            </span>
+            <span class="badge ${checked ? 'badge-forest' : 'badge-navy'}">${checked ? 'Done' : 'Planned'}</span>
+          </label>
+        `;
+      }).join('');
+
+      list.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', () => {
+          const id = cb.dataset.wid;
+          if (cb.checked && !state.completedWeeklyIds.includes(id)) state.completedWeeklyIds.push(id);
+          if (!cb.checked) state.completedWeeklyIds = state.completedWeeklyIds.filter(x => x !== id);
+          saveState();
+          renderWeeklyPlanner();
+        });
+      });
+
+      const doneCount = state.completedWeeklyIds.length;
+      const badge = document.getElementById('planner-progress-badge');
+      const heroCount = document.getElementById('hero-weekly-count');
+      if (badge) badge.textContent = `${doneCount} / ${WEEKLY_SESSIONS.length} Weekly Sessions Complete`;
+      if (heroCount) heroCount.textContent = `${doneCount} / ${WEEKLY_SESSIONS.length} Done`;
+    }
+
+    /* =======================================================================
+       5. CAO POINTS & GRADE CALCULATOR (TOP 6 + 25 HL MATHS BONUS)
+       ======================================================================= */
+    function renderCaoCalculator() {
+      const rowsEl = document.getElementById('cao-subjects-rows');
+      if (!rowsEl) return;
+
+      const gradeOptions = Object.keys(GRADE_POINTS_MAP);
+
+      rowsEl.innerHTML = state.caoRows.map((row, idx) => {
+        const pts = GRADE_POINTS_MAP[row.grade] || 0;
+        const hlBonus = row.isHlMaths && pts >= 46 ? 25 : 0;
+        return `
+          <div class="cao-row">
+            <input type="text" class="cao-name-in" data-idx="${idx}" value="${row.name}" aria-label="Subject ${idx + 1} name" />
+            <select class="cao-grade-sel" data-idx="${idx}" aria-label="Subject ${idx + 1} grade">
+              ${gradeOptions.map(g => `<option value="${g}" ${g === row.grade ? 'selected' : ''}>${g} (${GRADE_POINTS_MAP[g]} pts)</option>`).join('')}
+            </select>
+            <span class="font-mono" style="font-size:0.86rem; font-weight:700; text-align:right;">
+              ${pts + hlBonus} pts
+            </span>
+          </div>
+        `;
+      }).join('');
+
+      rowsEl.querySelectorAll('.cao-name-in').forEach(inp => {
+        inp.addEventListener('input', () => {
+          const i = Number(inp.dataset.idx);
+          state.caoRows[i].name = inp.value;
+          saveState();
+        });
+      });
+
+      rowsEl.querySelectorAll('.cao-grade-sel').forEach(sel => {
+        sel.addEventListener('change', () => {
+          const i = Number(sel.dataset.idx);
+          state.caoRows[i].grade = sel.value;
+          saveState();
+          renderCaoCalculator();
+        });
+      });
+
+      computeCaoSummary();
+    }
+
+    function computeCaoSummary() {
+      const scored = state.caoRows.map(r => {
+        const base = GRADE_POINTS_MAP[r.grade] || 0;
+        const bonus = r.isHlMaths && base >= 46 ? 25 : 0;
+        return { name: r.name, grade: r.grade, base, bonus, total: base + bonus };
+      });
+
+      const sorted = [...scored].sort((a, b) => b.total - a.total);
+      const top6 = sorted.slice(0, 6);
+      const totalPts = top6.reduce((sum, item) => sum + item.total, 0);
+      const bonusApplied = top6.reduce((sum, item) => sum + item.bonus, 0);
+
+      const heroCao = document.getElementById('hero-cao-points');
+      if (heroCao) heroCao.textContent = `${totalPts} pts`;
+
+      const panel = document.getElementById('cao-results-panel');
+      if (panel) {
+        panel.innerHTML = `
+          <div>
+            <span class="badge badge-forest">Calculated Best 6 Subjects</span>
+            <div style="font-family:'Fraunces', serif; font-size:2.2rem; font-weight:700; color:var(--ink-navy); margin:8px 0 4px;">
+              ${totalPts} <span style="font-size:1.05rem; font-weight:600; color:var(--ink-slate);">/ 625 CAO Points</span>
+            </div>
+            <p style="margin:0 0 12px; font-size:0.88rem; color:var(--ink-slate);">
+              Higher Level Maths Bonus Applied: <strong style="color:var(--forest);">+${bonusApplied} points</strong>
+            </p>
+            <div style="background-color:var(--bg-card); border:1px solid var(--border-hairline); border-radius:8px; padding:10px 12px; font-size:0.84rem;">
+              ${top6.map(item => `
+                <div style="display:flex; justify-content:space-between; padding:3px 0;">
+                  <span>${item.name} (<strong>${item.grade}</strong>)</span>
+                  <span class="font-mono">${item.base}${item.bonus ? ' + ' + item.bonus : ''} = <strong>${item.total}</strong></span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    /* =======================================================================
+       6. INITIALIZATION & EVENT LISTENERS
+       ======================================================================= */
+    window.addEventListener('DOMContentLoaded', () => {
+      // Filter chips
+      document.querySelectorAll('#subject-filter-bar .filter-chip').forEach(chip => {
+        chip.classList.toggle('active', chip.dataset.filter === state.activeFilter);
+        chip.addEventListener('click', () => {
+          state.activeFilter = chip.dataset.filter;
+          document.querySelectorAll('#subject-filter-bar .filter-chip').forEach(c => {
+            c.classList.toggle('active', c.dataset.filter === state.activeFilter);
+          });
+          saveState();
+          renderSubjectCards();
+        });
+      });
+
+      // Link setup drawer toggles
+      const drawer = document.getElementById('link-setup-drawer');
+      const toggleDrawer = () => {
+        const opened = drawer.classList.toggle('open');
+        if (opened) {
+          renderLinkEditor();
+          drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      };
+      document.getElementById('toggle-link-drawer-btn').addEventListener('click', toggleDrawer);
+      document.getElementById('header-link-setup-btn').addEventListener('click', () => {
+        document.getElementById('subjects-section').scrollIntoView({ behavior: 'smooth' });
+        if (!drawer.classList.contains('open')) drawer.classList.add('open');
+        renderLinkEditor();
+      });
+
+      document.getElementById('save-links-btn').addEventListener('click', () => {
+        SUBJECT_MODULES.forEach(m => {
+          const inp = document.getElementById(`path-in-${m.id}`);
+          if (inp) {
+            const val = inp.value.trim();
+            if (val && val !== m.defaultFile) state.customPaths[m.id] = val;
+            else delete state.customPaths[m.id];
+          }
+        });
+        saveState();
+        renderSubjectCards();
+        showToast('Custom LMS file paths saved');
+      });
+
+      document.getElementById('reset-links-btn').addEventListener('click', () => {
+        state.customPaths = {};
+        saveState();
+        renderLinkEditor();
+        renderSubjectCards();
+        showToast('Restored default filenames');
+      });
+
+      // Countdown date save
+      document.getElementById('save-date-btn').addEventListener('click', () => {
+        const val = document.getElementById('exam-date-input').value;
+        if (val) {
+          state.examTargetDate = val;
+          saveState();
+          renderCountdown();
+          showToast('June exam date updated');
+        }
+      });
+
+      // Weekly planner reset
+      document.getElementById('reset-week-btn').addEventListener('click', () => {
+        state.completedWeeklyIds = [];
+        saveState();
+        renderWeeklyPlanner();
+        showToast('Weekly study blocks reset');
+      });
+
+      renderLinkEditor();
+      renderSubjectCards();
+      renderCountdown();
+      renderWeeklyPlanner();
+      renderCaoCalculator();
+      updateOverallReadiness();
+    });
+  </script>
+</body>
+</html>
